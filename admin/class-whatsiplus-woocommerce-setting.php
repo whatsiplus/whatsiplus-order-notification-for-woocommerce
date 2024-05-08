@@ -155,7 +155,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 				array(
 					'name'  => 'whatsiplus_woocommerce_api_key',
 					'label' => __( 'API Key', WHATSIPLUS_TEXT_DOMAIN ),
-					'desc'  => __( 'Your WhatsApp API. Account can be registered <a href="https://panel.whatsiplus.com/" target="blank">here</a>', WHATSIPLUS_TEXT_DOMAIN ),
+					'desc'  => __( 'Your WhatsApp API. Account can be registered <a href="https://whatsiplus.com/go/?url=apikey" target="blank">here</a>', WHATSIPLUS_TEXT_DOMAIN ),
 					'type'  => 'text',
 				),
 				array(//Get default country v1.1.17
@@ -572,13 +572,14 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
                 $acc_balance === "API KEY is valid, status: ". $acc_balance;
                 echo '<p style="color: green;"><b>'. esc_html($acc_balance). '</b></p>';
                 echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
+                echo '<p><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Manage your service</a><p>';
             }
             else if($acc_balance === "Not connected to WhatsApp")
             {
                 $acc_balance="API KEY is valid but status: ".$acc_balance;
                 echo '<p style="color: red;"><b>'. esc_html($acc_balance). '</b></p>';
                 echo "<h3>To link the service with WhatsApp, please click on the provided link below.<h3>";
-                echo '<h2><a href="https://panel.whatsiplus.com/" target="_blank">Whatsiplus</a></h2>';
+                echo '<h2><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Whatsiplus</a></h2>';
                 echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
             }
             else
