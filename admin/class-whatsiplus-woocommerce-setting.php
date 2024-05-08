@@ -557,7 +557,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
         } catch (Exception $e) {
             $log->add("Whatsiplus", print_r($e->getMessage(), 1));
-            $acc_balance = 'Failed to retrieve balance';
+            $acc_balance = 'Failed to retrieve status for API KEY';
         }
 
 
@@ -567,8 +567,23 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
                     '<p><b><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Whatsiplus</a></b></p>'
                 ); 
         else{
-            echo '<p style="color: green;"><b>'. esc_html($acc_balance). '</b></p>';
-            echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
+            if($acc_balance === "Connected to WhatsApp")
+            {
+                $acc_balance === "API KEY is valid, status: ". $acc_balance;
+                echo '<p style="color: green;"><b>'. esc_html($acc_balance). '</b></p>';
+                echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
+            }
+            else if($acc_balance === "Not connected to WhatsApp")
+            {
+                $acc_balance="API KEY is valid but status:".$acc_balance;
+                echo '<p style="color: red;"><b>'. esc_html($acc_balance). '</b></p>';
+                echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
+            }
+            else
+            {
+                echo '<p style="color: red;"><b>'. esc_html($acc_balance). '</b></p>';
+            }
+            
         }
             
     }
