@@ -37,14 +37,14 @@ class WhatsiPLUS_Help_View implements Whatsiplus_Register_Interface {
         if($form_id !== 'whatsiplus_help_setting') { return; }
     ?>
         <br>
-        <h4>What is Whatsiplus Notification for WooCommerce?</h4>
-        <p><a href="https://whatsiplus.com/" target="_blank">Whatsiplus</a> is a WhatsApp API service that allows business owners to communicate with their users through WhatsApp.</p>
-        <h4>How to get an API KEY?</h4>
-        <p>If you want to use the plugin, you need to generate an API key. You can do this by creating an account <a href="https://panel.whatsiplus.com/index.php?rp=/store/whatsapp" target="_blank"><strong>here</strong></a>.  Creating an account is free, you can use all the services for an unlimited period of time up to 10 days..</p>
-        <h4>Have questions?</h4>
-        <p>You can see frequently asked questions in this <a href="https://whatsiplus.com/faq/all/" target="_blank"><strong>link</strong></a>.</p>
-		<h4>Contact</h4>
-		<p>If you have any questions, you can contact the support section of the site <a href="https://panel.whatsiplus.com/submitticket.php?step=2&deptid=2" target="_blank"><strong>Contact us</strong></a>.</p>
+        <h1>What is Whatsiplus Notification for WooCommerce?</h1>
+        <h2><a href="https://whatsiplus.com/" target="_blank">Whatsiplus</a> is a WhatsApp API service that allows business owners to communicate with their users through WhatsApp.</h2>
+        <h1>How to get an API KEY?</h1>
+        <h2>If you want to use the plugin, you need to generate an API key. You can do this by creating an account <a href="https://panel.whatsiplus.com/index.php?rp=/store/whatsapp" target="_blank"><strong>here</strong></a>.  Creating an account is free, you can use all the services for an unlimited period of time up to 10 days.</h2>
+        <h1>Have questions?</h1>
+        <h2>You can see frequently asked questions in this <a href="https://whatsiplus.com/faq/all/" target="_blank"><strong>link</strong></a>.</h2>
+		<h1>Contact</h1>
+		<h2>If you have any questions, you can contact the support section of the site <a href="https://panel.whatsiplus.com/submitticket.php?step=2&deptid=2" target="_blank"><strong>Contact us</strong></a>.</h2>
     <?php
     }
 

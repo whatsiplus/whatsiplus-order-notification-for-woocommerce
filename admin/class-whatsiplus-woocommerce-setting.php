@@ -563,8 +563,8 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
         if ($acc_balance === "Invalid API KEY")
             echo ('<p style="color: red;"><b>'. esc_html($acc_balance). '</b></p>'.
-                    '<p>To get free API KEY and use all the features of the plugin, enter the link below.</p>'.
-                    '<p><b><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Whatsiplus</a></b></p>'
+                    "<h3>To access a free API KEY and unlock all the plugin's features, please follow the link provided below.<h3>".
+                    '<h2><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Whatsiplus</a></h2>'
                 ); 
         else{
             if($acc_balance === "Connected to WhatsApp")
@@ -577,6 +577,8 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
             {
                 $acc_balance="API KEY is valid but status: ".$acc_balance;
                 echo '<p style="color: red;"><b>'. esc_html($acc_balance). '</b></p>';
+                echo "<h3>To link the service with WhatsApp, please click on the provided link below.<h3>";
+                echo '<h2><a href="https://panel.whatsiplus.com/" target="_blank">Whatsiplus</a></h2>';
                 echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
             }
             else
