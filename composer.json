@@ -1,0 +1,17 @@
+{
+    "name": "whatsiplus/whatsiplus-notification-for-woocommerce",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Whatsi",
+            "email": "whatsiplus@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WhatsiAPI_WC\\": "src"
+        },
+        "classmap": ["src/", "src/Forms/Handlers"]
+    }
+}
