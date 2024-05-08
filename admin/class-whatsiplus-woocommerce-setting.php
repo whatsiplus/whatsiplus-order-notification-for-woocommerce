@@ -575,7 +575,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
             }
             else if($acc_balance === "Not connected to WhatsApp")
             {
-                $acc_balance="API KEY is valid but status:".$acc_balance;
+                $acc_balance="API KEY is valid but status: ".$acc_balance;
                 echo '<p style="color: red;"><b>'. esc_html($acc_balance). '</b></p>';
                 echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
             }
