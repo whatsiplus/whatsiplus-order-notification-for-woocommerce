@@ -564,7 +564,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         if ($acc_balance === "Invalid API KEY")
             echo ('<p style="color: red;"><b>'. esc_html($acc_balance). '</b></p>'.
                     '<p>To get free API KEY and use all the features of the plugin, enter the link below.</p>'.
-                    '<p><b><a href="https://panel.whatsiplus.com/index.php?rp=/login" target="_blank">Whatsiplus</a></b></p>'
+                    '<p><b><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Whatsiplus</a></b></p>'
                 ); 
         else{
             echo '<p style="color: green;"><b>'. esc_html($acc_balance). '</b></p>';
