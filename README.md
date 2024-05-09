@@ -1,20 +1,5 @@
 # Whatsiplus Notification for WooCommerce
 
-## Contributors
-whatsiapiplugin
-
-## Tags
-whatsiplus, sms, woocommerce, multivendor, order, order notification, whatsapp
-
-## Requires at least
-WordPress 3.8, WooCommerce 2.6, PHP 5.6
-
-## Tested up to
-WordPress 6.2, WooCommerce 5.2.2
-
-## Stable tag
-1.0.0
-
 ## License
 GPLv3
 [License URI](http://www.gnu.org/licenses/gpl-3.0.html)
