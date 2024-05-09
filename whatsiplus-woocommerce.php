@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Whatsiplus Notification for WooCommerce
+Plugin Name: Whatsiplus Order Notification for WooCommerce
 Plugin URI:  https://whatsiplus.com
 Description: Whatsiplus Notification for WooCommerce
 Version:     1.0.0
