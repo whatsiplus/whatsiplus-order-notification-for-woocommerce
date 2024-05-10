@@ -10,21 +10,33 @@ GPLv3
 
 ### Whatsiplus Order Notification for WooCommerce
 
-Whatsiplus Notification for WooCommerce is a versatile WordPress plugin designed to streamline communication between you and your customers. Whether you’re a seasoned e-commerce entrepreneur or just starting out, this plugin offers unparalleled convenience and functionality. It allows you to effortlessly send WhatsApp messages to your customers and managers, keeping them informed about new orders, order status updates, and more.
+
+**Send WhatsApp Notification**: This plugin serves as a WooCommerce add-on, but you can access its functionalities independently. For instance, you can send **WhatsApp messages** and **notifications** to various user groups.
+
+This plugin helps you do your work with minimal effort and automatically send predefined WhatsApp messages to your customers.
+
+With this plugin, you can automatically send WhatsApp order notifications to your customers (buyer) and managers (seller/employees) whenever a new order is placed. In addition, if the status of the order changes, the customer will immediately receive a WhatsApp message regarding the status of the order.
+
+Try it for free. For 10 days, use all the features of the plugin, including sending unlimited WhatsApp messages to your users.
 
 This is a plugin add-on for WooCommerce. But WooCommerce plugin is not required to access certain functionalities of our plugin. For example: Send WhatsApp Message, Send WhatsApp messages to different groups of your users.
 
 ### Key Features
 
 - Notify seller whenever a new order is placed.
-- Inform buyer of the current order status/whenever order status is changed.
-- All WooCommerce order statuses are supported (including Custom WooCommerce Order Statuses).
+- Inform buyer the current order status / whenever order status is changed.
+- All WooCommerce order statuses are supported (including Custom WooCommerce Order Statuses)
 - Message templates can be saved to reuse in the future.
-- Placeholder tags are supported to personalize your message. For example: [shop_name], [order_id], [order_amount], [order_status], [order_product], [payment_method], [bank_details].
+- Placeholder tags are supported to personalize your message. For eg: [shop_name], [order_id], [order_amount], [order_status], [order_product], [payment_method], [bank_details]
 - Custom checkout field added from Woo Checkout Field Editor Pro is supported.
-- Notify vendor whenever there's a new order.
-- Notify vendor when suborder status changed.
-- Notify Admin when product stock is low.
+- Notify vendor whenever there’s new order
+- Notify vendor when sub order status changed
+- Notify Admin when product stock is low
+- Multivendor Plugins Supported / Integrated.
+- Reservation / Booking / Appointment Plugins Supported
+- Membership Plugins Supported
+- CRM Plugins Supported
+- Forms Plugins Supported
 
 ### Multivendor Plugins Supported / Integrated
 
