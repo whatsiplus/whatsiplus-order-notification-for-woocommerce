@@ -549,7 +549,8 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
             if($rest_response->{'status'} == "true"){
                 $acc_balance = $rest_response->{'connectionStatus'};
-                $countryCode = @$rest_response->{'countrycode'};    
+                $countryCode = @$rest_response->{'countrycode'};
+                $wNumber = $rest_response->{'whatsAppNumber'};  
 
             } else {
                 $acc_balance = "Invalid API KEY";
@@ -569,8 +570,9 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         else{
             if($acc_balance === "Connected to WhatsApp")
             {
-                $acc_balance === "API KEY is valid, status: ". $acc_balance;
-                echo '<p style="color: green;"><b>'. esc_html($acc_balance). '</b></p>';
+                $acc_balance = "Status: ". $acc_balance;
+                echo '<p style="color: green;"><b>API KEY is Valid</b></p><p style="color: green;"><b>'. esc_html($acc_balance). '</b></p>';
+                echo '<p style="color: green;"><b>'. esc_html($wNumber). '</b></p>';
                 echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
                 echo '<p><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Manage your service</a><p>';
             }
