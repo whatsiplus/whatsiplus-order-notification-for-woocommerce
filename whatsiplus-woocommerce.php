@@ -3,9 +3,9 @@
 /*
 Plugin Name: Whatsiplus Order Notification for WooCommerce
 Plugin URI:  https://whatsiplus.com
-Description: Whatsiplus Notification for WooCommerce
+Description: Send WhatsApp notifications to WordPress and WooCommerce users
 Version:     1.0.0
-Author:      Whatsiplus
+Author:      whatsiplus
 Author URI:  https://whatsiplus.com
 License:     GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
