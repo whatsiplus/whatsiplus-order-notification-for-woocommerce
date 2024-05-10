@@ -43,6 +43,13 @@ class Whatsiplus_WooCommerce_Logger {
     {
         return $this->log_directory . "{$handle}.log";
     }
+
+	public function clear_log_file($handle) {
+        $log_file = $this->log_directory . "{$handle}.log";
+        if (file_exists($log_file)) {
+            file_put_contents($log_file, ''); // Clear the contents of the log file
+        }
+    }
 }
 
 ?>
