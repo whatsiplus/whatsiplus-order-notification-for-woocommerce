@@ -39,6 +39,9 @@ Try it for free. For 10 days, use all the features of the plugin, including send
 * CRM Plugins Supported
 * Forms Plugins Supported
 
+**Third-party Service**:
+This plugin relies on an external service for sending WhatsApp messages. Therefore, it uses **[Whatsiplus Service API](https://whatsiplus.com)** to handle message delivery.
+
 ### Multivendor Plugins Supported / Integrated. ###
 
 *   [Woocommerce Product Vendors](https://woocommerce.com/products/product-vendors/)
@@ -83,7 +86,7 @@ You'll be able to send notifications to your contacts / leads when their status 
 
 📝 Supported Forms Plugins:
 
-*   [Contact Form 7](https://wordpress.org/plugins/contact-form-7/).
+*   [Contact Form 7](https://wordpress.org/plugins/contact-form-7/)
 
 You'll be able to send notifications to customer when a new form is submitted.
 
@@ -95,6 +98,14 @@ You'll be able to send notifications to customer when a new form is submitted.
 
 
 == Frequently Asked Questions ==
+
+= How do I get started with Whatsiplus? =
+
+1. **Register**: Sign up on our website at [panel.whatsiplus.com](https://panel.whatsiplus.com/).
+2. **Select a Plan**: Choose the plan that best suits your needs from our available options.
+3. **Connect WhatsApp**: Connect your WhatsApp account to WhatsiPLUS to start using its features.
+4. **Insert API KEY**: Insert the provided API KEY into the Whatsiplus plugin settings within your WordPress admin panel.
+5. **Customize Settings**: Tailor the plugin settings to your preferences and requirements.
 
 = Can I use the WhatsApp Order Notifications Plugin without WooCommerce? =
 
