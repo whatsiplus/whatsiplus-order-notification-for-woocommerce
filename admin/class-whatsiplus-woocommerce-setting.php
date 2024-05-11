@@ -565,7 +565,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         if ($acc_balance === "Invalid API KEY")
             echo ('<p style="color: red;"><b>'. esc_html($acc_balance). '</b></p>'.
                     "<h3>To access a free API KEY and unlock all the plugin's features, please follow the link provided below.<h3>".
-                    '<h2><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Whatsiplus</a></h2>'
+                    '<h2><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Get an API key</a></h2>'
                 ); 
         else{
             if($acc_balance === "Connected to WhatsApp")
