@@ -716,7 +716,7 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 			/* translators: %s is the group name */
 			throw new InvalidArgumentException( sprintf( __( 'The group "%s" does not exist.', 'action-scheduler' ), $group ) );
 		}
-
+	
 		// Set up a query for post IDs to use later.
 		$query      = new WP_Query();
 		$query_args = array(
@@ -725,7 +725,6 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 			'post_status'      => ActionScheduler_Store::STATUS_PENDING,
 			'has_password'     => false,
 			'posts_per_page'   => $limit * 3,
-			'suppress_filters' => true,
 			'no_found_rows'    => true,
 			'orderby'          => array(
 				'menu_order' => 'ASC',
@@ -746,9 +745,10 @@ class ActionScheduler_wpPostStore extends ActionScheduler_Store {
 				),
 			),
 		);
-
+	
 		return $query->query( $query_args );
 	}
+	
 
 	/**
 	 * Find actions by claim ID.

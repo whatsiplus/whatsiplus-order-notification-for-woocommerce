@@ -90,17 +90,75 @@ class WhatsiPLUS_SendSMS_Sms {
 
         }
 
+        /*
         if($filters == 'country') {
 
             $args = array(
                 'meta_key' => 'country',
                 'meta_value' => $criteria,
             );
-
+            
             $filtered_users = get_users($args);
 
         }
+        */
+        
+        if ($filters == 'country') {
+            global $wpdb;
+        
+            // Sanitize input
+            $criteria = esc_sql($criteria);
+        
+            // Custom SQL query to fetch user IDs with the specified country meta value
+            $user_ids_query = $wpdb->get_results("
+                SELECT user_id
+                FROM {$wpdb->usermeta}
+                WHERE meta_key = 'country' AND meta_value = '{$criteria}'
+            ");
+        
+            // Initialize an array to store filtered users
+            $filtered_users = array();
+        
+            // Loop through the user IDs and fetch user objects
+            foreach ($user_ids_query as $user_id) {
+                // Get full user object using user ID
+                $user_object = get_userdata($user_id->user_id);
+                
+                // Add user object to the filtered users array
+                $filtered_users[] = $user_object;
+            }
+        }
 
+        if ($filters == 'status') {
+            global $wpdb;
+        
+            // Sanitize input
+            $criteria = esc_sql($criteria);
+        
+            // Custom SQL query to fetch user IDs with the specified status meta value
+            $user_ids_query = $wpdb->get_results("
+                SELECT user_id
+                FROM {$wpdb->usermeta}
+                WHERE meta_key = 'account_status' AND meta_value = '{$criteria}'
+            ");
+        
+            // Initialize an array to store filtered users
+            $filtered_users = array();
+        
+            // Loop through the user IDs and fetch user objects
+            foreach ($user_ids_query as $user_id) {
+                // Get full user object using user ID
+                $user_object = get_userdata($user_id->user_id);
+                
+                // Add user object to the filtered users array
+                $filtered_users[] = $user_object;
+            }
+        }
+        
+        
+
+        
+        /*
         if ($filters == 'status') {
             $args = array(
                 'meta_key' => 'account_status',
@@ -109,6 +167,7 @@ class WhatsiPLUS_SendSMS_Sms {
 
             $filtered_users = get_users($args);
         }
+        */
 
         if ($filters == 'membership_level') {
             global $wpdb;
