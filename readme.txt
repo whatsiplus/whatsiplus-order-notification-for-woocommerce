@@ -24,65 +24,66 @@ Try it for free. For 10 days, use all the features of the plugin, including send
 
 ### Key Features ###
 
-➜ Notify seller whenever a new order is placed.
-➜ Inform buyer the current order status / whenever order status is changed.
-➜ All WooCommerce order statuses are supported (including Custom WooCommerce Order Statuses)
-➜ Message templates can be saved to reuse in the future.
-➜ Placeholder tags are supported to personalize your message. For eg: [shop_name], [order_id], [order_amount], [order_status], [order_product], [payment_method], [bank_details]
-➜ Custom checkout field added from Woo Checkout Field Editor Pro is supported.
-➜ Notify vendor whenever there’s new order
-➜ Notify vendor when sub order status changed
-➜ Notify Admin when product stock is low
-➜ Multivendor Plugins Supported / Integrated.
-➜ Reservation / Booking / Appointment Plugins Supported
-➜ Membership Plugins Supported
-➜ CRM Plugins Supported
-➜ Forms Plugins Supported
+* Notify seller whenever a new order is placed.
+* Inform buyer the current order status / whenever order status is changed.
+* All WooCommerce order statuses are supported (including Custom WooCommerce Order Statuses)
+* Message templates can be saved to reuse in the future.
+* Placeholder tags are supported to personalize your message. For eg: [shop_name], [order_id], [order_amount], [order_status], [order_product], [payment_method], [bank_details]
+* Custom checkout field added from Woo Checkout Field Editor Pro is supported.
+* Notify vendor whenever there’s new order
+* Notify vendor when sub order status changed
+* Notify Admin when product stock is low
+* Multivendor Plugins Supported / Integrated.
+* Reservation / Booking / Appointment Plugins Supported
+* Membership Plugins Supported
+* CRM Plugins Supported
+* Forms Plugins Supported
 
 ### Multivendor Plugins Supported / Integrated. ###
 
-👉 [Woocommerce Product Vendors](https://woocommerce.com/products/product-vendors/)
-👉 [MultivendorX formerly WC Marketplace](https://wordpress.org/plugins/dc-woocommerce-multi-vendor/)
-👉 [WC Vendors Marketplace](https://wordpress.org/plugins/wc-vendors/)
-👉 [WooCommerce Multivendor Marketplace (WCFM Marketplace)](https://wordpress.org/plugins/wc-multivendor-marketplace/)
-👉 [Dokan](https://wordpress.org/plugins/dokan-lite/)
-👉 [YITH WooCommerce Multi Vendor](https://wordpress.org/plugins/yith-woocommerce-product-vendors/)
+*   [Woocommerce Product Vendors](https://woocommerce.com/products/product-vendors/)
+*   [MultivendorX formerly WC Marketplace](https://wordpress.org/plugins/dc-woocommerce-multi-vendor/)
+*   [WC Vendors Marketplace](https://wordpress.org/plugins/wc-vendors/)
+*   [WooCommerce Multivendor Marketplace (WCFM Marketplace)](https://wordpress.org/plugins/wc-multivendor-marketplace/)
+*   [Dokan](https://wordpress.org/plugins/dokan-lite/)
+*   [YITH WooCommerce Multi Vendor](https://wordpress.org/plugins/yith-woocommerce-product-vendors/)
 
 You'll be able to Send WhatsApp Order Notification to vendors & buyers
 
 ### Integrations Supported ###
 
-* Supported Reservation / Booking / Appointment Plugins:
+🥡 Supported Reservation / Booking / Appointment Plugins:
 
-🥡 [Five Star Restaurant Reservations – WordPress Booking Plugin](https://wordpress.org/plugins/restaurant-reservations/).
-🥡 [Booking Calendar | Appointment Booking | BookIt](https://wordpress.org/plugins/bookit/).
-🥡 [Quick Restaurant Reservations](https://wordpress.org/plugins/quick-restaurant-reservations/).
-🥡 [LatePoint - Appointment Booking & Reservation](https://codecanyon.net/item/latepoint-appointment-booking-reservation-plugin-for-wordpress/22792692)
-🥡 [FAT Service Booking](https://codecanyon.net/item/fat-services-booking-automated-booking-and-online-scheduling/24214247)
+*   [Five Star Restaurant Reservations – WordPress Booking Plugin](https://wordpress.org/plugins/restaurant-reservations/).
+*   [Booking Calendar | Appointment Booking | BookIt](https://wordpress.org/plugins/bookit/).
+*   [Quick Restaurant Reservations](https://wordpress.org/plugins/quick-restaurant-reservations/).
+*   [LatePoint - Appointment Booking & Reservation](https://codecanyon.net/item/latepoint-appointment-booking-reservation-plugin-for-wordpress/22792692)
+*   [FAT Service Booking](https://codecanyon.net/item/fat-services-booking-automated-booking-and-online-scheduling/24214247)
 
 You'll be able to send WhatsApp booking notifications to your customers when booking status changes.
 
-* Supported Membership Plugins:
+🧑‍🤝‍🧑 Supported Membership Plugins:
 
-🧑‍🤝‍🧑 [ARMember – Membership Plugin](https://wordpress.org/plugins/armember-membership/)
-🧑‍🤝‍🧑 [MemberMouse](https://membermouse.com/)
-🧑‍🤝‍🧑 [MemberPress](https://memberpress.com/)
-🧑‍🤝‍🧑 [S2Members](https://wordpress.org/plugins/s2member/)
-🧑‍🤝‍🧑 [Simple Membership](https://wordpress.org/plugins/simple-membership)
+*   [ARMember – Membership Plugin](https://wordpress.org/plugins/armember-membership/)
+*   [MemberMouse](https://membermouse.com/)
+*   [MemberPress](https://memberpress.com/)
+*   [S2Members](https://wordpress.org/plugins/s2member/)
+*   [Simple Membership](https://wordpress.org/plugins/simple-membership)
 
 You'll be able to send membership WhatsApp notification & reminders to your members.
 
-* Supported CRM Plugins:
+💰 Supported CRM Plugins:
 
-💰 [Jetpack CRM](https://wordpress.org/plugins/zero-bs-crm/)
-💰 [Groundhogg CRM](https://wordpress.org/plugins/groundhogg/)
-💰 [Fluent CRM](https://wordpress.org/plugins/fluent-crm/)
-💰 [WP ERP CRM](https://wordpress.org/plugins/erp/)
+*   [Jetpack CRM](https://wordpress.org/plugins/zero-bs-crm/)
+*   [Groundhogg CRM](https://wordpress.org/plugins/groundhogg/)
+*   [Fluent CRM](https://wordpress.org/plugins/fluent-crm/)
+*   [WP ERP CRM](https://wordpress.org/plugins/erp/)
 
 You'll be able to send notifications to your contacts / leads when their status changed.
 
-* Supported Forms Plugins:
-📝 [Contact Form 7](https://wordpress.org/plugins/contact-form-7/).
+📝 Supported Forms Plugins:
+
+*   [Contact Form 7](https://wordpress.org/plugins/contact-form-7/).
 
 You'll be able to send notifications to customer when a new form is submitted.
 
