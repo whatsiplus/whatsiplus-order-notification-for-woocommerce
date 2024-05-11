@@ -53,7 +53,7 @@ class WhatsiARMemberPremium implements Whatsiplus_PluginInterface, Whatsiplus_Re
     {
         return array(
             'id'    => $this->get_option_id(),
-            'title' => __( $this->plugin_name, WHATSIPLUS_TEXT_DOMAIN ),
+            'title' => __( 'AR Member Premium', 'WHATSIPLUS_TEXT_DOMAIN' ),
         );
     }
 
@@ -79,8 +79,8 @@ class WhatsiARMemberPremium implements Whatsiplus_PluginInterface, Whatsiplus_Re
     private function get_enable_notification_fields() {
         return array(
             'name'    => 'whatsiplus_automation_enable_notification',
-            'label'   => __( 'Enable WhatsApp Notifications', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => ' ' . __( 'Enable', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Enable WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'checkbox',
             'default' => 'off'
         );
@@ -89,8 +89,8 @@ class WhatsiARMemberPremium implements Whatsiplus_PluginInterface, Whatsiplus_Re
     private function get_send_from_fields() {
         return array(
             'name'  => 'whatsiplus_automation_send_from',
-            'label' => __( 'Send from', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'  => __( 'To display in the Message Outbox section of the plugin', WHATSIPLUS_TEXT_DOMAIN ),
+            'label' => __( 'Send from', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'  => 'text',
         );
     }
@@ -98,8 +98,8 @@ class WhatsiARMemberPremium implements Whatsiplus_PluginInterface, Whatsiplus_Re
     private function get_send_on_fields() {
         return array(
             'name'    => 'whatsiplus_automation_send_on',
-            'label'   => __( 'Send notification on', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => __( 'Choose when to send the notification message to your customer', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => __( 'Choose when to send the notification message to your customer', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'multicheck',
             'options' => array(
                 'cancel_subscription'     => 'Cancel subscription',
@@ -113,33 +113,33 @@ class WhatsiARMemberPremium implements Whatsiplus_PluginInterface, Whatsiplus_Re
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_cancel_subscription',
-                'label'   => __( 'Cancel subscription message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Cancel subscription message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="cancel_subscription" data-attr-target="%1$s[whatsiplus_automation_sms_template_cancel_subscription]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [name] subscription has been cancelled', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], your [name] subscription has been cancelled', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_after_user_plan_change',
-                'label'   => __( 'After user plan changed message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'After user plan changed message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="after_user_plan_change" data-attr-target="%1$s[whatsiplus_automation_sms_template_after_user_plan_change]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your subscription has been changed to [name]', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], your subscription has been changed to [name]', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_after_user_plan_renew',
-                'label'   => __( 'After user plan renewed message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'After user plan renewed message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="after_user_plan_renew" data-attr-target="%1$s[whatsiplus_automation_sms_template_after_user_plan_renew]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [name] subscription has been renewed at [amount]', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], your [name] subscription has been renewed at [amount]', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
         );
     }
@@ -171,69 +171,70 @@ class WhatsiARMemberPremium implements Whatsiplus_PluginInterface, Whatsiplus_Re
     }
 
     private function get_reminder_fields() {
-        return array(
-            array(
-                'name'    => 'whatsiplus_automation_reminder',
-                'label'   => __( 'Send reminder to renew membership', WHATSIPLUS_TEXT_DOMAIN ),
-                'desc'    => __( '', WHATSIPLUS_TEXT_DOMAIN ),
-                'type'    => 'multicheck',
-                'options' => array(
-                    'rem_1'  => '1 day before membership expiry',
-                    'rem_2'  => '2 days before membership expiry',
-                    'rem_3'  => '3 days before membership expiry',
-                    'custom' => 'Custom time before membership expiry',
-                )
-            ),
-            array(
-                'name'  => 'whatsiplus_automation_reminder_custom_time',
-                'label' => __( '', WHATSIPLUS_TEXT_DOMAIN ),
-                'desc'  => __( 'Enter the custom time you want to remind your customer before membership expires in (minutes) <br> Choose when to send a reminder message to your customer <br> Please set your timezone in <a href="' . admin_url('options-general.php') . '">settings</a> <br> You must setup cronjob <a href="https://whatsiplus.com/go?url=cron">here</a> ', WHATSIPLUS_TEXT_DOMAIN ),
-                'type'  => 'number',
-            ),
-        );
-    }
+    return array(
+        array(
+            'name'    => 'whatsiplus_automation_reminder',
+            'label'   => __( 'Send reminder to renew membership', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => __( 'Description for the reminder field', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'type'    => 'multicheck',
+            'options' => array(
+                'rem_1'  => __( '1 day before membership expiry', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'rem_2'  => __( '2 days before membership expiry', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'rem_3'  => __( '3 days before membership expiry', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'custom' => __( 'Custom time before membership expiry', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            )
+        ),
+        array(
+            'name'  => 'whatsiplus_automation_reminder_custom_time',
+            'label' => __( 'Custom Reminder Time', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'  => __( 'Enter the custom time you want to remind your customer before membership expires (in minutes). Choose when to send a reminder message to your customer. Please set your timezone in settings. You must set up a cron job <a href="https://whatsiplus.com/go?url=cron" target="_blank">here</a>.', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'type'  => 'number',
+        ),
+    );
+}
+
 
     private function get_sms_reminder_template_fields() {
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rem_1',
-                'label'   => __( '1 day reminder message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( '1 day reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rem_1]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [name] subscription will expire in 1 Day, renew now to keep access.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], your [name] subscription will expire in 1 Day, renew now to keep access.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rem_2',
-                'label'   => __( '2 days reminder message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( '2 days reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rem_2]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [name] subscription will expire in 2 Days, renew now to keep access.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], your [name] subscription will expire in 2 Days, renew now to keep access.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rem_3',
-                'label'   => __( '3 days reminder message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( '3 days reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rem_3]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [name] subscription will expire in 3 Days, renew now to keep access.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], your [name] subscription will expire in 3 Days, renew now to keep access.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_custom',
-                'label'   => __( 'Custom time reminder message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Custom time reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_custom]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [name] subscription will expire in [reminder_custom_time] Days, renew now to keep access. - custom', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], your [name] subscription will expire in [reminder_custom_time] Days, renew now to keep access. - custom', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
         );
     }

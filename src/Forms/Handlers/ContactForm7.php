@@ -317,7 +317,16 @@ class ContactForm7 {
 
             <br class="clear" />
 
-            <p class="description mail-tag"><label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>"><?php echo wp_kses_post( sprintf( __( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'sms-alert' ), '<strong><span class="mail-tag"></span></strong>' ) ); ?><input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" /></label></p>
+            <p class="description mail-tag">
+    		<label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>">
+        	<?php
+            // translators: %s is a placeholder for the mail-tag
+			echo wp_kses_post( sprintf( __( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'sms-alert' ), '<strong><span class="mail-tag"></span></strong>' ) );
+			?>
+			<input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" />
+			</label>
+			</p>
+
         </div>
 		<?php
 	}
@@ -391,8 +400,8 @@ class ContactForm7 {
 			$messages,
 			array(
 				'whatsi_invalid_number' => array(
-					'description' => __( 'Invalid number', WHATSIPLUS_TEXT_DOMAIN ),
-					'default'     => __( 'Invalid number', WHATSIPLUS_TEXT_DOMAIN ),
+					'description' => __( 'Invalid number', 'WHATSIPLUS_TEXT_DOMAIN' ),
+					'default'     => __( 'Invalid number', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				),
 			)
 		);
@@ -419,7 +428,7 @@ class ContactForm7 {
 			{
 				echo sprintf(
 					'<div id="message" class="notice notice-warning"><p>%s</p></div>',
-					esc_html__( "Please choose mobile number field in WhatsiAPI tab", WHATSIPLUS_TEXT_DOMAIN)
+					esc_html__( "Please choose mobile number field in WhatsiAPI tab", 'WHATSIPLUS_TEXT_DOMAIN')
 				);
 			}
 		}

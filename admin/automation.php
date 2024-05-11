@@ -31,7 +31,7 @@ class WhatsiPLUS_Automation_View implements Whatsiplus_Register_Interface {
         }
 		$sections[] = array(
 			'id'             => 'whatsiplus_automation_setting',
-			'title'          => __( 'Automation', WHATSIPLUS_TEXT_DOMAIN ),
+			'title'          => __( 'Automation', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'submit_button'  => '',
             'children'       => $children,
 		);

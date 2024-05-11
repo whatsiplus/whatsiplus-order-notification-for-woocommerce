@@ -43,7 +43,7 @@ class WhatsiQuickRestaurantReservation implements Whatsiplus_PluginInterface, Wh
     {
         return array(
             'id'    => $this->get_option_id(),
-            'title' => __( $this->plugin_name, WHATSIPLUS_TEXT_DOMAIN ),
+            'title' => __( 'Quick Restaurant Reservations', 'WHATSIPLUS_TEXT_DOMAIN' ),
         );
     }
 
@@ -69,8 +69,8 @@ class WhatsiQuickRestaurantReservation implements Whatsiplus_PluginInterface, Wh
     private function get_enable_notification_fields() {
         return array(
             'name'    => 'whatsiplus_automation_enable_notification',
-            'label'   => __( 'Enable WhatsApp Notifications', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => ' ' . __( 'Enable', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Enable WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'checkbox',
             'default' => 'off'
         );
@@ -79,8 +79,8 @@ class WhatsiQuickRestaurantReservation implements Whatsiplus_PluginInterface, Wh
     private function get_send_from_fields() {
         return array(
             'name'  => 'whatsiplus_automation_send_from',
-            'label' => __( 'Send from', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'  => __( 'To display in the Message Outbox section of the plugin', WHATSIPLUS_TEXT_DOMAIN ),
+            'label' => __( 'Send from', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'  => 'text',
         );
     }
@@ -88,8 +88,8 @@ class WhatsiQuickRestaurantReservation implements Whatsiplus_PluginInterface, Wh
     private function get_send_on_fields() {
         return array(
             'name'    => 'whatsiplus_automation_send_on',
-            'label'   => __( 'Send notification on', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => __( 'Choose when to send the notification message to your customer', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => __( 'Choose when to send the notification message to your customer', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'multicheck',
             'options' => array(
                 'pending'    => 'Pending',
@@ -104,43 +104,43 @@ class WhatsiQuickRestaurantReservation implements Whatsiplus_PluginInterface, Wh
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_pending',
-                'label'   => __( 'Pending message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Pending message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_pending]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_confirmed',
-                'label'   => __( 'Confirmed message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Confirmed message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_confirmed]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_cancelled',
-                'label'   => __( 'Cancelled message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Cancelled message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_cancelled]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rejected',
-                'label'   => __( 'Rejected message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Rejected message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rejected]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
         );
     }
@@ -149,66 +149,67 @@ class WhatsiQuickRestaurantReservation implements Whatsiplus_PluginInterface, Wh
         return array(
             array(
                 'name'    => 'whatsiplus_automation_reminder',
-                'label'   => __( 'Send reminder to customer before reservation', WHATSIPLUS_TEXT_DOMAIN ),
-                'desc'    => __( '', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Send reminder to customer before reservation', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'desc'    => __( 'Description for the reminder field', 'WHATSIPLUS_TEXT_DOMAIN' ), // Provide a translatable description
                 'type'    => 'multicheck',
                 'options' => array(
-                    'rem_1'  => '15 minutes before reservation',
-                    'rem_2'  => '30 minutes before reservation',
-                    'rem_3'  => '60 minutes before reservation',
-                    'custom' => 'Custom time before reservation',
+                    'rem_1'  => __( '15 minutes before reservation', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                    'rem_2'  => __( '30 minutes before reservation', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                    'rem_3'  => __( '60 minutes before reservation', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                    'custom' => __( 'Custom time before reservation', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 )
             ),
             array(
                 'name'  => 'whatsiplus_automation_reminder_custom_time',
-                'label' => __( '', WHATSIPLUS_TEXT_DOMAIN ),
-                'desc'  => __( 'Enter the custom time you want to remind your customer before reservation in (minutes) <br> Choose when to send a reminder message to your customer <br> Please set your timezone in <a href="' . admin_url('options-general.php') . '">settings</a> <br> You must setup cronjob <a href="https://whatsiplus.com/go?url=cron">here</a> ', WHATSIPLUS_TEXT_DOMAIN ),
+                'label' => __( 'Custom Reminder Time', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'desc'  => __( 'Enter the custom time you want to remind your customer before membership expires (in minutes). Choose when to send a reminder message to your customer. Please set your timezone in settings. You must set up a cron job <a href="https://whatsiplus.com/go?url=cron" target="_blank">here</a>.', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'type'  => 'number',
             ),
         );
     }
+    
 
     private function get_sms_reminder_template_fields() {
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rem_1',
-                'label'   => __( '15 minutes reminder message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( '15 minutes reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rem_1]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status].', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rem_2',
-                'label'   => __( '30 minutes reminder message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( '30 minutes reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rem_2]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status].', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rem_3',
-                'label'   => __( '60 minutes reminder message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( '60 minutes reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rem_3]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status].', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_custom',
-                'label'   => __( 'Custom time reminder message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Custom time reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_custom]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]. - custom', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]. - custom', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
         );
     }

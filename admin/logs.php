@@ -17,7 +17,7 @@ class WhatsiPLUS_Logs_View implements Whatsiplus_Register_Interface {
 	public function set_logs_setting_section( $sections ) {
 		$sections[] = array(
             'id'               => 'whatsiplus_logs_setting',
-            'title'            => __( 'Logs', WHATSIPLUS_TEXT_DOMAIN ),
+            'title'            => __( 'Logs', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'submit_button'    => '',
 		);
 

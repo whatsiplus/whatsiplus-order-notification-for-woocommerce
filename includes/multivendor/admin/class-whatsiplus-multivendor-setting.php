@@ -12,7 +12,7 @@ class Whatsiplus_Multivendor_Setting implements Whatsiplus_Register_Interface {
 	public function set_multivendor_setting_section( $sections ) {
 		$sections[] = array(
 			'id'    => 'whatsiplus_multivendor_setting',
-			'title' => __( 'Multivendor Settings', WHATSIPLUS_TEXT_DOMAIN ),
+			'title' => __( 'Multivendor Settings', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'submit_button' => class_exists("woocommerce") ? null : '',
 		);
 
@@ -25,15 +25,15 @@ class Whatsiplus_Multivendor_Setting implements Whatsiplus_Register_Interface {
 		$setting_fields['whatsiplus_multivendor_setting'] = array(
 			array(
 				'name'    => 'whatsiplus_multivendor_vendor_send_sms',
-				'label'   => __( 'Enable Vendor WhatsApp Notifications', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'Enable Vendor WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'desc'    => 'Enable',
 				'type'    => 'checkbox',
 				'default' => 'off',
 			),
 			array(
 				'name'    => 'whatsiplus_multivendor_vendor_send_sms_on',
-				'label'   => __( 'Send notification on', WHATSIPLUS_TEXT_DOMAIN ),
-				'desc'    => __( 'Choose when to send a status notification message to your vendors', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
+				'desc'    => __( 'Choose when to send a status notification message to your vendors', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'type'    => 'multicheck',
 				'default' => array(
 					'processing' => 'processing',
@@ -51,7 +51,7 @@ class Whatsiplus_Multivendor_Setting implements Whatsiplus_Register_Interface {
 			),
 			array(
 				'name'    => 'whatsiplus_multivendor_selected_plugin',
-				'label'   => __( 'Third Party Plugin', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'Third Party Plugin', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'desc'    => 'Change this when auto detect multivendor plugin not working<br /><span id="whatsiplus_multivendor_setting[multivendor_helper_desc]"></span>',
 				'type'    => 'select',
 				'default' => Whatsiplus_Multivendor_Factory::$activatedPlugin ?? 'auto',
@@ -67,13 +67,13 @@ class Whatsiplus_Multivendor_Setting implements Whatsiplus_Register_Interface {
 			),
 			array(
 				'name'    => 'whatsiplus_multivendor_vendor_sms_template',
-				'label'   => __( 'Vendor message', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'Vendor message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="multivendor" data-attr-target="whatsiplus_multivendor_setting[whatsiplus_multivendor_vendor_sms_template]" class="button button-secondary">Keywords</button>',
 				'type'    => 'textarea',
 				'rows'    => '8',
 				'cols'    => '500',
 				'css'     => 'min-width:350px;',
-				'default' => __( '[shop_name] : You have a new order with order ID [order_id] and order amount [order_currency] [order_amount]. The order is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+				'default' => __( '[shop_name] : You have a new order with order ID [order_id] and order amount [order_currency] [order_amount]. The order is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
 			),
 		);
 

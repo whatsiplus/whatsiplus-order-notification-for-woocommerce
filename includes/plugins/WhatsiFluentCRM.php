@@ -42,7 +42,7 @@ class WhatsiFluentCRM implements Whatsiplus_PluginInterface, Whatsiplus_Register
     {
         return array(
             'id'    => $this->get_option_id(),
-            'title' => __( $this->plugin_name, WHATSIPLUS_TEXT_DOMAIN ),
+            'title' => __( 'Fluent CRM', 'WHATSIPLUS_TEXT_DOMAIN' ),
         );
     }
 
@@ -82,8 +82,8 @@ class WhatsiFluentCRM implements Whatsiplus_PluginInterface, Whatsiplus_Register
     private function get_enable_notification_fields() {
         return array(
             'name'    => 'whatsiplus_automation_enable_notification',
-            'label'   => __( 'Enable WhatsApp Notifications', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => ' ' . __( 'Enable', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Enable WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'checkbox',
             'default' => 'off'
         );
@@ -92,8 +92,8 @@ class WhatsiFluentCRM implements Whatsiplus_PluginInterface, Whatsiplus_Register
     private function get_send_from_fields() {
         return array(
             'name'  => 'whatsiplus_automation_send_from',
-            'label' => __( 'Send from', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'  => __( 'To display in the Message Outbox section of the plugin', WHATSIPLUS_TEXT_DOMAIN ),
+            'label' => __( 'Send from', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'  => 'text',
         );
     }
@@ -101,8 +101,8 @@ class WhatsiFluentCRM implements Whatsiplus_PluginInterface, Whatsiplus_Register
     private function get_send_on_fields() {
         return array(
             'name'    => 'whatsiplus_automation_send_on',
-            'label'   => __( 'Send notification on', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => __( 'Choose when to send a notification message', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => __( 'Choose when to send a notification message', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'multicheck',
             'options' => array(
                 'subscribed'    => 'Subscribed',
@@ -116,33 +116,33 @@ class WhatsiFluentCRM implements Whatsiplus_PluginInterface, Whatsiplus_Register
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_subscribed',
-                'label'   => __( 'Subscribed status message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Subscribed status message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="customer" data-attr-target="%1$s[whatsiplus_automation_sms_template_subscribed]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], thank you for subscribing, trending contents will be delivered to you.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], thank you for subscribing, trending contents will be delivered to you.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_unsubscribed',
-                'label'   => __( 'Unsubscribed status message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Unsubscribed status message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="lead" data-attr-target="%1$s[whatsiplus_automation_sms_template_unsubscribed]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], you have unsubscribed and will no longer receive trending contents.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], you have unsubscribed and will no longer receive trending contents.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_pending',
-                'label'   => __( 'Pending status message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Pending status message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="refused" data-attr-target="%1$s[whatsiplus_automation_sms_template_pending]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], would you like to opt-in to our newsletter and get trending contents delivered to you ? We promise we will not spam you.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], would you like to opt-in to our newsletter and get trending contents delivered to you ? We promise we will not spam you.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
         );
     }

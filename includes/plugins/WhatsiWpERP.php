@@ -42,7 +42,7 @@ class WhatsiWpERP implements Whatsiplus_PluginInterface, Whatsiplus_Register_Int
     {
         return array(
             'id'    => $this->get_option_id(),
-            'title' => __( $this->plugin_name, WHATSIPLUS_TEXT_DOMAIN ),
+            'title' => __( 'WP ERP', 'WHATSIPLUS_TEXT_DOMAIN' ),
         );
     }
 
@@ -83,8 +83,8 @@ class WhatsiWpERP implements Whatsiplus_PluginInterface, Whatsiplus_Register_Int
     private function get_enable_notification_fields() {
         return array(
             'name'    => 'whatsiplus_automation_enable_notification',
-            'label'   => __( 'Enable WhatsApp Notifications', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => ' ' . __( 'Enable', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Enable WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'checkbox',
             'default' => 'off'
         );
@@ -93,8 +93,8 @@ class WhatsiWpERP implements Whatsiplus_PluginInterface, Whatsiplus_Register_Int
     private function get_send_from_fields() {
         return array(
             'name'  => 'whatsiplus_automation_send_from',
-            'label' => __( 'Send from', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'  => __( 'To display in the Message Outbox section of the plugin', WHATSIPLUS_TEXT_DOMAIN ),
+            'label' => __( 'Send from', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'  => 'text',
         );
     }
@@ -102,8 +102,8 @@ class WhatsiWpERP implements Whatsiplus_PluginInterface, Whatsiplus_Register_Int
     private function get_send_on_fields() {
         return array(
             'name'    => 'whatsiplus_automation_send_on',
-            'label'   => __( 'Send notification on', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => __( 'Choose when to send the notification message to your customer', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => __( 'Choose when to send the notification message to your customer', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'multicheck',
             'options' => array(
                 'new_customer'    => 'New customer',
@@ -118,43 +118,43 @@ class WhatsiWpERP implements Whatsiplus_PluginInterface, Whatsiplus_Register_Int
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_new_customer',
-                'label'   => __( 'New customer message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'New customer message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="new_leads" data-attr-target="%1$s[whatsiplus_automation_sms_template_new_customer]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], we would like to personally thank you for using our services.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], we would like to personally thank you for using our services.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_new_lead',
-                'label'   => __( 'New lead message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'New lead message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="new_leads" data-attr-target="%1$s[whatsiplus_automation_sms_template_new_lead]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], thank you for showing interest in our services. Our sales representative will contact you shortly.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], thank you for showing interest in our services. Our sales representative will contact you shortly.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_new_opportunity',
-                'label'   => __( 'New opportunity message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'New opportunity message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="new_leads" data-attr-target="%1$s[whatsiplus_automation_sms_template_new_opportunity]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], when would be a good time for our sales representative to schedule a call with you to discuss more on our service?', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], when would be a good time for our sales representative to schedule a call with you to discuss more on our service?', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_new_subscriber',
-                'label'   => __( 'New subscriber message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'New subscriber message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="new_leads" data-attr-target="%1$s[whatsiplus_automation_sms_template_new_subscriber]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], thank you for subscribing to us. We will notify you of HOT contents', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], thank you for subscribing to us. We will notify you of HOT contents', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
         );
     }

@@ -192,9 +192,10 @@ abstract class ActionScheduler {
 	 */
 	public static function is_initialized( $function_name = null ) {
 		if ( ! self::$data_store_initialized && ! empty( $function_name ) ) {
+			/* translators: %s is a placeholder for the function name */
 			$message = sprintf( __( '%s() was called before the Action Scheduler data store was initialized', 'action-scheduler' ), esc_attr( $function_name ) );
 			error_log( $message, E_WARNING );
-		}
+		}		
 
 		return self::$data_store_initialized;
 	}
@@ -292,7 +293,7 @@ abstract class ActionScheduler {
 		return as_get_datetime_object( $when, $timezone );
 	}
 
-	/**
+	/*
 	 * Issue deprecated warning if an Action Scheduler function is called in the shutdown hook.
 	 *
 	 * @param string $function_name The name of the function being called.

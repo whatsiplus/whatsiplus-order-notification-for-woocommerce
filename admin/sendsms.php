@@ -93,7 +93,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 	public function set_sendsms_setting_section( $sections ) {
 		$sections[] = array(
             'id'               => 'whatsiplus_sendsms_setting',
-            'title'            => __( 'Send WhatsApp Message', WHATSIPLUS_TEXT_DOMAIN ),
+            'title'            => __( 'Send WhatsApp Message', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'submit_button'    => get_submit_button('Send Message', 'primary large', 'sendMessage', true ,array('id' => 'sendMessage')),
             'action'           => 'whatsiplus_sms_form',
             'action_url'       => admin_url('admin-post.php'),
@@ -119,7 +119,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 		$setting_fields['whatsiplus_sendsms_setting'] = array(
 			array(
 				'name'    => 'whatsiplus_sendsms_message_to',
-				'label'   => __( 'To', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'To', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'desc'    => 'Select the recipients you wish to broadcast your message',
 				'type'    => 'select',
 				'default' => 'customer_all',
@@ -132,7 +132,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 			),
 			array(
 				'name'    => 'whatsiplus_sendsms_users',
-				'label'   => __( 'Users', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'Users', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'desc'    => 'Note: Please ensure <b>Mobile Number</b> field at <b>Additional profile information</b> is not empty for selected users.<br />',
 				'type'    => 'selectm',
 				'default' => 'auto',
@@ -141,7 +141,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
 			array(
 				'name'    => 'whatsiplus_sendsms_recipients',
-				'label'   => __( 'Recipients', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'Recipients', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'desc'    => '(Please insert country code along with mobile numbers,<br>e.g. 60124512978,60198745123,60161237841)',
 				'type'    => 'textarea',
 				'rows'    => '8',
@@ -150,7 +150,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 			),
             array(
 				'name'    => 'whatsiplus_sendsms_filters',
-				'label'   => __( 'Filter By', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'Filter By', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'desc'    => 'Select the recipients you wish to filter by<br />',
 				'type'    => 'select',
 				'default' => '-1',
@@ -162,7 +162,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 			),
             array(
 				'name'    => 'whatsiplus_sendsms_criteria',
-				'label'   => __( 'Criteria', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'Criteria', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'desc'    => 'Select the criteria you wish to filter by<br />',
 				'type'    => 'select',
                 // 'css'     => 'min-width:350px;',
@@ -172,7 +172,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 			),
 			array(
 				'name'    => 'whatsiplus_sendsms_message',
-				'label'   => __( 'Message', WHATSIPLUS_TEXT_DOMAIN ),
+				'label'   => __( 'Message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 				'desc'    => "When sending outbound messages via our API service, please ensure that the total message size remains below the channel's maximum size limit.",
 				'type'    => 'textarea',
 				'rows'    => '8',

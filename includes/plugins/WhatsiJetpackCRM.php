@@ -40,7 +40,7 @@ class WhatsiJetpackCRM implements Whatsiplus_PluginInterface, Whatsiplus_Registe
     {
         return array(
             'id'    => $this->get_option_id(),
-            'title' => __( $this->plugin_name, WHATSIPLUS_TEXT_DOMAIN ),
+            'title' => __( 'Jetpack CRM', 'WHATSIPLUS_TEXT_DOMAIN' ),
         );
     }
 
@@ -81,8 +81,8 @@ class WhatsiJetpackCRM implements Whatsiplus_PluginInterface, Whatsiplus_Registe
     private function get_enable_notification_fields() {
         return array(
             'name'    => 'whatsiplus_automation_enable_notification',
-            'label'   => __( 'Enable WhatsApp Notifications', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => ' ' . __( 'Enable', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Enable WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'checkbox',
             'default' => 'off'
         );
@@ -91,8 +91,8 @@ class WhatsiJetpackCRM implements Whatsiplus_PluginInterface, Whatsiplus_Registe
     private function get_send_from_fields() {
         return array(
             'name'  => 'whatsiplus_automation_send_from',
-            'label' => __( 'Send from', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'  => __( 'To display in the Message Outbox section of the plugin', WHATSIPLUS_TEXT_DOMAIN ),
+            'label' => __( 'Send from', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'  => 'text',
         );
     }
@@ -100,8 +100,8 @@ class WhatsiJetpackCRM implements Whatsiplus_PluginInterface, Whatsiplus_Registe
     private function get_send_on_fields() {
         return array(
             'name'    => 'whatsiplus_automation_send_on',
-            'label'   => __( 'Send notification on', WHATSIPLUS_TEXT_DOMAIN ),
-            'desc'    => __( 'Choose when to send a notification message to your new contact', WHATSIPLUS_TEXT_DOMAIN ),
+            'label'   => __( 'Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'desc'    => __( 'Choose when to send a notification message to your new contact', 'WHATSIPLUS_TEXT_DOMAIN' ),
             'type'    => 'multicheck',
             'options' => array(
                 'customer'    => 'New Customer',
@@ -116,43 +116,43 @@ class WhatsiJetpackCRM implements Whatsiplus_PluginInterface, Whatsiplus_Registe
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_customer',
-                'label'   => __( 'Customer status message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Customer status message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="customer" data-attr-target="%1$s[whatsiplus_automation_sms_template_customer]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], we would like to personally thank you for using our services.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], we would like to personally thank you for using our services.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_lead',
-                'label'   => __( 'Lead status message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Lead status message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="lead" data-attr-target="%1$s[whatsiplus_automation_sms_template_lead]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], thank you for showing interest in our services. Our sales representative will contact you shortly.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], thank you for showing interest in our services. Our sales representative will contact you shortly.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_refused',
-                'label'   => __( 'Contact refused status message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Contact refused status message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="refused" data-attr-target="%1$s[whatsiplus_automation_sms_template_refused]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], we sincerely apologise for not meeting your expectations. We promise to do better.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], we sincerely apologise for not meeting your expectations. We promise to do better.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_blacklisted',
-                'label'   => __( 'Contact blacklisted message', WHATSIPLUS_TEXT_DOMAIN ),
+                'label'   => __( 'Contact blacklisted message', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="blacklisted" data-attr-target="%1$s[whatsiplus_automation_sms_template_blacklisted]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], thank you for your interest all these time, however we will need to terminate your access from our services.', WHATSIPLUS_TEXT_DOMAIN )
+                'default' => __( 'Hi [first_name], thank you for your interest all these time, however we will need to terminate your access from our services.', 'WHATSIPLUS_TEXT_DOMAIN' )
             ),
         );
     }

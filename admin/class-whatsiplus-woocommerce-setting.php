@@ -52,16 +52,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 		$sections = array(
 			array(
 				'id'    => 'whatsiplus_setting',
-				'title' => __( 'Whatsiplus Settings', WHATSIPLUS_TEXT_DOMAIN )
+				'title' => __( 'Whatsiplus Settings', 'WHATSIPLUS_TEXT_DOMAIN' )
 			),
 			array(
 				'id'    => 'whatsiplus_admin_setting',
-				'title' => __( 'Admin Settings', WHATSIPLUS_TEXT_DOMAIN ),
+				'title' => __( 'Admin Settings', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'submit_button' => class_exists("woocommerce") ? null : '',
 			),
 			array(
                 'id'    => 'whatsiplus_customer_setting',
-				'title' => __( 'Customer Settings', WHATSIPLUS_TEXT_DOMAIN ),
+				'title' => __( 'Customer Settings', 'WHATSIPLUS_TEXT_DOMAIN' ),
                 'submit_button' => class_exists("woocommerce") ? null : '',
 			)
 		);
@@ -147,22 +147,22 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 			'whatsiplus_setting' => array(
                 array(
 					'name'  => 'whatsiplus_woocommerce_account_balance',
-					'label' => __( 'API KEY Status:', WHATSIPLUS_TEXT_DOMAIN ),
-					'desc'  => __( 'Your WhatsiAPI account balance', WHATSIPLUS_TEXT_DOMAIN ),
+					'label' => __( 'API KEY Status:', 'WHATSIPLUS_TEXT_DOMAIN' ),
+					'desc'  => __( 'Your WhatsiAPI account balance', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'type'  => 'custom_html',
 					'custom_html'  => array($this, "display_account_balance"),
 				),
 				array(
 					'name'  => 'whatsiplus_woocommerce_api_key',
-					'label' => __( 'API Key', WHATSIPLUS_TEXT_DOMAIN ),
-					'desc'  => __( 'Your WhatsApp API. Account can be registered <a href="https://whatsiplus.com/go/?url=apikey" target="blank">here</a>', WHATSIPLUS_TEXT_DOMAIN ),
+					'label' => __( 'API Key', 'WHATSIPLUS_TEXT_DOMAIN' ),
+					'desc'  => __( 'Your WhatsApp API. Account can be registered <a href="https://whatsiplus.com/go/?url=apikey" target="blank">here</a>', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'type'  => 'text',
 				),
 				array(//Get default country v1.1.17
 					'name'    		=> 'whatsiplus_woocommerce_country_code',
-					'label'   		=> __( 'Default country', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   		=> __( 'Default country', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'class'     	=> array('chzn-drop'),
-					'placeholder'	=> __( 'Select a Country', WHATSIPLUS_TEXT_DOMAIN),
+					'placeholder'	=> __( 'Select a Country', 'WHATSIPLUS_TEXT_DOMAIN'),
 					'desc'    		=> 'Selected country will be use as default country info for mobile number when country info is not provided.',
 					'type'    		=> 'select',
 					'options' 		=> $countries,
@@ -178,15 +178,15 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 			'whatsiplus_admin_setting'     => array(
 				array(
 					'name'    => 'whatsiplus_woocommerce_admin_suborders_send_sms',
-					'label'   => __( 'Enable Suborders WhatsApp Notifications', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Enable Suborders WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => ' ' . __( 'Enable',  ),
 					'type'    => 'checkbox',
 					'default' => 'off'
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_admin_send_sms_on',
-					'label'   => __( '	Send notification on', WHATSIPLUS_TEXT_DOMAIN ),
-					'desc'    => __( 'Choose when to send a status notification message to your admin <br> Set <strong>low stock threshold</strong> for each product under <strong>WooCommerce Product -> Product Data -> Inventory -> Low Stock Threshold</strong>', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( '	Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
+					'desc'    => __( 'Choose when to send a status notification message to your admin <br> Set <strong>low stock threshold</strong> for each product under <strong>WooCommerce Product -> Product Data -> Inventory -> Low Stock Threshold</strong>', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'type'    => 'multicheck',
 					'default' => array(
 						'on-hold'    => 'on-hold',
@@ -205,43 +205,43 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 				),
 				array(
 					'name'  => 'whatsiplus_woocommerce_admin_sms_recipients',
-					'label' => __( 'Mobile Number', WHATSIPLUS_TEXT_DOMAIN ),
-					'desc'  => __( 'Mobile number to receive new order notification. To send to multiple receivers, separate each entry with comma such as 0123456789, 0167888945', WHATSIPLUS_TEXT_DOMAIN ),
+					'label' => __( 'Mobile Number', 'WHATSIPLUS_TEXT_DOMAIN' ),
+					'desc'  => __( 'Mobile number to receive new order notification. To send to multiple receivers, separate each entry with comma such as 0123456789, 0167888945', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'type'  => 'text',
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_admin_sms_template',
-					'label'   => __( 'Admin message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Admin message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="admin" data-attr-target="whatsiplus_admin_setting[whatsiplus_woocommerce_admin_sms_template]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : You have a new order with order ID [order_id] and order amount [order_currency] [order_amount]. The order is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : You have a new order with order ID [order_id] and order amount [order_currency] [order_amount]. The order is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
                 ),
 				array(
 					'name'    => 'whatsiplus_woocommerce_admin_sms_template_low_stock_product',
-					'label'   => __( 'Low Stock Product Admin message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Low Stock Product Admin message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords-low-product-stock]" data-attr-type="admin" data-attr-target="whatsiplus_admin_setting[whatsiplus_woocommerce_admin_sms_template_low_stock_product]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : Your product [product_name] has low stock. Current quantity: [product_stock_quantity]. Please restock soon.', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : Your product [product_name] has low stock. Current quantity: [product_stock_quantity]. Please restock soon.', 'WHATSIPLUS_TEXT_DOMAIN' )
                 ),
 			),
 			'whatsiplus_customer_setting'  => array(
 				array(
 					'name'    => 'whatsiplus_woocommerce_suborders_send_sms',
-					'label'   => __( 'Enable Suborders WhatsApp Notifications', WHATSIPLUS_TEXT_DOMAIN ),
-					'desc'    => ' ' . __( 'Enable', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Enable Suborders WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
+					'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'type'    => 'checkbox',
 					'default' => 'off'
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_send_sms_to',
-					'label'   => __( 'Send message to', WHATSIPLUS_TEXT_DOMAIN ),
-					'desc'    => ' ' . __( 'Choose who to Send message to', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Send message to', 'WHATSIPLUS_TEXT_DOMAIN' ),
+					'desc'    => ' ' . __( 'Choose who to Send message to', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'type'    => 'multicheck',
                     'default' => array(
 						'billing-recipient'  => 'billing-recipient',
@@ -253,8 +253,8 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_send_sms',
-					'label'   => __( '	Send notification on', WHATSIPLUS_TEXT_DOMAIN ),
-					'desc'    => __( 'Choose when to send a status notification message to your customer', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( '	Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
+					'desc'    => __( 'Choose when to send a status notification message to your customer', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'type'    => 'multicheck',
                     'default' => array(
 						'on-hold'    => 'on-hold',
@@ -273,83 +273,83 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_default',
-					'label'   => __( 'Default Customer message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Default Customer message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="default" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_default]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_pending',
-					'label'   => __( 'Pending message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Pending message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="pending" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_pending]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_on-hold',
-					'label'   => __( 'On-hold message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'On-hold message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="on_hold" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_on-hold]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_processing',
-					'label'   => __( 'Processing message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Processing message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="processing" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_processing]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_completed',
-					'label'   => __( 'Completed message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Completed message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="completed" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_completed]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_cancelled',
-					'label'   => __( 'Cancelled message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Cancelled message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="cancelled" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_cancelled]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_refunded',
-					'label'   => __( 'Refunded message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Refunded message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="refunded" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_refunded]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_failed',
-					'label'   => __( 'Failed message', WHATSIPLUS_TEXT_DOMAIN ),
+					'label'   => __( 'Failed message', 'WHATSIPLUS_TEXT_DOMAIN' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="failed" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_failed]" class="button button-secondary">Keywords</button>',
 					'type'    => 'textarea',
 					'rows'    => '8',
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
-					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', WHATSIPLUS_TEXT_DOMAIN )
+					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'WHATSIPLUS_TEXT_DOMAIN' )
 				)
 			)
 		);
@@ -398,17 +398,24 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
                     if(array_key_exists('options', $setting_fields[$field][$i])) {
                         foreach($processed_wc_statuses as $processed_key => $processed_value) {
                             if( ! array_key_exists($processed_key, $setting_fields[$field][$i]['options']) ) {
-                                $setting_fields[$field][$i]['options'][$processed_key] = " {$processed_value}";
+                                // Concatenate $processed_value outside of translation functions
+                                $processed_value_text = " " . $processed_value;
+        
+                                $setting_fields[$field][$i]['options'][$processed_key] = $processed_value_text;
                                 if($field == 'whatsiplus_customer_setting') {
+                                    // Concatenate $processed_value outside of translation functions
+                                    $message_label = $processed_value . ' Customer message';
+                                    $message_default = "Your {$processed_value} message template";
+        
                                     $setting_fields[$field][] = array(
                                         'name'    => "whatsiplus_woocommerce_sms_template_{$processed_key}",
-                                        'label'   => __( "{$processed_value} Customer message", WHATSIPLUS_TEXT_DOMAIN ),
+                                        'label'   => $message_label,
                                         'desc'    => sprintf('Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="default" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_%s]" class="button button-secondary">Keywords</button>', $processed_key),
                                         'type'    => 'textarea',
                                         'rows'    => '8',
                                         'cols'    => '500',
                                         'css'     => 'min-width:350px;',
-                                        'default' => __( "Your {$processed_value} message template", WHATSIPLUS_TEXT_DOMAIN )
+                                        'default' => $message_default
                                     );
                                 }
                             }
@@ -416,10 +423,10 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
                         break;
                     }
                 }
-
                 continue;
             }
         }
+        
 
         return $setting_fields;
     }
