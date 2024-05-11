@@ -9,7 +9,7 @@ Author:      whatsiplus
 Author URI:  https://whatsiplus.com
 License:     GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: whatsiplus woocommerce
+Text Domain: whatsiplus-order-notification-for-woocommerce
 */
 
 use WhatsiAPI_WC\Loader;
