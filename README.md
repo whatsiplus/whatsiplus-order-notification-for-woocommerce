@@ -91,10 +91,14 @@ You'll be able to send notifications to customers when a new form is submitted.
 
 ## Screenshots
 
-1. WhatsiAPI Settings
+1. Whatsiplus Settings
 2. Admin Settings
 3. Customer Settings
 4. Multivendor Settings
+5. Send WhatsApp Message to Users
+6. Automation Settings
+7. Message Outbox
+8. Logs
 
 ## Changelog
 
