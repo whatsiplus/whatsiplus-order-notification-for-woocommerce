@@ -549,6 +549,9 @@ class WhatsiS2Member implements Whatsiplus_PluginInterface, Whatsiplus_Register_
 
     public function send_sms_on()
     {
+        if ( ! isset( $_GET['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_GET['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            //return;
+        }
         $params = $_GET;
         $plugin_settings = $this->get_plugin_settings();
         $enable_notifications = $plugin_settings['whatsiplus_automation_enable_notification'];

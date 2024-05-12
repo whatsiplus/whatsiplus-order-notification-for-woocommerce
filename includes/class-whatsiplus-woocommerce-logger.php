@@ -64,13 +64,7 @@ class Whatsiplus_WooCommerce_Logger {
 	
     public function get_log_file( $handle ) {
         global $wpdb;
-        $logs = $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT * FROM whatsiplus_logs"
-            ),
-            ARRAY_A
-        );
-
+        $logs = $wpdb->get_results( "SELECT * FROM whatsiplus_logs", ARRAY_A );
         $log_content = '';
         foreach ( $logs as $log ) {
             $log_content .= $log['log_time']. " -> " .$log['message'] . "\n";

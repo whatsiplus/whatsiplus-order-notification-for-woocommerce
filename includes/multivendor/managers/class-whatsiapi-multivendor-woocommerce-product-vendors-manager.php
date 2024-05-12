@@ -31,7 +31,10 @@ class Whatsiapi_Multivendor_WooCommerce_Product_Vendors_Manager extends Abstract
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
 			return;
 		}
-
+		if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            //return;
+        }
+		
 		$whatsiplus_phone_field = sanitize_text_field( $_POST['whatsiplus_phone_field'] );
 
 		update_user_meta( $user_id, 'whatsiplus_phone', $whatsiplus_phone_field );
