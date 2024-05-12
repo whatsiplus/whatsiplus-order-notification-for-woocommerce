@@ -38,69 +38,10 @@ class WhatsiPLUS_SMSOutbox_View implements Whatsiplus_Register_Interface {
     public function display_smsoutbox_page($form_id) {
         if($form_id != 'whatsiplus_smsoutbox_setting') { return; }
         global $wpdb;
-        $db_table_name = WHATSI_DB_TABLE_NAME;
-        $count_result = $wpdb->get_results ( "SELECT count(*) as count FROM {$db_table_name}" );
-
-        $count = $count_result[0];
-        $total = $count->count;
-        $total_page = ceil($total / 10);
-        $total_show_pages= 5;
-        $middle_page_add_on_number = floor($total_show_pages/2);
-        if(isset($_GET['pageno'])){
-            $current_page = sanitize_text_field($_GET['pageno']);
-        }else{
-            $current_page = 1;
-        }
-
-        if($total_page < $total_show_pages)
-        {
-            $start_page = 1;
-            $end_page = $total_page;
-        }
-        else
-        {
-            if(($current_page + $middle_page_add_on_number) > $total_page)
-            {
-                $start_page = $total_page - $total_show_pages + 1;
-                $end_page = $total_page;
-            }
-        else if($current_page > $middle_page_add_on_number)
-            {
-                $start_page = $current_page - $middle_page_add_on_number;
-                $end_page = $start_page + $total_show_pages - 1;
-            }
-            else
-            {
-                $start_page = 1;
-                $end_page = $total_show_pages;
-            }
-        }
-
-        $first_page = 1;
-        $last_page = ($total_page > 0 ? $total_page : $first_page);
-        $previous_page = ($current_page>1 ? $current_page -1 : 1);
-        $next_page = ($current_page<$total_page ? $current_page +1 : $last_page);
-
-        $admin_url = admin_url('options-general.php?page=whatsiplus-woocommerce-setting');
-        $pageno = ($current_page - 1) * 10;
     ?>
         <br>
         <div class="bootstrap-wrapper">
-
-            <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="<?php echo $admin_url.'&pageno='.$first_page ?>">First</a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo $admin_url.'&pageno='.$previous_page ?>">Previous</a></li>
-                <?php for($i=$start_page; $i<=$end_page; $i++) { ?>
-                    <li class="page-item"><a class="page-link" href="<?php echo $admin_url.'&pageno='.$i ?>"><?php echo $i; ?></a></li>
-                <?php } ?>
-                <li class="page-item"><a class="page-link" href="<?php echo $admin_url.'&pageno='.$next_page ?>">Next</a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo $admin_url.'&pageno='.$last_page ?>">Last</a></li>
-            </ul>
-            </nav>
-
-
-            <span>Page : <?php echo $current_page; ?></span>
+            <span>List of 30 last sent messages</span>
             <table class="table">
                 <thead>
                     <tr>
@@ -113,20 +54,23 @@ class WhatsiPLUS_SMSOutbox_View implements Whatsiplus_Register_Interface {
                 </thead>
             <tbody id="the-list" data-wp-lists='list:id'>
             <?php
-                global $wpdb;
-                $result = $wpdb->get_results ( "SELECT * FROM {$db_table_name} ORDER BY id DESC LIMIT ".$pageno.",10" );
-
-                foreach ( $result as $print ) {
+            global $wpdb;
+            $result = $wpdb->get_results( 
+                "SELECT * FROM whatsiplus_wc_send_sms_outbox ORDER BY id DESC"
+            );
+            foreach ( $result as $print ) {
                 ?>
                 <tr>
-                <td><?php echo esc_attr($print->date);?></td>
-                <td><?php echo esc_attr($print->sender);?></td>
-                <td><?php echo esc_attr($print->recipient);?></td>
-                <td><?php echo esc_attr($print->message);?></td>
-                <td><?php echo esc_attr($print->status);?></td>
+                    <td><?php echo esc_attr( $print->date ); ?></td>
+                    <td><?php echo esc_attr( $print->sender ); ?></td>
+                    <td><?php echo esc_attr( $print->recipient ); ?></td>
+                    <td><?php echo esc_attr( $print->message ); ?></td>
+                    <td><?php echo esc_attr( $print->status ); ?></td>
                 </tr>
-                    <?php }
+                <?php
+            }
             ?>
+
             </tbody>
 
             </table>
