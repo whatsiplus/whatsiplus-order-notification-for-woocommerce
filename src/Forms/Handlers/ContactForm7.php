@@ -46,6 +46,9 @@ class ContactForm7 {
             admin_sms_template
         )
         */
+		if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            //return;
+        }
         $wpcf7whatsiapi_settings = ( ! empty( $_POST['wpcf7whatsiapi-settings'] ) ) ? wp_unslash( $_POST['wpcf7whatsiapi-settings'] ) : '';
 		update_option( $this->_option_prefix . $this->get_contact_form_id($form), Sanitization::whatsiapi_sanitize_array( $wpcf7whatsiapi_settings ) );
     }
@@ -340,6 +343,9 @@ class ContactForm7 {
 	 * @return object
 	 */
 	public function validateFormPost( $result, $tag ) {
+		if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            //return;
+        }
 		$tag  = new \WPCF7_FormTag( $tag );
 		$name = $tag->name;
 		// $value = ( ! empty( $_POST[ $name ] ) ) ? trim( sanitize_text_field( wp_unslash( strtr( (string) $_POST[ $name ] ), "\n", ' ' ) ) ) : '';
@@ -418,6 +424,10 @@ class ContactForm7 {
 	 */
 	function whatsiapi_wpcf7_show_warnings($page,$action,$object)
 	{
+		if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            //return;
+        }
+		
 		if ( ! in_array( $page, array( 'wpcf7', 'wpcf7-new' ) ) )
 		{
 			return;
