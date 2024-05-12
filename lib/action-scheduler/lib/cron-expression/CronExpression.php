@@ -229,22 +229,23 @@ class CronExpression
      * @return bool Returns TRUE if the cron is due to run or FALSE if not
      */
     public function isDue($currentTime = 'now')
-    {
-        if ('now' === $currentTime) {
-            $currentDate = date('Y-m-d H:i');
-            $currentTime = strtotime($currentDate);
-        } elseif ($currentTime instanceof DateTime) {
-            $currentDate = $currentTime->format('Y-m-d H:i');
-            $currentTime = strtotime($currentDate);
-        } else {
-            $currentTime = new DateTime($currentTime);
-            $currentTime->setTime($currentTime->format('H'), $currentTime->format('i'), 0);
-            $currentDate = $currentTime->format('Y-m-d H:i');
-            $currentTime = (int)($currentTime->getTimestamp());
-        }
-
-        return $this->getNextRunDate($currentDate, 0, true)->getTimestamp() == $currentTime;
+{
+    if ('now' === $currentTime) {
+        $currentDate = gmdate('Y-m-d H:i');
+        $currentTime = strtotime($currentDate);
+    } elseif ($currentTime instanceof DateTime) {
+        $currentDate = $currentTime->format('Y-m-d H:i');
+        $currentTime = strtotime($currentDate);
+    } else {
+        $currentTime = new DateTime($currentTime);
+        $currentTime->setTime($currentTime->format('H'), $currentTime->format('i'), 0);
+        $currentDate = $currentTime->format('Y-m-d H:i');
+        $currentTime = (int)($currentTime->getTimestamp());
     }
+
+    return $this->getNextRunDate($currentDate, 0, true)->getTimestamp() == $currentTime;
+}
+
 
     /**
      * Get the next or previous run date of the expression relative to a date

@@ -101,30 +101,26 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         if (!empty($default_country_code) && !empty($apikey)) {
             $dialing_country_code = $this->get_country_dialing_code($default_country_code);
             $api_url = "https://api.whatsiplus.com/serviceSettings/{$apikey}?countryCode={$dialing_country_code}";
-
-            try {
-                // Initialize cURL session
-                $c = curl_init();
-
-                // Set cURL options
-                curl_setopt($c, CURLOPT_URL, $api_url);
-                curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($c, CURLOPT_CUSTOMREQUEST, 'GET'); // Set request method to POST if needed
-
-                $response = curl_exec($c);
-
-                if ($response === false) {
-                    throw new Exception(curl_error($c), curl_errno($c));
-                }
-                curl_close($c);
+        
+            // Set up arguments for wp_remote_get
+            $args = array(
+                'timeout' => 20, // Set a timeout value in seconds
+            );
+        
+            // Make the HTTP request using wp_remote_get
+            $response = wp_remote_get($api_url, $args);
+        
+            // Check for errors in the response
+            if (is_wp_error($response)) {
+                $error_message = $response->get_error_message();
+                $this->log->add("Whatsiplus", "Error occurred while sending data to API: " . $error_message);
+            } else {
+                // Get the response body
+                $response_body = wp_remote_retrieve_body($response);
                 //$this->log->add("Whatsiplus", "URL: {$api_url}");
-                //$this->log->add("Whatsiplus", "Response from API: {$response}");
-
-            } catch (Exception $e) {
-                // Handle exceptions
-                $this->log->add("Whatsiplus", "Error occurred while sending data to API: " . $e->getMessage());
+                //$this->log->add("Whatsiplus", "Response from API: {$response_body}");
             }
-        }
+        }        
 
 
 
@@ -644,35 +640,49 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
     public function get_country_code_from_ip($ip_address)
     {
         $api_url = "https://www.iplocate.io/api/lookup/{$ip_address}";
-        try {
-            $c = curl_init();
-            curl_setopt( $c , CURLOPT_URL , $api_url);
-            curl_setopt( $c , CURLOPT_USERAGENT, "Mozilla/5.0 (Linux Centos 7;) Chrome/74.0.3729.169 Safari/537.36");
-            curl_setopt( $c , CURLOPT_RETURNTRANSFER, true);
-            curl_setopt( $c , CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt( $c , CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt( $c , CURLOPT_TIMEOUT, 10000); // 10 sec
-            $response = json_decode(curl_exec($c), 1);
-            curl_close($c);
 
+        // Set up arguments for wp_remote_get
+        $args = array(
+            'timeout' => 10, // Set timeout to 10 seconds
+            'sslverify' => false, // Disable SSL verification
+            'headers' => array(
+                'User-Agent' => 'Mozilla/5.0 (Linux; Centos 7; Chrome/74.0.3729.169) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
+            ),
+        );
 
-            if(!empty($response['error'])) {
-                $this->log->add("Whatsiplus", "Unable to get country code for IP address: {$ip_address}");
-                $this->log->add("Whatsiplus", "Error from API request: {$response['error']}");
-                return ''; // ''
+        // Make the HTTP request using wp_remote_get
+        $response = wp_remote_get($api_url, $args);
+
+        // Check for errors in the response
+        if (is_wp_error($response)) {
+            $error_message = $response->get_error_message();
+            $this->log->add("Whatsiplus", "Error occurred while getting country code for IP address: {$ip_address}. Error: {$error_message}");
+            return ''; // Return empty string on error
+        }
+
+        // Get the response code
+        $response_code = wp_remote_retrieve_response_code($response);
+
+        // Check if response code is 200
+        if ($response_code === 200) {
+            // Get the body of the response
+            $response_body = wp_remote_retrieve_body($response);
+            // Decode the JSON response
+            $data = json_decode($response_body, true);
+
+            // Check if data contains country code
+            if (isset($data['country_code'])) {
+                return $data['country_code']; // Return the country code
+            } else {
+                $this->log->add("Whatsiplus", "No country code found in response for IP address: {$ip_address}");
+                return ''; // Return empty string if country code is not found
             }
-
-            $country_code = $response['country_code'];
-
-            //$this->log->add("Whatsiplus", "Resolved {$ip_address} to country code: {$country_code}");
-            return $country_code;
-
-        } catch (Exception $e) {
-            $this->log->add("Whatsiplus", "Error occured. Failed to get country code from ip address: {$ip_address}");
-            $this->log->add("Whatsiplus", print_r($e->getMessage(), 1));
-            return '';
+        } else {
+            $this->log->add("Whatsiplus", "Failed to get country code for IP address: {$ip_address}. Response code: {$response_code}");
+            return ''; // Return empty string if response code is not 200
         }
     }
+
 
     public function get_countries()
     {

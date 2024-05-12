@@ -103,14 +103,17 @@ class WeDevs_Settings_API {
                 add_option( $section['id'] );
             }
 
-            if ( isset($section['desc']) && !empty($section['desc']) ) {
-                $section['desc'] = '<div class="inside">'.$section['desc'].'</div>';
-                $callback = create_function('', 'echo "'.str_replace('"', '\"', $section['desc']).'";');
-            } else if ( isset( $section['callback'] ) ) {
+            if (isset($section['desc']) && !empty($section['desc'])) {
+                $section['desc'] = '<div class="inside">' . $section['desc'] . '</div>';
+                $callback = function () use ($section) {
+                    echo '"' . str_replace('"', '\"', $section['desc']) . '"';
+                };
+            } elseif (isset($section['callback'])) {
                 $callback = $section['callback'];
             } else {
                 $callback = null;
             }
+            
 
             if( array_key_exists('children', $section) && !empty($section['children']) ) {
                 foreach( $section['children'] as $subsection ) {
@@ -118,14 +121,17 @@ class WeDevs_Settings_API {
                         add_option( $subsection['id'] );
                     }
 
-                    if ( isset($subsection['desc']) && !empty($subsection['desc']) ) {
-                        $subsection['desc'] = '<div class="inside">'.$subsection['desc'].'</div>';
-                        $callback = create_function('', 'echo "'.str_replace('"', '\"', $subsection['desc']).'";');
-                    } else if ( isset( $subsection['callback'] ) ) {
+                    if (isset($subsection['desc']) && !empty($subsection['desc'])) {
+                        $subsection['desc'] = '<div class="inside">' . $subsection['desc'] . '</div>';
+                        $callback = function () use ($subsection) {
+                            echo '"' . str_replace('"', '\"', $subsection['desc']) . '"';
+                        };
+                    } elseif (isset($subsection['callback'])) {
                         $callback = $subsection['callback'];
                     } else {
                         $callback = null;
                     }
+                    
                     add_settings_section( $subsection['id'], $subsection['title'], $callback, $subsection['id'] );
                 }
 

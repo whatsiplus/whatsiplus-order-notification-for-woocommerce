@@ -210,25 +210,27 @@ class WhatsiFATService implements Whatsiplus_PluginInterface, Whatsiplus_Registe
     }
 
     private function get_booking_by_id($booking_id) {
-        // code
         global $wpdb;
-        $sql = "SELECT *
-                FROM {$wpdb->prefix}fat_sb_booking
-                INNER JOIN {$wpdb->prefix}fat_sb_customers
-                    ON {$wpdb->prefix}fat_sb_booking.b_customer_id = {$wpdb->prefix}fat_sb_customers.c_id
-                    AND {$wpdb->prefix}fat_sb_booking.b_id=%d
-                INNER JOIN {$wpdb->prefix}fat_sb_employees
-                    ON {$wpdb->prefix}fat_sb_booking.b_employee_id = {$wpdb->prefix}fat_sb_employees.e_id
-                INNER JOIN {$wpdb->prefix}fat_sb_locations
-                    ON {$wpdb->prefix}fat_sb_booking.b_loc_id = {$wpdb->prefix}fat_sb_locations.loc_id
-                INNER JOIN {$wpdb->prefix}fat_sb_services
-                    ON {$wpdb->prefix}fat_sb_booking.b_service_id = {$wpdb->prefix}fat_sb_services.s_id
-                ";
-        $sql = $wpdb->prepare($sql, $booking_id);
-        $booking = $wpdb->get_results($sql);
-        if(count($booking) > 0) return $booking[0];
-        else return array();
+       
+        $booking = $wpdb->get_results($wpdb->prepare("SELECT *
+        FROM {$wpdb->prefix}fat_sb_booking
+        INNER JOIN {$wpdb->prefix}fat_sb_customers
+            ON {$wpdb->prefix}fat_sb_booking.b_customer_id = {$wpdb->prefix}fat_sb_customers.c_id
+            AND {$wpdb->prefix}fat_sb_booking.b_id = %d
+        INNER JOIN {$wpdb->prefix}fat_sb_employees
+            ON {$wpdb->prefix}fat_sb_booking.b_employee_id = {$wpdb->prefix}fat_sb_employees.e_id
+        INNER JOIN {$wpdb->prefix}fat_sb_locations
+            ON {$wpdb->prefix}fat_sb_booking.b_loc_id = {$wpdb->prefix}fat_sb_locations.loc_id
+        INNER JOIN {$wpdb->prefix}fat_sb_services
+            ON {$wpdb->prefix}fat_sb_booking.b_service_id = {$wpdb->prefix}fat_sb_services.s_id", $booking_id));
+
+        if (count($booking) > 0) {
+            return $booking[0];
+        } else {
+            return array();
+        }
     }
+    
 
     public function send_sms_on($b_id, $b_process_status)
     {
@@ -347,12 +349,12 @@ class WhatsiFATService implements Whatsiplus_PluginInterface, Whatsiplus_Registe
         else if ($booking->b_process_status == 2) { $status = 'cancel';   }
         else if ($booking->b_process_status == 3) { $status = 'reject';   }
         $kw_mappers = array(
-            'b_time' => date("H:i", mktime(0, $booking->b_time)),
+            'b_time' => gmdate("H:i", mktime(0, $booking->b_time)),
             'b_process_status' => $status,
         );
-
+    
         if(! array_key_exists($key, $kw_mappers)) { return ''; }
         return $kw_mappers[$key];
-    }
+    }    
 
 }

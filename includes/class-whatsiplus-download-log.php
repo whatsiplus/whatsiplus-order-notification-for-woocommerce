@@ -21,8 +21,10 @@ class Whatsiplus_Download_log implements Whatsiplus_Register_Interface {
 	public function download() {
 		if ( isset( $_GET['file'] ) ) {
 			$logFile = $this->log_directory . $_GET['file'] . '.log';
+			
+			global $wp_filesystem;
 
-			if ( file_exists( $logFile ) ) {
+			if ( WP_Filesystem( $logFile ) ) {
 				header( 'Content-Description: File Transfer' );
 				header( 'Content-Type: text/plain' );
 				header( 'Content-Disposition: attachment; filename="' . basename( $logFile ) . '"' );
@@ -32,9 +34,13 @@ class Whatsiplus_Download_log implements Whatsiplus_Register_Interface {
 				header( 'Content-Length: ' . filesize( $logFile ) );
 				ob_clean();
 				flush();
-				echo file_get_contents( $logFile );
+				$file_contents = $wp_filesystem->get_contents( $logFile );
+				echo $file_contents;
+				exit;
 			}
 		}
-		exit;
+		// If file does not exist, exit gracefully
+		wp_die( 'File not found.' );
 	}
+	
 }

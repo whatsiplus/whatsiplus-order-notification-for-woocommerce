@@ -460,15 +460,14 @@ class WhatsiBookIt implements Whatsiplus_PluginInterface, Whatsiplus_Register_In
     }
 
     protected function keyword_mapper($appointment, $keyword) {
-
         $keyword_mappers = array(
             'appointment_id'                => $appointment->id,
-            'appointment_day'               => date( get_option('date_format'), $appointment->date_timestamp ),
+            'appointment_day'               => gmdate( get_option('date_format'), $appointment->date_timestamp ),
             'appointment_price'             => $appointment->price,
             'appointment_total_price'       => bookit_price($appointment->price),
             'appointment_status'            => $appointment->status,
-            'appointment_start_time'        => date( get_option('time_format'), $appointment->start_time ),
-            'appointment_end_time'          => date( get_option('time_format'), $appointment->end_time ),
+            'appointment_start_time'        => gmdate( get_option('time_format'), $appointment->start_time ),
+            'appointment_end_time'          => gmdate( get_option('time_format'), $appointment->end_time ),
             'service_name'                  => $appointment->service_name,
             'staff_id'                      => $appointment->staff_id,
             'staff_name'                    => $appointment->staff_name,
@@ -482,8 +481,8 @@ class WhatsiBookIt implements Whatsiplus_PluginInterface, Whatsiplus_Register_In
         );
         if(!array_key_exists($keyword, $keyword_mappers)) { return ''; }
         return $keyword_mappers[$keyword];
-
     }
+    
 
     private function seconds_to_days($seconds) {
 

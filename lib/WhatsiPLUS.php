@@ -71,7 +71,8 @@ class WhatsiPLUS {
         $delivery_report_data->dlr_status = $delivery_status[$data['whatsi-dlr-status']];
         $delivery_report_data->msgid = $data['whatsi-msgid'];
         $delivery_report_data->error_code = $data['whatsi-error-code'];
-        $delivery_report_data->dlr_received_time = date('Y-m-d H:i:s');
+        $delivery_report_data->dlr_received_time = gmdate('Y-m-d H:i:s');
+
 
         return $delivery_report_data;
     }
@@ -117,46 +118,48 @@ class WhatsiPLUS {
         return $this->invokeApi ('get_pricing', $params);
     }
 
-    private function invokeApi ($command, $params = array())
-    {
-        if(get_option("whatsiplus_domain_reachable")) { $this->setApiUrl(true); }
-        else { $this->setApiUrl(false); }
-        // Get REST URL and HTTP method
-        $command_info = $this->rest_commands[$command];
-        $url = $this->actual_api_url;
-        $method = $command_info['method'];
-        
-        // Build the post data
-        //$params = array_merge($params, array('whatsi-api-key' => $this->api_key, 'whatsi-api-secret' => $this->api_secret, 'whatsi-resp-format' => $this->response_format));
-
-        $rest_request = curl_init();
-        if($method == 'POST') {
-            curl_setopt($rest_request, CURLOPT_URL, ($url.$command_info['url'].$this->api_key));
-            curl_setopt($rest_request, CURLOPT_POST, $method == 'POST' ? true: false);
-            curl_setopt($rest_request, CURLOPT_POSTFIELDS, http_build_query($params));
-        } else {
-            $query_string = '';
-            foreach($params as $parameter_name => $parameter_value) {
-                $query_string .= '&'.$parameter_name.'='.$parameter_value;
-            }
-            $query_string = substr($query_string, 1);
-            curl_setopt($rest_request, CURLOPT_URL, $url.$command_info['url'].$this->api_key.'?'.$query_string);
-        }
-        curl_setopt($rest_request, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($rest_request, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($rest_request, CURLOPT_SSL_VERIFYHOST, 0);
-
-        $rest_response = curl_exec($rest_request);
-
-        if($rest_response === false) {
-            throw new Exception('curl error: ' . curl_error($rest_request));
-        }
-
-        curl_close ($rest_request);
-        //$this->log->add("Whatsiplus", "Using url: ".$url.$command_info['url'].$this->api_key.'?'.$query_string);
-
-        return $rest_response;
+    private function invokeApi($command, $params = array())
+{
+    if (get_option("whatsiplus_domain_reachable")) {
+        $this->setApiUrl(true);
+    } else {
+        $this->setApiUrl(false);
     }
+
+    // Get REST URL and HTTP method
+    $command_info = $this->rest_commands[$command];
+    $url = $this->actual_api_url;
+    $method = $command_info['method'];
+
+    // Build the request URL
+    $request_url = $url . $command_info['url'] . $this->api_key;
+
+    // Set up request parameters
+    $request_args = array(
+        'headers' => array(
+            'Content-Type' => 'application/x-www-form-urlencoded', // Adjust content type if needed
+        ),
+    );
+
+    if ($method === 'POST') {
+        $request_args['body'] = $params;
+    } else {
+        $request_url .= '?' . http_build_query($params);
+    }
+
+    // Make the request using wp_remote_get()
+    $response = wp_remote_get($request_url, $request_args);
+
+    // Check for errors
+    if (is_wp_error($response)) {
+        throw new Exception('WP error: ' . $response->get_error_message());
+    }
+
+    // Get the response body
+    $rest_response = wp_remote_retrieve_body($response);
+
+    return $rest_response;
+}
 
     private function utf16HexToUtf8($string)
     {
