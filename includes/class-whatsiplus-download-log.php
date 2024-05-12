@@ -1,46 +1,37 @@
 <?php
 
-/**
- * Created by VsCode.
- * User: whatsi
- * Date: 4/16/2019
- * Time: 4:30 PM.
- */
 class Whatsiplus_Download_log implements Whatsiplus_Register_Interface {
-	protected $log_directory;
+    private $logger;
 
-	public function __construct() {
-		$upload_dir          = wp_upload_dir();
-		$this->log_directory = $upload_dir['basedir'] . '/whatsiplus-woocommerce-logs/';
-	}
+    public function __construct() {
+        $this->logger = new Whatsiplus_WooCommerce_Logger(); // Instantiate the logger
+    }
 
-	public function register() {
-		add_submenu_page( null, '', '', 'manage_options', 'whatsiplus-download-file', array( $this, 'download' ) );
-	}
+    public function register() {
+        add_submenu_page( null, '', '', 'manage_options', 'whatsiplus-download-file', array( $this, 'download' ) );
+    }
 
 	public function download() {
-		if ( isset( $_GET['file'] ) ) {
-			$logFile = $this->log_directory . $_GET['file'] . '.log';
-			
-			global $wp_filesystem;
-
-			if ( WP_Filesystem( $logFile ) ) {
-				header( 'Content-Description: File Transfer' );
-				header( 'Content-Type: text/plain' );
-				header( 'Content-Disposition: attachment; filename="' . basename( $logFile ) . '"' );
-				header( 'Expires: 0' );
-				header( 'Cache-Control: must-revalidate' );
-				header( 'Pragma: public' );
-				header( 'Content-Length: ' . filesize( $logFile ) );
-				ob_clean();
-				flush();
-				$file_contents = $wp_filesystem->get_contents( $logFile );
-				echo $file_contents;
-				exit;
-			}
+		// Get log content from the logger
+		$log_content = $this->logger->get_log_file("Whatsiplus");
+	
+		if (!empty($log_content)) {
+			// Set headers for file download
+			header( 'Content-Description: File Transfer' );
+			header( 'Content-Type: text/plain' );
+			header( 'Content-Disposition: attachment; filename="whatsiplus_logs.txt"');
+			header( 'Expires: 0' );
+			header( 'Cache-Control: must-revalidate' );
+			header( 'Pragma: public' );
+			header( 'Content-Length: ' . strlen( $log_content ) );
+			ob_clean();
+			flush();
+			echo $log_content;
+			exit;
 		}
-		// If file does not exist, exit gracefully
-		wp_die( 'File not found.' );
 	}
 	
+	
 }
+
+?>
