@@ -30,6 +30,10 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
     public function mapi_send_sms()
     {
+        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            //return;
+        }
+
         $from='';$message_to='';$message='';$users='';$recipients='';$country='';$roles=[];
         $post_data = $_POST['whatsiplus_sendsms_setting'];
 
@@ -435,6 +439,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
             <tr>
                 <th><label for="phone">Mobile number</label></th>
                 <td>
+                    <input type="hidden" name="whatsiplus_nonce" value="<?php echo wp_create_nonce( 'whatsiplus_send_sms_action' ); ?>" />
                     <input type="text" name="phone" placeholder="1234567890" id="phone" value="<?php echo esc_attr( get_the_author_meta( 'phone', $user->ID ) ); ?>" class="regular-text" /><br />
                     <span class="description">Please enter your phone number.</span>
                 </td>
@@ -471,6 +476,9 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
     {
         if ( !current_user_can( 'edit_user', $user_id ) )
             return false;
+        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            return;
+        }
         /* Copy and paste this line for additional fields. Make sure to change 'phone' to the field ID. */
         if(isset($_POST['phone']) && isset($_POST['country'])) {
             $post_phone = sanitize_text_field($_POST['phone']);
@@ -490,6 +498,10 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         // Check if user has authority to change this
         if(!current_user_can('edit_user',$user->ID)){
             $errors->add("permission_denied","You do not have permission to update this page");
+        }
+
+        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            return;
         }
 
         // Validate Phone Number
@@ -514,6 +526,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
     ?>
         <p>
         <label>Mobile number<br/>
+        <input type="hidden" name="whatsiplus_nonce" value="<?php echo wp_create_nonce( 'whatsiplus_send_sms_action' ); ?>" />
         <input id="phone" type="text" placeholder="1234567890" tabindex="30" size="25" name="phone" />
         </label>
         </p>
@@ -524,6 +537,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
     ?>
         <p>
         <label>Country<br/>
+        <input type="hidden" name="whatsiplus_nonce" value="<?php echo wp_create_nonce( 'whatsiplus_send_sms_action' ); ?>" />
             <select name="country" class="specific_number_prefix">
                 <?php foreach ($this->mapi_getCountryList() as $country) { ?>
                 <option data-country-code="<?php echo esc_attr(strtolower($country['d_code'])); ?>"
@@ -549,6 +563,10 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
     public function mapi_validate_fields ( $login, $email, $errors )
     {
+        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            return;
+        }
+
         global $phone;
         if(isset($_POST['phone'])){
 
@@ -566,6 +584,9 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
     public function mapi_register_additional_fields ( $user_id, $password = "", $meta = array() )
     {
+        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            return;
+        }
         $post_phone = sanitize_text_field($_POST['phone']);
         update_user_meta( $user_id, 'phone', $post_phone );
         $post_country = sanitize_text_field($_POST['country']);
@@ -574,6 +595,10 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
     public function display_send_sms_success()
     {
+        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+            return;
+        }
+
         if( !isset($_GET['sms_sent']) ) { return; }
         ?>
         <div class="notice notice-success is-dismissible">
