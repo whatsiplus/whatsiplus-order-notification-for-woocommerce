@@ -431,7 +431,8 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
 		$this->settings_api->show_navigation();
 		$this->settings_api->show_forms();
-		echo '<input type="hidden" value="' . join(",", $this->get_additional_billing_fields()) . '" id="whatsiplus_new_billing_field" />';
+		echo '<input type="hidden" value="' . esc_attr( join(",", $this->get_additional_billing_fields()) ) . '" id="whatsiplus_new_billing_field" />';
+
 
 		echo '</div>';
 	}

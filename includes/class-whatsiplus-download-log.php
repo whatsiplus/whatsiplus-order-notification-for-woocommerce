@@ -26,9 +26,10 @@ class Whatsiplus_Download_log implements Whatsiplus_Register_Interface {
 			header( 'Content-Length: ' . strlen( $log_content ) );
 			ob_clean();
 			flush();
-			echo $log_content;
+			echo esc_html( $log_content );
 			exit;
 		}
+		
 	}
 	
 	

@@ -146,7 +146,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 			array(
 				'name'    => 'whatsiplus_sendsms_recipients',
 				'label'   => __( 'Recipients', 'WHATSIPLUS_TEXT_DOMAIN' ),
-				'desc'    => '(Please insert country code along with mobile numbers,<br>e.g. 60124512978,60198745123,60161237841)',
+				'desc'    => '(Please insert country code along with mobile numbers,<br>e.g. 15303776310,15303776310)',
 				'type'    => 'textarea',
 				'rows'    => '8',
 				'cols'    => '500',
@@ -439,7 +439,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
             <tr>
                 <th><label for="phone">Mobile number</label></th>
                 <td>
-                    <input type="hidden" name="whatsiplus_nonce" value="<?php echo wp_create_nonce( 'whatsiplus_send_sms_action' ); ?>" />
+                <input type="hidden" name="whatsiplus_nonce" value="<?php echo esc_attr( wp_create_nonce( 'whatsiplus_send_sms_action' ) ); ?>" />
                     <input type="text" name="phone" placeholder="1234567890" id="phone" value="<?php echo esc_attr( get_the_author_meta( 'phone', $user->ID ) ); ?>" class="regular-text" /><br />
                     <span class="description">Please enter your phone number.</span>
                 </td>
@@ -449,7 +449,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
                 <td>
                     <select name="country" class="specific_number_prefix">
                         <?php foreach ($this->mapi_getCountryList() as $country) { ?>
-                        <option data-country-code="<?php echo strtolower($country['d_code']); ?>"
+                        <option data-country-code="<?php echo esc_attr(strtolower($country['d_code'])); ?>"
                                 value="<?php echo esc_attr(strtolower($country['code'])); ?>"
                                 <?php
                                     if(!empty(get_the_author_meta('country', $user->ID))) {
@@ -526,7 +526,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
     ?>
         <p>
         <label>Mobile number<br/>
-        <input type="hidden" name="whatsiplus_nonce" value="<?php echo wp_create_nonce( 'whatsiplus_send_sms_action' ); ?>" />
+        <input type="hidden" name="whatsiplus_nonce" value="<?php echo esc_attr( wp_create_nonce( 'whatsiplus_send_sms_action' ) ); ?>" />
         <input id="phone" type="text" placeholder="1234567890" tabindex="30" size="25" name="phone" />
         </label>
         </p>
@@ -537,7 +537,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
     ?>
         <p>
         <label>Country<br/>
-        <input type="hidden" name="whatsiplus_nonce" value="<?php echo wp_create_nonce( 'whatsiplus_send_sms_action' ); ?>" />
+        <input type="hidden" name="whatsiplus_nonce" value="<?php echo esc_attr(wp_create_nonce( 'whatsiplus_send_sms_action' )); ?>" />
             <select name="country" class="specific_number_prefix">
                 <?php foreach ($this->mapi_getCountryList() as $country) { ?>
                 <option data-country-code="<?php echo esc_attr(strtolower($country['d_code'])); ?>"
@@ -552,7 +552,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
                                 echo (!empty($country['code']) && $country['code'] == 'US') ? esc_attr('selected=selected') : '';
                             }
                         ?> >
-                        <?php echo $country['name'] ?>
+                <?php echo esc_html( $country['name'] ); ?>
                 </option>
                 <?php } ?>
             </select>
@@ -602,7 +602,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         if( !isset($_GET['sms_sent']) ) { return; }
         ?>
         <div class="notice notice-success is-dismissible">
-            <p><?php _e( 'Message Sent!', 'whatsiplus-woocommerce' ); ?></p>
+        <p><?php esc_html_e( 'Message Sent!', 'whatsiplus-woocommerce' ); ?></p>
         </div>
         <?php
     }

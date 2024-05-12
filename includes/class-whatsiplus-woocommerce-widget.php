@@ -35,7 +35,7 @@ class Whatsiplus_WooCommerce_Widget implements Whatsiplus_Register_Interface {
 			if ( $api_key && $api_secret ) {
 				?>
 
-                <h3><?php echo $balance->status === 0 ? "Balance: $balance->value" : urldecode( $balance->err_msg ) ?></h3>
+				<h3><?php echo $balance->status === 0 ? "Balance: " . esc_html( $balance->value ) : esc_html( urldecode( $balance->err_msg ) ) ?></h3>
 
 				<?php
 			} else {
@@ -43,7 +43,7 @@ class Whatsiplus_WooCommerce_Widget implements Whatsiplus_Register_Interface {
 
                 <h3>
                     Please setup API Key and API Secret in
-                    <a href="<?php echo admin_url( 'options-general.php?page=whatsiplus-woocommerce-setting' ) ?>">
+					<a href="<?php echo esc_url( admin_url( 'options-general.php?page=whatsiplus-woocommerce-setting' ) ); ?>">
                         WhatsiPLUS settings
                     </a>
                 </h3>

@@ -159,7 +159,7 @@ abstract class ActionScheduler_Abstract_ListTable extends WP_List_Table {
 
 		foreach ( $this->bulk_actions as $action => $label ) {
 			if ( ! is_callable( array( $this, 'bulk_' . $action ) ) ) {
-				throw new RuntimeException( "The bulk action $action does not have a callback method" );
+				throw new RuntimeException( 'The bulk action ' . esc_html( $action ) . ' does not have a callback method' );
 			}
 
 			$actions[ $action ] = $label;

@@ -207,7 +207,7 @@ class WeDevs_Settings_API {
         // $type  = isset( $args['type'] ) ? $args['type'] : 'text';
 
         // $html = $args['custom_html'];
-        // $html  .= $this->get_field_description( $args );
+        // $html  .= wp_kses_post($this->get_field_description( $args ));
         call_user_func($args['custom_html']);
     }
 
@@ -223,7 +223,7 @@ class WeDevs_Settings_API {
         $type  = isset( $args['type'] ) ? $args['type'] : 'text';
 
         $html  = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"/>', $type, $size, $args['section'], $args['id'], $value );
-        $html  .= $this->get_field_description( $args );
+        $html  .= wp_kses_post($this->get_field_description( $args ));
 
         echo $html;
     }
@@ -282,7 +282,7 @@ class WeDevs_Settings_API {
             $html    .= sprintf( '%1$s</label><br>',  $label );
         }
 
-        $html .= $this->get_field_description( $args );
+        $html .= wp_kses_post($this->get_field_description( $args ));
         $html .= '</fieldset>';
 
         echo $html;
@@ -304,7 +304,7 @@ class WeDevs_Settings_API {
             $html .= sprintf( '%1$s</label><br>', $label );
         }
 
-        $html .= $this->get_field_description( $args );
+        $html .= wp_kses_post($this->get_field_description( $args ));
         $html .= '</fieldset>';
 
         echo $html;
@@ -326,7 +326,7 @@ class WeDevs_Settings_API {
         }
 
         $html .= sprintf( '</select>' );
-        $html .= $this->get_field_description( $args );
+        $html .= wp_kses_post($this->get_field_description( $args ));
 
         echo $html;
     }
@@ -347,7 +347,7 @@ class WeDevs_Settings_API {
         }
 
         $html .= sprintf( '</select>' );
-        $html .= $this->get_field_description( $args );
+        $html .= wp_kses_post($this->get_field_description( $args ));
 
         echo $html;
     }
@@ -366,7 +366,7 @@ class WeDevs_Settings_API {
         $css  = isset( $args['css'] ) && !is_null( $args['css'] ) ? 'style="'.$args['css'].';"' : '';
 
         $html  = sprintf( '<textarea rows="'.$rows.'" cols="'.$cols.'" class="%1$s-text" '.$css.' id="%2$s[%3$s]" name="%2$s[%3$s]">%4$s</textarea>', $size, $args['section'], $args['id'], $value );
-        $html  .= $this->get_field_description( $args );
+        $html  .= wp_kses_post($this->get_field_description( $args ));
 
         echo $html;
     }
@@ -378,7 +378,7 @@ class WeDevs_Settings_API {
      * @return string
      */
     function callback_html( $args ) {
-        echo $this->get_field_description( $args );
+        echo wp_kses_post($this->get_field_description( $args ));
     }
 
     /**
@@ -407,7 +407,7 @@ class WeDevs_Settings_API {
 
         echo '</div>';
 
-        echo $this->get_field_description( $args );
+        echo wp_kses_post($this->get_field_description( $args ));
     }
 
     /**
@@ -424,7 +424,7 @@ class WeDevs_Settings_API {
 
         $html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
         $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
-        $html  .= $this->get_field_description( $args );
+        $html  .= wp_kses_post($this->get_field_description( $args ));
 
         echo $html;
     }
@@ -440,7 +440,7 @@ class WeDevs_Settings_API {
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 
         $html  = sprintf( '<input type="password" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
-        $html  .= $this->get_field_description( $args );
+        $html  .= wp_kses_post($this->get_field_description( $args ));
 
         echo $html;
     }
@@ -456,7 +456,7 @@ class WeDevs_Settings_API {
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
 
         $html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, $args['std'] );
-        $html  .= $this->get_field_description( $args );
+        $html  .= wp_kses_post($this->get_field_description( $args ));
 
         echo $html;
     }
