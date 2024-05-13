@@ -44,9 +44,10 @@ class CronExpression_FieldFactory
                     $this->fields[$position] = new CronExpression_YearField();
                     break;
                 default:
-                    throw new InvalidArgumentException(
-                        $position . ' is not a valid position'
-                    );
+                throw new InvalidArgumentException(
+                    esc_html($position) . ' is not a valid position'
+                );
+                
             }
         }
 

@@ -97,8 +97,8 @@ class CronExpression
         $this->cronParts = preg_split('/\s/', $value, -1, PREG_SPLIT_NO_EMPTY);
         if (count($this->cronParts) < 5) {
             throw new InvalidArgumentException(
-                $value . ' is not a valid CRON expression'
-            );
+                esc_html($value) . ' is not a valid CRON expression'
+            );            
         }
 
         foreach ($this->cronParts as $position => $part) {
@@ -121,7 +121,11 @@ class CronExpression
     {
         if (!$this->fieldFactory->getField($position)->validate($value)) {
             throw new InvalidArgumentException(
-                'Invalid CRON field value ' . $value . ' as position ' . $position
+                sprintf(
+                    'Invalid CRON field value %s as position %s',
+                    esc_html($value),
+                    esc_html($position)
+                )
             );
         }
 
