@@ -83,7 +83,8 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 			return $action_id;
 		} catch ( \Exception $e ) {
 			/* translators: %s: error message */
-			throw new \RuntimeException( sprintf( __( 'Error saving action: %s', 'action-scheduler' ), $e->getMessage() ), 0 );
+			throw new \RuntimeException( sprintf( esc_html__( 'Error saving action: %s', 'action-scheduler' ), esc_html( $e->getMessage() ) ), 0 );
+
 		}
 	}
 
@@ -243,7 +244,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 	protected function get_query_actions_sql( array $query, $select_or_count = 'select' ) {
 
 		if ( ! in_array( $select_or_count, array( 'select', 'count' ), true ) ) {
-			throw new InvalidArgumentException( __( 'Invalid value for select or count parameter. Cannot query actions.', 'action-scheduler' ) );
+			throw new InvalidArgumentException( esc_html__( 'Invalid value for select or count parameter. Cannot query actions.', 'action-scheduler' ) );
 		}
 
 		$query = wp_parse_args(
@@ -448,7 +449,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 		);
 		if ( empty( $updated ) ) {
 			/* translators: %s: action ID */
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s', 'action-scheduler' ), $action_id ) );
+			throw new \InvalidArgumentException( sprintf( esc_html__( 'Unidentified action %s', 'action-scheduler' ), esc_html( $action_id ) ) );
 		}
 		do_action( 'action_scheduler_canceled_action', $action_id );
 	}
@@ -540,7 +541,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 		global $wpdb;
 		$deleted = $wpdb->delete( $wpdb->actionscheduler_actions, array( 'action_id' => $action_id ), array( '%d' ) );
 		if ( empty( $deleted ) ) {
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s', 'action-scheduler' ), $action_id ) ); //phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
+			throw new \InvalidArgumentException( sprintf( esc_html__( 'Unidentified action %s', 'action-scheduler' ), esc_html( $action_id ) ) ); //phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
 		}
 		do_action( 'action_scheduler_deleted_action', $action_id );
 	}
@@ -571,7 +572,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 		global $wpdb;
 		$record = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->actionscheduler_actions} WHERE action_id=%d", $action_id ) );
 		if ( empty( $record ) ) {
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s', 'action-scheduler' ), $action_id ) ); //phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
+			throw new \InvalidArgumentException( sprintf( esc_html__( 'Unidentified action %s', 'action-scheduler' ), esc_html( $action_id ) ) ); //phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
 		}
 		if ( self::STATUS_PENDING === $record->status ) {
 			return as_get_datetime_object( $record->scheduled_date_gmt );
@@ -660,7 +661,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 			// throw exception if no matching group found, this matches ActionScheduler_wpPostStore's behaviour.
 			if ( empty( $group_id ) ) {
 				/* translators: %s: group name */
-				throw new InvalidArgumentException( sprintf( __( 'The group "%s" does not exist.', 'action-scheduler' ), $group ) );
+				throw new InvalidArgumentException( sprintf( esc_html__( 'The group "%s" does not exist.', 'action-scheduler' ), esc_html( $group ) ) );
 			}
 
 			$where   .= ' AND group_id = %d';
@@ -680,7 +681,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 		$sql           = $wpdb->prepare( "{$update} {$where} {$order} LIMIT %d", $params ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders
 		$rows_affected = $wpdb->query( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		if ( false === $rows_affected ) {
-			throw new \RuntimeException( __( 'Unable to claim actions. Database error.', 'action-scheduler' ) );
+			throw new \RuntimeException( esc_html__( 'Unable to claim actions. Database error.', 'action-scheduler' ) );
 		}
 
 		return (int) $rows_affected;
@@ -794,7 +795,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 			array( '%d' )
 		);
 		if ( empty( $updated ) ) {
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s', 'action-scheduler' ), $action_id ) ); //phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
+			throw new \InvalidArgumentException( esc_html__( 'Unidentified action', 'action-scheduler' ) ); //phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
 		}
 	}
 
@@ -837,7 +838,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 			array( '%d' )
 		);
 		if ( empty( $updated ) ) {
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s', 'action-scheduler' ), $action_id ) ); //phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
+			throw new \InvalidArgumentException( esc_html__( 'Unidentified action', 'action-scheduler' ) ); //phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
 		}
 	}
 
@@ -858,9 +859,9 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 		$status = $wpdb->get_var( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		if ( null === $status ) {
-			throw new \InvalidArgumentException( __( 'Invalid action ID. No status found.', 'action-scheduler' ) );
+			throw new \InvalidArgumentException( esc_html__( 'Invalid action ID. No status found.', 'action-scheduler' ) );
 		} elseif ( empty( $status ) ) {
-			throw new \RuntimeException( __( 'Unknown status found for action.', 'action-scheduler' ) );
+			throw new \RuntimeException( esc_html__( 'Unknown status found for action.', 'action-scheduler' ) );
 		} else {
 			return $status;
 		}
