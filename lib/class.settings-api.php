@@ -225,7 +225,7 @@ class WeDevs_Settings_API {
         $html  = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"/>', $type, $size, $args['section'], $args['id'], $value );
         $html  .= wp_kses_post($this->get_field_description( $args ));
 
-        echo wp_kses_post($html);
+        echo $html;
     }
 
     /**
@@ -262,7 +262,7 @@ class WeDevs_Settings_API {
         $html  .= sprintf( '%1$s</label>', $args['desc'] );
         $html  .= '</fieldset>';
 
-        echo wp_kses_post($html);
+        echo $html;
     }
 
     /**
@@ -307,7 +307,7 @@ class WeDevs_Settings_API {
         $html .= wp_kses_post($this->get_field_description( $args ));
         $html .= '</fieldset>';
 
-        echo wp_kses_post($html);
+        echo $html;
     }
 
     /**
@@ -378,7 +378,7 @@ class WeDevs_Settings_API {
      * @return string
      */
     function callback_html( $args ) {
-        echo wp_kses_post($this->get_field_description( $args ));
+        echo $this->get_field_description( $args );
     }
 
     /**
@@ -407,7 +407,7 @@ class WeDevs_Settings_API {
 
         echo '</div>';
 
-        echo wp_kses_post($this->get_field_description( $args ));
+        echo $this->get_field_description( $args );
     }
 
     /**
@@ -620,7 +620,7 @@ class WeDevs_Settings_API {
                                 <div style="padding-left: 10px">
                                     <?php
                                     if(isset($plugin['submit_button']) && !empty($plugin['submit_button'])){
-                                        echo wp_kses_post($plugin['submit_button']);
+                                        echo $plugin['submit_button'];
                                     } else {
                                         submit_button();
                                     }
