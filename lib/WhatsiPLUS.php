@@ -152,7 +152,7 @@ class WhatsiPLUS {
 
     // Check for errors
     if (is_wp_error($response)) {
-        throw new Exception('WP error: ' . $response->get_error_message());
+        throw new Exception('WP error: ' . esc_html($response->get_error_message()));
     }
 
     // Get the response body
