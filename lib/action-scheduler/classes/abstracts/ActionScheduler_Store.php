@@ -264,14 +264,15 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	protected function validate_args( $args, $action_id ) {
 		// Ensure we have an array of args.
 		if ( ! is_array( $args ) ) {
-			throw ActionScheduler_InvalidActionException::from_decoding_args( $action_id );
+			throw ActionScheduler_InvalidActionException::from_decoding_args( esc_html( $action_id ) );
 		}
-
+	
 		// Validate JSON decoding if possible.
 		if ( function_exists( 'json_last_error' ) && JSON_ERROR_NONE !== json_last_error() ) {
-			throw ActionScheduler_InvalidActionException::from_decoding_args( $action_id, $args );
+			throw ActionScheduler_InvalidActionException::from_decoding_args( esc_html( $action_id ), esc_html($args) );
 		}
 	}
+	
 
 	/**
 	 * Validate a ActionScheduler_Schedule object.
@@ -283,9 +284,10 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	 */
 	protected function validate_schedule( $schedule, $action_id ) {
 		if ( empty( $schedule ) || ! is_a( $schedule, 'ActionScheduler_Schedule' ) ) {
-			throw ActionScheduler_InvalidActionException::from_schedule( $action_id, $schedule );
+			throw ActionScheduler_InvalidActionException::from_schedule( esc_html( $action_id ), esc_html( $schedule ) );
 		}
 	}
+	
 
 	/**
 	 * InnoDB indexes have a maximum size of 767 bytes by default, which is only 191 characters with utf8mb4.
@@ -299,9 +301,11 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	protected function validate_action( ActionScheduler_Action $action ) {
 		if ( strlen( json_encode( $action->get_args() ) ) > static::$max_args_length ) {
 			/* translators: %d is a placeholder for the maximum args length */
-			throw new InvalidArgumentException( sprintf( __( 'ActionScheduler_Action::$args too long. To ensure the args column can be indexed, action args should not be more than %d characters when encoded as JSON.', 'action-scheduler' ), static::$max_args_length ) );
+			throw new InvalidArgumentException( sprintf( esc_html__( 'ActionScheduler_Action::$args too long. To ensure the args column can be indexed, action args should not be more than %d characters when encoded as JSON.', 'action-scheduler' ), esc_html( static::$max_args_length ) ) );
 		}
 	}
+	
+	
 	
 
 	/**

@@ -23,27 +23,46 @@ class ActionScheduler_DBStoreMigrator extends ActionScheduler_DBStore {
 	 * @return string The action ID
 	 * @throws \RuntimeException When the action is not saved.
 	 */
-	public function save_action( ActionScheduler_Action $action, \DateTime $scheduled_date = null, \DateTime $last_attempt_date = null ){
+	public function save_action( ActionScheduler_Action $action, \DateTime $scheduled_date = null, \DateTime $last_attempt_date = null ) {
 		try {
 			/** @var \wpdb $wpdb */
 			global $wpdb;
-
+	
 			$action_id = parent::save_action( $action, $scheduled_date );
-
+	
 			if ( null !== $last_attempt_date ) {
 				$data = [
 					'last_attempt_gmt'   => $this->get_scheduled_date_string( $action, $last_attempt_date ),
 					'last_attempt_local' => $this->get_scheduled_date_string_local( $action, $last_attempt_date ),
 				];
-
-				$wpdb->update( $wpdb->actionscheduler_actions, $data, array( 'action_id' => $action_id ), array( '%s', '%s' ), array( '%d' ) );
+	
+				// Update action data using $wpdb->update()
+				$this->update_action_data( $action_id, $data );
 			}
-
+	
 			return $action_id;
 		} catch ( \Exception $e ) {
 			// translators: %s is a placeholder for the error message
-			throw new \RuntimeException( sprintf( __( 'Error saving action: %s', 'action-scheduler' ), $e->getMessage() ), 0 );
+			throw new \RuntimeException( sprintf( esc_html__( 'Error saving action: %s', 'action-scheduler' ), esc_html( $e->getMessage() ) ), 0 );
 		}
-		
 	}
+	
+	private function update_action_data( $action_id, $data ) {
+		global $wpdb;
+	
+		// Perform the database update using $wpdb->update()
+		$result = $wpdb->update(
+			$wpdb->actionscheduler_actions,
+			$data,
+			array( 'action_id' => $action_id ),
+			array( '%s', '%s' ),
+			array( '%d' )
+		);
+	
+		if ( $result === false ) {
+			// Handle the error
+			throw new \RuntimeException( esc_html__( 'Error updating action.', 'action-scheduler' ) );
+		}
+	}
+	
 }
