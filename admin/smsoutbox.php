@@ -55,9 +55,18 @@ class WhatsiPLUS_SMSOutbox_View implements Whatsiplus_Register_Interface {
             <tbody id="the-list" data-wp-lists='list:id'>
             <?php
             global $wpdb;
-            $result = $wpdb->get_results( 
-                "SELECT * FROM whatsiplus_wc_send_sms_outbox ORDER BY id DESC"
-            );
+            //$result = $wpdb->get_results(
+            //    "SELECT * FROM whatsiplus_wc_send_sms_outbox ORDER BY id DESC"
+            //);
+
+            $result = wp_cache_get( 'whatsiplus_wc_send_sms_outbox_results', 'whatsiplus_wc_send_sms_outbox' );
+            if ( false === $result ) {
+                $result = $wpdb->get_results(
+                    "SELECT * FROM whatsiplus_wc_send_sms_outbox ORDER BY id DESC"
+                );
+                wp_cache_set( 'whatsiplus_wc_send_sms_outbox_results', $result, 'whatsiplus_wc_send_sms_outbox' );
+            }
+
             foreach ( $result as $print ) {
                 ?>
                 <tr>

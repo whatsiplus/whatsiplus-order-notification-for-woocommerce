@@ -637,25 +637,53 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
                 }
 
                 // populate ultimate members status
-                if(function_exists('is_ultimatemember')) {
+                if (function_exists('is_ultimatemember')) {
                     $available_filters[] = "status";
-                    global $wpdb;
-                    $results = $wpdb->get_results("SELECT DISTINCT meta_value FROM wp_usermeta WHERE meta_key = 'account_status' ");
-
-                    foreach ($results as $result) {
-                        $um_arr[$result->meta_value] = $result->meta_value;
+                
+                    $cache_key = 'um_account_status';
+                    $um_arr = wp_cache_get($cache_key, 'um_account_status');
+                
+                    if (!$um_arr) {
+                        $user_meta_query = new WP_User_Query(array(
+                            'meta_key' => 'account_status',
+                            'fields'   => 'ID',
+                            'orderby'  => 'meta_value',
+                            'order'    => 'ASC',
+                        ));
+                        $users = $user_meta_query->get_results();
+                
+                        $um_arr = array();
+                        foreach ($users as $user_id) {
+                            $status = get_user_meta($user_id, 'account_status', true);
+                            if (!empty($status)) {
+                                $um_arr[$status] = $status;
+                            }
+                        }
+                
+                        wp_cache_set($cache_key, $um_arr, 'um_account_status');
                     }
                 }
+                
 
                 // populate PM Pro
-                if(function_exists('pmpro_hasMembershipLevel')) {
+                if (function_exists('pmpro_hasMembershipLevel')) {
                     $available_filters[] = "membership_level";
-                    global $wpdb;
-                    $results = $wpdb->get_results ( "SELECT id, name FROM wp_pmpro_membership_levels" );
-                    foreach ($results as $result) {
-                        $pmpro_arr[$result->id] = $result->name;
+                
+                    $cache_key = 'pmpro_membership_levels';
+                    $pmpro_arr = wp_cache_get($cache_key, 'pmpro_membership_levels');
+                
+                    if (!$pmpro_arr) {
+                        $levels = pmpro_getAllLevels(true, true);
+                
+                        $pmpro_arr = array();
+                        foreach ($levels as $level) {
+                            $pmpro_arr[$level->id] = $level->name;
+                        }
+                
+                        wp_cache_set($cache_key, $pmpro_arr, 'pmpro_membership_levels');
                     }
                 }
+                     
 
             ?>
 

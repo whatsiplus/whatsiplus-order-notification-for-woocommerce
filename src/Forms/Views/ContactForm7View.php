@@ -53,7 +53,13 @@ if (empty($wpcf7->id())) {
                                     } else {
                                         $text = sprintf('<option value="%1$s">%1$s</option>', $field['name']);
                                     }
-                                    echo $text;
+                                    //echo $text;
+                                    echo wp_kses( $text, array(
+                                        'option' => array(
+                                            'value'    => true,
+                                            'selected' => true,
+                                        ),
+                                    ) );
                                 }
                             }
                         }
@@ -73,7 +79,7 @@ if (empty($wpcf7->id())) {
                         style="min-width:350px;;"
                         id="wpcf7whatsiapi-settings[visitor_sms_template]"
                         name="wpcf7whatsiapi-settings[visitor_sms_template]"
-                    ><?php echo $visitor_sms_template; ?></textarea>
+                    ><?php echo esc_html($visitor_sms_template); ?></textarea>
                     <p class="description">Customize your message with <button type="button" id="whatsiplus-open-keyword[dummy]" data-attr-type="admin" data-attr-target="wpcf7whatsiapi-settings[visitor_sms_template]" class="button button-secondary">Keywords</button></p>
                 </td>
             </tr>
@@ -110,7 +116,7 @@ if (empty($wpcf7->id())) {
                         id="wpcf7whatsiapi-settings[admin_mobile_numbers]"
                         name="wpcf7whatsiapi-settings[admin_mobile_numbers]"
                         placeholder="15303776310,15303776310"
-                        value="<?php echo $admin_mobile_numbers; ?>"
+                        value="<?php echo esc_html($admin_mobile_numbers); ?>"
                     >
                     <p class="description">Comma separated mobile numbers including country code. Eg: 15303776310,15303776310</p>
                 </td>
@@ -125,7 +131,7 @@ if (empty($wpcf7->id())) {
                         style="min-width:350px;;"
                         id="wpcf7whatsiapi-settings[admin_sms_template]"
                         name="wpcf7whatsiapi-settings[admin_sms_template]"
-                    ><?php echo $admin_sms_template ?></textarea>
+                    ><?php echo esc_html($admin_sms_template) ?></textarea>
                     <p class="description">Customize your message with <button type="button" id="whatsiplus-open-keyword[dummy]" data-attr-type="default" data-attr-target="wpcf7whatsiapi-settings[admin_sms_template]" class="button button-secondary">Keywords</button></p>,
                 </td>
             </tr>

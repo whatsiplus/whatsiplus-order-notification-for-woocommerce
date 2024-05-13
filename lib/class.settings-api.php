@@ -216,7 +216,8 @@ class WeDevs_Settings_API {
      *
      * @param array   $args settings field args
      */
-    function callback_text( $args ) {
+/*
+     function callback_text( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -226,6 +227,26 @@ class WeDevs_Settings_API {
         $html  .= wp_kses_post($this->get_field_description( $args ));
 
         echo $html;
+    }
+*/
+    function callback_text( $args ) {
+
+        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
+        $type  = isset( $args['type'] ) ? $args['type'] : 'text';
+
+        $html  = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"/>', $type, $size, $args['section'], $args['id'], $value );
+        $html  .= $this->get_field_description( $args ); // Assuming get_field_description() returns HTML
+        echo wp_kses( $html, array(
+            'input' => array(
+                'type'  => true,
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'value' => true,
+            ),
+        ) );
+
     }
 
     /**
@@ -251,6 +272,8 @@ class WeDevs_Settings_API {
      *
      * @param array   $args settings field args
      */
+
+ /*
     function callback_checkbox( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -264,12 +287,40 @@ class WeDevs_Settings_API {
 
         echo $html;
     }
+*/
+
+    function callback_checkbox( $args ) {
+        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+
+        $html  = '<fieldset>';
+        $html  .= sprintf( '<label for="wpuf-%1$s[%2$s]">', $args['section'], $args['id'] );
+        $html  .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="off" />', $args['section'], $args['id'] );
+        $html  .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', $args['section'], $args['id'], checked( $value, 'on', false ) );
+        $html  .= sprintf( '%1$s</label>', $args['desc'] );
+        $html  .= '</fieldset>';
+
+        echo wp_kses( $html, array(
+            'input' => array(
+                'type'  => true,
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'value' => true,
+                'checked' => true,
+            ),
+            'label' => array(
+                'for' => true,
+            ),
+            'fieldset' => array(),
+        ) );
+    }
 
     /**
      * Displays a multicheckbox a settings field
      *
      * @param array   $args settings field args
      */
+/*
     function callback_multicheck( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
@@ -287,13 +338,51 @@ class WeDevs_Settings_API {
 
         echo $html;
     }
+*/
+function callback_multicheck( $args ) {
+    $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
+    $html  = '<fieldset>';
+
+    foreach ( $args['options'] as $key => $label ) {
+        // Check if the current option is selected in the saved value
+        $checked = isset( $value[$key] ) && $value[$key] === 'on' ? 'checked' : '';
+
+        $html .= sprintf( '<label for="wpuf-%1$s[%2$s][%3$s]">', $args['section'], $args['id'], $key );
+        $html .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s][%3$s]" name="%1$s[%2$s][%3$s]" value="on" %4$s />', $args['section'], $args['id'], $key, $checked );
+        $html .= sprintf( '%1$s</label><br>', $label );
+    }
+
+    // Assuming get_field_description() returns HTML
+    $html .= $this->get_field_description( $args );
+
+    $html .= '</fieldset>';
+
+    echo wp_kses( $html, array(
+        'input' => array(
+            'type'  => true,
+            'class' => true,
+            'id'    => true,
+            'name'  => true,
+            'value' => true,
+            'checked' => true,
+        ),
+        'label' => array(
+            'for' => true,
+        ),
+        'fieldset' => array(),
+        'br' => array(),
+    ) );
+}
+
+
 
     /**
      * Displays a multicheckbox a settings field
      *
      * @param array   $args settings field args
      */
-    function callback_radio( $args ) {
+/*
+     function callback_radio( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $html  = '<fieldset>';
@@ -309,12 +398,45 @@ class WeDevs_Settings_API {
 
         echo $html;
     }
+*/
+
+    function callback_radio( $args ) {
+        $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
+        $html  = '<fieldset>';
+
+        foreach ( $args['options'] as $key => $label ) {
+            $html .= sprintf( '<label for="wpuf-%1$s[%2$s][%3$s]">',  $args['section'], $args['id'], $key );
+            $html .= sprintf( '<input type="radio" class="radio" id="wpuf-%1$s[%2$s][%3$s]" name="%1$s[%2$s]" value="%3$s" %4$s />', $args['section'], $args['id'], $key, checked( $value, $key, false ) );
+            $html .= sprintf( '%1$s</label><br>', $label );
+        }
+
+        // Assuming get_field_description() returns HTML
+        $html .= $this->get_field_description( $args );
+
+        $html .= '</fieldset>';
+
+        echo wp_kses( $html, array(
+            'input' => array(
+                'type'  => true,
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'value' => true,
+            ),
+            'label' => array(
+                'for' => true,
+            ),
+            'fieldset' => array(),
+            'br' => array(),
+        ) );
+    }
 
     /**
      * Displays a selectbox for a settings field
      *
      * @param array   $args settings field args
      */
+/*
     function callback_select( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -330,12 +452,40 @@ class WeDevs_Settings_API {
 
         echo $html;
     }
+*/
+    function callback_select( $args ) {
+        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
+        $html  = sprintf( '<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, $args['section'], $args['id'] );
+
+        foreach ( $args['options'] as $key => $label ) {
+            $html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $value, $key, false ), $label );
+        }
+
+        $html .= sprintf( '</select>' );
+        
+        // Assuming get_field_description() returns HTML
+        $html .= $this->get_field_description( $args );
+
+        echo wp_kses( $html, array(
+            'select' => array(
+                'class' => true,
+                'name'  => true,
+                'id'    => true,
+            ),
+            'option' => array(
+                'value'    => true,
+                'selected' => true,
+            ),
+        ) );
+    }
 
     /**
      * Displays a selectbox for a settings field
      *
      * @param array   $args settings field args
      */
+/*
     function callback_selectm( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -351,12 +501,42 @@ class WeDevs_Settings_API {
 
         echo $html;
     }
+*/
+
+    function callback_selectm( $args ) {
+        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
+        $html  = sprintf( '<select class="%1$s" name="%2$s[%3$s][]" id="%2$s[%3$s]" multiple>', $size, $args['section'], $args['id'] );
+
+        foreach ( $args['options'] as $key => $label ) {
+            $html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $value, $key, false ), $label );
+        }
+
+        $html .= sprintf( '</select>' );
+        
+        // Assuming get_field_description() returns HTML
+        $html .= $this->get_field_description( $args );
+
+        echo wp_kses( $html, array(
+            'select' => array(
+                'class'    => true,
+                'name'     => true,
+                'id'       => true,
+                'multiple' => true,
+            ),
+            'option' => array(
+                'value'    => true,
+                'selected' => true,
+            ),
+        ) );
+    }
 
     /**
      * Displays a textarea for a settings field
      *
      * @param array   $args settings field args
      */
+/*
     function callback_textarea( $args ) {
 
         $value = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -370,6 +550,31 @@ class WeDevs_Settings_API {
 
         echo $html;
     }
+*/
+
+    function callback_textarea( $args ) {
+        $value = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
+        $rows  = isset( $args['rows'] ) && ! is_null( $args['rows'] ) ? $args['rows'] : '5';
+        $cols  = isset( $args['cols'] ) && ! is_null( $args['cols'] ) ? $args['cols'] : '55';
+        $css   = isset( $args['css'] ) && ! is_null( $args['css'] ) ? 'style="' . esc_attr( $args['css'] ) . ';"' : '';
+
+        $html  = sprintf( '<textarea rows="%1$s" cols="%2$s" class="%3$s-text" %4$s id="%5$s[%6$s]" name="%5$s[%6$s]">%7$s</textarea>', $rows, $cols, $size, $css, $args['section'], $args['id'], $value );
+
+        // Assuming get_field_description() returns HTML
+        $html .= $this->get_field_description( $args );
+
+        echo wp_kses( $html, array(
+            'textarea' => array(
+                'rows'  => true,
+                'cols'  => true,
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'style' => true,
+            ),
+        ) );
+    }
 
     /**
      * Displays a textarea for a settings field
@@ -377,8 +582,28 @@ class WeDevs_Settings_API {
      * @param array   $args settings field args
      * @return string
      */
+/*
     function callback_html( $args ) {
         echo $this->get_field_description( $args );
+    }
+*/
+    function callback_html( $args ) {
+        $description = $this->get_field_description( $args );
+        echo wp_kses( $description, array(
+            'p' => array(
+                'class' => true,
+            ),
+            'span' => array(
+                'class' => true,
+            ),
+            'strong' => array(),
+            'em' => array(),
+            'a' => array(
+                'href' => true,
+                'class' => true,
+                'id' => true,
+            ),
+        ) );
     }
 
     /**
@@ -386,7 +611,9 @@ class WeDevs_Settings_API {
      *
      * @param array   $args settings field args
      */
-    function callback_wysiwyg( $args ) {
+
+     /*
+     function callback_wysiwyg( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
@@ -409,12 +636,57 @@ class WeDevs_Settings_API {
 
         echo $this->get_field_description( $args );
     }
+     */
+    function callback_wysiwyg( $args ) {
+
+        $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
+        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
+
+        echo wp_kses('<div style="max-width: ' . $size . ';">',array(
+            'div'=> array(
+                'style' => true,
+            )));
+
+        $editor_settings = array(
+            'teeny'         => true,
+            'textarea_name' => $args['section'] . '[' . $args['id'] . ']',
+            'textarea_rows' => 10
+        );
+
+        if ( isset( $args['options'] ) && is_array( $args['options'] ) ) {
+            $editor_settings = array_merge( $editor_settings, $args['options'] );
+        }
+
+        wp_editor( $value, $args['section'] . '-' . $args['id'], $editor_settings );
+
+        echo wp_kses('</div>',array(
+            'div'=> array(
+                'style' => true,
+            )));
+
+        echo wp_kses($this->get_field_description( $args ), array(
+            'p' => array(
+                'class' => true,
+            ),
+            'span' => array(
+                'class' => true,
+            ),
+            'strong' => array(),
+            'em' => array(),
+            'a' => array(
+                'href' => true,
+                'class' => true,
+                'id' => true,
+            ),
+        ));
+    }
 
     /**
      * Displays a file upload field for a settings field
      *
      * @param array   $args settings field args
      */
+/*
     function callback_file( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -428,12 +700,42 @@ class WeDevs_Settings_API {
 
         echo $html;
     }
+*/
+
+    function callback_file( $args ) {
+
+        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
+        $id    = $args['section']  . '[' . $args['id'] . ']';
+        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
+
+        $html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
+        $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
+        $html  .= wp_kses_post($this->get_field_description( $args ));
+
+        echo wp_kses( $output, array(
+            'input' => array(
+                'type'  => true,
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'value' => true,
+            ),
+            'label' => array(
+                'for' => true,
+            ),
+            'p' => array(
+                'class' => true,
+            ),
+        ) );
+    }
 
     /**
      * Displays a password field for a settings field
      *
      * @param array   $args settings field args
      */
+/*
     function callback_password( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -444,12 +746,36 @@ class WeDevs_Settings_API {
 
         echo $html;
     }
+*/
+
+    function callback_password( $args ) {
+
+        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
+
+        $html  = sprintf( '<input type="password" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
+        $html  .= wp_kses_post($this->get_field_description( $args ));
+
+        echo wp_kses( $output, array(
+            'input' => array(
+                'type'  => true,
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'value' => true,
+            ),
+            'p' => array(
+                'class' => true,
+            ),
+        ) );
+    }
 
     /**
      * Displays a color picker field for a settings field
      *
      * @param array   $args settings field args
      */
+/*
     function callback_color( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -459,6 +785,28 @@ class WeDevs_Settings_API {
         $html  .= wp_kses_post($this->get_field_description( $args ));
 
         echo $html;
+    }
+*/
+
+    function callback_color( $args ) {
+        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
+        $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
+
+        $html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, $args['std'] );
+        
+        // Assuming get_field_description() returns HTML
+        $html  .= $this->get_field_description( $args );
+
+        echo wp_kses( $html, array(
+            'input' => array(
+                'type'  => true,
+                'class' => true,
+                'id'    => true,
+                'name'  => true,
+                'value' => true,
+                'data-default-color' => true,
+            ),
+        ) );
     }
 
     /**
@@ -529,6 +877,7 @@ class WeDevs_Settings_API {
      *
      * Shows all the settings section labels as tab
      */
+/*
     function show_navigation() {
         $html = '<h2 class="nav-tab-wrapper">';
 
@@ -540,6 +889,27 @@ class WeDevs_Settings_API {
         $html .= '</h2>';
 
         echo $html;
+    }
+*/
+    function show_navigation() {
+        $html = '<h2 class="nav-tab-wrapper">';
+
+        foreach ( $this->settings_sections as $tab ) {
+            $html .= sprintf( '<a href="#%1$s" class="nav-tab" id="%1$s-tab">%2$s</a>', $tab['id'], $tab['title'] );
+        }
+
+        $html .= '</h2>';
+
+        echo wp_kses( $html, array(
+            'h2' => array(
+                'class' => true,
+            ),
+            'a' => array(
+                'href' => true,
+                'class' => true,
+                'id' => true,
+            ),
+        ) );
     }
 
     /**
@@ -593,10 +963,27 @@ class WeDevs_Settings_API {
                             <div style="padding-left: 10px">
                                 <?php
                                     if(isset($form['submit_button']) && empty($form['submit_button'])){
-                                        echo $form['submit_button'];
+                                        echo wp_kses( $form['submit_button'], 
+                                        array('input' => array(
+                                            'type'     => true,
+                                            'name'     => true,
+                                            'id'       => true,
+                                            'class'    => true,
+                                            'value'    => true,
+                                            ),
+                                        ));
+                                        
                                     } else if (isset($form['submit_button']) && !empty($form['submit_button']))  {
                                         // if submit_button == '';
-                                        echo $form['submit_button'];
+                                        echo wp_kses( $form['submit_button'], 
+                                        array('input' => array(
+                                            'type'     => true,
+                                            'name'     => true,
+                                            'id'       => true,
+                                            'class'    => true,
+                                            'value'    => true,
+                                            ),
+                                        ));
                                     }
                                     else {
                                         submit_button();
@@ -620,7 +1007,16 @@ class WeDevs_Settings_API {
                                 <div style="padding-left: 10px">
                                     <?php
                                     if(isset($plugin['submit_button']) && !empty($plugin['submit_button'])){
-                                        echo $plugin['submit_button'];
+                                        //echo $plugin['submit_button'];
+                                        echo wp_kses( $plugin['submit_button'], 
+                                        array('input' => array(
+                                            'type'     => true,
+                                            'name'     => true,
+                                            'id'       => true,
+                                            'class'    => true,
+                                            'value'    => true,
+                                            ),
+                                        ));
                                     } else {
                                         submit_button();
                                     }

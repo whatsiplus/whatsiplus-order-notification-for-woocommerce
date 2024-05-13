@@ -104,12 +104,13 @@ class WhatsiPLUS_SendSMS_Sms {
         */
         
         if ($filters == 'country') {
-            global $wpdb;
+            //global $wpdb;
             
             // Sanitize input
-            $criteria = esc_sql($criteria);
+            //$criteria = esc_sql($criteria);
             
             // Custom SQL query to fetch user IDs with the specified country meta value
+            /*
             $user_ids_query = $wpdb->get_results(
                 $wpdb->prepare(
                     "SELECT user_id
@@ -118,21 +119,29 @@ class WhatsiPLUS_SendSMS_Sms {
                     $criteria
                 )
             );
-            
-            // Initialize an array to store filtered users
+            */
+
+            $args = array(
+                'meta_key'     => 'country',
+                'meta_value'   => $criteria,
+                'compare' => '=',
+            );
+
+            $user_query = new WP_User_Query( $args );
+            $user_ids_query = $user_query->get_results();
+
             $filtered_users = array();
             
-            // Loop through the user IDs and fetch user objects
             foreach ($user_ids_query as $user_id) {
                 // Get full user object using user ID
-                $user_object = get_userdata($user_id->user_id);
+                //$user_object = get_userdata($user_id->user_id);
                 
                 // Add user object to the filtered users array
-                $filtered_users[] = $user_object;
+                $filtered_users[] = $user_id->ID;
             }
         }
         
-
+/*
         if ($filters == 'status') {
             global $wpdb;
             
@@ -140,6 +149,7 @@ class WhatsiPLUS_SendSMS_Sms {
             $criteria = esc_sql($criteria);
             
             // Custom SQL query to fetch user IDs with the specified status meta value
+            
             $user_ids_query = $wpdb->get_results(
                 $wpdb->prepare(
                     "SELECT user_id
@@ -148,7 +158,8 @@ class WhatsiPLUS_SendSMS_Sms {
                     $criteria
                 )
             );
-            
+           
+
             // Initialize an array to store filtered users
             $filtered_users = array();
             
@@ -162,19 +173,25 @@ class WhatsiPLUS_SendSMS_Sms {
             }
         }
         
-        
-        
-        /*
+ */
         if ($filters == 'status') {
+            // Define arguments for the WP_User_Query
             $args = array(
-                'meta_key' => 'account_status',
-                'meta_value' => $criteria,
+                'meta_key'     => 'account_status',
+                'meta_value'   => $criteria,
+                'compare' => '=',
             );
 
-            $filtered_users = get_users($args);
-        }
-        */
+            $user_query = new WP_User_Query( $args );
+            $user_ids = $user_query->get_results();
+            $filtered_users = array();
 
+            foreach ($user_ids as $user_id) {
+                $filtered_users[] = $user_id->ID;
+            }
+        }
+
+        /*
         if ($filters == 'membership_level') {
             global $wpdb;
             #$wpdb->prepare($sql_query, implode(', ', $criteria));
@@ -184,6 +201,24 @@ class WhatsiPLUS_SendSMS_Sms {
             }
 
         }
+        */
+
+        if ($filters == 'membership_level') {
+            $args = array(
+                'meta_key'     => 'membership_id',
+                'meta_value'   => $criteria,
+                'compare' => '=',
+            );
+        
+            $user_query = new WP_User_Query( $args );
+            $user_ids = $user_query->get_results();
+            $filtered_users = array();
+        
+            foreach ($user_ids as $user_id) {
+                $filtered_users[] = $user_id->ID;
+            }
+        }
+        
 
         return self::getValidatedPhoneNumbers($filtered_users);
     }
