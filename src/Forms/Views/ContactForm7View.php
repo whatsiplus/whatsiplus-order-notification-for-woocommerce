@@ -109,10 +109,10 @@ if (empty($wpcf7->id())) {
                         class="regular-text"
                         id="wpcf7whatsiapi-settings[admin_mobile_numbers]"
                         name="wpcf7whatsiapi-settings[admin_mobile_numbers]"
-                        placeholder="60123456789,60123344556"
+                        placeholder="15303776310,15303776310"
                         value="<?php echo $admin_mobile_numbers; ?>"
                     >
-                    <p class="description">Comma separated mobile numbers including country code. Eg: 60123456789,60123344556</p>
+                    <p class="description">Comma separated mobile numbers including country code. Eg: 15303776310,15303776310</p>
                 </td>
             </tr>
             <tr>
