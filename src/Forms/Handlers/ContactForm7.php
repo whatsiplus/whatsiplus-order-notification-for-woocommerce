@@ -299,7 +299,7 @@ class ContactForm7 {
             </tr>
             <tr>
                 <th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-id' ); ?>"><?php esc_html_e( 'Id attribute', 'contact-form-7' ); ?></label></th>
-                <td><input type="text" name="id" class="idvalue oneline option" id="<?php echo $args['content'] . '-id'; ?>" /></td>
+				<td><input type="text" name="id" class="idvalue oneline option" id="<?php echo esc_attr($args['content']) . '-id'; ?>" /></td>
             </tr>
 
             <tr>
