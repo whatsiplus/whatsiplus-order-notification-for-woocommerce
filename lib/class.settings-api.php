@@ -106,7 +106,7 @@ class WeDevs_Settings_API {
             if (isset($section['desc']) && !empty($section['desc'])) {
                 $section['desc'] = '<div class="inside">' . $section['desc'] . '</div>';
                 $callback = function () use ($section) {
-                    echo '"' . str_replace('"', '\"', $section['desc']) . '"';
+                    echo '"' . esc_html(str_replace('"', '\"', $section['desc'])) . '"';
                 };
             } elseif (isset($section['callback'])) {
                 $callback = $section['callback'];
@@ -124,7 +124,7 @@ class WeDevs_Settings_API {
                     if (isset($subsection['desc']) && !empty($subsection['desc'])) {
                         $subsection['desc'] = '<div class="inside">' . $subsection['desc'] . '</div>';
                         $callback = function () use ($subsection) {
-                            echo '"' . str_replace('"', '\"', $subsection['desc']) . '"';
+                            echo '"' . esc_html(str_replace('"', '\"', $subsection['desc'])) . '"';
                         };
                     } elseif (isset($subsection['callback'])) {
                         $callback = $subsection['callback'];
@@ -225,7 +225,7 @@ class WeDevs_Settings_API {
         $html  = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"/>', $type, $size, $args['section'], $args['id'], $value );
         $html  .= wp_kses_post($this->get_field_description( $args ));
 
-        echo $html;
+        echo wp_kses_post($html);
     }
 
     /**
@@ -262,7 +262,7 @@ class WeDevs_Settings_API {
         $html  .= sprintf( '%1$s</label>', $args['desc'] );
         $html  .= '</fieldset>';
 
-        echo $html;
+        echo wp_kses_post($html);
     }
 
     /**
@@ -307,7 +307,7 @@ class WeDevs_Settings_API {
         $html .= wp_kses_post($this->get_field_description( $args ));
         $html .= '</fieldset>';
 
-        echo $html;
+        echo wp_kses_post($html);
     }
 
     /**
@@ -557,7 +557,8 @@ class WeDevs_Settings_API {
                             <div class="wrap">
                             <h2 class="nav-tab-wrapper">
                                 <?php foreach($form['children'] as $plugin) { ?>
-                                    <?php echo sprintf( '<a href="#%1$s" class="nav-tab" id="%1$s-tab">%2$s</a>', $plugin['id'], $plugin['title'] ); ?>
+                                    <?php echo sprintf( '<a href="#%1$s" class="nav-tab" id="%1$s-tab">%2$s</a>', esc_attr($plugin['id']), esc_attr($plugin['title']) ); ?>
+
                                 <?php } ?>
                             </h2>
                             </div>
@@ -575,7 +576,8 @@ class WeDevs_Settings_API {
 
                         ?>
 
-                        <form id="<?php echo $form['id'] . "_form" ?>" method="post" action="<?php echo esc_url($action_url); ?>">
+                        <form id="<?php echo esc_attr($form['id'] . "_form"); ?>" method="post" action="<?php echo esc_url($action_url); ?>">
+
                             <?php
                             do_action( 'wsa_form_top_' . $form['id'], $form );
                             settings_fields( $form['id'] );
@@ -584,7 +586,7 @@ class WeDevs_Settings_API {
                             do_action('whatsiplus_setting_fields_custom_html', $form['id']);
 
                             if(isset($action) && !empty($action)) {
-                                echo sprintf('<input type="hidden" name="action" value="%s">', $action);
+                                echo sprintf('<input type="hidden" name="action" value="%s">', esc_attr($action));
                                 unset($action, $action_url);
                             }
                             ?>
@@ -607,7 +609,7 @@ class WeDevs_Settings_API {
 
                 <?php if( array_key_exists('children', $form) && !empty($form['children']) ) { ?>
                     <?php foreach($form['children'] as $plugin) { ?>
-                        <div id="<?php echo $plugin['id']; ?>" class="group" style="display: none;">
+                        <div id="<?php echo esc_attr( $plugin['id'] ); ?>" class="group" style="display: none;">
                             <form method="post" action="options.php">
                                 <?php
                                 do_action( 'wsa_form_top_' . $plugin['id'], $plugin );
@@ -618,7 +620,7 @@ class WeDevs_Settings_API {
                                 <div style="padding-left: 10px">
                                     <?php
                                     if(isset($plugin['submit_button']) && !empty($plugin['submit_button'])){
-                                        echo $plugin['submit_button'];
+                                        echo wp_kses_post($plugin['submit_button']);
                                     } else {
                                         submit_button();
                                     }
