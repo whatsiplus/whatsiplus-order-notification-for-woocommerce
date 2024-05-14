@@ -133,10 +133,6 @@ class WhatsiPLUS_SendSMS_Sms {
             $filtered_users = array();
             
             foreach ($user_ids_query as $user_id) {
-                // Get full user object using user ID
-                //$user_object = get_userdata($user_id->user_id);
-                
-                // Add user object to the filtered users array
                 $filtered_users[] = $user_id->ID;
             }
         }
