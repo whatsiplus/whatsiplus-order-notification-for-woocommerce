@@ -100,7 +100,7 @@ You'll be able to send notifications to customers when a new form is submitted.
 5. ![Send WhatsApp Message to Users](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-5.jpg)
 6. ![Automation Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-6.jpg)
 7. ![Message Outbox](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-7.jpg)
-8. ![Logs]()
+8. ![Logs](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-8.jpg)
 
 ## Changelog
 
