@@ -10,7 +10,7 @@ GPLv3
 
 ### Whatsiplus Order Notification for WooCommerce
 
-ooCommerce WhatsApp Notification is a versatile WordPress plugin designed to streamline communication between you and your customers. Whether you’re a seasoned e-commerce entrepreneur or just starting out, this plugin offers unparalleled convenience and functionality. It allows you to effortlessly send WhatsApp messages to your customers and managers, keeping them informed about new orders, order status updates, and more.
+WooCommerce WhatsApp Notification is a versatile WordPress plugin designed to streamline communication between you and your customers. Whether you’re a seasoned e-commerce entrepreneur or just starting out, this plugin offers unparalleled convenience and functionality. It allows you to effortlessly send WhatsApp messages to your customers and managers, keeping them informed about new orders, order status updates, and more.
 
 This is a plugin add-on for WooCommerce. But WooCommerce plugin is not required to access certain functionalities of our plugin. For example: Send WhatsApp Message, Send WhatsApp messages to different groups of your users.
 
@@ -89,16 +89,18 @@ You'll be able to send notifications to customers when a new form is submitted.
 2. Configure the settings in Settings > Whatsiplus WooCommerce.
 3. Enjoy.
 
+## [Get a Free API KEY](https://panel.whatsiplus.com/)
+
 ## Screenshots
 
 1. ![Whatsiplus Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-1.jpg)
 2. ![Admin Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-2.jpg)
-3. Customer Settings
-4. Multivendor Settings
-5. Send WhatsApp Message to Users
-6. Automation Settings
-7. Message Outbox
-8. Logs
+3. ![Customer Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-3.jpg)
+4. ![Multivendor Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-4.jpg)
+5. ![Send WhatsApp Message to Users](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-5.jpg)
+6. ![Automation Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-6.jpg)
+7. ![Message Outbox](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-7.jpg)
+8. ![Logs]()
 
 ## Changelog
 
