@@ -12,9 +12,17 @@ GPLv3
 
 WooCommerce WhatsApp Notification is a versatile WordPress plugin designed to streamline communication between you and your customers. Whether you’re a seasoned e-commerce entrepreneur or just starting out, this plugin offers unparalleled convenience and functionality. It allows you to effortlessly send WhatsApp messages to your customers and managers, keeping them informed about new orders, order status updates, and more.
 
-This is a plugin add-on for WooCommerce. But WooCommerce plugin is not required to access certain functionalities of our plugin. For example: Send WhatsApp Message, Send WhatsApp messages to different groups of your users.
+This is a plugin add-on for WooCommerce. But WooCommerce plugin is not required to access certain functionalities of our plugin. For example: [Send WhatsApp Message](https://whatsiplus.com), Send WhatsApp messages to different groups of your users.
 
-### Key Features
+[View All Information in Website](https://whatsiplus.com/whatsapp-order-notifications-plugin-boost-your-woocommerce-sales/)
+
+### What is Whatsiplus?
+
+WhatsiPlus is a [WhatsApp API service](https://docs.whatsiplus.com) that can perform WhatsApp services on its powerful servers.
+With our service, you can send unlimited WhatsApp messages to your users
+
+
+### Whatsiplus Plugging Key Features
 
 - Notify seller whenever a new order is placed.
 - Inform buyer of the current order status/whenever order status is changed.
