@@ -91,8 +91,8 @@ You'll be able to send notifications to customers when a new form is submitted.
 
 ## Screenshots
 
-1. Whatsiplus Settings(https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-1.jpg)
-2. Admin Settings
+1. ![Whatsiplus Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-1.jpg)
+2. ![Admin Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-2.jpg)
 3. Customer Settings
 4. Multivendor Settings
 5. Send WhatsApp Message to Users
