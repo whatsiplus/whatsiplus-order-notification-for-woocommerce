@@ -30,7 +30,7 @@ class ActionScheduler_WPCLI_QueueRunner extends ActionScheduler_Abstract_QueueRu
 	public function __construct( ActionScheduler_Store $store = null, ActionScheduler_FatalErrorMonitor $monitor = null, ActionScheduler_QueueCleaner $cleaner = null ) {
 		if ( ! ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 			/* translators: %s php class name */
-			throw new Exception( sprintf( esc_html__( 'The %s class can only be run within WP CLI.', 'action-scheduler' ), esc_html( __CLASS__ ) ) );
+			throw new Exception( sprintf( __( 'The %s class can only be run within WP CLI.', 'action-scheduler' ), __CLASS__ ) );
 		}
 
 		parent::__construct( $store, $monitor, $cleaner );
@@ -90,7 +90,7 @@ class ActionScheduler_WPCLI_QueueRunner extends ActionScheduler_Abstract_QueueRu
 		$count              = count( $this->actions );
 		$this->progress_bar = new ProgressBar(
 			/* translators: %d: amount of actions */
-			sprintf( _n( 'Running %d action', 'Running %d actions', $count, 'action-scheduler' ), number_format_i18n( $count ) ),
+			sprintf( _n( 'Running %d action', 'Running %d actions', $count, 'action-scheduler' ), $count ),
 			$count
 		);
 	}

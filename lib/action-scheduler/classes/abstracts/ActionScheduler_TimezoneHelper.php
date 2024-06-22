@@ -67,14 +67,13 @@ abstract class ActionScheduler_TimezoneHelper {
 		}
 
 		// Last try, guess timezone string manually.
-		foreach (timezone_abbreviations_list() as $abbr) {
-			foreach ($abbr as $city) {
-				if ((bool) gmdate('I') === (bool) $city['dst'] && $city['timezone_id'] && intval($city['offset']) === $utc_offset) {
+		foreach ( timezone_abbreviations_list() as $abbr ) {
+			foreach ( $abbr as $city ) {
+				if ( (bool) date( 'I' ) === (bool) $city['dst'] && $city['timezone_id'] && intval( $city['offset'] ) === $utc_offset ) { // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date	 -- we are actually interested in the runtime timezone.
 					return $city['timezone_id'];
 				}
 			}
 		}
-		
 
 		// No timezone string
 		return '';
@@ -122,23 +121,22 @@ abstract class ActionScheduler_TimezoneHelper {
 					}
 
 					// Try mapping to the first abbreviation we can find.
-					if (false === $tzstring) {
-						$is_dst = gmdate('I');
-						foreach (timezone_abbreviations_list() as $abbr) {
-							foreach ($abbr as $city) {
-								if ($city['dst'] == $is_dst && $city['offset'] == $gmt_offset) {
+					if ( false === $tzstring ) {
+						$is_dst = date( 'I' ); // phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date	 -- we are actually interested in the runtime timezone.
+						foreach ( timezone_abbreviations_list() as $abbr ) {
+							foreach ( $abbr as $city ) {
+								if ( $city['dst'] == $is_dst && $city['offset'] == $gmt_offset ) {
 									// If there's no valid timezone ID, keep looking.
-									if (null === $city['timezone_id']) {
+									if ( null === $city['timezone_id'] ) {
 										continue;
 									}
-					
+
 									$tzstring = $city['timezone_id'];
 									break 2;
 								}
 							}
 						}
 					}
-					
 
 					// If we still have no valid string, then fall back to UTC.
 					if ( false === $tzstring ) {

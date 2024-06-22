@@ -76,7 +76,7 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	/**
 	 * Query for action count or list of action IDs.
 	 *
-	 * @since x.x.x $query['status'] accepts array of statuses instead of a single status.
+	 * @since 3.3.0 $query['status'] accepts array of statuses instead of a single status.
 	 *
 	 * @param array  $query {
 	 *      Query filtering options.
@@ -104,7 +104,7 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	/**
 	 * Run query to get a single action ID.
 	 *
-	 * @since x.x.x
+	 * @since 3.3.0
 	 *
 	 * @see ActionScheduler_Store::query_actions for $query arg usage but 'per_page' and 'offset' can't be used.
 	 *
@@ -130,6 +130,34 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	 * @return array
 	 */
 	abstract public function action_counts();
+
+	/**
+	 * Get additional action counts.
+	 *
+	 * - add past-due actions
+	 *
+	 * @return array
+	 */
+	public function extra_action_counts() {
+		$extra_actions = array();
+
+		$pastdue_action_counts = ( int ) $this->query_actions( array(
+			'status' => self::STATUS_PENDING,
+			'date'   => as_get_datetime_object(),
+		), 'count' );
+
+		if ( $pastdue_action_counts ) {
+			$extra_actions['past-due'] = $pastdue_action_counts;
+		}
+
+		/**
+		 * Allows 3rd party code to add extra action counts (used in filters in the list table).
+		 *
+		 * @since 3.5.0
+		 * @param $extra_actions array Array with format action_count_identifier => action count.
+		 */
+		return apply_filters( 'action_scheduler_extra_action_counts', $extra_actions );
+	}
 
 	/**
 	 * @param string $action_id
@@ -220,7 +248,7 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	}
 
 	/**
-	 * Get the time MySQL formated date/time string for an action's (next) scheduled date.
+	 * Get the time MySQL formatted date/time string for an action's (next) scheduled date.
 	 *
 	 * @param ActionScheduler_Action $action
 	 * @param DateTime $scheduled_date (optional)
@@ -229,7 +257,7 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	protected function get_scheduled_date_string( ActionScheduler_Action $action, DateTime $scheduled_date = NULL ) {
 		$next = null === $scheduled_date ? $action->get_schedule()->get_date() : $scheduled_date;
 		if ( ! $next ) {
-			return '0000-00-00 00:00:00';
+			$next = date_create();
 		}
 		$next->setTimezone( new DateTimeZone( 'UTC' ) );
 
@@ -237,7 +265,7 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	}
 
 	/**
-	 * Get the time MySQL formated date/time string for an action's (next) scheduled date.
+	 * Get the time MySQL formatted date/time string for an action's (next) scheduled date.
 	 *
 	 * @param ActionScheduler_Action $action
 	 * @param DateTime $scheduled_date (optional)
@@ -246,7 +274,7 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	protected function get_scheduled_date_string_local( ActionScheduler_Action $action, DateTime $scheduled_date = NULL ) {
 		$next = null === $scheduled_date ? $action->get_schedule()->get_date() : $scheduled_date;
 		if ( ! $next ) {
-			return '0000-00-00 00:00:00';
+			$next = date_create();
 		}
 
 		ActionScheduler_TimezoneHelper::set_local_timezone( $next );
@@ -264,15 +292,14 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	protected function validate_args( $args, $action_id ) {
 		// Ensure we have an array of args.
 		if ( ! is_array( $args ) ) {
-			throw ActionScheduler_InvalidActionException::from_decoding_args( esc_html( $action_id ) );
+			throw ActionScheduler_InvalidActionException::from_decoding_args( $action_id );
 		}
-	
+
 		// Validate JSON decoding if possible.
 		if ( function_exists( 'json_last_error' ) && JSON_ERROR_NONE !== json_last_error() ) {
-			throw ActionScheduler_InvalidActionException::from_decoding_args( esc_html( $action_id ), esc_html($args) );
+			throw ActionScheduler_InvalidActionException::from_decoding_args( $action_id, $args );
 		}
 	}
-	
 
 	/**
 	 * Validate a ActionScheduler_Schedule object.
@@ -284,10 +311,9 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	 */
 	protected function validate_schedule( $schedule, $action_id ) {
 		if ( empty( $schedule ) || ! is_a( $schedule, 'ActionScheduler_Schedule' ) ) {
-			throw ActionScheduler_InvalidActionException::from_schedule( esc_html( $action_id ), esc_html( $schedule ) );
+			throw ActionScheduler_InvalidActionException::from_schedule( $action_id, $schedule );
 		}
 	}
-	
 
 	/**
 	 * InnoDB indexes have a maximum size of 767 bytes by default, which is only 191 characters with utf8mb4.
@@ -299,14 +325,11 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	 * @throws InvalidArgumentException When json encoded args is too long.
 	 */
 	protected function validate_action( ActionScheduler_Action $action ) {
-		if ( strlen( json_encode( $action->get_args() ) ) > static::$max_args_length ) {
-			/* translators: %d is a placeholder for the maximum args length */
-			throw new InvalidArgumentException( sprintf( esc_html__( 'ActionScheduler_Action::$args too long. To ensure the args column can be indexed, action args should not be more than %d characters when encoded as JSON.', 'action-scheduler' ), esc_html( static::$max_args_length ) ) );
+		if ( strlen( wp_json_encode( $action->get_args() ) ) > static::$max_args_length ) {
+			// translators: %d is a number (maximum length of action arguments).
+			throw new InvalidArgumentException( sprintf( __( 'ActionScheduler_Action::$args too long. To ensure the args column can be indexed, action args should not be more than %d characters when encoded as JSON.', 'action-scheduler' ), static::$max_args_length ) );
 		}
 	}
-	
-	
-	
 
 	/**
 	 * Cancel pending actions by hook.
@@ -325,7 +348,7 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 					'hook'     => $hook,
 					'status'   => self::STATUS_PENDING,
 					'per_page' => 1000,
-					'orderby'  => 'action_id',
+					'orderby'  => 'none',
 				)
 			);
 
@@ -350,7 +373,7 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 					'group'    => $group,
 					'status'   => self::STATUS_PENDING,
 					'per_page' => 1000,
-					'orderby'  => 'action_id',
+					'orderby'  => 'none',
 				)
 			);
 

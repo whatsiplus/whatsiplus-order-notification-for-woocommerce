@@ -97,8 +97,8 @@ class CronExpression
         $this->cronParts = preg_split('/\s/', $value, -1, PREG_SPLIT_NO_EMPTY);
         if (count($this->cronParts) < 5) {
             throw new InvalidArgumentException(
-                esc_html($value) . ' is not a valid CRON expression'
-            );            
+                $value . ' is not a valid CRON expression'
+            );
         }
 
         foreach ($this->cronParts as $position => $part) {
@@ -121,11 +121,7 @@ class CronExpression
     {
         if (!$this->fieldFactory->getField($position)->validate($value)) {
             throw new InvalidArgumentException(
-                sprintf(
-                    'Invalid CRON field value %s as position %s',
-                    esc_html($value),
-                    esc_html($position)
-                )
+                'Invalid CRON field value ' . $value . ' as position ' . $position
             );
         }
 
@@ -233,23 +229,22 @@ class CronExpression
      * @return bool Returns TRUE if the cron is due to run or FALSE if not
      */
     public function isDue($currentTime = 'now')
-{
-    if ('now' === $currentTime) {
-        $currentDate = gmdate('Y-m-d H:i');
-        $currentTime = strtotime($currentDate);
-    } elseif ($currentTime instanceof DateTime) {
-        $currentDate = $currentTime->format('Y-m-d H:i');
-        $currentTime = strtotime($currentDate);
-    } else {
-        $currentTime = new DateTime($currentTime);
-        $currentTime->setTime($currentTime->format('H'), $currentTime->format('i'), 0);
-        $currentDate = $currentTime->format('Y-m-d H:i');
-        $currentTime = (int)($currentTime->getTimestamp());
+    {
+        if ('now' === $currentTime) {
+            $currentDate = date('Y-m-d H:i');
+            $currentTime = strtotime($currentDate);
+        } elseif ($currentTime instanceof DateTime) {
+            $currentDate = $currentTime->format('Y-m-d H:i');
+            $currentTime = strtotime($currentDate);
+        } else {
+            $currentTime = new DateTime($currentTime);
+            $currentTime->setTime($currentTime->format('H'), $currentTime->format('i'), 0);
+            $currentDate = $currentTime->format('Y-m-d H:i');
+            $currentTime = (int)($currentTime->getTimestamp());
+        }
+
+        return $this->getNextRunDate($currentDate, 0, true)->getTimestamp() == $currentTime;
     }
-
-    return $this->getNextRunDate($currentDate, 0, true)->getTimestamp() == $currentTime;
-}
-
 
     /**
      * Get the next or previous run date of the expression relative to a date
