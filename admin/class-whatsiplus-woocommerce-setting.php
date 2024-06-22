@@ -89,14 +89,14 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         $apikey = whatsiplus_get_options('whatsiplus_woocommerce_api_key', 'whatsiplus_setting');
         
         $country_code = '';
-        if( empty($default_country_code) ) {
-            $user_ip = $this->get_user_ip();
-            if(!empty($user_ip) ) {
-                $country_code = $this->get_country_code_from_ip($user_ip);
-            }
+        //if( empty($default_country_code) ) {
+            //$user_ip = $this->get_user_ip();
+            //if(!empty($user_ip) ) {
+            //    $country_code = $this->get_country_code_from_ip($user_ip);
+            //}
 
             
-        }
+        //}
 
         if (!empty($default_country_code) && !empty($apikey)) {
             $dialing_country_code = $this->get_country_dialing_code($default_country_code);
@@ -635,7 +635,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
     }
 
     public function get_user_ip() {
-        return Utils::curl_get_file_contents("https://ipecho.net/plain");
+        //return Utils::curl_get_file_contents("https://ipecho.net/plain");
     }
 
     public function get_country_code_from_ip($ip_address)
