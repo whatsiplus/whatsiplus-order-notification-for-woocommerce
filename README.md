@@ -1,4 +1,4 @@
-# WooCommerce WhatsApp Order Notification for Wordpress (Whatsiplus)
+# Whatsiplus Notification for WooCommerce
 
 ## License
 GPLv3
@@ -10,19 +10,11 @@ GPLv3
 
 ### Whatsiplus Order Notification for WooCommerce
 
-WooCommerce WhatsApp Order Notification is a versatile WordPress plugin designed to streamline communication between you and your customers. Whether you’re a seasoned e-commerce entrepreneur or just starting out, this plugin offers unparalleled convenience and functionality. It allows you to effortlessly send WhatsApp messages to your customers and managers, keeping them informed about new orders, order status updates, and more.
+Whatsiplus Notification for WooCommerce is a versatile WordPress plugin designed to streamline communication between you and your customers. Whether you’re a seasoned e-commerce entrepreneur or just starting out, this plugin offers unparalleled convenience and functionality. It allows you to effortlessly send WhatsApp messages to your customers and managers, keeping them informed about new orders, order status updates, and more.
 
-This is a plugin add-on for WooCommerce. But WooCommerce plugin is not required to access certain functionalities of our plugin. For example: [Send WhatsApp Message](https://whatsiplus.com), Send WhatsApp messages to different groups of your users.
+This is a plugin add-on for WooCommerce. But WooCommerce plugin is not required to access certain functionalities of our plugin. For example: Send WhatsApp Message, Send WhatsApp messages to different groups of your users.
 
-### [View All Information in Website](https://whatsiplus.com/whatsapp-order-notifications-plugin-boost-your-woocommerce-sales/)
-
-### What is Whatsiplus?
-
-WhatsiPlus is a [WhatsApp API service](https://docs.whatsiplus.com) that can perform WhatsApp services on its powerful servers.
-With our service, you can send unlimited WhatsApp messages to your users
-
-
-### Whatsiplus Plugging Key Features
+### Key Features
 
 - Notify seller whenever a new order is placed.
 - Inform buyer of the current order status/whenever order status is changed.
@@ -97,18 +89,16 @@ You'll be able to send notifications to customers when a new form is submitted.
 2. Configure the settings in Settings > Whatsiplus WooCommerce.
 3. Enjoy.
 
-## [Get a Free API KEY](https://panel.whatsiplus.com/)
-
 ## Screenshots
 
-1. ![Whatsiplus Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-1.jpg)
-2. ![Admin Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-2.jpg)
-3. ![Customer Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-3.jpg)
-4. ![Multivendor Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-4.jpg)
-5. ![Send WhatsApp Message to Users](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-5.jpg)
-6. ![Automation Settings](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-6.jpg)
-7. ![Message Outbox](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-7.jpg)
-8. ![Logs](https://github.com/whatsiplus/whatsiplus-order-notification-for-woocommerce/blob/main/assets/screenshot-8.jpg)
+1. Whatsiplus Settings
+2. Admin Settings
+3. Customer Settings
+4. Multivendor Settings
+5. Send WhatsApp Message to Users
+6. Automation Settings
+7. Message Outbox
+8. Logs
 
 ## Changelog
 

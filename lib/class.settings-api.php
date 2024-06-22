@@ -216,7 +216,7 @@ class WeDevs_Settings_API {
      *
      * @param array   $args settings field args
      */
-/*
+
      function callback_text( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -226,9 +226,10 @@ class WeDevs_Settings_API {
         $html  = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"/>', $type, $size, $args['section'], $args['id'], $value );
         $html  .= wp_kses_post($this->get_field_description( $args ));
 
-        echo $html;
+        echo $html; //It is not possible to use esc_html, esc_attr, wp_kses, and wp_kses_post because due to the limitation of the "wp_kses"" function for example:<input type="checkbox" value="suspend" or value="complete" ... .
     }
-*/
+
+/* ok
     function callback_text( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -245,10 +246,14 @@ class WeDevs_Settings_API {
                 'name'  => true,
                 'value' => true,
             ),
+            'br' => array(),
+            'p' => array(
+                'class' => true,
+            ),
         ) );
 
     }
-
+*/
     /**
      * Displays a url field for a settings field
      *
@@ -273,7 +278,7 @@ class WeDevs_Settings_API {
      * @param array   $args settings field args
      */
 
- /*
+ 
     function callback_checkbox( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -285,10 +290,11 @@ class WeDevs_Settings_API {
         $html  .= sprintf( '%1$s</label>', $args['desc'] );
         $html  .= '</fieldset>';
 
-        echo $html;
+        echo $html; //It is not possible to use esc_html, esc_attr, wp_kses, and wp_kses_post because due to the limitation of the "wp_kses"" function for example:<input type="checkbox" value="suspend" or value="complete" ... .
     }
-*/
 
+
+/* ok
     function callback_checkbox( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 
@@ -312,15 +318,20 @@ class WeDevs_Settings_API {
                 'for' => true,
             ),
             'fieldset' => array(),
+            'br' => array(),
+            'p' => array(
+                'class' => true,
+            ),
         ) );
     }
-
+*/
     /**
      * Displays a multicheckbox a settings field
      *
      * @param array   $args settings field args
      */
-/*
+
+
     function callback_multicheck( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
@@ -336,9 +347,12 @@ class WeDevs_Settings_API {
         $html .= wp_kses_post($this->get_field_description( $args ));
         $html .= '</fieldset>';
 
-        echo $html;
+        echo $html; //It is not possible to use esc_html, esc_attr, wp_kses, and wp_kses_post because due to the limitation of the "wp_kses"" function for example:<input type="checkbox" value="suspend" or value="complete" ... .
     }
-*/
+
+
+
+/*
 function callback_multicheck( $args ) {
     $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
     $html  = '<fieldset>';
@@ -359,21 +373,25 @@ function callback_multicheck( $args ) {
 
     echo wp_kses( $html, array(
         'input' => array(
-            'type'  => true,
-            'class' => true,
-            'id'    => true,
-            'name'  => true,
-            'value' => true,
-            'checked' => true,
+            'type'  => array(),
+            'class' => array(),
+            'id'    => array(),
+            'name'  => array(),
+            'value' => string,
+            'checked' => array(),
         ),
         'label' => array(
             'for' => true,
         ),
         'fieldset' => array(),
         'br' => array(),
+        'p' => array(
+            'class' => true,
+            'id' => true,
+        ),
     ) );
 }
-
+*/
 
 
     /**
@@ -428,6 +446,9 @@ function callback_multicheck( $args ) {
             ),
             'fieldset' => array(),
             'br' => array(),
+            'p' => array(
+                'class' => true,
+            ),
         ) );
     }
 
@@ -472,10 +493,15 @@ function callback_multicheck( $args ) {
                 'class' => true,
                 'name'  => true,
                 'id'    => true,
+                'multiple' => true,
             ),
             'option' => array(
                 'value'    => true,
                 'selected' => true,
+            ),
+            'br' => array(),
+            'p' => array(
+                'class' => true,
             ),
         ) );
     }
@@ -528,6 +554,10 @@ function callback_multicheck( $args ) {
                 'value'    => true,
                 'selected' => true,
             ),
+            'br' => array(),
+            'p' => array(
+                'class' => true,
+            ),
         ) );
     }
 
@@ -573,6 +603,10 @@ function callback_multicheck( $args ) {
                 'name'  => true,
                 'style' => true,
             ),
+            'br' => array(),
+            'p' => array(
+                'class' => true,
+            ),
         ) );
     }
 
@@ -603,6 +637,7 @@ function callback_multicheck( $args ) {
                 'class' => true,
                 'id' => true,
             ),
+            'br' => array(),
         ) );
     }
 
@@ -678,6 +713,7 @@ function callback_multicheck( $args ) {
                 'class' => true,
                 'id' => true,
             ),
+            'br' => array(),
         ));
     }
 
@@ -727,6 +763,7 @@ function callback_multicheck( $args ) {
             'p' => array(
                 'class' => true,
             ),
+            'br' => array(),
         ) );
     }
 
@@ -767,6 +804,7 @@ function callback_multicheck( $args ) {
             'p' => array(
                 'class' => true,
             ),
+            'br' => array(),
         ) );
     }
 
@@ -909,6 +947,7 @@ function callback_multicheck( $args ) {
                 'class' => true,
                 'id' => true,
             ),
+            'br' => array(),
         ) );
     }
 
