@@ -8,6 +8,9 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 	function __construct() {
         $this->log = new Whatsiplus_WooCommerce_Logger();
 		$this->settings_api = new WeDevs_Settings_API;
+
+        add_action('wp_enqueue_scripts', array($this, 'my_custom_scripts3'));
+        add_action('admin_enqueue_scripts', array($this, 'my_custom_scripts3'));
 	}
 
 	public function register() {
@@ -618,295 +621,96 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         wp_enqueue_script( 'admin-split-sms-js' );
     }
     
-    public function load_scripts()
-    {
-        add_action( 'admin_enqueue_scripts', 'enqueue_admin_custom_scripts' );
-        ?>
-        <script>
 
-            <?php
-                $roles_arr = array();
-                $um_arr = array();
-                $pmpro_arr = array();
-                $country_arr = array();
+    public function my_custom_scripts3() {
+        // Register the script
+        wp_register_script('custom-script3', plugin_dir_url(__DIR__) . 'js/custom-script1.js', array('jquery'), null, true);
 
-                $available_filters = array("roles", "country");
+        // Prepare PHP data to pass to the script
+        $roles_arr = array();
+        $um_arr = array();
+        $pmpro_arr = array();
+        $country_arr = array();
+        $available_filters = array("roles", "country");
 
-                // populate roles
-                foreach (get_editable_roles() as $key => $value) {
-                    $roles_arr[$key] = $value['name'];
-                }
-
-                foreach ($this->mapi_getCountryList() as $country) {
-                    $country_arr[$country['code']] = $country['name'];
-                }
-
-                // populate ultimate members status
-                if (function_exists('is_ultimatemember')) {
-                    $available_filters[] = "status";
-                
-                    $cache_key = 'um_account_status';
-                    $um_arr = wp_cache_get($cache_key, 'um_account_status');
-                
-                    if (!$um_arr) {
-                        $user_meta_query = new WP_User_Query(array(
-                            'meta_key' => 'account_status',
-                            'fields'   => 'ID',
-                            'orderby'  => 'meta_value',
-                            'order'    => 'ASC',
-                        ));
-                        $users = $user_meta_query->get_results();
-                
-                        $um_arr = array();
-                        foreach ($users as $user_id) {
-                            $status = get_user_meta($user_id, 'account_status', true);
-                            if (!empty($status)) {
-                                $um_arr[$status] = $status;
-                            }
-                        }
-                
-                        wp_cache_set($cache_key, $um_arr, 'um_account_status');
-                    }
-                }
-                
-
-                // populate PM Pro
-                if (function_exists('pmpro_hasMembershipLevel')) {
-                    $available_filters[] = "membership_level";
-                
-                    $cache_key = 'pmpro_membership_levels';
-                    $pmpro_arr = wp_cache_get($cache_key, 'pmpro_membership_levels');
-                
-                    if (!$pmpro_arr) {
-                        $levels = pmpro_getAllLevels(true, true);
-                
-                        $pmpro_arr = array();
-                        foreach ($levels as $level) {
-                            $pmpro_arr[$level->id] = $level->name;
-                        }
-                
-                        wp_cache_set($cache_key, $pmpro_arr, 'pmpro_membership_levels');
-                    }
-                }
-                     
-
-            ?>
-
-            var filter_by_arr = <?php echo json_encode($available_filters) ?>;
-
-            var criteria_array = new Object;
-
-            if(filter_by_arr.includes("roles")) {
-                criteria_array['roles'] = <?php echo json_encode($roles_arr); ?>;
-            }
-            if(filter_by_arr.includes("country")) {
-                criteria_array['country'] = <?php echo json_encode($country_arr); ?>;
-            }
-            if(filter_by_arr.includes("status")) {
-                criteria_array['status'] = <?php echo json_encode($um_arr); ?>;
-            }
-            if(filter_by_arr.includes("membership_level")) {
-                criteria_array['membership_level'] = <?php echo json_encode($pmpro_arr); ?>;
-            }
-
-
-            function populatedSecondaryFields(filteredField, stateElementId) {
-
-                var selectedFilter = document.getElementById(filteredField).value; // roles
-
-                var criteriaElement = document.getElementById(stateElementId);
-
-                criteriaElement.length = 0;
-                criteriaElement.selectedIndex = 0;
-
-                var crit_arr = criteria_array[selectedFilter];
-
-                for (let [key, value] of Object.entries(crit_arr)) {
-                    criteriaElement.options[criteriaElement.length] = new Option(value.replace('_', ' '), key);
-                }
-
-            }
-
-            function populateFilters(filterElementId, filterValueElementId) {
-                // given the id of the <select> tag as function argument, it inserts <option> tags
-                var filterElement = document.getElementById(filterElementId);
-                filterElement.length = 0;
-                filterElement.options[0] = new Option('Select Filter', '-1');
-                filterElement.selectedIndex = 0;
-                for (var i = 0; i < filter_by_arr.length; i++) {
-                    filterElement.options[filterElement.length] = new Option(filter_by_arr[i].replace('_', ' '), filter_by_arr[i]);
-                }
-
-                if (filterElementId) {
-                    filterElement.onchange = function () {
-                        populatedSecondaryFields(filterElementId, filterValueElementId);
-                    };
-                }
-            }
-
-            populateFilters("whatsiplus_sendsms_setting[whatsiplus_sendsms_filters]", "whatsiplus_sendsms_setting[whatsiplus_sendsms_criteria]");
-
-            jQuery(function ($) {
-
-                countCharactersAndSMS('textarea#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_message\\]', 'text-bulksms-characters', 'text-bulksms-sms');
-
-                function countCharactersAndSMS(selector, charCounter, smsCounter){
-
-                    var box = $(selector+'');
-
-                    $(selector+'').keyup(function(e) {
-                        var info = window.splitter.split(box.val());
-                        //this can read the bytes of last sms
-                        countBytes = JSON.stringify(info.parts[info.parts.length-1].bytes);
-                        totalBytes = JSON.stringify(info.bytes);
-                        remainingChar = JSON.stringify(info.remainingInPart);
-                        characterSet = JSON.stringify(info.characterSet);
-                        $('#'+charCounter+'').html(countBytes+' / '+remainingChar);
-                        //this can read the total number of sms
-                        $('#'+smsCounter+'').html(info.parts.length);
-
-                    });
-                    $('#'+selector+'').trigger('keyup');
-                }
-
-                $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_users\\]').closest("tr").hide();
-                $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_recipients\\]').closest("tr").hide();
-                $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_filters\\]').closest("tr").hide();
-                $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_criteria\\]').closest("tr").hide();
-
-                $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_message_to\\]').on('change', function() {
-                    if($(this).val()=="customer_all") {
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_users\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_recipients\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_filters\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_criteria\\]').closest("tr").hide();
-                    }
-                    else if($(this).val()=="customer") {
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_users\\]').closest("tr").show();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_recipients\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_filters\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_criteria\\]').closest("tr").hide();
-                    }
-
-                    else if($(this).val()=="phones") {
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_recipients\\]').closest("tr").show();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_users\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_filters\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_criteria\\]').closest("tr").hide();
-                    }
-                    else if($(this).val()=="spec_group_ppl") {
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_filters\\]').closest("tr").show();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_criteria\\]').closest("tr").show();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_users\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_recipients\\]').closest("tr").hide();
-                    } else {
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_users\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_recipients\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_filters\\]').closest("tr").hide();
-                        $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_criteria\\]').closest("tr").hide();
-                    }
-                });
-
-                $('select[name="type"]').on('change', function() {
-                    if($(this).val()=="mms") {
-                        $('.media_upload').show();
-                    } else {
-                        $('.media_upload').hide();
-                    }
-                });
-
-                var error = '';
-                var validate = function () {
-                    if(!($('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_users\\]').val())
-                        && $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_message_to\\]').val() == 'customer') {
-                        error = "users";
-                        return false;
-                    }
-
-                    if(!($('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_recipients\\]').val())
-                        && $('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_message_to\\]').val() == 'phones') {
-                        error = "recipients";
-                        return false;
-                    }
-
-                    if(!($('#whatsiplus_sendsms_setting\\[whatsiplus_sendsms_message\\]').val())) {
-                        error = "message";
-                        return false;
-                    }
-                    return true;
-                };
-
-                $('#sendMessage').on('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if(validate()) {
-                        $("#whatsiplus_sendsms_setting form").submit();
-                    } else {
-                        if(error == 'users'){
-                            alert("Please enter user you wish to send to!");
-                        }else if(error == 'recipients'){
-                            alert("Please enter your recipients!");
-                        }else if(error == 'message'){
-                            alert("Please enter message!");
-                        }
-                    }
-                });
-
-                $("#count_me").characterCounter({
-                    counterFormat: '%1 written characters.',
-                    counterWrapper: 'div',
-                    counterCssClass: 'message_counter'
-                });
-
-                $('#recipients').keypress(function(e) {
-                    var a = [];
-                    var k = e.which;
-
-                    if($('#recipients').val() !== '')
-                        a.push(44);
-
-                    for (i = 48; i < 58; i++)
-                        a.push(i);
-
-                    if (!(a.indexOf(k)>=0))
-                        e.preventDefault();
-
-                    // $('span').text('KeyCode: '+k);
-                });
-
-            });
-
-        function sendCheck(phone) {
-
-            <?php if( get_option('smsbump_PhoneNumberPrefix')=='yes') { ?>
-                phone.replace(' ','');
-                phone.replace('-','');
-                phone.replace('(','');
-                phone.replace(')','');
-                var numberCheck = phone.replace(/^(\+|0)+/, '');
-                var prefixCheck = '<?php get_option('smsbump_StrictNumberPrefix'); ?>'.replace(/^\++/, '');
-                var formattedNumber = '';
-                if(!isNaN(phone)){
-                    if((phone.indexOf('+') === 0 || phone.indexOf('00') === 0) && numberCheck.indexOf(prefixCheck) === 0 ){
-                        formatedNumber = '+' + numberCheck;
-                    } else if ((phone.indexOf('+') === 0 || phone.indexOf('00') === 0) && numberCheck.indexOf(prefixCheck) !== 0){
-                        formattedNumber = false;
-                    } else if (numberCheck.indexOf(prefixCheck) === -1){
-                        formattedNumber = prefix + numberCheck;
-                    } else if (phone.indexOf('+') !== 0 && phone.indexOf('00') !== 0 && numberCheck.indexOf(prefixCheck) === 0 ){
-                        formattedNumber = '+'+phone;
-                    } else {
-                        formattedNumber = false;
-                    }
-
-                }
-                return formattedNumber;
-            <?php } ?>
-            return phone;
+        // Populate roles
+        foreach (get_editable_roles() as $key => $value) {
+            $roles_arr[$key] = $value['name'];
         }
 
-        </script>
-        <?php
+        foreach ($this->mapi_getCountryList() as $country) {
+            $country_arr[$country['code']] = $country['name'];
+        }
+
+        // Populate ultimate member status
+        if (function_exists('is_ultimatemember')) {
+            $available_filters[] = "status";
+            $cache_key = 'um_account_status';
+            $um_arr = wp_cache_get($cache_key, 'um_account_status');
+
+            if (!$um_arr) {
+                $user_meta_query = new WP_User_Query(array(
+                    'meta_key' => 'account_status',
+                    'fields'   => 'ID',
+                    'orderby'  => 'meta_value',
+                    'order'    => 'ASC',
+                ));
+                $users = $user_meta_query->get_results();
+
+                $um_arr = array();
+                foreach ($users as $user_id) {
+                    $status = get_user_meta($user_id, 'account_status', true);
+                    if (!empty($status)) {
+                        $um_arr[$status] = $status;
+                    }
+                }
+
+                wp_cache_set($cache_key, $um_arr, 'um_account_status');
+            }
+        }
+
+        // Populate PMPro
+        if (function_exists('pmpro_hasMembershipLevel')) {
+            $available_filters[] = "membership_level";
+            $cache_key = 'pmpro_membership_levels';
+            $pmpro_arr = wp_cache_get($cache_key, 'pmpro_membership_levels');
+
+            if (!$pmpro_arr) {
+                $levels = pmpro_getAllLevels(true, true);
+                $pmpro_arr = array();
+                foreach ($levels as $level) {
+                    $pmpro_arr[$level->id] = $level->name;
+                }
+
+                wp_cache_set($cache_key, $pmpro_arr, 'pmpro_membership_levels');
+            }
+        }
+
+        // Localize the script with new data
+        $script_data = array(
+            'filter_by_arr' => $available_filters,
+            'criteria_array' => array(
+                'roles' => $roles_arr,
+                'country' => $country_arr,
+                'status' => $um_arr,
+                'membership_level' => $pmpro_arr,
+            ),
+            'prefixCheckEnabled' => get_option('smsbump_PhoneNumberPrefix') === 'yes',
+            'prefixCheck' => get_option('smsbump_StrictNumberPrefix')
+        );
+
+        wp_localize_script('custom-script3', 'wp_localize_script_data', $script_data);
+
+        // Enqueue the script
+        wp_enqueue_script('custom-script3');
+    }
+    
+
+    public function load_scripts()
+    {
+
+        add_action( 'admin_enqueue_scripts', 'enqueue_admin_custom_scripts' );
+
     }
 
 }
