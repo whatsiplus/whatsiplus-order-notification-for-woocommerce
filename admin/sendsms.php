@@ -613,10 +613,15 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         return $args;
     }
 
+    function enqueue_admin_custom_scripts() {
+        wp_register_script( 'admin-split-sms-js', 'https://cdn.rawgit.com/Codesleuth/split-sms/0.1.7/dist/split-sms.min.js', array(), '0.1.7', true );
+        wp_enqueue_script( 'admin-split-sms-js' );
+    }
+    
     public function load_scripts()
     {
+        add_action( 'admin_enqueue_scripts', 'enqueue_admin_custom_scripts' );
         ?>
-        <script src="https://cdn.rawgit.com/Codesleuth/split-sms/0.1.7/dist/split-sms.min.js"></script>
         <script>
 
             <?php
@@ -899,22 +904,6 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
             <?php } ?>
             return phone;
         }
-
-        // function getAllUsersPhones() {
-        // 	var phones = [];
-        // 	<?php
-        // 	$users = get_users();
-
-        // 	foreach ($users as $user ) {
-        // 		if($user->roles[0] != 'administrator'){
-        // 			$phone = get_user_meta($user->ID, "phone", true);
-        // 		}
-        // 	?>
-        // 		phones.push('<?php //echo $phone; ?>');
-        // 	<?php //} ?>
-
-        // 	return phones;
-        // }
 
         </script>
         <?php

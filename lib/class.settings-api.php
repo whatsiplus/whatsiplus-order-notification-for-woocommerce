@@ -28,8 +28,34 @@ class WeDevs_Settings_API {
 
     public function __construct() {
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+        $this->register_hooks();
     }
 
+    public function register_hooks() {
+        add_action('admin_enqueue_scripts', array($this, 'my_custom_scripts2'));
+        add_action('admin_enqueue_scripts', array($this, 'my_custom_scripts'));
+        add_action('admin_head', array($this, 'my_custom_styles'));
+    }
+
+    public function my_custom_scripts2() {
+        wp_enqueue_script('custom-admin-script', plugin_dir_url(__DIR__) . 'js/custom-admin-script.js', array('jquery', 'wp-color-picker'), null, true);
+    }
+
+    public function my_custom_scripts() {
+        wp_enqueue_script('split-sms', 'https://cdn.rawgit.com/Codesleuth/split-sms/0.1.7/dist/split-sms.min.js', array(), null, true);
+    }
+
+    public function my_custom_styles() {
+        ?>
+        <style type="text/css">
+            /** WordPress 3.8 Fix **/
+            .form-table th { padding: 20px 10px; }
+            #wpbody-content .metabox-holder { padding-top: 5px; }
+        </style>
+        <?php
+    }
+
+    
     /**
      * Enqueue scripts and styles
      */
@@ -1068,111 +1094,8 @@ function callback_multicheck( $args ) {
 			<?php } ?>
         </div>
         <?php
-        $this->script();
-        do_action('whatsiplus_load_javascripts');
-    }
-
-    /**
-     * Tabbable JavaScript codes & Initiate Color Picker
-     *
-     * This code uses localstorage for displaying active tabs
-     */
-    function script() {
-        ?>
-        <script>
-            jQuery(document).ready(function($) {
-                //Initiate Color Picker
-                $('.wp-color-picker-field').wpColorPicker();
-
-                // Switches option sections
-                $('.group').hide();
-                var activetab = '';
-                var subtab = '';
-                if (typeof(localStorage) != 'undefined' ) {
-                    activetab = localStorage.getItem("activetab");
-                }
-                if (activetab != '' && $(activetab).length ) {
-                    $(activetab).fadeIn();
-                } else {
-                    $('.group:first').fadeIn();
-                }
-                $('.group .collapsed').each(function(){
-                    $(this).find('input:checked').parent().parent().parent().nextAll().each(
-
-                    function(){
-                        if ($(this).hasClass('last')) {
-                            $(this).removeClass('hidden');
-                            return false;
-                        }
-                        $(this).filter('.hidden').removeClass('hidden');
-                    });
-                });
-
-                if (activetab != '' && $(activetab + '-tab').length ) {
-                    $(activetab + '-tab').addClass('nav-tab-active');
-                }
-                else {
-                    $('.nav-tab-wrapper a:first').addClass('nav-tab-active');
-                }
-                $('.nav-tab-wrapper a').click(function(evt) {
-                    $('.nav-tab-wrapper a').removeClass('nav-tab-active');
-                    $(this).addClass('nav-tab-active').blur();
-                    var clicked_group = $(this).attr('href');
-                    if (typeof(localStorage) != 'undefined' ) {
-                        localStorage.setItem("activetab", $(this).attr('href'));
-                    }
-                    $('.group').hide();
-                    $(clicked_group).fadeIn();
-                    evt.preventDefault();
-                });
-
-                $('.group .wrap .nav-tab-wrapper a').click(function(evt) {
-                    $('.nav-tab-wrapper a').removeClass('nav-tab-active');
-                    $(this).addClass('nav-tab-active').blur();
-                    var clicked_group = $(this).attr('href');
-                    if (typeof(localStorage) != 'undefined' ) {
-                        localStorage.setItem("subtab", $(this).attr('href'));
-                    }
-                    $('.group').hide();
-                    parent_id = $(this).parent().parent().parent().attr("id");
-                    $("#" + parent_id + "-tab").addClass('nav-tab-active').blur();
-                    $(this).parent().parent().parent().show();
-                    $(clicked_group).fadeIn();
-                    evt.preventDefault();
-                });
-
-                $('.wpsa-browse').on('click', function (event) {
-                    event.preventDefault();
-
-                    var self = $(this);
-
-                    // Create the media frame.
-                    var file_frame = wp.media.frames.file_frame = wp.media({
-                        title: self.data('uploader_title'),
-                        button: {
-                            text: self.data('uploader_button_text'),
-                        },
-                        multiple: false
-                    });
-
-                    file_frame.on('select', function () {
-                        attachment = file_frame.state().get('selection').first().toJSON();
-
-                        self.prev('.wpsa-url').val(attachment.url);
-                    });
-
-                    // Finally, open the modal
-                    file_frame.open();
-                });
-        });
-        </script>
-        <!-- <script src="https://cdn.rawgit.com/Codesleuth/split-sms/0.1.7/dist/split-sms.min.js"></script> -->
-        <style type="text/css">
-            /** WordPress 3.8 Fix **/
-            .form-table th { padding: 20px 10px; }
-            #wpbody-content .metabox-holder { padding-top: 5px; }
-        </style>
-        <?php
+        //$this->register_hooks();
+        //do_action('whatsiplus_load_javascripts');
     }
 
 }
