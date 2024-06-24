@@ -424,7 +424,7 @@ class WhatsiQuickRestaurantReservation implements Whatsiplus_PluginInterface, Wh
             return;
         }
 
-        $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field( $_POST['whatsiplus_nonce'] ) : '';
+        $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field( wp_unslash($_POST['whatsiplus_nonce']) ) : '';
         if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
             // return;
         }

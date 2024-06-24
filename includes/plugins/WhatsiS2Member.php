@@ -421,22 +421,6 @@ class WhatsiS2Member implements Whatsiplus_PluginInterface, Whatsiplus_Register_
             ),
         );
 
-        // if(in_array('subscription', $this->get_statuses())) {
-        //     $keywords['s2_subscription'] = self::__url_params('subscription', true);
-        // }
-        // if(in_array('payment', $this->get_statuses())) {
-        //     $keywords['s2_payment'] = self::__url_params('payment', true);
-        // }
-        // if(in_array('modification', $this->get_statuses())) {
-        //     $keywords['s2_modification'] = self::__url_params('modification', true);
-        // }
-        // if(in_array('end_of_term', $this->get_statuses())) {
-        //     $keywords['s2_end_of_term'] = self::__url_params('end_of_term', true);
-        // }
-        // if(in_array('refund_or_reversal', $this->get_statuses())) {
-        //     $keywords['s2_refund_or_reversal'] = self::__url_params('refund_or_reversal', true);
-        // }
-
         if(!empty($custom_fields)) {
             $keywords['your_s2_custom_fields'] = $custom_fields;
         }
@@ -550,57 +534,100 @@ class WhatsiS2Member implements Whatsiplus_PluginInterface, Whatsiplus_Register_
 
     public function send_sms_on()
     {
-        if ( ! isset( $_GET['whatsiplus_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['whatsiplus_nonce'] ), 'whatsiplus_send_sms_action' ) ) {
-            // return;
-        }        
-        $params = $_GET;
+        if ( ! isset( $_GET['whatsiplus_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['whatsiplus_nonce'] ) ), 'whatsiplus_send_sms_action' ) ) {
+            return;
+        }
+    
         $plugin_settings = $this->get_plugin_settings();
         $enable_notifications = $plugin_settings['whatsiplus_automation_enable_notification'];
         $send_on = $plugin_settings['whatsiplus_automation_send_on'];
-
-        if($enable_notifications !== "on") { return false; }
-
-        if(!empty($params['s2_signup_notification']) && $params['s2_signup_notification'] === 'yes') {
-            if(!array_key_exists("subscription", $send_on) && empty($params['payer_email']))
-                return false;
-
-            $payer_email = sanitize_text_field($params['payer_email']);
-            $user = get_user_by('email', $payer_email);
-            if(empty($user))
-                return false;
-            $this->send_sms_on_status_subscription($user, $params);
+    
+        if ( $enable_notifications !== "on" ) { 
+            return false; 
         }
-
-        if(!empty($params['s2_payment_notification']) && $params['s2_payment_notification'] === 'yes') {
-            if( !array_key_exists("payment", $send_on)  && empty($params['user_id']))
+    
+        if ( ! empty( $_GET['s2_signup_notification'] ) && sanitize_text_field( wp_unslash( $_GET['s2_signup_notification'] ) ) === 'yes' ) {
+            if ( ! array_key_exists( "subscription", $send_on ) && empty( $_GET['payer_email'] ) ) {
                 return false;
-            $user_id = sanitize_text_field($params['user_id']);
-            $user = new WP_User($user_id);
-            if(empty($user))
+            }
+    
+            $payer_email = sanitize_text_field( wp_unslash( $_GET['payer_email'] ) );
+            $user = get_user_by( 'email', $payer_email );
+            if ( empty( $user ) ) {
                 return false;
-            $this->send_sms_on_status_payment($user, $params);
+            }
+    
+            $params = [
+                'payer_email' => $payer_email,
+                's2_signup_notification' => sanitize_text_field( wp_unslash( $_GET['s2_signup_notification'] ) ),
+                // Add other needed fields here
+            ];
+    
+            $this->send_sms_on_status_subscription( $user, $params );
         }
-
-        if(!empty($params['s2_eot_notification']) && $params['s2_eot_notification'] === 'yes') {
-            if( ! array_key_exists("end_of_term", $send_on)  && empty($params['user_id']))
+    
+        if ( ! empty( $_GET['s2_payment_notification'] ) && sanitize_text_field( wp_unslash( $_GET['s2_payment_notification'] ) ) === 'yes' ) {
+            if ( ! array_key_exists( "payment", $send_on ) && empty( $_GET['user_id'] ) ) {
                 return false;
-            $user_id = sanitize_text_field($params['user_id']);
-            $user = new WP_User($user_id);
-            if(empty($user))
+            }
+    
+            $user_id = sanitize_text_field( wp_unslash( $_GET['user_id'] ) );
+            $user = new WP_User( $user_id );
+            if ( empty( $user ) ) {
                 return false;
-            $this->send_sms_on_status_eot($user, $params);
+            }
+    
+            $params = [
+                'user_id' => $user_id,
+                's2_payment_notification' => sanitize_text_field( wp_unslash( $_GET['s2_payment_notification'] ) ),
+                // Add other needed fields here
+            ];
+    
+            $this->send_sms_on_status_payment( $user, $params );
         }
-
-        if(!empty($params['s2_ror_notification']) && $params['s2_ror_notification'] === 'yes') {
-            if( !array_key_exists("refund_or_reversal", $send_on)  && empty($params['user_id']))
+    
+        if ( ! empty( $_GET['s2_eot_notification'] ) && sanitize_text_field( wp_unslash( $_GET['s2_eot_notification'] ) ) === 'yes' ) {
+            if ( ! array_key_exists( "end_of_term", $send_on ) && empty( $_GET['user_id'] ) ) {
                 return false;
-            $user_id = sanitize_text_field($params['user_id']);
-            $user = new WP_User($user_id);
-            if(empty($user))
+            }
+    
+            $user_id = sanitize_text_field( wp_unslash( $_GET['user_id'] ) );
+            $user = new WP_User( $user_id );
+            if ( empty( $user ) ) {
                 return false;
-            $this->send_sms_on_status_ror($user, $params);
+            }
+    
+            $params = [
+                'user_id' => $user_id,
+                's2_eot_notification' => sanitize_text_field( wp_unslash( $_GET['s2_eot_notification'] ) ),
+                // Add other needed fields here
+            ];
+    
+            $this->send_sms_on_status_eot( $user, $params );
+        }
+    
+        if ( ! empty( $_GET['s2_ror_notification'] ) && sanitize_text_field( wp_unslash( $_GET['s2_ror_notification'] ) ) === 'yes' ) {
+            if ( ! array_key_exists( "refund_or_reversal", $send_on ) && empty( $_GET['user_id'] ) ) {
+                return false;
+            }
+    
+            $user_id = sanitize_text_field( wp_unslash( $_GET['user_id'] ) );
+            $user = new WP_User( $user_id );
+            if ( empty( $user ) ) {
+                return false;
+            }
+    
+            $params = [
+                'user_id' => $user_id,
+                's2_ror_notification' => sanitize_text_field( wp_unslash( $_GET['s2_ror_notification'] ) ),
+                // Add other needed fields here
+            ];
+    
+            $this->send_sms_on_status_ror( $user, $params );
         }
     }
+    
+
 
     public function send_sms_on_status_subscription($user, $params) {
         $this->schedule_reminders($user, $params);

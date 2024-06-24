@@ -18,7 +18,7 @@ abstract class Abstract_Whatsiplus_Multivendor implements Whatsiplus_Multivendor
 
 		$this->log = $log;
 
-		$nonce = isset( $_GET['whatsiplus_nonce'] ) ? sanitize_text_field( $_GET['whatsiplus_nonce'] ) : '';
+		$nonce = isset( $_GET['whatsiplus_nonce'] ) ? sanitize_text_field( wp_unslash($_GET['whatsiplus_nonce']) ) : '';
 		if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
 			//return;
 		}

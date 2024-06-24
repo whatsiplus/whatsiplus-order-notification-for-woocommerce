@@ -26,11 +26,11 @@ class Whatsiplus_WooCommerce_Frontend_Scripts implements Whatsiplus_Register_Int
     // only load bootstrap 5 in  our plugin page
     public function load_bootstrap()
     {
-        if ( ! isset( $_GET['whatsiplus_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['whatsiplus_nonce'] ), 'whatsiplus_send_sms_action' ) ) {
+        if ( ! isset( $_GET['whatsiplus_nonce'] ) || ! wp_verify_nonce( sanitize_text_field(wp_unslash($_GET['whatsiplus_nonce'])  ), 'whatsiplus_send_sms_action' ) ) {
             // return;
         }        
         if ( isset($_GET['page']) ) {
-            $page = sanitize_text_field($_GET['page']);
+            $page = sanitize_text_field(wp_unslash($_GET['page']));
             global $pagenow;
             if ($pagenow === 'options-general.php' && $this->str_contains($page, 'whatsiplus-woocommerce-setting')) {
                 wp_enqueue_style ( 'admin-whatsiplus-bootstrap', plugins_url( 'css/bootstrap.css', __DIR__), array(), '1.0.0' );
