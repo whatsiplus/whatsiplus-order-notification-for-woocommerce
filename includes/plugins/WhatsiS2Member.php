@@ -75,7 +75,8 @@ class WhatsiS2Member implements Whatsiplus_PluginInterface, Whatsiplus_Register_
 
     private static function build_notification_url($notif_identifier)
     {
-        $domain = $_SERVER['HTTP_HOST'];
+        $domain = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
+
 
         $url = "https://{$domain}/?";
         $url = "http://{$domain}/?";
@@ -549,9 +550,9 @@ class WhatsiS2Member implements Whatsiplus_PluginInterface, Whatsiplus_Register_
 
     public function send_sms_on()
     {
-        if ( ! isset( $_GET['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_GET['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
-            //return;
-        }
+        if ( ! isset( $_GET['whatsiplus_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_GET['whatsiplus_nonce'] ), 'whatsiplus_send_sms_action' ) ) {
+            // return;
+        }        
         $params = $_GET;
         $plugin_settings = $this->get_plugin_settings();
         $enable_notifications = $plugin_settings['whatsiplus_automation_enable_notification'];

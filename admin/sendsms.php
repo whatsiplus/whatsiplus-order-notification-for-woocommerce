@@ -33,7 +33,8 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
     public function mapi_send_sms()
     {
-        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+        $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field( $_POST['whatsiplus_nonce'] ) : '';
+        if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
             //return;
         }
 
@@ -479,9 +480,12 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
     {
         if ( !current_user_can( 'edit_user', $user_id ) )
             return false;
-        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+
+        $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field( $_POST['whatsiplus_nonce'] ) : '';
+        if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
             return;
         }
+
         /* Copy and paste this line for additional fields. Make sure to change 'phone' to the field ID. */
         if(isset($_POST['phone']) && isset($_POST['country'])) {
             $post_phone = sanitize_text_field($_POST['phone']);
@@ -503,16 +507,19 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
             $errors->add("permission_denied","You do not have permission to update this page");
         }
 
-        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+        $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field( $_POST['whatsiplus_nonce'] ) : '';
+        if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
             return;
         }
 
+
         // Validate Phone Number
         if(isset($_POST['phone'])) {
-            if(empty($_POST['phone'])){
+            $phone_number1 = sanitize_text_field( $_POST['phone'] );
+            if(empty($phone_number1)){
                 $errors->add("phone","Mobile number - Cannot be empty");
             }
-            else if (!ctype_digit($_POST['phone']))
+            else if (!is_numeric( $phone_number1 ))
                 $errors->add("phone", "Mobile Number - Please enter digits only");
 
             }
@@ -566,9 +573,11 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
     public function mapi_validate_fields ( $login, $email, $errors )
     {
-        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+        $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field( $_POST['whatsiplus_nonce'] ) : '';
+        if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
             return;
         }
+        
 
         global $phone;
         if(isset($_POST['phone'])){
@@ -587,9 +596,11 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
     public function mapi_register_additional_fields ( $user_id, $password = "", $meta = array() )
     {
-        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+        $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field( $_POST['whatsiplus_nonce'] ) : '';
+        if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
             return;
         }
+        
         $post_phone = sanitize_text_field($_POST['phone']);
         update_user_meta( $user_id, 'phone', $post_phone );
         $post_country = sanitize_text_field($_POST['country']);
@@ -598,7 +609,8 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
     public function display_send_sms_success()
     {
-        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
+        $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field( $_POST['whatsiplus_nonce'] ) : '';
+        if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
             return;
         }
 

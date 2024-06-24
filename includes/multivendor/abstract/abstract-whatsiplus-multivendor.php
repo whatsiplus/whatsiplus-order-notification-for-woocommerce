@@ -18,15 +18,18 @@ abstract class Abstract_Whatsiplus_Multivendor implements Whatsiplus_Multivendor
 
 		$this->log = $log;
 
-		if ( ! isset( $_GET['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_GET['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
-            //return;
-        }
+		$nonce = isset( $_GET['whatsiplus_nonce'] ) ? sanitize_text_field( $_GET['whatsiplus_nonce'] ) : '';
+		if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
+			//return;
+		}
 
-		if ( ! empty( $_GET['user_id'] ) && is_numeric( $_GET['user_id'] ) ) {
-			$user_id = $_GET['user_id'];
+
+		if ( isset( $_GET['user_id'] ) && is_numeric( $_GET['user_id'] ) ) {
+			$user_id = absint( $_GET['user_id'] );
 		} else {
 			$user_id = get_current_user_id();
 		}
+		
 
 		$user = get_user_by( 'id', $user_id );
 

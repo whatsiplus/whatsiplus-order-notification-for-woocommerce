@@ -423,9 +423,12 @@ class WhatsiQuickRestaurantReservation implements Whatsiplus_PluginInterface, Wh
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
             return;
         }
-        if ( ! isset( $_POST['whatsiplus_nonce'] ) || ! wp_verify_nonce( $_POST['whatsiplus_nonce'], 'whatsiplus_send_sms_action' ) ) {
-            //return;
+
+        $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field( $_POST['whatsiplus_nonce'] ) : '';
+        if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
+            // return;
         }
+        
 
         // don't do anything on autosave, auto-draft, bulk edit, or quick edit
         if ( wp_is_post_autosave( $post_id ) || $post->post_status == 'auto-draft' || defined( 'DOING_AJAX' ) || isset( $_GET['bulk_edit'] ) ) {
