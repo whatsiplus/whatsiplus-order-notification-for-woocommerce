@@ -17,7 +17,7 @@ class WhatsiPLUS_SMSOutbox_View implements Whatsiplus_Register_Interface {
 	public function set_smsoutbox_setting_section( $sections ) {
 		$sections[] = array(
             'id'               => 'whatsiplus_smsoutbox_setting',
-            'title'            => __( 'Message Outbox', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'title'            => __( 'Message Outbox', 'whatsiplus-order-notification-for-woocommerce' ),
             'submit_button'    => '',
             // 'action'           => 'whatsiplus_sms_form',
             // 'action_url'       => admin_url('admin-post.php'),

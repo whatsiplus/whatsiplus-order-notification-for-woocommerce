@@ -39,7 +39,7 @@ class WhatsiFATService implements Whatsiplus_PluginInterface, Whatsiplus_Registe
     {
         return array(
             'id'    => $this->get_option_id(),
-            'title' => __( 'FAT Services Booking', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'title' => __( 'FAT Services Booking', 'whatsiplus-order-notification-for-woocommerce' ),
         );
     }
 
@@ -59,8 +59,8 @@ class WhatsiFATService implements Whatsiplus_PluginInterface, Whatsiplus_Registe
     private function get_enable_notification_fields() {
         return array(
             'name'    => 'whatsiplus_automation_enable_notification',
-            'label'   => __( 'Enable WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label'   => __( 'Enable WhatsApp Notifications', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'    => ' ' . __( 'Enable', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'    => 'checkbox',
             'default' => 'off'
         );
@@ -69,8 +69,8 @@ class WhatsiFATService implements Whatsiplus_PluginInterface, Whatsiplus_Registe
     private function get_send_from_fields() {
         return array(
             'name'  => 'whatsiplus_automation_send_from',
-            'label' => __( 'Send from', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label' => __( 'Send from', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'  => 'text',
         );
     }
@@ -78,8 +78,8 @@ class WhatsiFATService implements Whatsiplus_PluginInterface, Whatsiplus_Registe
     private function get_send_on_fields() {
         return array(
             'name'    => 'whatsiplus_automation_send_on',
-            'label'   => __( 'Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'    => __( 'Choose when to send the notification message to your customer', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label'   => __( 'Send notification on', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'    => __( 'Choose when to send the notification message to your customer', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'    => 'multicheck',
             'options' => array(
                 'cancel'   => 'Cancel',
@@ -94,43 +94,43 @@ class WhatsiFATService implements Whatsiplus_PluginInterface, Whatsiplus_Registe
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_cancel',
-                'label'   => __( 'Cancel message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Cancel message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="cancel" data-attr-target="%1$s[whatsiplus_automation_sms_template_cancel]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [c_first_name], your appointment for [s_name] on [b_date] [b_time] is [b_process_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Greetings [c_first_name], your appointment for [s_name] on [b_date] [b_time] is [b_process_status]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_approved',
-                'label'   => __( 'Approved message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Approved message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="approved" data-attr-target="%1$s[whatsiplus_automation_sms_template_approved]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [c_first_name], your appointment for [s_name] on [b_date] [b_time] is [b_process_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Greetings [c_first_name], your appointment for [s_name] on [b_date] [b_time] is [b_process_status]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_pending',
-                'label'   => __( 'Pending message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Pending message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_pending]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [c_first_name], your appointment for [s_name] on [b_date] [b_time] is [b_process_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Greetings [c_first_name], your appointment for [s_name] on [b_date] [b_time] is [b_process_status]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_reject',
-                'label'   => __( 'Rejected message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Rejected message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="approved" data-attr-target="%1$s[whatsiplus_automation_sms_template_reject]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [c_first_name], your appointment for [s_name] on [b_date] [b_time] is [b_process_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Greetings [c_first_name], your appointment for [s_name] on [b_date] [b_time] is [b_process_status]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
         );
     }

@@ -327,7 +327,7 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	protected function validate_action( ActionScheduler_Action $action ) {
 		if ( strlen( wp_json_encode( $action->get_args() ) ) > static::$max_args_length ) {
 			// translators: %d is a number (maximum length of action arguments).
-			throw new InvalidArgumentException( sprintf( __( 'ActionScheduler_Action::$args too long. To ensure the args column can be indexed, action args should not be more than %d characters when encoded as JSON.', 'action-scheduler' ), static::$max_args_length ) );
+			throw new InvalidArgumentException( sprintf( __( 'ActionScheduler_Action::$args too long. To ensure the args column can be indexed, action args should not be more than %d characters when encoded as JSON.', 'whatsiplus-order-notification-for-woocommerce' ), static::$max_args_length ) );
 		}
 	}
 
@@ -403,11 +403,11 @@ abstract class ActionScheduler_Store extends ActionScheduler_Store_Deprecated {
 	 */
 	public function get_status_labels() {
 		return array(
-			self::STATUS_COMPLETE => __( 'Complete', 'action-scheduler' ),
-			self::STATUS_PENDING  => __( 'Pending', 'action-scheduler' ),
-			self::STATUS_RUNNING  => __( 'In-progress', 'action-scheduler' ),
-			self::STATUS_FAILED   => __( 'Failed', 'action-scheduler' ),
-			self::STATUS_CANCELED => __( 'Canceled', 'action-scheduler' ),
+			self::STATUS_COMPLETE => __( 'Complete', 'whatsiplus-order-notification-for-woocommerce' ),
+			self::STATUS_PENDING  => __( 'Pending', 'whatsiplus-order-notification-for-woocommerce' ),
+			self::STATUS_RUNNING  => __( 'In-progress', 'whatsiplus-order-notification-for-woocommerce' ),
+			self::STATUS_FAILED   => __( 'Failed', 'whatsiplus-order-notification-for-woocommerce' ),
+			self::STATUS_CANCELED => __( 'Canceled', 'whatsiplus-order-notification-for-woocommerce' ),
 		);
 	}
 

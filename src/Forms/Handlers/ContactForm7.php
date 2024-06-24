@@ -125,7 +125,7 @@ class ContactForm7 {
 
     public function new_menu_whatsi( $panels ) {
 		$panels['whatsi-sms-panel'] = array(
-			'title'    => esc_html__( 'WhatsiAPI', 'WHATSIPLUS_TEXT_DOMAIN' ),
+			'title'    => esc_html__( 'WhatsiAPI', 'whatsiplus-order-notification-for-woocommerce' ),
 			'callback' => array( $this, 'add_panel_whatsi' ),
 		);
 		return $panels;
@@ -179,7 +179,7 @@ class ContactForm7 {
     {
         if ( class_exists( 'WPCF7_TagGenerator' ) ) {
 			$tag_generator = \WPCF7_TagGenerator::get_instance();
-			$tag_generator->add( 'whatsi_phone', __( 'WHATSIAPI PHONE', 'contact-form-7' ), array( $this, 'whatsiapi_wpcf7_tag_generator_text' ) );
+			$tag_generator->add( 'whatsi_phone', __( 'WHATSIAPI PHONE', 'whatsiplus-order-notification-for-woocommerce' ), array( $this, 'whatsiapi_wpcf7_tag_generator_text' ) );
 		}
     }
 
@@ -276,17 +276,17 @@ class ContactForm7 {
         <table class="form-table">
         <tbody>
             <tr>
-            <th scope="row"><?php esc_html_e( 'Field type', 'contact-form-7' ); ?></th>
+            <th scope="row"><?php esc_html_e( 'Field type', 'whatsiplus-order-notification-for-woocommerce' ); ?></th>
             <td>
                 <fieldset>
-                <legend class="screen-reader-text"><?php esc_html_e( 'Field type', 'contact-form-7' ); ?></legend>
-                <label><input type="checkbox" name="required" checked="checked"/> <?php esc_html_e( 'Required field', 'contact-form-7' ); ?></label>
+                <legend class="screen-reader-text"><?php esc_html_e( 'Field type', 'whatsiplus-order-notification-for-woocommerce' ); ?></legend>
+                <label><input type="checkbox" name="required" checked="checked"/> <?php esc_html_e( 'Required field', 'whatsiplus-order-notification-for-woocommerce' ); ?></label>
                 </fieldset>
             </td>
             </tr>
 
             <tr>
-                <th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-name' ); ?>"><?php esc_html_e( 'Name', 'contact-form-7' ); ?></label></th>
+                <th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-name' ); ?>"><?php esc_html_e( 'Name', 'whatsiplus-order-notification-for-woocommerce' ); ?></label></th>
 
                 <td>
                     <input type="text" name="name" class="tg-name oneline" id="<?php echo esc_attr( $args['content'] . '-name' ); ?>" value="<?php echo esc_attr( $field_name ); ?>" />
@@ -294,17 +294,17 @@ class ContactForm7 {
             </tr>
 
             <tr>
-                <th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-values' ); ?>"><?php esc_html_e( 'Default value', 'contact-form-7' ); ?></label></th>
+                <th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-values' ); ?>"><?php esc_html_e( 'Default value', 'whatsiplus-order-notification-for-woocommerce' ); ?></label></th>
                 <td><input type="text" name="values" class="oneline" id="<?php echo esc_attr( $args['content'] . '-values' ); ?>" /><br />
-                <label><input type="checkbox" name="placeholder" class="option" /> <?php esc_html_e( 'Use this text as the placeholder of the field', 'contact-form-7' ); ?></label></td>
+                <label><input type="checkbox" name="placeholder" class="option" /> <?php esc_html_e( 'Use this text as the placeholder of the field', 'whatsiplus-order-notification-for-woocommerce' ); ?></label></td>
             </tr>
             <tr>
-                <th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-id' ); ?>"><?php esc_html_e( 'Id attribute', 'contact-form-7' ); ?></label></th>
+                <th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-id' ); ?>"><?php esc_html_e( 'Id attribute', 'whatsiplus-order-notification-for-woocommerce' ); ?></label></th>
 				<td><input type="text" name="id" class="idvalue oneline option" id="<?php echo esc_attr($args['content']) . '-id'; ?>" /></td>
             </tr>
 
             <tr>
-                <th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-class' ); ?>"><?php esc_html_e( 'Class attribute', 'contact-form-7' ); ?></label></th>
+                <th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-class' ); ?>"><?php esc_html_e( 'Class attribute', 'whatsiplus-order-notification-for-woocommerce' ); ?></label></th>
                 <td><input type="text" name="class" class="classvalue oneline option" id="<?php echo esc_attr( $args['content'] . '-class' ); ?>" /></td>
             </tr>
         </tbody>
@@ -316,7 +316,7 @@ class ContactForm7 {
             <input type="text" name="<?php echo esc_attr( $type ); ?>" class="tag code" readonly="readonly" onfocus="this.select()" />
 
             <div class="submitbox">
-            <input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'contact-form-7' ) ); ?>" />
+            <input type="button" class="button button-primary insert-tag" value="<?php echo esc_attr( __( 'Insert Tag', 'whatsiplus-order-notification-for-woocommerce' ) ); ?>" />
             </div>
 
             <br class="clear" />
@@ -325,7 +325,7 @@ class ContactForm7 {
     		<label for="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>">
         	<?php
             // translators: %s is a placeholder for the mail-tag
-			echo wp_kses_post( sprintf( __( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'sms-alert' ), '<strong><span class="mail-tag"></span></strong>' ) );
+			echo wp_kses_post( sprintf( __( 'To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab.', 'whatsiplus-order-notification-for-woocommerce' ), '<strong><span class="mail-tag"></span></strong>' ) );
 			?>
 			<input type="text" class="mail-tag code hidden" readonly="readonly" id="<?php echo esc_attr( $args['content'] . '-mailtag' ); ?>" />
 			</label>
@@ -407,8 +407,8 @@ class ContactForm7 {
 			$messages,
 			array(
 				'whatsi_invalid_number' => array(
-					'description' => __( 'Invalid number', 'WHATSIPLUS_TEXT_DOMAIN' ),
-					'default'     => __( 'Invalid number', 'WHATSIPLUS_TEXT_DOMAIN' ),
+					'description' => __( 'Invalid number', 'whatsiplus-order-notification-for-woocommerce' ),
+					'default'     => __( 'Invalid number', 'whatsiplus-order-notification-for-woocommerce' ),
 				),
 			)
 		);
@@ -439,7 +439,7 @@ class ContactForm7 {
 			{
 				echo sprintf(
 					'<div id="message" class="notice notice-warning"><p>%s</p></div>',
-					esc_html__( "Please choose mobile number field in WhatsiAPI tab", 'WHATSIPLUS_TEXT_DOMAIN')
+					esc_html__( "Please choose mobile number field in WhatsiAPI tab", 'whatsiplus-order-notification-for-woocommerce')
 				);
 			}
 		}

@@ -55,7 +55,7 @@ class WhatsiLatePoint implements Whatsiplus_PluginInterface, Whatsiplus_Register
     {
         return array(
             'id'    => $this->get_option_id(),
-            'title' => __( 'LatePoint Appointment Booking and Reservation', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'title' => __( 'LatePoint Appointment Booking and Reservation', 'whatsiplus-order-notification-for-woocommerce' ),
         );
     }
 
@@ -75,8 +75,8 @@ class WhatsiLatePoint implements Whatsiplus_PluginInterface, Whatsiplus_Register
     private function get_enable_notification_fields() {
         return array(
             'name'    => 'whatsiplus_automation_enable_notification',
-            'label'   => __( 'Enable WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label'   => __( 'Enable WhatsApp Notifications', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'    => ' ' . __( 'Enable', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'    => 'checkbox',
             'default' => 'off'
         );
@@ -85,8 +85,8 @@ class WhatsiLatePoint implements Whatsiplus_PluginInterface, Whatsiplus_Register
     private function get_send_from_fields() {
         return array(
             'name'  => 'whatsiplus_automation_send_from',
-            'label' => __( 'Send from', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label' => __( 'Send from', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'  => 'text',
         );
     }
@@ -94,8 +94,8 @@ class WhatsiLatePoint implements Whatsiplus_PluginInterface, Whatsiplus_Register
     private function get_send_on_fields() {
         return array(
             'name'    => 'whatsiplus_automation_send_on',
-            'label'   => __( 'Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'    => __( 'Choose when to send the notification message to your customer', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label'   => __( 'Send notification on', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'    => __( 'Choose when to send the notification message to your customer', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'    => 'multicheck',
             'options' => array(
                 'approved'         => 'Approved',
@@ -110,43 +110,43 @@ class WhatsiLatePoint implements Whatsiplus_PluginInterface, Whatsiplus_Register
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_approved',
-                'label'   => __( 'Approved message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Approved message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="approved" data-attr-target="%1$s[whatsiplus_automation_sms_template_approved]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [cust_first_name], your appointment for [service_name] on [booking_start_date] [booking_start_time] is [booking_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Greetings [cust_first_name], your appointment for [service_name] on [booking_start_date] [booking_start_time] is [booking_status]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_pending',
-                'label'   => __( 'Pending approval message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Pending approval message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_pending]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [cust_first_name], your appointment for [service_name] on [booking_start_date] [booking_start_time] is [booking_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Greetings [cust_first_name], your appointment for [service_name] on [booking_start_date] [booking_start_time] is [booking_status]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_payment_pending',
-                'label'   => __( 'Payment pending message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Payment pending message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_payment_pending]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [cust_first_name], your appointment for [service_name] on [booking_start_date] [booking_start_time] is [booking_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Greetings [cust_first_name], your appointment for [service_name] on [booking_start_date] [booking_start_time] is [booking_status]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_cancelled',
-                'label'   => __( 'Cancelled message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Cancelled message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_cancelled]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Greetings [cust_first_name], your appointment for [service_name] on [booking_start_date] [booking_start_time] is [booking_status]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Greetings [cust_first_name], your appointment for [service_name] on [booking_start_date] [booking_start_time] is [booking_status]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
         );
     }

@@ -2,7 +2,7 @@
 $wpcf7 = WPCF7_ContactForm::get_current();
 if (empty($wpcf7->id())) {
     echo '<h3>';
-    esc_html_e('Please save your contact form 7 once.', 'WHATSIPLUS_TEXT_DOMAIN');
+    esc_html_e('Please save your contact form 7 once.', 'whatsiplus-order-notification-for-woocommerce');
     echo '</h3>';
 } else {
     $contact_form = WPCF7_ContactForm::get_instance($wpcf7->id());

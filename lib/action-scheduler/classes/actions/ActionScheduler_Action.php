@@ -47,7 +47,7 @@ class ActionScheduler_Action {
 			throw new Exception(
 				sprintf(
 					/* translators: 1: action hook. */
-					__( 'Scheduled action for %1$s will not be executed as no callbacks are registered.', 'action-scheduler' ),
+					__( 'Scheduled action for %1$s will not be executed as no callbacks are registered.', 'whatsiplus-order-notification-for-woocommerce' ),
 					$hook
 				)
 			);

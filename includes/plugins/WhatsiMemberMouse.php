@@ -46,7 +46,7 @@ class WhatsiMemberMouse implements Whatsiplus_PluginInterface, Whatsiplus_Regist
     public function get_setting_section_data() {
         return array(
             'id'    => $this->get_option_id(),
-            'title' => __( 'MemberMouse', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'title' => __( 'MemberMouse', 'whatsiplus-order-notification-for-woocommerce' ),
         );
     }
 
@@ -102,8 +102,8 @@ class WhatsiMemberMouse implements Whatsiplus_PluginInterface, Whatsiplus_Regist
     private function get_enable_notification_fields() {
         return array(
             'name'    => 'whatsiplus_automation_enable_notification',
-            'label'   => __( 'Enable WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label'   => __( 'Enable WhatsApp Notifications', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'    => ' ' . __( 'Enable', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'    => 'checkbox',
             'default' => 'off'
         );
@@ -112,8 +112,8 @@ class WhatsiMemberMouse implements Whatsiplus_PluginInterface, Whatsiplus_Regist
     private function get_send_from_fields() {
         return array(
             'name'  => 'whatsiplus_automation_send_from',
-            'label' => __( 'Send from', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label' => __( 'Send from', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'  => __( 'To display in the Message Outbox section of the plugin', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'  => 'text',
         );
     }
@@ -121,8 +121,8 @@ class WhatsiMemberMouse implements Whatsiplus_PluginInterface, Whatsiplus_Regist
     private function get_send_on_fields() {
         return array(
             'name'    => 'whatsiplus_automation_send_on',
-            'label'   => __( 'Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'    => __( 'Choose when to send the notification message to your customer', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label'   => __( 'Send notification on', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'    => __( 'Choose when to send the notification message to your customer', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'    => 'multicheck',
             'options' => array(
                 'member_membership_change' => 'Member membership change',
@@ -141,83 +141,83 @@ class WhatsiMemberMouse implements Whatsiplus_PluginInterface, Whatsiplus_Regist
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_member_membership_change',
-                'label'   => __( 'Member membership change', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Member membership change', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_member_membership_change]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your current membership is [membership_level_name]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], your current membership is [membership_level_name]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_member_status_change',
-                'label'   => __( 'Member status change', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Member status change', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_member_status_change]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your membership is [status_name]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], your membership is [status_name]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_bundles_added_to_member',
-                'label'   => __( 'Bundles added to member', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Bundles added to member', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_bundles_added_to_member]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], [bundle_name] has been added to your account successfully', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], [bundle_name] has been added to your account successfully', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_bundles_status_change',
-                'label'   => __( 'Bundles status changed', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Bundles status changed', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_bundles_status_change]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [bundle_name] is [bundle_status_name]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], your [bundle_name] is [bundle_status_name]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_payment_received',
-                'label'   => __( 'Payment received', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Payment received', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_payment_received]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your payment of [order_total] is successful', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], your payment of [order_total] is successful', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_payment_rebill',
-                'label'   => __( 'Payment rebill', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Payment rebill', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_payment_rebill]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], recurring payment of [order_total] is successful', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], recurring payment of [order_total] is successful', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_payment_rebill_declined',
-                'label'   => __( 'Payment rebill declined', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Payment rebill declined', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_payment_rebill_declined]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], recurring payment of [order_total] is unsuccessful, talk to our support', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], recurring payment of [order_total] is unsuccessful, talk to our support', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_refund_issued',
-                'label'   => __( 'Refund issued', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Refund issued', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_refund_issued]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], we are sorry to see you go, we have refunded your payment of [order_total]', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], we are sorry to see you go, we have refunded your payment of [order_total]', 'whatsiplus-order-notification-for-woocommerce' )
             ),
         );
     }
@@ -226,20 +226,20 @@ class WhatsiMemberMouse implements Whatsiplus_PluginInterface, Whatsiplus_Regist
     return array(
         array(
             'name'    => 'whatsiplus_automation_reminder',
-            'label'   => __( 'Send reminder to renew membership', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'    => __( 'Description for the reminder field', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label'   => __( 'Send reminder to renew membership', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'    => __( 'Description for the reminder field', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'    => 'multicheck',
             'options' => array(
-                'rem_1'  => __( '1 day before membership expiry', 'WHATSIPLUS_TEXT_DOMAIN' ),
-                'rem_2'  => __( '2 days before membership expiry', 'WHATSIPLUS_TEXT_DOMAIN' ),
-                'rem_3'  => __( '3 days before membership expiry', 'WHATSIPLUS_TEXT_DOMAIN' ),
-                'custom' => __( 'Custom time before membership expiry', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'rem_1'  => __( '1 day before membership expiry', 'whatsiplus-order-notification-for-woocommerce' ),
+                'rem_2'  => __( '2 days before membership expiry', 'whatsiplus-order-notification-for-woocommerce' ),
+                'rem_3'  => __( '3 days before membership expiry', 'whatsiplus-order-notification-for-woocommerce' ),
+                'custom' => __( 'Custom time before membership expiry', 'whatsiplus-order-notification-for-woocommerce' ),
             )
         ),
         array(
             'name'  => 'whatsiplus_automation_reminder_custom_time',
-            'label' => __( 'Custom Reminder Time', 'WHATSIPLUS_TEXT_DOMAIN' ),
-            'desc'  => __( 'Enter the custom time you want to remind your customer before membership expires (in minutes). Choose when to send a reminder message to your customer. Please set your timezone in settings. You must set up a cron job <a href="https://whatsiplus.com/go?url=cron" target="_blank">here</a>.', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'label' => __( 'Custom Reminder Time', 'whatsiplus-order-notification-for-woocommerce' ),
+            'desc'  => __( 'Enter the custom time you want to remind your customer before membership expires (in minutes). Choose when to send a reminder message to your customer. Please set your timezone in settings. You must set up a cron job <a href="https://whatsiplus.com/go?url=cron" target="_blank">here</a>.', 'whatsiplus-order-notification-for-woocommerce' ),
             'type'  => 'number',
         ),
     );
@@ -250,43 +250,43 @@ class WhatsiMemberMouse implements Whatsiplus_PluginInterface, Whatsiplus_Regist
         return array(
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rem_1',
-                'label'   => __( '1 day reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( '1 day reminder message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rem_1]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [membership_level_name] subscription will expire in 1 Day, renew now to keep access.', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], your [membership_level_name] subscription will expire in 1 Day, renew now to keep access.', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rem_2',
-                'label'   => __( '2 days reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( '2 days reminder message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rem_2]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [membership_level_name] subscription will expire in 2 Days, renew now to keep access.', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], your [membership_level_name] subscription will expire in 2 Days, renew now to keep access.', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_rem_3',
-                'label'   => __( '3 days reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( '3 days reminder message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_rem_3]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [membership_level_name] subscription will expire in 3 Days, renew now to keep access.', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], your [membership_level_name] subscription will expire in 3 Days, renew now to keep access.', 'whatsiplus-order-notification-for-woocommerce' )
             ),
             array(
                 'name'    => 'whatsiplus_automation_sms_template_custom',
-                'label'   => __( 'Custom time reminder message', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                'label'   => __( 'Custom time reminder message', 'whatsiplus-order-notification-for-woocommerce' ),
                 'desc'    => sprintf('Customize your message with <button type="button" id="whatsiplus-open-keyword-%1$s-[dummy]" data-attr-type="pending" data-attr-target="%1$s[whatsiplus_automation_sms_template_custom]" class="button button-secondary">Keywords</button>', $this->get_option_id() ),
                 'type'    => 'textarea',
                 'rows'    => '8',
                 'cols'    => '500',
                 'css'     => 'min-width:350px;',
-                'default' => __( 'Hi [first_name], your [membership_level_name] subscription will expire in [reminder_custom_time] Days, renew now to keep access. - custom', 'WHATSIPLUS_TEXT_DOMAIN' )
+                'default' => __( 'Hi [first_name], your [membership_level_name] subscription will expire in [reminder_custom_time] Days, renew now to keep access. - custom', 'whatsiplus-order-notification-for-woocommerce' )
             ),
         );
     }

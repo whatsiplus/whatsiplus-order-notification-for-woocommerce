@@ -42,7 +42,7 @@ class ActionScheduler_DBStoreMigrator extends ActionScheduler_DBStore {
 			return $action_id;
 		} catch ( \Exception $e ) {
 			// translators: %s is an error message.
-			throw new \RuntimeException( sprintf( __( 'Error saving action: %s', 'action-scheduler' ), $e->getMessage() ), 0 );
+			throw new \RuntimeException( sprintf( __( 'Error saving action: %s', 'whatsiplus-order-notification-for-woocommerce' ), $e->getMessage() ), 0 );
 		}
 	}
 }

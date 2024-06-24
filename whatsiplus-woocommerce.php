@@ -32,7 +32,7 @@ define("WHATSIPLUS_PLUGIN_URL", plugin_dir_url(__FILE__));
 define("WHATSIPLUS_PLUGIN_DIR", plugin_dir_path(__FILE__));
 define("WHATSIPLUS_INC_DIR", WHATSIPLUS_PLUGIN_DIR . "includes/");
 define("WHATSIPLUS_ADMIN_VIEW", WHATSIPLUS_PLUGIN_DIR . "admin/");
-define("WHATSIPLUS_TEXT_DOMAIN", "whatsiplus-woocommerce");
+define("WHATSIPLUS_TEXT_DOMAIN", "whatsiplus-order-notification-for-woocommerce");
 define("WHATSI_DB_TABLE_NAME", "whatsiplus_wc_send_sms_outbox");
 
 require_once WHATSIPLUS_PLUGIN_DIR . 'lib/action-scheduler/action-scheduler.php';

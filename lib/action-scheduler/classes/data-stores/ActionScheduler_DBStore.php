@@ -115,7 +115,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 				if ( $unique ) {
 					return 0;
 				}
-				throw new \RuntimeException( $wpdb->last_error ? $wpdb->last_error : __( 'Database error.', 'action-scheduler' ) );
+				throw new \RuntimeException( $wpdb->last_error ? $wpdb->last_error : __( 'Database error.', 'whatsiplus-order-notification-for-woocommerce' ) );
 			}
 
 			do_action( 'action_scheduler_stored_action', $action_id );
@@ -123,7 +123,7 @@ class ActionScheduler_DBStore extends ActionScheduler_Store {
 			return $action_id;
 		} catch ( \Exception $e ) {
 			/* translators: %s: error message */
-			throw new \RuntimeException( sprintf( __( 'Error saving action: %s', 'action-scheduler' ), $e->getMessage() ), 0 );
+			throw new \RuntimeException( sprintf( __( 'Error saving action: %s', 'whatsiplus-order-notification-for-woocommerce' ), $e->getMessage() ), 0 );
 		}
 	}
 
@@ -393,7 +393,7 @@ AND `group_id` = %d
 	protected function get_query_actions_sql( array $query, $select_or_count = 'select' ) {
 
 		if ( ! in_array( $select_or_count, array( 'select', 'count' ), true ) ) {
-			throw new InvalidArgumentException( __( 'Invalid value for select or count parameter. Cannot query actions.', 'action-scheduler' ) );
+			throw new InvalidArgumentException( __( 'Invalid value for select or count parameter. Cannot query actions.', 'whatsiplus-order-notification-for-woocommerce' ) );
 		}
 
 		$query = wp_parse_args( $query, array(
@@ -451,7 +451,7 @@ AND `group_id` = %d
 			switch ( $query['partial_args_matching'] ) {
 				case 'json':
 					if ( ! $supports_json ) {
-						throw new \RuntimeException( __( 'JSON partial matching not supported in your environment. Please check your MySQL/MariaDB version.', 'action-scheduler' ) );
+						throw new \RuntimeException( __( 'JSON partial matching not supported in your environment. Please check your MySQL/MariaDB version.', 'whatsiplus-order-notification-for-woocommerce' ) );
 					}
 					$supported_types = array(
 						'integer' => '%d',
@@ -468,7 +468,7 @@ AND `group_id` = %d
 						if ( ! $placeholder ) {
 							throw new \RuntimeException( sprintf(
 								/* translators: %s: provided value type */
-								__( 'The value type for the JSON partial matching is not supported. Must be either integer, boolean, double or string. %s type provided.', 'action-scheduler' ),
+								__( 'The value type for the JSON partial matching is not supported. Must be either integer, boolean, double or string. %s type provided.', 'whatsiplus-order-notification-for-woocommerce' ),
 								$value_type
 							) );
 						}
@@ -489,7 +489,7 @@ AND `group_id` = %d
 					$sql_params[] = $this->get_args_for_query( $query['args'] );
 					break;
 				default:
-					throw new \RuntimeException( __( 'Unknown partial args matching value.', 'action-scheduler' ) );
+					throw new \RuntimeException( __( 'Unknown partial args matching value.', 'whatsiplus-order-notification-for-woocommerce' ) );
 			}
 		}
 
@@ -650,7 +650,7 @@ AND `group_id` = %d
 		);
 		if ( false === $updated ) {
 			/* translators: %s: action ID */
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to cancel this action. It may may have been deleted by another process.', 'action-scheduler' ), $action_id ) );
+			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to cancel this action. It may may have been deleted by another process.', 'whatsiplus-order-notification-for-woocommerce' ), $action_id ) );
 		}
 		do_action( 'action_scheduler_canceled_action', $action_id );
 	}
@@ -743,7 +743,7 @@ AND `group_id` = %d
 		$deleted = $wpdb->delete( $wpdb->actionscheduler_actions, array( 'action_id' => $action_id ), array( '%d' ) );
 		if ( empty( $deleted ) ) {
 			/* translators: %s is the action ID */
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to delete this action. It may may have been deleted by another process.', 'action-scheduler' ), $action_id ) );
+			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to delete this action. It may may have been deleted by another process.', 'whatsiplus-order-notification-for-woocommerce' ), $action_id ) );
 		}
 		do_action( 'action_scheduler_deleted_action', $action_id );
 	}
@@ -775,7 +775,7 @@ AND `group_id` = %d
 		$record = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->actionscheduler_actions} WHERE action_id=%d", $action_id ) );
 		if ( empty( $record ) ) {
 			/* translators: %s is the action ID */
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to determine the date of this action. It may may have been deleted by another process.', 'action-scheduler' ), $action_id ) );
+			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to determine the date of this action. It may may have been deleted by another process.', 'whatsiplus-order-notification-for-woocommerce' ), $action_id ) );
 		}
 		if ( self::STATUS_PENDING === $record->status ) {
 			return as_get_datetime_object( $record->scheduled_date_gmt );
@@ -938,13 +938,13 @@ AND `group_id` = %d
 		$rows_affected = $wpdb->query( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		if ( false === $rows_affected ) {
 			$error = empty( $wpdb->last_error )
-				? _x( 'unknown', 'database error', 'action-scheduler' )
+				? _x( 'unknown', 'database error', 'whatsiplus-order-notification-for-woocommerce' )
 				: $wpdb->last_error;
 
 			throw new \RuntimeException(
 				sprintf(
 					/* translators: %s database error. */
-					__( 'Unable to claim actions. Database error: %s.', 'action-scheduler' ),
+					__( 'Unable to claim actions. Database error: %s.', 'whatsiplus-order-notification-for-woocommerce' ),
 					$error
 				)
 			);
@@ -1042,7 +1042,7 @@ AND `group_id` = %d
 			throw new RuntimeException(
 				sprintf(
 					// translators: %d is an id.
-					__( 'Unable to release actions from claim id %d.', 'action-scheduler' ),
+					__( 'Unable to release actions from claim id %d.', 'whatsiplus-order-notification-for-woocommerce' ),
 					$claim->get_id()
 				)
 			);
@@ -1086,7 +1086,7 @@ AND `group_id` = %d
 		);
 		if ( empty( $updated ) ) {
 			/* translators: %s is the action ID */
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to mark this action as having failed. It may may have been deleted by another process.', 'action-scheduler' ), $action_id ) );
+			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to mark this action as having failed. It may may have been deleted by another process.', 'whatsiplus-order-notification-for-woocommerce' ), $action_id ) );
 		}
 	}
 
@@ -1113,7 +1113,7 @@ AND `group_id` = %d
 			throw new Exception(
 				sprintf(
 					/* translators: 1: action ID. 2: status slug. */
-					__( 'Unable to update the status of action %1$d to %2$s.', 'action-scheduler' ),
+					__( 'Unable to update the status of action %1$d to %2$s.', 'whatsiplus-order-notification-for-woocommerce' ),
 					$action_id,
 					self::STATUS_RUNNING
 				)
@@ -1145,7 +1145,7 @@ AND `group_id` = %d
 		);
 		if ( empty( $updated ) ) {
 			/* translators: %s is the action ID */
-			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to mark this action as having completed. It may may have been deleted by another process.', 'action-scheduler' ), $action_id ) );
+			throw new \InvalidArgumentException( sprintf( __( 'Unidentified action %s: we were unable to mark this action as having completed. It may may have been deleted by another process.', 'whatsiplus-order-notification-for-woocommerce' ), $action_id ) );
 		}
 
 		/**
@@ -1175,9 +1175,9 @@ AND `group_id` = %d
 		$status = $wpdb->get_var( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		if ( null === $status ) {
-			throw new \InvalidArgumentException( __( 'Invalid action ID. No status found.', 'action-scheduler' ) );
+			throw new \InvalidArgumentException( __( 'Invalid action ID. No status found.', 'whatsiplus-order-notification-for-woocommerce' ) );
 		} elseif ( empty( $status ) ) {
-			throw new \RuntimeException( __( 'Unknown status found for action.', 'action-scheduler' ) );
+			throw new \RuntimeException( __( 'Unknown status found for action.', 'whatsiplus-order-notification-for-woocommerce' ) );
 		} else {
 			return $status;
 		}

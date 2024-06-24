@@ -17,7 +17,7 @@ class WhatsiPLUS_Help_View implements Whatsiplus_Register_Interface {
 	public function set_help_setting_section( $sections ) {
 		$sections[] = array(
             'id'               => 'whatsiplus_help_setting',
-            'title'            => __( 'Help', 'WHATSIPLUS_TEXT_DOMAIN' ),
+            'title'            => __( 'Help', 'whatsiplus-order-notification-for-woocommerce' ),
             'submit_button'    => '',
 		);
 

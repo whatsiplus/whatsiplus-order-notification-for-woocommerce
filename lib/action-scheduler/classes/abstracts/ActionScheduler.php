@@ -223,7 +223,7 @@ abstract class ActionScheduler {
 		if ( ! self::$data_store_initialized && ! empty( $function_name ) ) {
 			$message = sprintf(
 				/* translators: %s function name. */
-				__( '%s() was called before the Action Scheduler data store was initialized', 'action-scheduler' ),
+				__( '%s() was called before the Action Scheduler data store was initialized', 'whatsiplus-order-notification-for-woocommerce' ),
 				esc_attr( $function_name )
 			);
 			_doing_it_wrong( $function_name, $message, '3.1.6' );

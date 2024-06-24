@@ -30,7 +30,7 @@ class WhatsiPLUS_Automation_View implements Whatsiplus_Register_Interface {
         }
         $sections[] = array(
             'id'             => 'whatsiplus_automation_setting',
-            'title'          => __('Automation', 'WHATSIPLUS_TEXT_DOMAIN'),
+            'title'          => __('Automation', 'whatsiplus-order-notification-for-woocommerce'),
             'submit_button'  => '',
             'children'       => $children,
         );
