@@ -173,12 +173,12 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 			),
 			'whatsiplus_admin_setting'     => array(
 				array(
-					'name'    => 'whatsiplus_woocommerce_admin_suborders_send_sms',
-					'label'   => __( 'Enable Suborders WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
-					'desc'    => ' ' . __( 'Enable',  ),
-					'type'    => 'checkbox',
-					'default' => 'off'
-				),
+                    'name'    => 'whatsiplus_woocommerce_admin_suborders_send_sms',
+                    'label'   => __( 'Enable Suborders WhatsApp Notifications', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                    'desc'    => ' ' . __( 'Enable', 'WHATSIPLUS_TEXT_DOMAIN' ),
+                    'type'    => 'checkbox',
+                    'default' => 'off'
+                ),                
 				array(
 					'name'    => 'whatsiplus_woocommerce_admin_send_sms_on',
 					'label'   => __( '	Send notification on', 'WHATSIPLUS_TEXT_DOMAIN' ),
@@ -633,57 +633,6 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         </div>
         <?php
     }
-
-    public function get_user_ip() {
-        //return Utils::curl_get_file_contents("https://ipecho.net/plain");
-    }
-
-    public function get_country_code_from_ip($ip_address)
-    {
-        $api_url = "https://www.iplocate.io/api/lookup/{$ip_address}";
-
-        // Set up arguments for wp_remote_get
-        $args = array(
-            'timeout' => 10, // Set timeout to 10 seconds
-            'sslverify' => false, // Disable SSL verification
-            'headers' => array(
-                'User-Agent' => 'Mozilla/5.0 (Linux; Centos 7; Chrome/74.0.3729.169) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
-            ),
-        );
-
-        // Make the HTTP request using wp_remote_get
-        $response = wp_remote_get($api_url, $args);
-
-        // Check for errors in the response
-        if (is_wp_error($response)) {
-            $error_message = $response->get_error_message();
-            $this->log->add("Whatsiplus", "Error occurred while getting country code for IP address: {$ip_address}. Error: {$error_message}");
-            return ''; // Return empty string on error
-        }
-
-        // Get the response code
-        $response_code = wp_remote_retrieve_response_code($response);
-
-        // Check if response code is 200
-        if ($response_code === 200) {
-            // Get the body of the response
-            $response_body = wp_remote_retrieve_body($response);
-            // Decode the JSON response
-            $data = json_decode($response_body, true);
-
-            // Check if data contains country code
-            if (isset($data['country_code'])) {
-                return $data['country_code']; // Return the country code
-            } else {
-                $this->log->add("Whatsiplus", "No country code found in response for IP address: {$ip_address}");
-                return ''; // Return empty string if country code is not found
-            }
-        } else {
-            $this->log->add("Whatsiplus", "Failed to get country code for IP address: {$ip_address}. Response code: {$response_code}");
-            return ''; // Return empty string if response code is not 200
-        }
-    }
-
 
     public function get_countries()
     {

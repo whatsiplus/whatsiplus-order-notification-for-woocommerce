@@ -42,8 +42,9 @@ class WeDevs_Settings_API {
     }
 
     public function my_custom_scripts() {
-        wp_enqueue_script('split-sms', 'https://cdn.rawgit.com/Codesleuth/split-sms/0.1.7/dist/split-sms.min.js', array(), null, true);
+        wp_enqueue_script('split-sms', plugins_url('js/split-sms.min.js', __FILE__), array(), '0.1.7', true);
     }
+    
 
     public function my_custom_styles() {
         ?>
@@ -769,7 +770,8 @@ function callback_multicheck( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $id    = $args['section']  . '[' . $args['id'] . ']';
-        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
+        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : esc_html__( 'Choose File', 'WHATSIPLUS_TEXT_DOMAIN' );
+
 
         $html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
         $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';

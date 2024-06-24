@@ -125,11 +125,12 @@ class ContactForm7 {
 
     public function new_menu_whatsi( $panels ) {
 		$panels['whatsi-sms-panel'] = array(
-			'title'    => __( 'WhatsiAPI' ),
+			'title'    => esc_html__( 'WhatsiAPI', 'WHATSIPLUS_TEXT_DOMAIN' ),
 			'callback' => array( $this, 'add_panel_whatsi' ),
 		);
 		return $panels;
 	}
+	
 
     /**
 	 * Add phonefield to backend cf7 form builder section.

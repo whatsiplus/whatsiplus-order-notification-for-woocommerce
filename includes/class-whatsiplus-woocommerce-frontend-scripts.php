@@ -18,8 +18,9 @@ class Whatsiplus_WooCommerce_Frontend_Scripts implements Whatsiplus_Register_Int
         wp_enqueue_script( 'admin-whatsiplus-charcounter', plugins_url( 'js/charactercounter.js', __DIR__ ), array(), '1.0.0', true );
     
         // jQuery modal
-        wp_enqueue_style( 'admin-whatsiplus-css', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css', array(), '0.9.1' );
-        wp_enqueue_script( 'jquery-modal', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js', array( 'jquery' ), '0.9.1', true );
+        wp_enqueue_style( 'admin-whatsiplus-css', plugins_url( 'css/jquery.modal.min.css', __FILE__ ), array(), '0.9.1' );
+        wp_enqueue_script( 'jquery-modal', plugins_url( 'js/jquery.modal.min.js', __FILE__ ), array( 'jquery' ), '0.9.1', true );
+
     }
     
     // only load bootstrap 5 in  our plugin page
