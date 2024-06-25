@@ -53,7 +53,7 @@ class Whatsiapi_Multivendor_WC_Marketplace_Manager extends Abstract_Whatsiplus_M
 			);
 		}
 
-		$this->log->add( 'Whatsiplus', 'Raw data: ' . json_encode( $vendor_data_list ) );
+		$this->log->add( 'Whatsiplus', 'Raw data: ' . wp_json_encode( $vendor_data_list ) );
 
 		return $this->perform_grouping( $vendor_data_list );
 	}

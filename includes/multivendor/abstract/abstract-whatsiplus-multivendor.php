@@ -6,6 +6,9 @@
  * Time: 10:27 AM.
  */
 
+ if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 require_once __DIR__ . '/../contracts/class-whatsiplus-multivendor-interface.php';
 
 abstract class Abstract_Whatsiplus_Multivendor implements Whatsiplus_Multivendor_Interface {
@@ -65,7 +68,7 @@ abstract class Abstract_Whatsiplus_Multivendor implements Whatsiplus_Multivendor
 				$product_with_qty .= ', ' . $vendor_data['item']->get_name() . ' X ' . $vendor_data['item']->get_quantity();
 				$total            += $vendor_data['item']->get_total();
 
-				$this->log->add( 'Whatsiplus', 'item data for vendor id (' . $vendor_data['vendor_user_id'] . ') : ' . json_encode( $vendor_data['item']->get_data() ) );
+				$this->log->add( 'Whatsiplus', 'item data for vendor id (' . $vendor_data['vendor_user_id'] . ') : ' . wp_json_encode( $vendor_data['item']->get_data() ) );
 			}
 
 			if ( $product_name ) {
@@ -79,7 +82,7 @@ abstract class Abstract_Whatsiplus_Multivendor implements Whatsiplus_Multivendor
 			$new_group_vendor_datas[ $phone_number ]['vendor_profile']          = $vendor_datas[0]['vendor_profile'];
 		}
 
-		$this->log->add( 'Whatsiplus', 'processed data: ' . json_encode( $new_group_vendor_datas ) );
+		$this->log->add( 'Whatsiplus', 'processed data: ' . wp_json_encode( $new_group_vendor_datas ) );
 
 		return $new_group_vendor_datas;
 	}

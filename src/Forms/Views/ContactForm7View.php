@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 $wpcf7 = WPCF7_ContactForm::get_current();
 if (empty($wpcf7->id())) {
     echo '<h3>';

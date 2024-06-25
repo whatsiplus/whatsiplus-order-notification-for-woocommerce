@@ -1,6 +1,6 @@
 (function($) {
-    var keywordArr = <?php echo json_encode($keywordArr); ?>;
-
+    var keywordArr = <?php echo wp_json_encode( $keywordArr ); ?>;
+    
     $(document).ready(function() {
         var $div = $('<div />').appendTo('body');
         $div.attr('id', 'keyword-modal');

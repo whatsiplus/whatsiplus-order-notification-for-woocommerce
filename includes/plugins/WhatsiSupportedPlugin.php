@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 require_once WHATSIPLUS_PLUGIN_DIR . 'includes/plugins/WhatsiS2Member.php';
 require_once WHATSIPLUS_PLUGIN_DIR . 'includes/plugins/WhatsiARMemberLite.php';
 require_once WHATSIPLUS_PLUGIN_DIR . 'includes/plugins/WhatsiARMemberPremium.php';

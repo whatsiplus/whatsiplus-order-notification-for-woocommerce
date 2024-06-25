@@ -68,7 +68,7 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
 			// check for specific hook if sms should be send
 			$activatedHooks = whatsiplus_get_options( 'whatsiplus_multivendor_vendor_send_sms_on', 'whatsiplus_multivendor_setting', $this->defaultHooks );
 			if ( ! in_array( $status, $activatedHooks ) ) {
-				$this->log->add( 'Whatsiplus', 'not sending, current hook: ["' . $status . '"] activated hooks: ' . json_encode( $activatedHooks ) );
+				$this->log->add( 'Whatsiplus', 'not sending, current hook: ["' . $status . '"] activated hooks: ' . wp_json_encode( $activatedHooks ) );
 				return;
 			}
 

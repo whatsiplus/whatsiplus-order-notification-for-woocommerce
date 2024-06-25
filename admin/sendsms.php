@@ -70,7 +70,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         }
 
         $numbers = WhatsiPLUS_SendSMS_Sms::getPhoneNumber($message_to, $users, $recipients, $country, $filters, $criteria);
-        // write_log('numbers :' . json_encode($numbers));
+        // write_log('numbers :' . wp_json_encode($numbers));
 
         $medium = 'wp_wordpress';
 

@@ -42,7 +42,7 @@ class WeDevs_Settings_API {
     }
 
     public function my_custom_scripts() {
-        wp_enqueue_script('split-sms', plugins_url('js/split-sms.min.js', __FILE__), array(), '0.1.7', true);
+        wp_enqueue_script('split-sms', plugin_dir_url(__DIR__) . 'js/split-sms.min.js', array(), null, true);
     }
     
 
@@ -244,6 +244,7 @@ class WeDevs_Settings_API {
      * @param array   $args settings field args
      */
 
+     /*
      function callback_text( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -255,16 +256,33 @@ class WeDevs_Settings_API {
 
         echo $html; //It is not possible to use esc_html, esc_attr, wp_kses, and wp_kses_post because due to the limitation of the "wp_kses"" function for example:<input type="checkbox" value="suspend" or value="complete" ... .
     }
+    */
 
-/* ok
+
+
     function callback_text( $args ) {
 
+        // Get and sanitize the value
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
-        $type  = isset( $args['type'] ) ? $args['type'] : 'text';
-
-        $html  = sprintf( '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"/>', $type, $size, $args['section'], $args['id'], $value );
-        $html  .= $this->get_field_description( $args ); // Assuming get_field_description() returns HTML
+    
+        // Sanitize the size and type
+        $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? esc_attr( $args['size'] ) : 'regular';
+        $type  = isset( $args['type'] ) ? esc_attr( $args['type'] ) : 'text';
+    
+        // Create the input field HTML with sanitized attributes
+        $html  = sprintf(
+            '<input type="%1$s" class="%2$s-text" id="%3$s[%4$s]" name="%3$s[%4$s]" value="%5$s"/>', 
+            $type, 
+            $size, 
+            esc_attr( $args['section'] ), 
+            esc_attr( $args['id'] ), 
+            $value
+        );
+    
+        // Append the sanitized field description, assuming get_field_description() returns HTML
+        $html .= $this->get_field_description( $args );
+    
+        // Output the final HTML with allowed tags and attributes
         echo wp_kses( $html, array(
             'input' => array(
                 'type'  => true,
@@ -278,9 +296,10 @@ class WeDevs_Settings_API {
                 'class' => true,
             ),
         ) );
-
     }
-*/
+    
+
+
     /**
      * Displays a url field for a settings field
      *
@@ -305,7 +324,7 @@ class WeDevs_Settings_API {
      * @param array   $args settings field args
      */
 
- 
+    /*
     function callback_checkbox( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -319,46 +338,47 @@ class WeDevs_Settings_API {
 
         echo $html; //It is not possible to use esc_html, esc_attr, wp_kses, and wp_kses_post because due to the limitation of the "wp_kses"" function for example:<input type="checkbox" value="suspend" or value="complete" ... .
     }
+    */
 
 
-/* ok
     function callback_checkbox( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-
+    
         $html  = '<fieldset>';
-        $html  .= sprintf( '<label for="wpuf-%1$s[%2$s]">', $args['section'], $args['id'] );
-        $html  .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="off" />', $args['section'], $args['id'] );
-        $html  .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', $args['section'], $args['id'], checked( $value, 'on', false ) );
-        $html  .= sprintf( '%1$s</label>', $args['desc'] );
-        $html  .= '</fieldset>';
-
+        $html .= sprintf( '<label for="wpuf-%1$s[%2$s]">', esc_attr( $args['section'] ), esc_attr( $args['id'] ) );
+        $html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="off" />', esc_attr( $args['section'] ), esc_attr( $args['id'] ) );
+        $html .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', esc_attr( $args['section'] ), esc_attr( $args['id'] ), checked( $value, 'on', false ) );
+        $html .= sprintf( '%1$s</label>', wp_kses_post( $args['desc'] ) );
+        $html .= '</fieldset>';
+    
         echo wp_kses( $html, array(
             'input' => array(
-                'type'  => true,
-                'class' => true,
-                'id'    => true,
-                'name'  => true,
-                'value' => true,
+                'type'    => true,
+                'class'   => true,
+                'id'      => true,
+                'name'    => true,
+                'value'   => true,
                 'checked' => true,
             ),
-            'label' => array(
+            'label'     => array(
                 'for' => true,
             ),
-            'fieldset' => array(),
-            'br' => array(),
-            'p' => array(
+            'fieldset'  => array(),
+            'br'        => array(),
+            'p'         => array(
                 'class' => true,
             ),
         ) );
     }
-*/
+    
+
     /**
      * Displays a multicheckbox a settings field
      *
      * @param array   $args settings field args
      */
 
-
+    /*
     function callback_multicheck( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
@@ -376,49 +396,52 @@ class WeDevs_Settings_API {
 
         echo $html; //It is not possible to use esc_html, esc_attr, wp_kses, and wp_kses_post because due to the limitation of the "wp_kses"" function for example:<input type="checkbox" value="suspend" or value="complete" ... .
     }
+    */
 
 
 
-/*
-function callback_multicheck( $args ) {
-    $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
-    $html  = '<fieldset>';
 
-    foreach ( $args['options'] as $key => $label ) {
-        // Check if the current option is selected in the saved value
-        $checked = isset( $value[$key] ) && $value[$key] === 'on' ? 'checked' : '';
-
-        $html .= sprintf( '<label for="wpuf-%1$s[%2$s][%3$s]">', $args['section'], $args['id'], $key );
-        $html .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s][%3$s]" name="%1$s[%2$s][%3$s]" value="on" %4$s />', $args['section'], $args['id'], $key, $checked );
-        $html .= sprintf( '%1$s</label><br>', $label );
+    function callback_multicheck( $args ) {
+        $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
+        $html  = '<fieldset>';
+    
+        foreach ( $args['options'] as $key => $label ) {
+            // Check if the current option is selected in the saved value
+            $checked = isset( $value[$key] ) && $value[$key] === 'on' ? 'checked' : '';
+    
+            $html .= sprintf( '<label for="wpuf-%1$s[%2$s][%3$s]">', esc_attr( $args['section'] ), esc_attr( $args['id'] ), esc_attr( $key ) );
+            $html .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s][%3$s]" name="%1$s[%2$s][%3$s]" value="on" %4$s />', esc_attr( $args['section'] ), esc_attr( $args['id'] ), esc_attr( $key ), checked( $checked, 'checked', false ) );
+            $html .= sprintf( '%1$s</label><br>', esc_html( $label ) );
+        }
+    
+        // Assuming get_field_description() returns HTML
+        $html .= $this->get_field_description( $args );
+    
+        $html .= '</fieldset>';
+    
+        echo wp_kses( $html, array(
+            'input' => array(
+                'type'    => array(),
+                'class'   => array(),
+                'id'      => array(),
+                'name'    => array(),
+                'value'   => array(),
+                'checked' => array(),
+            ),
+            'label'    => array(
+                'for' => true,
+            ),
+            'fieldset' => array(),
+            'br'       => array(),
+            'p'        => array(
+                'class' => true,
+                'id'    => true,
+            ),
+        ) );
     }
+    
+    
 
-    // Assuming get_field_description() returns HTML
-    $html .= $this->get_field_description( $args );
-
-    $html .= '</fieldset>';
-
-    echo wp_kses( $html, array(
-        'input' => array(
-            'type'  => array(),
-            'class' => array(),
-            'id'    => array(),
-            'name'  => array(),
-            'value' => string,
-            'checked' => array(),
-        ),
-        'label' => array(
-            'for' => true,
-        ),
-        'fieldset' => array(),
-        'br' => array(),
-        'p' => array(
-            'class' => true,
-            'id' => true,
-        ),
-    ) );
-}
-*/
 
 
     /**
@@ -426,24 +449,7 @@ function callback_multicheck( $args ) {
      *
      * @param array   $args settings field args
      */
-/*
-     function callback_radio( $args ) {
 
-        $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
-        $html  = '<fieldset>';
-
-        foreach ( $args['options'] as $key => $label ) {
-            $html .= sprintf( '<label for="wpuf-%1$s[%2$s][%3$s]">',  $args['section'], $args['id'], $key );
-            $html .= sprintf( '<input type="radio" class="radio" id="wpuf-%1$s[%2$s][%3$s]" name="%1$s[%2$s]" value="%3$s" %4$s />', $args['section'], $args['id'], $key, checked( $value, $key, false ) );
-            $html .= sprintf( '%1$s</label><br>', $label );
-        }
-
-        $html .= wp_kses_post($this->get_field_description( $args ));
-        $html .= '</fieldset>';
-
-        echo $html;
-    }
-*/
 
     function callback_radio( $args ) {
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
@@ -484,23 +490,7 @@ function callback_multicheck( $args ) {
      *
      * @param array   $args settings field args
      */
-/*
-    function callback_select( $args ) {
 
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-        $html  = sprintf( '<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, $args['section'], $args['id'] );
-
-        foreach ( $args['options'] as $key => $label ) {
-            $html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $value, $key, false ), $label );
-        }
-
-        $html .= sprintf( '</select>' );
-        $html .= wp_kses_post($this->get_field_description( $args ));
-
-        echo $html;
-    }
-*/
     function callback_select( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -538,23 +528,6 @@ function callback_multicheck( $args ) {
      *
      * @param array   $args settings field args
      */
-/*
-    function callback_selectm( $args ) {
-
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-        $html  = sprintf( '<select class="%1$s" name="%2$s[%3$s][]" id="%2$s[%3$s]" multiple>', $size, $args['section'], $args['id'] );
-
-        foreach ( $args['options'] as $key => $label ) {
-            $html .= sprintf( '<option value="%s"%s>%s</option>', $key, selected( $value, $key, false ), $label );
-        }
-
-        $html .= sprintf( '</select>' );
-        $html .= wp_kses_post($this->get_field_description( $args ));
-
-        echo $html;
-    }
-*/
 
     function callback_selectm( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -593,21 +566,6 @@ function callback_multicheck( $args ) {
      *
      * @param array   $args settings field args
      */
-/*
-    function callback_textarea( $args ) {
-
-        $value = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-        $rows  = isset( $args['rows'] ) && !is_null( $args['rows'] ) ? $args['rows'] : '5';
-        $cols  = isset( $args['cols'] ) && !is_null( $args['cols'] ) ? $args['cols'] : '55';
-        $css  = isset( $args['css'] ) && !is_null( $args['css'] ) ? 'style="'.$args['css'].';"' : '';
-
-        $html  = sprintf( '<textarea rows="'.$rows.'" cols="'.$cols.'" class="%1$s-text" '.$css.' id="%2$s[%3$s]" name="%2$s[%3$s]">%4$s</textarea>', $size, $args['section'], $args['id'], $value );
-        $html  .= wp_kses_post($this->get_field_description( $args ));
-
-        echo $html;
-    }
-*/
 
     function callback_textarea( $args ) {
         $value = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -749,29 +707,13 @@ function callback_multicheck( $args ) {
      *
      * @param array   $args settings field args
      */
-/*
+
     function callback_file( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $id    = $args['section']  . '[' . $args['id'] . ']';
         $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
-
-        $html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
-        $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
-        $html  .= wp_kses_post($this->get_field_description( $args ));
-
-        echo $html;
-    }
-*/
-
-    function callback_file( $args ) {
-
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-        $id    = $args['section']  . '[' . $args['id'] . ']';
-        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : esc_html__( 'Choose File', 'whatsiplus-order-notification-for-woocommerce' );
-
 
         $html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
         $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';
@@ -800,18 +742,6 @@ function callback_multicheck( $args ) {
      *
      * @param array   $args settings field args
      */
-/*
-    function callback_password( $args ) {
-
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-
-        $html  = sprintf( '<input type="password" class="%1$s-text" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
-        $html  .= wp_kses_post($this->get_field_description( $args ));
-
-        echo $html;
-    }
-*/
 
     function callback_password( $args ) {
 
@@ -841,18 +771,7 @@ function callback_multicheck( $args ) {
      *
      * @param array   $args settings field args
      */
-/*
-    function callback_color( $args ) {
 
-        $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
-        $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
-
-        $html  = sprintf( '<input type="text" class="%1$s-text wp-color-picker-field" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s" data-default-color="%5$s" />', $size, $args['section'], $args['id'], $value, $args['std'] );
-        $html  .= wp_kses_post($this->get_field_description( $args ));
-
-        echo $html;
-    }
-*/
 
     function callback_color( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -943,20 +862,7 @@ function callback_multicheck( $args ) {
      *
      * Shows all the settings section labels as tab
      */
-/*
-    function show_navigation() {
-        $html = '<h2 class="nav-tab-wrapper">';
 
-        foreach ( $this->settings_sections as $tab ) {
-
-            $html .= sprintf( '<a href="#%1$s" class="nav-tab" id="%1$s-tab">%2$s</a>', $tab['id'], $tab['title'] );
-        }
-
-        $html .= '</h2>';
-
-        echo $html;
-    }
-*/
     function show_navigation() {
         $html = '<h2 class="nav-tab-wrapper">';
 
