@@ -7,7 +7,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
 
 	function __construct() {
         $this->log = new Whatsiplus_WooCommerce_Logger();
-		$this->settings_api = new WeDevs_Settings_API;
+		$this->settings_api = new WONFW_Settings_API;
 
         add_action('wp_enqueue_scripts', array($this, 'my_custom_scripts3'));
         add_action('admin_enqueue_scripts', array($this, 'my_custom_scripts3'));
@@ -579,7 +579,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         }
         
 
-        global $phone;
+        global $whatsiplus_phone;
         if(isset($_POST['phone'])){
 
             $post_phone = sanitize_text_field(wp_unslash($_POST['phone']));
@@ -589,7 +589,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
             }
             else
             {
-                $phone = $post_phone;
+                $whatsiplus_phone = $post_phone;
             }
         }
     }

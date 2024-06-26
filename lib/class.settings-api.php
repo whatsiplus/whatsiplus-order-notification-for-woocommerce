@@ -9,8 +9,8 @@
  * @link http://tareq.weDevs.com Tareq's Planet
  * @example src/settings-api.php How to use the class
  */
-if ( !class_exists( 'WeDevs_Settings_API' ) ):
-class WeDevs_Settings_API {
+if ( !class_exists( 'WONFW_Settings_API' ) ):
+class WONFW_Settings_API {
 
     /**
      * settings sections array
@@ -189,7 +189,7 @@ class WeDevs_Settings_API {
                     'css'               => isset( $option['css'] ) ? $option['css'] : null,
                     'custom_html'       => isset( $option['custom_html'] ) ? $option['custom_html'] : null,
                 );
-                add_settings_field( $section . '[' . $option['name'] . ']', $option['label'], array( $this, 'callback_' . $type ), $section, $section, $args );
+                add_settings_field( $section . '[' . $option['name'] . ']', $option['label'], array( $this, 'wonfw_callback_' . $type ), $section, $section, $args );
 
             }
         }
@@ -227,7 +227,7 @@ class WeDevs_Settings_API {
      *
      * @param array   $args settings field args
      */
-    function callback_custom_html( $args ) {
+    function wonfw_callback_custom_html( $args ) {
 
         // $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         // $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -245,7 +245,7 @@ class WeDevs_Settings_API {
      */
 
      /*
-     function callback_text( $args ) {
+     function wonfw_callback_text( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -260,7 +260,7 @@ class WeDevs_Settings_API {
 
 
 
-    function callback_text( $args ) {
+    function wonfw_callback_text( $args ) {
 
         // Get and sanitize the value
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -305,8 +305,8 @@ class WeDevs_Settings_API {
      *
      * @param array   $args settings field args
      */
-    function callback_url( $args ) {
-        $this->callback_text( $args );
+    function wonfw_callback_url( $args ) {
+        $this->wonfw_callback_text( $args );
     }
 
     /**
@@ -314,8 +314,8 @@ class WeDevs_Settings_API {
      *
      * @param array   $args settings field args
      */
-    function callback_number( $args ) {
-        $this->callback_text( $args );
+    function wonfw_callback_number( $args ) {
+        $this->wonfw_callback_text( $args );
     }
 
     /**
@@ -325,7 +325,7 @@ class WeDevs_Settings_API {
      */
 
     /*
-    function callback_checkbox( $args ) {
+    function wonfw_callback_checkbox( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 
@@ -341,7 +341,7 @@ class WeDevs_Settings_API {
     */
 
 
-    function callback_checkbox( $args ) {
+    function wonfw_callback_checkbox( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
     
         $html  = '<fieldset>';
@@ -379,7 +379,7 @@ class WeDevs_Settings_API {
      */
 
     /*
-    function callback_multicheck( $args ) {
+    function wonfw_callback_multicheck( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $html  = '<fieldset>';
@@ -401,7 +401,7 @@ class WeDevs_Settings_API {
 
 
 
-    function callback_multicheck( $args ) {
+    function wonfw_callback_multicheck( $args ) {
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $html  = '<fieldset>';
     
@@ -451,7 +451,7 @@ class WeDevs_Settings_API {
      */
 
 
-    function callback_radio( $args ) {
+    function wonfw_callback_radio( $args ) {
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $html  = '<fieldset>';
 
@@ -491,7 +491,7 @@ class WeDevs_Settings_API {
      * @param array   $args settings field args
      */
 
-    function callback_select( $args ) {
+    function wonfw_callback_select( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
         $html  = sprintf( '<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, $args['section'], $args['id'] );
@@ -529,7 +529,7 @@ class WeDevs_Settings_API {
      * @param array   $args settings field args
      */
 
-    function callback_selectm( $args ) {
+    function wonfw_callback_selectm( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
         $html  = sprintf( '<select class="%1$s" name="%2$s[%3$s][]" id="%2$s[%3$s]" multiple>', $size, $args['section'], $args['id'] );
@@ -567,7 +567,7 @@ class WeDevs_Settings_API {
      * @param array   $args settings field args
      */
 
-    function callback_textarea( $args ) {
+    function wonfw_callback_textarea( $args ) {
         $value = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
         $rows  = isset( $args['rows'] ) && ! is_null( $args['rows'] ) ? $args['rows'] : '5';
@@ -602,11 +602,11 @@ class WeDevs_Settings_API {
      * @return string
      */
 /*
-    function callback_html( $args ) {
+    function wonfw_callback_html( $args ) {
         echo $this->get_field_description( $args );
     }
 */
-    function callback_html( $args ) {
+    function wonfw_callback_html( $args ) {
         $description = $this->get_field_description( $args );
         echo wp_kses( $description, array(
             'p' => array(
@@ -633,7 +633,7 @@ class WeDevs_Settings_API {
      */
 
      /*
-     function callback_wysiwyg( $args ) {
+     function wonfw_callback_wysiwyg( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
@@ -657,7 +657,7 @@ class WeDevs_Settings_API {
         echo $this->get_field_description( $args );
     }
      */
-    function callback_wysiwyg( $args ) {
+    function wonfw_callback_wysiwyg( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
@@ -708,7 +708,7 @@ class WeDevs_Settings_API {
      * @param array   $args settings field args
      */
 
-    function callback_file( $args ) {
+    function wonfw_callback_file( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -743,7 +743,7 @@ class WeDevs_Settings_API {
      * @param array   $args settings field args
      */
 
-    function callback_password( $args ) {
+    function wonfw_callback_password( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -773,7 +773,7 @@ class WeDevs_Settings_API {
      */
 
 
-    function callback_color( $args ) {
+    function wonfw_callback_color( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
 
@@ -922,10 +922,10 @@ class WeDevs_Settings_API {
                         <form id="<?php echo esc_attr($form['id'] . "_form"); ?>" method="post" action="<?php echo esc_url($action_url); ?>">
 
                             <?php
-                            do_action( 'wsa_form_top_' . $form['id'], $form );
+                            do_action( 'wonfw_form_top_' . $form['id'], $form );
                             settings_fields( $form['id'] );
                             do_settings_sections( $form['id'] );
-                            do_action( 'wsa_form_bottom_' . $form['id'], $form );
+                            do_action( 'wonfw_form_bottom_' . $form['id'], $form );
                             do_action('whatsiplus_setting_fields_custom_html', $form['id']);
 
                             if(isset($action) && !empty($action)) {
@@ -972,10 +972,10 @@ class WeDevs_Settings_API {
                         <div id="<?php echo esc_attr( $plugin['id'] ); ?>" class="group" style="display: none;">
                             <form method="post" action="options.php">
                                 <?php
-                                do_action( 'wsa_form_top_' . $plugin['id'], $plugin );
+                                do_action( 'wonfw_form_top_' . $plugin['id'], $plugin );
                                 settings_fields( $plugin['id'] );
                                 do_settings_sections( $plugin['id'] );
-                                do_action( 'wsa_form_bottom_' . $plugin['id'], $plugin );
+                                do_action( 'wonfw_form_bottom_' . $plugin['id'], $plugin );
                                 ?>
                                 <div style="padding-left: 10px">
                                     <?php

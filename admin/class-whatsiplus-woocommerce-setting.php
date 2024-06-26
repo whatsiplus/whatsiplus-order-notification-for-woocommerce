@@ -9,7 +9,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
     private $log;
 
 	function __construct() {
-		$this->settings_api = new WeDevs_Settings_API;
+		$this->settings_api = new WONFW_Settings_API;
         $this->log = new Whatsiplus_WooCommerce_Logger();
 
         $this->prev_default_country_code = get_option('whatsiplus_prev_default_country_code');
@@ -43,7 +43,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 	}
 
 	function admin_menu() {
-		add_options_page( 'WhatsiPLUS WooCommerce', 'Whatsiplus Settings', 'manage_options', 'whatsiplus-woocommerce-setting',
+		add_options_page( 'Whatsiplus WooCommerce', 'Whatsiplus Settings', 'manage_options', 'whatsiplus-woocommerce-setting',
             array($this, 'plugin_page')
         );
 	}

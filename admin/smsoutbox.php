@@ -5,7 +5,7 @@ class WhatsiPLUS_SMSOutbox_View implements Whatsiplus_Register_Interface {
 	private $settings_api;
 
 	function __construct() {
-		$this->settings_api = new WeDevs_Settings_API;
+		$this->settings_api = new WONFW_Settings_API;
 	}
 
 	public function register() {

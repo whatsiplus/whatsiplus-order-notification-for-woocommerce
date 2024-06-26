@@ -6,7 +6,7 @@ class WhatsiPLUS_Logs_View implements Whatsiplus_Register_Interface {
     private $logger;
 
     function __construct() {
-        $this->settings_api = new WeDevs_Settings_API;
+        $this->settings_api = new WONFW_Settings_API;
         $this->logger = new Whatsiplus_WooCommerce_Logger(); // Instantiate the logger
     }
 
