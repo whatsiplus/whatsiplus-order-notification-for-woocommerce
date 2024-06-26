@@ -244,6 +244,7 @@ class WONFW_Settings_API {
      * @param array   $args settings field args
      */
 
+     
      /*
      function wonfw_callback_text( $args ) {
 
@@ -259,9 +260,8 @@ class WONFW_Settings_API {
     */
 
 
-
+    
     function wonfw_callback_text( $args ) {
-
         // Get and sanitize the value
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
     
@@ -298,6 +298,7 @@ class WONFW_Settings_API {
         ) );
     }
     
+    
 
 
     /**
@@ -324,7 +325,8 @@ class WONFW_Settings_API {
      * @param array   $args settings field args
      */
 
-    /*
+    
+     /*
     function wonfw_callback_checkbox( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
@@ -340,7 +342,7 @@ class WONFW_Settings_API {
     }
     */
 
-
+    
     function wonfw_callback_checkbox( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
     
@@ -348,7 +350,7 @@ class WONFW_Settings_API {
         $html .= sprintf( '<label for="wpuf-%1$s[%2$s]">', esc_attr( $args['section'] ), esc_attr( $args['id'] ) );
         $html .= sprintf( '<input type="hidden" name="%1$s[%2$s]" value="off" />', esc_attr( $args['section'] ), esc_attr( $args['id'] ) );
         $html .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s]" name="%1$s[%2$s]" value="on" %3$s />', esc_attr( $args['section'] ), esc_attr( $args['id'] ), checked( $value, 'on', false ) );
-        $html .= sprintf( '%1$s</label>', wp_kses_post( $args['desc'] ) );
+        $html .= sprintf( '%1$s</label>', esc_html( $args['desc'] ) );
         $html .= '</fieldset>';
     
         echo wp_kses( $html, array(
@@ -370,6 +372,7 @@ class WONFW_Settings_API {
             ),
         ) );
     }
+    
     
 
     /**
@@ -398,47 +401,44 @@ class WONFW_Settings_API {
     }
     */
 
-
-
-
     function wonfw_callback_multicheck( $args ) {
-        $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
-        $html  = '<fieldset>';
-    
-        foreach ( $args['options'] as $key => $label ) {
-            // Check if the current option is selected in the saved value
-            $checked = isset( $value[$key] ) && $value[$key] === 'on' ? 'checked' : '';
-    
-            $html .= sprintf( '<label for="wpuf-%1$s[%2$s][%3$s]">', esc_attr( $args['section'] ), esc_attr( $args['id'] ), esc_attr( $key ) );
-            $html .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s][%3$s]" name="%1$s[%2$s][%3$s]" value="on" %4$s />', esc_attr( $args['section'] ), esc_attr( $args['id'] ), esc_attr( $key ), checked( $checked, 'checked', false ) );
-            $html .= sprintf( '%1$s</label><br>', esc_html( $label ) );
-        }
-    
-        // Assuming get_field_description() returns HTML
-        $html .= $this->get_field_description( $args );
-    
-        $html .= '</fieldset>';
-    
-        echo wp_kses( $html, array(
-            'input' => array(
-                'type'    => array(),
-                'class'   => array(),
-                'id'      => array(),
-                'name'    => array(),
-                'value'   => array(),
-                'checked' => array(),
-            ),
-            'label'    => array(
-                'for' => true,
-            ),
-            'fieldset' => array(),
-            'br'       => array(),
-            'p'        => array(
-                'class' => true,
-                'id'    => true,
-            ),
-        ) );
+    $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
+    $html  = '<fieldset>';
+
+    foreach ( $args['options'] as $key => $label ) {
+        $checked = isset( $value[$key] ) && $value[$key] === $key ? 'checked' : '';
+
+        $html .= sprintf( '<label for="wpuf-%1$s[%2$s][%3$s]">', esc_attr( $args['section'] ), esc_attr( $args['id'] ), esc_attr( $key ) );
+        $html .= sprintf( '<input type="checkbox" class="checkbox" id="wpuf-%1$s[%2$s][%3$s]" name="%1$s[%2$s][%3$s]" value="%3$s" %4$s />', esc_attr( $args['section'] ), esc_attr( $args['id'] ), esc_attr( $key ), checked( $checked, 'checked', false ) );
+        $html .= sprintf( '%1$s</label><br>', esc_html( $label ) );
     }
+
+    // Assuming get_field_description() returns HTML
+    $html .= wp_kses_post($this->get_field_description( $args ));
+
+    $html .= '</fieldset>';
+
+    echo wp_kses( $html, array(
+        'input' => array(
+            'type'    => array(),
+            'class'   => array(),
+            'id'      => array(),
+            'name'    => array(),
+            'value'   => array(),
+            'checked' => array(),
+        ),
+        'label'    => array(
+            'for' => true,
+        ),
+        'fieldset' => array(),
+        'br'       => array(),
+        'p'        => array(
+            'class' => true,
+            'id'    => true,
+        ),
+    ) );
+}
+
     
     
 
