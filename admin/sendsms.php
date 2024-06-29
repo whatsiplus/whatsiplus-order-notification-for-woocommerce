@@ -31,6 +31,14 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         add_filter( 'removable_query_args',          array($this, 'add_removable_arg') );
 	}
 
+    public function sanitize_recursive($input) {
+        if (is_array($input)) {
+            return array_map(array($this, 'sanitize_recursive'), $input);
+        } else {
+            return sanitize_text_field($input);
+        }
+    }
+    
     public function mapi_send_sms()
     {
         $nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field(wp_unslash( $_POST['whatsiplus_nonce']) ) : '';
@@ -39,7 +47,11 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         }
 
         $from='';$message_to='';$message='';$users='';$recipients='';$country='';$roles=[];
-        $post_data = $_POST['whatsiplus_sendsms_setting'];
+        //$post_data = $_POST['whatsiplus_sendsms_setting'];
+        //$post_data = isset($_POST['whatsiplus_sendsms_setting']) ? array_map('sanitize_text_field', wp_unslash($_POST['whatsiplus_sendsms_setting'])) : array();
+
+        $post_data = isset($_POST['whatsiplus_sendsms_setting']) ? $this->sanitize_recursive(wp_unslash($_POST['whatsiplus_sendsms_setting'])) : array();
+
 
         $from = "Whatsi";
 

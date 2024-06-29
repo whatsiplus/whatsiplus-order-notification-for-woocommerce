@@ -34,7 +34,8 @@ class WONFW_Settings_API {
     public function register_hooks() {
         add_action('admin_enqueue_scripts', array($this, 'my_custom_scripts2'));
         add_action('admin_enqueue_scripts', array($this, 'my_custom_scripts'));
-        add_action('admin_head', array($this, 'my_custom_styles'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_custom_styles'));
+
     }
 
     public function my_custom_scripts2() {
@@ -46,14 +47,13 @@ class WONFW_Settings_API {
     }
     
 
-    public function my_custom_styles() {
-        ?>
-        <style type="text/css">
+    public function enqueue_custom_styles() {
+        $custom_css = "
             /** WordPress 3.8 Fix **/
             .form-table th { padding: 20px 10px; }
             #wpbody-content .metabox-holder { padding-top: 5px; }
-        </style>
-        <?php
+        ";
+        wp_add_inline_style('wp-admin', $custom_css);
     }
 
     
@@ -713,7 +713,7 @@ class WONFW_Settings_API {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
         $id    = $args['section']  . '[' . $args['id'] . ']';
-        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __( 'Choose File' );
+        $label = isset( $args['options']['button_label'] ) ? $args['options']['button_label'] : __('Choose File', 'whatsiplus-order-notification-for-woocommerce');
 
         $html  = sprintf( '<input type="text" class="%1$s-text wpsa-url" id="%2$s[%3$s]" name="%2$s[%3$s]" value="%4$s"/>', $size, $args['section'], $args['id'], $value );
         $html  .= '<input type="button" class="button wpsa-browse" value="' . $label . '" />';

@@ -50,7 +50,8 @@ class ContactForm7 {
         if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
             // return;
         }
-        $wpcf7whatsiapi_settings = ( ! empty( $_POST['wpcf7whatsiapi-settings'] ) ) ? wp_unslash( $_POST['wpcf7whatsiapi-settings'] ) : '';
+		$wpcf7whatsiapi_settings = ( ! empty( $_POST['wpcf7whatsiapi-settings'] ) ) ? sanitize_text_field( wp_unslash( $_POST['wpcf7whatsiapi-settings'] ) ) : '';
+
 		update_option( $this->_option_prefix . $this->get_contact_form_id($form), Sanitization::whatsiapi_sanitize_array( $wpcf7whatsiapi_settings ) );
     }
 
@@ -438,7 +439,10 @@ class ContactForm7 {
 			return;
 		}
 		if(!empty($_REQUEST['post'])){
-			$options         = get_option( $this->_option_prefix . $_REQUEST['post'] );
+			$post_id = isset($_REQUEST['post']) ? absint(sanitize_text_field(wp_unslash($_REQUEST['post']))) : 0;
+			$options = get_option($this->_option_prefix . $post_id);
+
+
 			if ( empty($options['visitor_mobile_field']) )
 			{
 				echo sprintf(
