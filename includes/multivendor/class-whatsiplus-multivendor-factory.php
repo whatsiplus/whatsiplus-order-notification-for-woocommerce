@@ -48,7 +48,7 @@ class Whatsiplus_Multivendor_Factory {
 	}
 
 	/**
-	 * @return Abstract_Whatsiplus_Multivendor|bool
+	 * @return Whatsiplus_Abstract_Multivendor|bool
 	 */
 	public static function make() {
 		$factory = new self();

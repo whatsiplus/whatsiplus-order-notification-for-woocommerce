@@ -37,7 +37,7 @@ class WhatsiPLUS_SendSMS_Sms {
 
 	}
 
-	public static function whatsiapi_get_account_balance($api_key, $api_secret){
+	public static function whatsiplus_get_account_balance($api_key, $api_secret){
 
 	    $whatsiplus_rest = new WhatsiPLUS($api_key, $api_secret);
 	    $rest_response = $whatsiplus_rest->accountBalance();

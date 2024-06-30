@@ -7,7 +7,7 @@ class Sanitization {
      *
      * @param array $arr Values to be sanitized.
      */
-    static function whatsiapi_sanitize_array( $arr ) {
+    static function whatsiplus_sanitize_array( $arr ) {
         global $wp_version;
         $older_version = ( $wp_version < '4.7' ) ? true : false;
         if ( ! is_array( $arr ) ) {

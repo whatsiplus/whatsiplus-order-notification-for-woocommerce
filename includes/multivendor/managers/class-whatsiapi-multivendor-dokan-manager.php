@@ -6,7 +6,7 @@
  * Time: 5:46 PM.
  */
 
-class Whatsiapi_Multivendor_Dokan_Manager extends Abstract_Whatsiplus_Multivendor {
+class Whatsiapi_Multivendor_Dokan_Manager extends Whatsiplus_Abstract_Multivendor {
 	public function __construct( Whatsiplus_WooCommerce_Logger $log = null ) {
 		parent::__construct( $log );
 	}

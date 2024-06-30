@@ -439,7 +439,7 @@ class WhatsiQuickRestaurantReservation implements Whatsiplus_PluginInterface, Wh
         if ( did_action( 'save_post_qrr_booking' ) > 1 ) {
             return;
         }
-        update_option("test_whatsi", $post);
+        update_option("Whatsiplus_test", $post);
 
         $this->send_sms_on($post_id, '','');
 

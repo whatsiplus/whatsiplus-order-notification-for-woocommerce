@@ -7,7 +7,7 @@
  */
 
 class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notification {
-	/* @var Abstract_Whatsiplus_Multivendor $whatsiplus_multivendor */
+	/* @var Whatsiplus_Abstract_Multivendor $whatsiplus_multivendor */
 	private $whatsiplus_multivendor;
 	private $medium;
 	private $defaultHooks = array(

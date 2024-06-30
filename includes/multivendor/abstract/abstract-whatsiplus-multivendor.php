@@ -11,7 +11,7 @@
 }
 require_once __DIR__ . '/../contracts/class-whatsiplus-multivendor-interface.php';
 
-abstract class Abstract_Whatsiplus_Multivendor implements Whatsiplus_Multivendor_Interface {
+abstract class Whatsiplus_Abstract_Multivendor implements Whatsiplus_Multivendor_Interface {
 	protected $log;
 
 	protected function __construct( Whatsiplus_WooCommerce_Logger $log = null ) {

@@ -36,7 +36,7 @@ class ContactForm7 {
     }
 
     public function save_form($form) {
-        // identifier = whatsiapi_sms_wpcf7_{id}
+        // identifier = whatsiplus_sms_wpcf7_{id}
         /* array (
             visitor_notification,
             visitor_mobile_field,
@@ -139,7 +139,7 @@ class ContactForm7 {
 	 *
 	 * @return void
 	 */
-	public function whatsiapi_wpcf7_add_shortcode_phonefield_frontend() {
+	public function whatsiplus_wpcf7_add_shortcode_phonefield_frontend() {
 		wpcf7_add_form_tag(
 			array( 'whatsi_phone', 'whatsi_phone*'),
 			array( $this, 'whatsiapi_wpcf7_shortcode_handler' ),
@@ -192,7 +192,7 @@ class ContactForm7 {
 	 *
 	 * @return string
 	 */
-	public function whatsiapi_wpcf7_shortcode_handler( $tag ) {
+	public function whatsiplus_wpcf7_shortcode_handler( $tag ) {
 		$wpcf7    = wpcf7_get_current_contact_form();
 		$unit_tag = $wpcf7->unit_tag();
 
@@ -267,7 +267,7 @@ class ContactForm7 {
 	 *
 	 * @return void
 	 */
-	public function whatsiapi_wpcf7_tag_generator_text( $contact_form, $args = '' ) {
+	public function whatsiplus_wpcf7_tag_generator_text( $contact_form, $args = '' ) {
 		$args = wp_parse_args( $args, array() );
 		$type = $args['id'];
         $field_name = 'whatsi_phone';
@@ -427,7 +427,7 @@ class ContactForm7 {
 	 *
 	 * @return void
 	 */
-	function whatsiapi_wpcf7_show_warnings($page,$action,$object)
+	function whatsiplus_wpcf7_show_warnings($page,$action,$object)
 	{
 		$nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field(wp_unslash($_POST['whatsiplus_nonce'])  ) : '';
         if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {

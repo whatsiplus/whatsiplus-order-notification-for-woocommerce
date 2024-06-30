@@ -189,7 +189,7 @@ class WONFW_Settings_API {
                     'css'               => isset( $option['css'] ) ? $option['css'] : null,
                     'custom_html'       => isset( $option['custom_html'] ) ? $option['custom_html'] : null,
                 );
-                add_settings_field( $section . '[' . $option['name'] . ']', $option['label'], array( $this, 'wonfw_callback_' . $type ), $section, $section, $args );
+                add_settings_field( $section . '[' . $option['name'] . ']', $option['label'], array( $this, 'whatsiplus_callback_' . $type ), $section, $section, $args );
 
             }
         }
@@ -227,7 +227,7 @@ class WONFW_Settings_API {
      *
      * @param array   $args settings field args
      */
-    function wonfw_callback_custom_html( $args ) {
+    function whatsiplus_callback_custom_html( $args ) {
 
         // $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         // $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -246,7 +246,7 @@ class WONFW_Settings_API {
 
      
      /*
-     function wonfw_callback_text( $args ) {
+     function whatsiplus_callback_text( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -261,7 +261,7 @@ class WONFW_Settings_API {
 
 
     
-    function wonfw_callback_text( $args ) {
+    function whatsiplus_callback_text( $args ) {
         // Get and sanitize the value
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
     
@@ -306,8 +306,8 @@ class WONFW_Settings_API {
      *
      * @param array   $args settings field args
      */
-    function wonfw_callback_url( $args ) {
-        $this->wonfw_callback_text( $args );
+    function whatsiplus_callback_url( $args ) {
+        $this->whatsiplus_callback_text( $args );
     }
 
     /**
@@ -315,8 +315,8 @@ class WONFW_Settings_API {
      *
      * @param array   $args settings field args
      */
-    function wonfw_callback_number( $args ) {
-        $this->wonfw_callback_text( $args );
+    function whatsiplus_callback_number( $args ) {
+        $this->whatsiplus_callback_text( $args );
     }
 
     /**
@@ -327,7 +327,7 @@ class WONFW_Settings_API {
 
     
      /*
-    function wonfw_callback_checkbox( $args ) {
+    function whatsiplus_callback_checkbox( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
 
@@ -343,7 +343,7 @@ class WONFW_Settings_API {
     */
 
     
-    function wonfw_callback_checkbox( $args ) {
+    function whatsiplus_callback_checkbox( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
     
         $html  = '<fieldset>';
@@ -382,7 +382,7 @@ class WONFW_Settings_API {
      */
 
     /*
-    function wonfw_callback_multicheck( $args ) {
+    function whatsiplus_callback_multicheck( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $html  = '<fieldset>';
@@ -401,7 +401,7 @@ class WONFW_Settings_API {
     }
     */
 
-    function wonfw_callback_multicheck( $args ) {
+    function whatsiplus_callback_multicheck( $args ) {
     $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
     $html  = '<fieldset>';
 
@@ -451,7 +451,7 @@ class WONFW_Settings_API {
      */
 
 
-    function wonfw_callback_radio( $args ) {
+    function whatsiplus_callback_radio( $args ) {
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $html  = '<fieldset>';
 
@@ -491,7 +491,7 @@ class WONFW_Settings_API {
      * @param array   $args settings field args
      */
 
-    function wonfw_callback_select( $args ) {
+    function whatsiplus_callback_select( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
         $html  = sprintf( '<select class="%1$s" name="%2$s[%3$s]" id="%2$s[%3$s]">', $size, $args['section'], $args['id'] );
@@ -529,7 +529,7 @@ class WONFW_Settings_API {
      * @param array   $args settings field args
      */
 
-    function wonfw_callback_selectm( $args ) {
+    function whatsiplus_callback_selectm( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
         $html  = sprintf( '<select class="%1$s" name="%2$s[%3$s][]" id="%2$s[%3$s]" multiple>', $size, $args['section'], $args['id'] );
@@ -567,7 +567,7 @@ class WONFW_Settings_API {
      * @param array   $args settings field args
      */
 
-    function wonfw_callback_textarea( $args ) {
+    function whatsiplus_callback_textarea( $args ) {
         $value = esc_textarea( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
         $rows  = isset( $args['rows'] ) && ! is_null( $args['rows'] ) ? $args['rows'] : '5';
@@ -602,11 +602,11 @@ class WONFW_Settings_API {
      * @return string
      */
 /*
-    function wonfw_callback_html( $args ) {
+    function whatsiplus_callback_html( $args ) {
         echo $this->get_field_description( $args );
     }
 */
-    function wonfw_callback_html( $args ) {
+    function whatsiplus_callback_html( $args ) {
         $description = $this->get_field_description( $args );
         echo wp_kses( $description, array(
             'p' => array(
@@ -633,7 +633,7 @@ class WONFW_Settings_API {
      */
 
      /*
-     function wonfw_callback_wysiwyg( $args ) {
+     function whatsiplus_callback_wysiwyg( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
@@ -657,7 +657,7 @@ class WONFW_Settings_API {
         echo $this->get_field_description( $args );
     }
      */
-    function wonfw_callback_wysiwyg( $args ) {
+    function whatsiplus_callback_wysiwyg( $args ) {
 
         $value = $this->get_option( $args['id'], $args['section'], $args['std'] );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : '500px';
@@ -708,7 +708,7 @@ class WONFW_Settings_API {
      * @param array   $args settings field args
      */
 
-    function wonfw_callback_file( $args ) {
+    function whatsiplus_callback_file( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -743,7 +743,7 @@ class WONFW_Settings_API {
      * @param array   $args settings field args
      */
 
-    function wonfw_callback_password( $args ) {
+    function whatsiplus_callback_password( $args ) {
 
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && !is_null( $args['size'] ) ? $args['size'] : 'regular';
@@ -773,7 +773,7 @@ class WONFW_Settings_API {
      */
 
 
-    function wonfw_callback_color( $args ) {
+    function whatsiplus_callback_color( $args ) {
         $value = esc_attr( $this->get_option( $args['id'], $args['section'], $args['std'] ) );
         $size  = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
 
@@ -922,10 +922,10 @@ class WONFW_Settings_API {
                         <form id="<?php echo esc_attr($form['id'] . "_form"); ?>" method="post" action="<?php echo esc_url($action_url); ?>">
 
                             <?php
-                            do_action( 'wonfw_form_top_' . $form['id'], $form );
+                            do_action( 'whatsiplus_form_top_' . $form['id'], $form );
                             settings_fields( $form['id'] );
                             do_settings_sections( $form['id'] );
-                            do_action( 'wonfw_form_bottom_' . $form['id'], $form );
+                            do_action( 'whatsiplus_form_bottom_' . $form['id'], $form );
                             do_action('whatsiplus_setting_fields_custom_html', $form['id']);
 
                             if(isset($action) && !empty($action)) {
@@ -972,10 +972,10 @@ class WONFW_Settings_API {
                         <div id="<?php echo esc_attr( $plugin['id'] ); ?>" class="group" style="display: none;">
                             <form method="post" action="options.php">
                                 <?php
-                                do_action( 'wonfw_form_top_' . $plugin['id'], $plugin );
+                                do_action( 'whatsiplus_form_top_' . $plugin['id'], $plugin );
                                 settings_fields( $plugin['id'] );
                                 do_settings_sections( $plugin['id'] );
-                                do_action( 'wonfw_form_bottom_' . $plugin['id'], $plugin );
+                                do_action( 'whatsiplus_form_bottom_' . $plugin['id'], $plugin );
                                 ?>
                                 <div style="padding-left: 10px">
                                     <?php

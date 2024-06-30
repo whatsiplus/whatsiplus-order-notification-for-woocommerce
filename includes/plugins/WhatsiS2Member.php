@@ -2,6 +2,8 @@
 
 class WhatsiS2Member implements Whatsiplus_PluginInterface, Whatsiplus_Register_Interface {
     /*
+    // File: whatsiplus-order-notification-for-woocommerce/includes/plugins/WhatsiS2Member.php
+
     Plugin Name: s2Member® Framework (Membership, Member Level Roles, Access Capabilities, PayPal Members)
     Plugin Link: https://wordpress.org/plugins/s2member/
     */
@@ -68,6 +70,9 @@ class WhatsiS2Member implements Whatsiplus_PluginInterface, Whatsiplus_Register_
                 }
             }
         }
+        // This code is used to interact with the s2member plugin
+        // We need to use the options of the s2member plugin
+        // Therefore, we cannot change the option names
         update_option('ws_plugin__s2member_options', $s2_option);
 
         return true;
