@@ -14,12 +14,12 @@ class Whatsiplus_WooCommerce_Frontend_Scripts implements Whatsiplus_Register_Int
 
 	public function msmswc_admin_enqueue_scripts() {
         wp_enqueue_script( 'admin-whatsiplus-scripts', plugins_url( 'js/admin.js', __DIR__ ), array( 'jquery' ), '1.1.5', true );
-        wp_enqueue_script( 'admin-whatsiplus-sendsms', plugins_url( 'js/sendsms.js', __DIR__ ), array(), '1.0.0', true );
+        //wp_enqueue_script( 'admin-whatsiplus-sendsms', plugins_url( 'js/sendsms.js', __DIR__ ), array(), '1.0.0', true );
         wp_enqueue_script( 'admin-whatsiplus-charcounter', plugins_url( 'js/charactercounter.js', __DIR__ ), array(), '1.0.0', true );
     
         // jQuery modal
-        wp_enqueue_style( 'admin-whatsiplus-css', plugins_url( 'css/jquery.modal.min.css', __FILE__ ), array(), '0.9.1' );
-        wp_enqueue_script( 'jquery-modal', plugins_url( 'js/jquery.modal.min.js', __FILE__ ), array( 'jquery' ), '0.9.1', true );
+        //wp_enqueue_style( 'admin-whatsiplus-css', plugins_url( 'css/jquery.modal.min.css', __FILE__ ), array(), '0.9.1' );
+        //wp_enqueue_script( 'jquery-modal', plugins_url( 'js/jquery.modal.min.js', __FILE__ ), array( 'jquery' ), '0.9.1', true );
 
     }
     

@@ -641,7 +641,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
     }
 
     function enqueue_admin_custom_scripts() {
-        wp_register_script( 'admin-split-sms-js', plugins_url( 'js/split-sms.min.js', __FILE__ ), array(), '0.1.7', true );
+        wp_register_script( 'admin-split-sms-js', plugins_url( 'js/split-sms.js', __FILE__ ), array(), '0.1.7', true );
         wp_enqueue_script( 'admin-split-sms-js' );
     }
     

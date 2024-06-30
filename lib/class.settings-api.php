@@ -43,7 +43,7 @@ class WONFW_Settings_API {
     }
 
     public function my_custom_scripts() {
-        wp_enqueue_script('split-sms', plugin_dir_url(__DIR__) . 'js/split-sms.min.js', array(), null, true);
+        wp_enqueue_script('split-sms', plugin_dir_url(__DIR__) . 'js/split-sms.js', array(), null, true);
     }
     
 
