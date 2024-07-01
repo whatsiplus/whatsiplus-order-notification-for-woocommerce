@@ -142,9 +142,9 @@ if (empty($wpcf7->id())) {
     </table>
 
    <?php
-    function whatsiplus_enqueue_keyword_modal_script() {
+    function enqueue_keyword_modal_script() {
         wp_enqueue_script('keyword-modal-script', plugin_dir_url(__DIR__) . '/js/custom-contact7.js', array('jquery'), '1.0', true);
     }
-    add_action('wp_enqueue_scripts', 'whatsiplus_enqueue_keyword_modal_script');
+    add_action('wp_enqueue_scripts', 'enqueue_keyword_modal_script');
     
  } ?>

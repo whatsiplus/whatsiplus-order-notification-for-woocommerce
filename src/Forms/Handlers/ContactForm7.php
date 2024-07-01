@@ -25,7 +25,7 @@ class ContactForm7 {
         add_action( 'wpcf7_after_save', array( &$this, 'save_form' ) );
 		add_action( 'wpcf7_before_send_mail', array( $this, 'sendsms_c7' ) );
 
-		add_action( 'wpcf7_init', array( $this, 'whatsiapi_wpcf7_add_shortcode_phonefield_frontend' ) );
+		add_action( 'wpcf7_init', array( $this, 'whatsiplus_wpcf7_add_shortcode_phonefield_frontend' ) );
 		add_action( 'wpcf7_admin_notices', array( $this,'whatsiapi_wpcf7_show_warnings'), 10, 3 );
 
     }
