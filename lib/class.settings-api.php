@@ -34,7 +34,7 @@ class WONFW_Settings_API {
     public function register_hooks() {
         add_action('admin_enqueue_scripts', array($this, 'whatsiplus_my_custom_scripts2'));
         add_action('admin_enqueue_scripts', array($this, 'whatsiplus_my_custom_scripts'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueue_custom_styles'));
+        add_action('admin_enqueue_scripts', array($this, 'whatsiplus_enqueue_custom_styles'));
 
     }
 
@@ -47,7 +47,7 @@ class WONFW_Settings_API {
     }
     
 
-    public function enqueue_custom_styles() {
+    public function whatsiplus_enqueue_custom_styles() {
         $custom_css = "
             /** WordPress 3.8 Fix **/
             .form-table th { padding: 20px 10px; }
