@@ -32,17 +32,17 @@ class WONFW_Settings_API {
     }
 
     public function register_hooks() {
-        add_action('admin_enqueue_scripts', array($this, 'my_custom_scripts2'));
-        add_action('admin_enqueue_scripts', array($this, 'my_custom_scripts'));
+        add_action('admin_enqueue_scripts', array($this, 'whatsiplus_my_custom_scripts2'));
+        add_action('admin_enqueue_scripts', array($this, 'whatsiplus_my_custom_scripts'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_custom_styles'));
 
     }
 
-    public function my_custom_scripts2() {
+    public function whatsiplus_my_custom_scripts2() {
         wp_enqueue_script('custom-admin-script', plugin_dir_url(__DIR__) . 'js/custom-admin-script.js', array('jquery', 'wp-color-picker'), null, true);
     }
 
-    public function my_custom_scripts() {
+    public function whatsiplus_my_custom_scripts() {
         wp_enqueue_script('split-sms', plugin_dir_url(__DIR__) . 'js/split-sms.js', array(), null, true);
     }
     

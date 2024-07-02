@@ -25,7 +25,7 @@ class ContactForm7 {
         add_action( 'wpcf7_after_save', array( &$this, 'save_form' ) );
 		add_action( 'wpcf7_before_send_mail', array( $this, 'sendsms_c7' ) );
 
-		add_action( 'wpcf7_init', array( $this, 'whatsiplus_wpcf7_add_shortcode_phonefield_frontend' ) );
+		add_action( 'wpcf7_init', array( $this, 'whatsiapi_wpcf7_add_shortcode_phonefield_frontend' ) );
 		add_action( 'wpcf7_admin_notices', array( $this,'whatsiapi_wpcf7_show_warnings'), 10, 3 );
 
     }
@@ -36,7 +36,7 @@ class ContactForm7 {
     }
 
     public function save_form($form) {
-        // identifier = whatsiplus_sms_wpcf7_{id}
+        // identifier = whatsiapi_sms_wpcf7_{id}
         /* array (
             visitor_notification,
             visitor_mobile_field,
@@ -50,9 +50,16 @@ class ContactForm7 {
         if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
             // return;
         }
-		$wpcf7whatsiapi_settings = ( ! empty( $_POST['wpcf7whatsiapi-settings'] ) ) ? sanitize_text_field( wp_unslash( $_POST['wpcf7whatsiapi-settings'] ) ) : '';
+		$wpcf7whatsiapi_settings = ( ! empty( $_POST['wpcf7whatsiapi-settings'] ) ) ? wp_unslash( $_POST['wpcf7whatsiapi-settings'] ) : '';
 
-		update_option( $this->_option_prefix . $this->get_contact_form_id($form), Sanitization::whatsiapi_sanitize_array( $wpcf7whatsiapi_settings ) );
+		if ( is_array( $wpcf7whatsiapi_settings ) ) {
+			$sanitized_settings = array_map( 'sanitize_text_field', $wpcf7whatsiapi_settings );
+		} else {
+			$sanitized_settings = sanitize_text_field( $wpcf7whatsiapi_settings );
+		}
+
+		update_option( $this->_option_prefix . $this->get_contact_form_id($form), $sanitized_settings );
+
     }
 
     /**
@@ -132,14 +139,13 @@ class ContactForm7 {
 		);
 		return $panels;
 	}
-	
 
     /**
 	 * Add phonefield to backend cf7 form builder section.
 	 *
 	 * @return void
 	 */
-	public function whatsiplus_wpcf7_add_shortcode_phonefield_frontend() {
+	public function whatsiapi_wpcf7_add_shortcode_phonefield_frontend() {
 		wpcf7_add_form_tag(
 			array( 'whatsi_phone', 'whatsi_phone*'),
 			array( $this, 'whatsiapi_wpcf7_shortcode_handler' ),
@@ -192,7 +198,7 @@ class ContactForm7 {
 	 *
 	 * @return string
 	 */
-	public function whatsiplus_wpcf7_shortcode_handler( $tag ) {
+	public function whatsiapi_wpcf7_shortcode_handler( $tag ) {
 		$wpcf7    = wpcf7_get_current_contact_form();
 		$unit_tag = $wpcf7->unit_tag();
 
@@ -267,7 +273,7 @@ class ContactForm7 {
 	 *
 	 * @return void
 	 */
-	public function whatsiplus_wpcf7_tag_generator_text( $contact_form, $args = '' ) {
+	public function whatsiapi_wpcf7_tag_generator_text( $contact_form, $args = '' ) {
 		$args = wp_parse_args( $args, array() );
 		$type = $args['id'];
         $field_name = 'whatsi_phone';
@@ -350,7 +356,6 @@ class ContactForm7 {
 		if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
 			//return;
 		}
-
 		$tag  = new \WPCF7_FormTag( $tag );
 		$name = $tag->name;
 		// $value = ( ! empty( $_POST[ $name ] ) ) ? trim( sanitize_text_field( wp_unslash( strtr( (string) $_POST[ $name ] ), "\n", ' ' ) ) ) : '';
@@ -427,11 +432,11 @@ class ContactForm7 {
 	 *
 	 * @return void
 	 */
-	function whatsiplus_wpcf7_show_warnings($page,$action,$object)
+	function whatsiapi_wpcf7_show_warnings($page,$action,$object)
 	{
 		$nonce = isset( $_POST['whatsiplus_nonce'] ) ? sanitize_text_field(wp_unslash($_POST['whatsiplus_nonce'])  ) : '';
         if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'whatsiplus_send_sms_action' ) ) {
-            // return;
+            //return;
         }
 		
 		if ( ! in_array( $page, array( 'wpcf7', 'wpcf7-new' ) ) )
@@ -441,8 +446,6 @@ class ContactForm7 {
 		if(!empty($_REQUEST['post'])){
 			$post_id = isset($_REQUEST['post']) ? absint(sanitize_text_field(wp_unslash($_REQUEST['post']))) : 0;
 			$options = get_option($this->_option_prefix . $post_id);
-
-
 			if ( empty($options['visitor_mobile_field']) )
 			{
 				echo sprintf(

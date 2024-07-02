@@ -12,7 +12,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 		$this->settings_api = new WONFW_Settings_API;
         $this->log = new Whatsiplus_WooCommerce_Logger();
 
-        $this->prev_default_country_code = get_option('whatsiplus_prev_default_country_code');
+        //$this->prev_default_country_code = get_option('whatsiplus_prev_default_country_code');
 	}
 
 	public function register() {

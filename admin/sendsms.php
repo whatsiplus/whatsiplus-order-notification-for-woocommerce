@@ -9,8 +9,8 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         $this->log = new Whatsiplus_WooCommerce_Logger();
 		$this->settings_api = new WONFW_Settings_API;
 
-        add_action('wp_enqueue_scripts', array($this, 'my_custom_scripts3'));
-        add_action('admin_enqueue_scripts', array($this, 'my_custom_scripts3'));
+        add_action('wp_enqueue_scripts', array($this, 'whatsiplus_my_custom_scripts3'));
+        add_action('admin_enqueue_scripts', array($this, 'whatsiplus_my_custom_scripts3'));
 	}
 
 	public function register() {
@@ -646,7 +646,7 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
     }
     
 
-    public function my_custom_scripts3() {
+    public function whatsiplus_my_custom_scripts3() {
         // Register the script
         wp_register_script('custom-script3', plugin_dir_url(__DIR__) . 'js/custom-script1.js', array('jquery'), null, true);
 
