@@ -6,10 +6,10 @@ Plugin URI:  https://whatsiplus.com
 Description: Send WhatsApp notifications to WordPress and WooCommerce users
 Version:     1.0.0
 Author:      whatsiplus
-Text Domain: whatsiplus-order-notification-for-woocommerce
 License:     GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: whatsiplus-order-notification-for-woocommerce
+Domain Path: /languages
 */
 
 use WhatsiAPI_WC\Loader;
@@ -38,6 +38,12 @@ define("WHATSI_DB_TABLE_NAME", "whatsiplus_wc_send_sms_outbox");
 //require_once WHATSIPLUS_PLUGIN_DIR . 'lib/action-scheduler/action-scheduler.php';
 
 add_action( 'plugins_loaded', 'whatsiplus_woocommerce_init', PHP_INT_MAX );
+
+function whatsiplus_my_plugin_load_textdomain() {
+    load_plugin_textdomain('whatsiplus-order-notification-for-woocommerce', false, dirname(plugin_basename(__FILE__)) . '/languages');
+}
+add_action('plugins_loaded', 'whatsiplus_my_plugin_load_textdomain');
+
 
 function whatsiplus_install() {
 
