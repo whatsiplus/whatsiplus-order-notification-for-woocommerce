@@ -7,7 +7,6 @@ Description: Send WhatsApp notifications to WordPress and WooCommerce users
 Version:     1.0.0
 Author:      whatsiplus
 Text Domain: whatsiplus-order-notification-for-woocommerce
-Domain Path: /languages
 License:     GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: whatsiplus-order-notification-for-woocommerce
