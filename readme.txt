@@ -14,19 +14,19 @@ WhatsApp notification plugin for WooCommerce:Notify buyers & sellers on order pl
 
 This plugin sends order notifications via WhatsApp using the Whatsiplus service.
 
-### Third-party or external service ###
+### Third-party Service ###
+This plugin relies on an external service for sending WhatsApp messages. Therefore, it uses **[Whatsiplus Service API](https://whatsiplus.com)** to handle message delivery.
 
-This extension must use a third-party service to send all WhatsApp messages. Therefore, the Whatsiplus service is used to send messages.
 - **Service URL:** https://api.whatsiplus.com/
 - **Links used in the plugin to send messages:** https://api.whatsiplus.com/sendMsg
 - **Links used in the plugin to set default country code:** https://api.whatsiplus.com/serviceSettings
-- **API documentation:** https://docs.whatsiplus.com/
+- **API documentation:** [docs.whatsiplus.com](https://docs.whatsiplus.com)
 - **Terms of Service:** 
   - https://whatsiplus.com/terms-and-conditions/
   - https://whatsiplus.com/privacy-policy/
-- **Main website:** https://whatsiplus.com/
+- **Main website:** [whatsiplus.com](https://whatsiplus.com/)
 
-### Whatsiplus WooCommerce Order Notification ###
+### WhatsApp Order Notification WooCommerce ###
 
 **Send WhatsApp Notification**: This plugin serves as a WooCommerce add-on, but you can access its functionalities independently. For instance, you can send **WhatsApp messages** and **notifications** to various user groups.
 
@@ -52,9 +52,6 @@ Try it for free. For 10 days, use all the features of the plugin, including send
 * Membership Plugins Supported
 * CRM Plugins Supported
 * Forms Plugins Supported
-
-**Third-party Service**:
-This plugin relies on an external service for sending WhatsApp messages. Therefore, it uses **[Whatsiplus Service API](https://whatsiplus.com)** to handle message delivery.
 
 ### Multivendor Plugins Supported / Integrated. ###
 
