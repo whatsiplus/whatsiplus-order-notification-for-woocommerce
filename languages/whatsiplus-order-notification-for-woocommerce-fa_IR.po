@@ -1155,3 +1155,72 @@ msgstr "https://whatsiplus.com"
 #: whatsiplus-woocommerce.php
 msgid "Whatsiplus Order Notification for WooCommerce"
 msgstr "اطلاعیه سفارش واتسی پلاس برای ووکامرس"
+
+msgid "https://whatsiplus.com/go?url=apikey"
+msgstr "https://whatsiplus.ir/go?url=apikey"
+
+msgid "Get an API key"
+msgstr "دریافت کلید API"
+
+msgid "To access a free API KEY and unlock all the plugins features, please follow the link provided below."
+msgstr "برای دسترسی به یک کلید API رایگان و باز کردن قفل تمام ویژگی‌های افزونه، لطفاً پیوند ارائه شده در زیر را دنبال کنید."
+
+msgid "Invalid API KEY"
+msgstr "کلید API نامعتبر است"
+
+msgid "https://whatsiplus.com/"
+msgstr "https://whatsiplus.ir/"
+
+msgid "https://panel.whatsiplus.com/index.php?rp=/store/whatsapp"
+msgstr "https://panel.whatsiplus.ir/index.php?rp=/store/whatsapp"
+
+msgid "https://whatsiplus.com/faq/all/"
+msgstr "https://whatsiplus.ir/faq/all/"
+
+msgid "https://panel.whatsiplus.com/submitticket.php?step=2&deptid=2"
+msgstr "https://panel.whatsiplus.ir/submitticket.php?step=2&deptid=2"
+
+msgid "What is Whatsiplus Notification for WooCommerce?"
+msgstr "واتسی‌پلاس برای ووکامرس چیست؟"
+
+msgid "Whatsiplus"
+msgstr "واتسی پلاس"
+
+msgid "is a WhatsApp API service that allows business owners to communicate with their users through WhatsApp."
+msgstr "یک سرویس API واتساپ است که به صاحبان کسب‌وکار اجازه می‌دهد از طریق واتساپ با کاربران خود ارتباط برقرار کنند."
+
+msgid "How to get an API KEY?"
+msgstr "چگونه می‌توان یک کلید API دریافت کرد؟"
+
+msgid "If you want to use the plugin, you need to generate an API key. You can do this by creating an account"
+msgstr "اگر می‌خواهید از افزونه استفاده کنید، باید یک کلید API ایجاد کنید. می‌توانید این کار را با ایجاد یک حساب کاربری انجام دهید"
+
+msgid "here"
+msgstr "اینجا"
+
+msgid "Creating an account is free, you can use all the services for an unlimited period of time up to 10 days."
+msgstr "ایجاد حساب کاربری رایگان است و می‌توانید به مدت ۱۰ روز از تمامی خدمات به صورت نامحدود استفاده کنید."
+
+msgid "Have questions?"
+msgstr "سوالی دارید؟"
+
+msgid "You can see frequently asked questions in this"
+msgstr "می‌توانید سوالات متداول را در این"
+
+msgid "link"
+msgstr "لینک"
+
+msgid "Contact"
+msgstr "تماس"
+
+msgid "If you have any questions, you can contact the support section of the site"
+msgstr "اگر سوالی دارید، می‌توانید با بخش پشتیبانی سایت تماس بگیرید"
+
+msgid "Contact us"
+msgstr "تماس با ما"
+
+msgid "Default country code:"
+msgstr "کد کشور پیش فرض:"
+
+msgid "Manage your service"
+msgstr "مدیریت سرویس شما"

@@ -566,26 +566,34 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
 
         if ($acc_balance === "Invalid API KEY")
-        echo '<p style="color: red;"><b>' . esc_html($acc_balance) . '</b></p>' .
-        '<h3>' . esc_html__('To access a free API KEY and unlock all the plugin\'s features, please follow the link provided below.', 'whatsiplus-order-notification-for-woocommerce') . '</h3>' .
-        '<h2><a href="' . esc_url('https://whatsiplus.com/go?url=apikey') . '" target="_blank">' . esc_html__('Get an API key', 'whatsiplus-order-notification-for-woocommerce') . '</a></h2>';
-   
+        {
+            $translated_url = esc_url( __('https://whatsiplus.com/go?url=apikey', 'whatsiplus-order-notification-for-woocommerce') );
+
+            echo '<p style="color: red;"><b>' . esc_html__('Invalid API KEY', 'whatsiplus-order-notification-for-woocommerce') . '</b></p>' .
+            '<h3>' . esc_html__('To access a free API KEY and unlock all the plugins features, please follow the link provided below.', 'whatsiplus-order-notification-for-woocommerce') . '</h3>' .
+            '<h2><a href="' . $translated_url . '" target="_blank">' . esc_html__('Get an API key', 'whatsiplus-order-notification-for-woocommerce') . '</a></h2>';
+        }
         else{
             if($acc_balance === "Connected to WhatsApp")
             {
-                $acc_balance = "Status: ". $acc_balance;
-                echo '<p style="color: green;"><b>API KEY is Valid</b></p><p style="color: green;"><b>'. esc_html($acc_balance). '</b></p>';
-                echo '<p style="color: green;"><b>'. esc_html($wNumber). '</b></p>';
-                echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
-                echo '<p><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Manage your service</a><p>';
+                $acc_balance = sprintf(__('Status: %s', 'whatsiplus-order-notification-for-woocommerce'), $acc_balance);
+
+                echo '<p style="color: green;"><b>' . esc_html__('API KEY is Valid', 'whatsiplus-order-notification-for-woocommerce') . '</b></p>';
+                echo '<p style="color: green;"><b>' . esc_html($acc_balance) . '</b></p>';
+                echo '<p style="color: green;"><b>' . esc_html($wNumber) . '</b></p>';
+                echo '<p>' . esc_html__('Default country code:', 'whatsiplus-order-notification-for-woocommerce') . ' ' . esc_html($countryCode) . '</p>';
+                echo '<p><a href="' . esc_url('https://whatsiplus.com/go?url=apikey') . '" target="_blank">' . esc_html__('Manage your service', 'whatsiplus-order-notification-for-woocommerce') . '</a></p>';
+
             }
             else if($acc_balance === "Not connected to WhatsApp")
             {
-                $acc_balance="API KEY is valid but status: ".$acc_balance;
-                echo '<p style="color: red;"><b>'. esc_html($acc_balance). '</b></p>';
-                echo "<h3>To link the service with WhatsApp, please click on the provided link below.<h3>";
-                echo '<h2><a href="https://whatsiplus.com/go?url=apikey" target="_blank">Whatsiplus</a></h2>';
-                echo '<p>'.'Defualt country code: '.esc_html($countryCode). '</p>';
+                $acc_balance = sprintf(__('API KEY is valid but status: %s', 'whatsiplus-order-notification-for-woocommerce'), $acc_balance);
+
+                echo '<p style="color: red;"><b>' . esc_html($acc_balance) . '</b></p>';
+                echo '<h3>' . esc_html__('To link the service with WhatsApp, please click on the provided link below.', 'whatsiplus-order-notification-for-woocommerce') . '</h3>';
+                echo '<h2><a href="' . esc_url('https://whatsiplus.com/go?url=apikey') . '" target="_blank">' . esc_html__('Whatsiplus', 'whatsiplus-order-notification-for-woocommerce') . '</a></h2>';
+                echo '<p>' . esc_html__('Default country code:', 'whatsiplus-order-notification-for-woocommerce') . ' ' . esc_html($countryCode) . '</p>';
+
             }
             else
             {
