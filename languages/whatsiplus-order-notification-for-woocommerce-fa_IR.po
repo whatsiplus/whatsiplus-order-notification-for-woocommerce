@@ -1,0 +1,1157 @@
+msgid ""
+msgstr ""
+"PO-Revision-Date: +0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: fa\n"
+"Project-Id-Version: Plugins - Whatsiplus Order Notification for WooCommerce - Stable (latest release)\n"
+
+#: src/Forms/Views/ContactForm7View.php:8
+msgid "Please save your contact form 7 once."
+msgstr "لطفاً فرم تماس 7 خود را یک‌بار ذخیره کنید."
+
+#: src/Forms/Handlers/ContactForm7.php:453
+msgid "Please choose mobile number field in WhatsiAPI tab"
+msgstr "لطفاً در زبانه واتسیAPI، فیلد شماره موبایل را انتخاب کنید."
+
+#: src/Forms/Handlers/ContactForm7.php:419
+#: src/Forms/Handlers/ContactForm7.php:420
+msgid "Invalid number"
+msgstr "شماره نامعتبر"
+
+#. translators: %s is a placeholder for the mail-tag
+#: src/Forms/Handlers/ContactForm7.php:336
+msgid "To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab."
+msgstr "برای استفاده از مقدار ورودی از طریق این فیلد در یک فیلد ایمیل، باید تگ ایمیل مربوطه (%s) را در زبانه ایمیل وارد کنید."
+
+#: src/Forms/Handlers/ContactForm7.php:327
+msgid "Insert Tag"
+msgstr "درج تگ"
+
+#: src/Forms/Handlers/ContactForm7.php:315
+msgid "Class attribute"
+msgstr "ویژگی کلاس"
+
+#: src/Forms/Handlers/ContactForm7.php:310
+msgid "Id attribute"
+msgstr "ویژگی شناسه"
+
+#: src/Forms/Handlers/ContactForm7.php:307
+msgid "Use this text as the placeholder of the field"
+msgstr "این متن را به‌عنوان جای‌نگهدار فیلد استفاده کنید"
+
+#: src/Forms/Handlers/ContactForm7.php:305
+msgid "Default value"
+msgstr "مقدار پیش‌فرض"
+
+#: src/Forms/Handlers/ContactForm7.php:297
+msgid "Name"
+msgstr "نام"
+
+#: src/Forms/Handlers/ContactForm7.php:291
+msgid "Required field"
+msgstr "فیلد اجباری"
+
+#: src/Forms/Handlers/ContactForm7.php:287
+#: src/Forms/Handlers/ContactForm7.php:290
+msgid "Field type"
+msgstr "نوع فیلد"
+
+#: src/Forms/Handlers/ContactForm7.php:190
+msgid "WHATSIAPI PHONE"
+msgstr "تلفن واتسیAPI"
+
+#: src/Forms/Handlers/ContactForm7.php:137
+msgid "WhatsiAPI"
+msgstr "واتسیAPI"
+
+#: lib/class.settings-api.php:716
+msgid "Choose File"
+msgstr "انتخاب فایل"
+
+#: includes/plugins/WhatsiWpERP.php:157
+msgid "Hi [first_name], thank you for subscribing to us. We will notify you of HOT contents"
+msgstr "سلام [first_name]، از اینکه به ما پیوستید سپاسگزاریم. ما شما را از محتوای داغ مطلع خواهیم کرد."
+
+#: includes/plugins/WhatsiWpERP.php:151
+msgid "New subscriber message"
+msgstr "پیام مشترک جدید"
+
+#: includes/plugins/WhatsiWpERP.php:147
+msgid "Hi [first_name], when would be a good time for our sales representative to schedule a call with you to discuss more on our service?"
+msgstr "سلام [first_name]، چه زمانی برای شما مناسب است تا نماینده فروش ما با شما تماس بگیرد و درباره خدمات ما بیشتر صحبت کند؟"
+
+#: includes/plugins/WhatsiWpERP.php:141
+msgid "New opportunity message"
+msgstr "پیام فرصت جدید"
+
+#: includes/plugins/WhatsiWpERP.php:131
+msgid "New lead message"
+msgstr "پیام سرنخ جدید"
+
+#: includes/plugins/WhatsiWpERP.php:121
+msgid "New customer message"
+msgstr "پیام مشتری جدید"
+
+#: includes/plugins/WhatsiWpERP.php:45
+msgid "WP ERP"
+msgstr "مدیریت منابع سازمانی وردپرس"
+
+#: includes/plugins/WhatsiSimpleMembership.php:154
+msgid "Hi [first_name], your membership for [membership_level_name] has expired or cancelled. Renew now to retain access."
+msgstr "سلام [first_name]، عضویت شما برای [membership_level_name] منقضی یا لغو شده است. اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiSimpleMembership.php:148
+msgid "Membership cancellation or end of term"
+msgstr "لغو عضویت یا پایان دوره"
+
+#: includes/plugins/WhatsiSimpleMembership.php:144
+msgid "Hi [first_name], your subscription of [total_amount] for [membership_level_name] via [payment_gateway] is [payment_status]."
+msgstr "سلام [first_name]، اشتراک شما به مبلغ [total_amount] برای [membership_level_name] از طریق [payment_gateway]، [payment_status] است."
+
+#: includes/plugins/WhatsiSimpleMembership.php:138
+msgid "Recurring payment received"
+msgstr "پرداخت دوره‌ای دریافت شد"
+
+#: includes/plugins/WhatsiSimpleMembership.php:55
+msgid "Simple Membership"
+msgstr "عضویت ساده"
+
+#: includes/plugins/WhatsiS2Member.php:372
+msgid "Hi [first_name], your [s2member_access_label] will expire in [reminder_custom_time] Days, renew now to keep access. - custom"
+msgstr "سلام [first_name]، دسترسی شما به [s2member_access_label] در [reminder_custom_time] روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید. - سفارشی"
+
+#: includes/plugins/WhatsiS2Member.php:362
+msgid "Hi [first_name], your [s2member_access_label] will expire in 3 Days, renew now to keep access."
+msgstr "سلام [first_name]، دسترسی شما به [s2member_access_label] در 3 روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiS2Member.php:352
+msgid "Hi [first_name], your [s2member_access_label] will expire in 2 Days, renew now to keep access."
+msgstr "سلام [first_name]، دسترسی شما به [s2member_access_label] در 2 روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiS2Member.php:342
+msgid "Hi [first_name], your [s2member_access_label] will expire in 1 Day, renew now to keep access."
+msgstr "سلام [first_name]، دسترسی شما به [s2member_access_label] در 1 روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiS2Member.php:319
+msgid "Custom time before membership expires"
+msgstr "زمان سفارشی قبل از انقضای عضویت"
+
+#: includes/plugins/WhatsiS2Member.php:318
+msgid "3 days before membership expires"
+msgstr "3 روز قبل از انقضای عضویت"
+
+#: includes/plugins/WhatsiS2Member.php:317
+msgid "2 days before membership expires"
+msgstr "2 روز قبل از انقضای عضویت"
+
+#: includes/plugins/WhatsiS2Member.php:316
+msgid "1 day before membership expires"
+msgstr "1 روز قبل از انقضای عضویت"
+
+#: includes/plugins/WhatsiS2Member.php:303
+msgid "Hi [first_name], your payment of [currency_symbol][-amount] for [s2member_access_label] has been refunded."
+msgstr "سلام [first_name]، پرداخت شما به مبلغ [currency_symbol][-amount] برای [s2member_access_label] بازپرداخت شده است."
+
+#: includes/plugins/WhatsiS2Member.php:297
+msgid "Refund or reversal message"
+msgstr "پیام بازپرداخت یا برگشت"
+
+#: includes/plugins/WhatsiS2Member.php:293
+msgid "Hi [first_name], [s2member_access_label] has expired"
+msgstr "سلام [first_name]، [s2member_access_label] منقضی شده است"
+
+#: includes/plugins/WhatsiS2Member.php:287
+msgid "End of term message"
+msgstr "پیام پایان دوره"
+
+#: includes/plugins/WhatsiS2Member.php:283
+msgid "Hi [first_name], your membership has been modified, current membership is [s2member_access_label]"
+msgstr "سلام [first_name]، عضویت شما تغییر یافته است، عضویت فعلی شما [s2member_access_label] است"
+
+#: includes/plugins/WhatsiS2Member.php:277
+msgid "Payment modification message"
+msgstr "پیام تغییر پرداخت"
+
+#: includes/plugins/WhatsiS2Member.php:273
+msgid "Hi [first_name], thank you for your purchase of [s2member_access_label], [currency_symbol][regular] has been deducted from your account."
+msgstr "سلام [first_name]، از خرید شما برای [s2member_access_label] سپاسگزاریم، مبلغ [currency_symbol][regular] از حساب شما کسر شده است."
+
+#: includes/plugins/WhatsiS2Member.php:267
+msgid "Payment received message"
+msgstr "پیام دریافت پرداخت"
+
+#: includes/plugins/WhatsiS2Member.php:263
+msgid "Hi [first_name], thank you for your subscription of [s2member_access_label]"
+msgstr "سلام [first_name]، از اشتراک شما برای [s2member_access_label] سپاسگزاریم"
+
+#: includes/plugins/WhatsiS2Member.php:257
+msgid "Subscription message"
+msgstr "پیام اشتراک"
+
+#: includes/plugins/WhatsiS2Member.php:195
+msgid "S2 Member"
+msgstr "عضو S2"
+
+#: includes/plugins/WhatsiRestaurantReservation.php:201
+msgid "Greetings [name], your table reservation for [party] people on [date] is [post_status] - custom"
+msgstr "سلام [name]، رزرو میز شما برای [party] نفر در تاریخ [date] به وضعیت [post_status] است - سفارشی"
+
+#: includes/plugins/WhatsiRestaurantReservation.php:141
+msgid "Send reminder to confirmed customer reservation"
+msgstr "ارسال یادآوری به رزرو تایید شده مشتری"
+
+#: includes/plugins/WhatsiRestaurantReservation.php:126
+msgid "Closed message"
+msgstr "پیام بسته شدن"
+
+#: includes/plugins/WhatsiRestaurantReservation.php:112
+#: includes/plugins/WhatsiRestaurantReservation.php:122
+#: includes/plugins/WhatsiRestaurantReservation.php:132
+#: includes/plugins/WhatsiRestaurantReservation.php:171
+#: includes/plugins/WhatsiRestaurantReservation.php:181
+#: includes/plugins/WhatsiRestaurantReservation.php:191
+msgid "Greetings [name], your table reservation for [party] people on [date] is [post_status]"
+msgstr "سلام [name]، رزرو میز شما برای [party] نفر در تاریخ [date] به وضعیت [post_status] است"
+
+#: includes/plugins/WhatsiRestaurantReservation.php:46
+msgid "Five Star Restaurant Reservations"
+msgstr "رزرو رستوران پنج ستاره"
+
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:212
+msgid "Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]. - custom"
+msgstr "سلام [qrr_user_name]، رزرو شما برای [qrr_party] در تاریخ [qrr_date_formatted] به وضعیت [qrr_booking_status] است. - سفارشی"
+
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:182
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:192
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:202
+msgid "Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]."
+msgstr "سلام [qrr_user_name]، رزرو شما برای [qrr_party] در تاریخ [qrr_date_formatted] به وضعیت [qrr_booking_status] است."
+
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:152
+msgid "Send reminder to customer before reservation"
+msgstr "ارسال یادآوری به مشتری قبل از رزرو"
+
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:117
+#: includes/plugins/WhatsiRestaurantReservation.php:116
+msgid "Confirmed message"
+msgstr "پیام تایید"
+
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:113
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:123
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:133
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:143
+msgid "Greetings [qrr_user_name], your reservation for [qrr_party] on [qrr_date_formatted] is [qrr_booking_status]"
+msgstr "سلام [qrr_user_name]، رزرو شما برای [qrr_party] در تاریخ [qrr_date_formatted] به وضعیت [qrr_booking_status] است"
+
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:46
+msgid "Quick Restaurant Reservations"
+msgstr "رزرو سریع رستوران"
+
+#: includes/plugins/WhatsiMemberPress.php:291
+msgid "Hi [first_name], your [membership_post_title] subscription will expire in [reminder_custom_time] Days, renew now to keep access. - custom"
+msgstr "سلام [first_name]، اشتراک شما برای [membership_post_title] در [reminder_custom_time] روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید. - سفارشی"
+
+#: includes/plugins/WhatsiMemberPress.php:281
+msgid "Hi [first_name], your [membership_post_title] subscription will expire in 3 Days, renew now to keep access."
+msgstr "سلام [first_name]، اشتراک شما برای [membership_post_title] در 3 روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiMemberPress.php:271
+msgid "Hi [first_name], your [membership_post_title] subscription will expire in 2 Days, renew now to keep access."
+msgstr "سلام [first_name]، اشتراک شما برای [membership_post_title] در 2 روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiMemberPress.php:261
+msgid "Hi [first_name], your [membership_post_title] subscription will expire in 1 Day, renew now to keep access."
+msgstr "سلام [first_name]، اشتراک شما برای [membership_post_title] در 1 روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiMemberPress.php:237
+msgid "Custom time before subscription expiry"
+msgstr "زمان سفارشی قبل از انقضای اشتراک"
+
+#: includes/plugins/WhatsiMemberPress.php:236
+msgid "3 days before subscription expiry"
+msgstr "3 روز قبل از انقضای اشتراک"
+
+#: includes/plugins/WhatsiMemberPress.php:235
+msgid "2 days before subscription expiry"
+msgstr "2 روز قبل از انقضای اشتراک"
+
+#: includes/plugins/WhatsiMemberPress.php:234
+msgid "1 day before subscription expiry"
+msgstr "1 روز قبل از انقضای اشتراک"
+
+#: includes/plugins/WhatsiMemberPress.php:230
+msgid "Send reminder to renew active subscription"
+msgstr "ارسال یادآوری برای تمدید اشتراک فعال"
+
+#: includes/plugins/WhatsiMemberPress.php:221
+msgid "Hi [first_name], your [membership_post_title] subscription has stopped"
+msgstr "سلام [first_name]، اشتراک شما برای [membership_post_title] متوقف شده است"
+
+#: includes/plugins/WhatsiMemberPress.php:215
+msgid "Subscription stopped message"
+msgstr "پیام توقف اشتراک"
+
+#: includes/plugins/WhatsiMemberPress.php:211
+msgid "Hi [first_name], your [membership_post_title] subscription has been resumed"
+msgstr "سلام [first_name]، اشتراک شما برای [membership_post_title] از سر گرفته شده است"
+
+#: includes/plugins/WhatsiMemberPress.php:205
+msgid "Subscription resumed message"
+msgstr "پیام از سرگیری اشتراک"
+
+#: includes/plugins/WhatsiMemberPress.php:201
+msgid "Hi [first_name], your [membership_post_title] subscription has been paused"
+msgstr "سلام [first_name]، اشتراک شما برای [membership_post_title] متوقف شده است"
+
+#: includes/plugins/WhatsiMemberPress.php:195
+msgid "Subscription paused message"
+msgstr "پیام توقف اشتراک"
+
+#: includes/plugins/WhatsiMemberPress.php:191
+msgid "Hi [first_name], we are sorry that you are not satisfied with our services, your payment of [trans_total] has been refunded"
+msgstr "سلام [first_name]، متاسفیم که از خدمات ما راضی نیستید، پرداخت شما به مبلغ [trans_total] بازپرداخت شده است"
+
+#: includes/plugins/WhatsiMemberPress.php:185
+msgid "Transaction refunded message"
+msgstr "پیام بازپرداخت تراکنش"
+
+#: includes/plugins/WhatsiMemberPress.php:181
+msgid "Hi [first_name], your recurring transaction of [trans_total] has failed"
+msgstr "سلام [first_name]، تراکنش مکرر شما به مبلغ [trans_total] ناموفق بود"
+
+#: includes/plugins/WhatsiMemberPress.php:175
+msgid "Transaction failed message"
+msgstr "پیام تراکنش ناموفق"
+
+#: includes/plugins/WhatsiMemberPress.php:171
+msgid "Hi [first_name], your transaction [trans_id] is pending"
+msgstr "سلام [first_name]، تراکنش شما با شماره [trans_id] در حال بررسی است"
+
+#: includes/plugins/WhatsiMemberPress.php:165
+msgid "Transaction pending message"
+msgstr "پیام تراکنش در حال بررسی"
+
+#: includes/plugins/WhatsiMemberPress.php:161
+msgid "Hi [first_name], your recurring transaction of [trans_total] has expired"
+msgstr "سلام [first_name]، تراکنش مکرر شما به مبلغ [trans_total] منقضی شده است"
+
+#: includes/plugins/WhatsiMemberPress.php:155
+msgid "Transaction expired message"
+msgstr "پیام تراکنش منقضی شده"
+
+#: includes/plugins/WhatsiMemberPress.php:151
+msgid "Hi [first_name], thank you for your purchase of [membership_post_title] at [trans_total]"
+msgstr "سلام [first_name]، از خرید شما برای [membership_post_title] به مبلغ [trans_total] سپاسگزاریم"
+
+#: includes/plugins/WhatsiMemberPress.php:145
+msgid "Transaction completed message"
+msgstr "پیام تراکنش تکمیل شده"
+
+#: includes/plugins/WhatsiMemberPress.php:80
+msgid "MemberPress"
+msgstr "MemberPress"
+
+#: includes/plugins/WhatsiMemberMouse.php:289
+#: includes/plugins/WhatsiSimpleMembership.php:223
+msgid "Hi [first_name], your [membership_level_name] subscription will expire in [reminder_custom_time] Days, renew now to keep access. - custom"
+msgstr "سلام [first_name]، اشتراک شما برای [membership_level_name] در [reminder_custom_time] روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید. - سفارشی"
+
+#: includes/plugins/WhatsiMemberMouse.php:279
+#: includes/plugins/WhatsiSimpleMembership.php:213
+msgid "Hi [first_name], your [membership_level_name] subscription will expire in 3 Days, renew now to keep access."
+msgstr "سلام [first_name]، اشتراک شما برای [membership_level_name] در 3 روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiMemberMouse.php:269
+#: includes/plugins/WhatsiSimpleMembership.php:203
+msgid "Hi [first_name], your [membership_level_name] subscription will expire in 2 Days, renew now to keep access."
+msgstr "سلام [first_name]، اشتراک شما برای [membership_level_name] در 2 روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiMemberMouse.php:259
+#: includes/plugins/WhatsiSimpleMembership.php:193
+msgid "Hi [first_name], your [membership_level_name] subscription will expire in 1 Day, renew now to keep access."
+msgstr "سلام [first_name]، اشتراک شما برای [membership_level_name] در 1 روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی را حفظ کنید."
+
+#: includes/plugins/WhatsiMemberMouse.php:220
+msgid "Hi [first_name], we are sorry to see you go, we have refunded your payment of [order_total]"
+msgstr "سلام [first_name]، از اینکه می‌بینیم شما را از دست می‌دهیم متاسفیم، پرداخت شما به مبلغ [order_total] بازپرداخت شده است"
+
+#: includes/plugins/WhatsiMemberMouse.php:214
+msgid "Refund issued"
+msgstr "بازپرداخت صادر شد"
+
+#: includes/plugins/WhatsiMemberMouse.php:210
+msgid "Hi [first_name], recurring payment of [order_total] is unsuccessful, talk to our support"
+msgstr "سلام [first_name]، پرداخت مکرر به مبلغ [order_total] ناموفق بود، با پشتیبانی ما تماس بگیرید"
+
+#: includes/plugins/WhatsiMemberMouse.php:204
+msgid "Payment rebill declined"
+msgstr "صورتحساب پرداخت رد شد"
+
+#: includes/plugins/WhatsiMemberMouse.php:200
+msgid "Hi [first_name], recurring payment of [order_total] is successful"
+msgstr "سلام [first_name]، پرداخت مکرر به مبلغ [order_total] موفقیت‌آمیز بود"
+
+#: includes/plugins/WhatsiMemberMouse.php:194
+msgid "Payment rebill"
+msgstr "صورتحساب پرداخت"
+
+#: includes/plugins/WhatsiMemberMouse.php:190
+msgid "Hi [first_name], your payment of [order_total] is successful"
+msgstr "سلام [first_name]، پرداخت شما به مبلغ [order_total] موفقیت‌آمیز بود"
+
+#: includes/plugins/WhatsiMemberMouse.php:184
+msgid "Payment received"
+msgstr "پرداخت دریافت شد"
+
+#: includes/plugins/WhatsiMemberMouse.php:180
+msgid "Hi [first_name], your [bundle_name] is [bundle_status_name]"
+msgstr "سلام [first_name]، بسته شما به وضعیت [bundle_name] [bundle_status_name] است"
+
+#: includes/plugins/WhatsiMemberMouse.php:174
+msgid "Bundles status changed"
+msgstr "وضعیت بسته‌ها تغییر کرد"
+
+#: includes/plugins/WhatsiMemberMouse.php:170
+msgid "Hi [first_name], [bundle_name] has been added to your account successfully"
+msgstr "سلام [first_name]، بسته [bundle_name] با موفقیت به حساب شما افزوده شد"
+
+#: includes/plugins/WhatsiMemberMouse.php:164
+msgid "Bundles added to member"
+msgstr "بسته‌ها به عضو اضافه شدند"
+
+#: includes/plugins/WhatsiMemberMouse.php:160
+msgid "Hi [first_name], your membership is [status_name]"
+msgstr "سلام [first_name]، عضویت شما به وضعیت [status_name] است"
+
+#: includes/plugins/WhatsiMemberMouse.php:154
+msgid "Member status change"
+msgstr "تغییر وضعیت عضو"
+
+#: includes/plugins/WhatsiMemberMouse.php:150
+msgid "Hi [first_name], your current membership is [membership_level_name]"
+msgstr "سلام [first_name]، عضویت فعلی شما [membership_level_name] است"
+
+#: includes/plugins/WhatsiMemberMouse.php:144
+msgid "Member membership change"
+msgstr "تغییر عضویت عضو"
+
+#: includes/plugins/WhatsiMemberMouse.php:49
+msgid "MemberMouse"
+msgstr "MemberMouse"
+
+#: includes/plugins/WhatsiLatePoint.php:133
+msgid "Payment pending message"
+msgstr "پیام پرداخت در انتظار"
+
+#: includes/plugins/WhatsiLatePoint.php:123
+msgid "Pending approval message"
+msgstr "پیام تایید در انتظار"
+
+#: includes/plugins/WhatsiLatePoint.php:119
+#: includes/plugins/WhatsiLatePoint.php:129
+#: includes/plugins/WhatsiLatePoint.php:139
+#: includes/plugins/WhatsiLatePoint.php:149
+msgid "Greetings [cust_first_name], your appointment for [service_name] on [booking_start_date] [booking_start_time] is [booking_status]"
+msgstr "سلام [cust_first_name]، وقت ملاقات شما برای [service_name] در تاریخ [booking_start_date] و زمان [booking_start_time] به وضعیت [booking_status] است"
+
+#: includes/plugins/WhatsiLatePoint.php:58
+msgid "LatePoint Appointment Booking and Reservation"
+msgstr "رزرو و تعیین وقت ملاقات LatePoint"
+
+#: includes/plugins/WhatsiJetpackCRM.php:155
+msgid "Hi [first_name], thank you for your interest all these time, however we will need to terminate your access from our services."
+msgstr "سلام [first_name]، از علاقه شما در تمام این مدت سپاسگزاریم، اما باید دسترسی شما به خدماتمان را قطع کنیم."
+
+#: includes/plugins/WhatsiJetpackCRM.php:149
+msgid "Contact blacklisted message"
+msgstr "پیام لیست سیاه تماس"
+
+#: includes/plugins/WhatsiJetpackCRM.php:145
+msgid "Hi [first_name], we sincerely apologise for not meeting your expectations. We promise to do better."
+msgstr "سلام [first_name]، بابت عدم برآورده کردن انتظارات شما صمیمانه عذرخواهی می‌کنیم. قول می‌دهیم بهتر عمل کنیم."
+
+#: includes/plugins/WhatsiJetpackCRM.php:139
+msgid "Contact refused status message"
+msgstr "پیام وضعیت رد تماس"
+
+#: includes/plugins/WhatsiJetpackCRM.php:135
+#: includes/plugins/WhatsiWpERP.php:137
+msgid "Hi [first_name], thank you for showing interest in our services. Our sales representative will contact you shortly."
+msgstr "سلام [first_name]، از ابراز علاقه شما به خدمات ما سپاسگزاریم. نماینده فروش ما به زودی با شما تماس خواهد گرفت."
+
+#: includes/plugins/WhatsiJetpackCRM.php:129
+msgid "Lead status message"
+msgstr "پیام وضعیت لید"
+
+#: includes/plugins/WhatsiJetpackCRM.php:125
+#: includes/plugins/WhatsiWpERP.php:127
+msgid "Hi [first_name], we would like to personally thank you for using our services."
+msgstr "سلام [first_name]، ما می‌خواهیم شخصاً از شما بابت استفاده از خدماتمان تشکر کنیم."
+
+#: includes/plugins/WhatsiJetpackCRM.php:119
+msgid "Customer status message"
+msgstr "پیام وضعیت مشتری"
+
+#: includes/plugins/WhatsiJetpackCRM.php:104
+msgid "Choose when to send a notification message to your new contact"
+msgstr "زمان ارسال پیام اطلاع‌رسانی به مخاطب جدید خود را انتخاب کنید"
+
+#: includes/plugins/WhatsiJetpackCRM.php:43
+msgid "Jetpack CRM"
+msgstr "Jetpack CRM"
+
+#: includes/plugins/WhatsiGroundhoggCRM.php:143
+msgid "Hi [first_name], we are sorry to see you go, tell us how cna we improve to serve you better in the future ?"
+msgstr "سلام [first_name]، از اینکه می‌بینیم شما را از دست می‌دهیم متاسفیم، به ما بگویید چگونه می‌توانیم خدماتمان را برای شما بهتر کنیم؟"
+
+#: includes/plugins/WhatsiGroundhoggCRM.php:127
+msgid "Unconfirmed status message"
+msgstr "پیام وضعیت تایید نشده"
+
+#: includes/plugins/WhatsiGroundhoggCRM.php:117
+msgid "Confirmed status message"
+msgstr "پیام وضعیت تایید شده"
+
+#: includes/plugins/WhatsiGroundhoggCRM.php:43
+msgid "Groundhogg CRM"
+msgstr "Groundhogg CRM"
+
+#: includes/plugins/WhatsiFluentCRM.php:145
+#: includes/plugins/WhatsiGroundhoggCRM.php:133
+msgid "Hi [first_name], would you like to opt-in to our newsletter and get trending contents delivered to you ? We promise we will not spam you."
+msgstr "سلام [first_name]، آیا مایلید به خبرنامه ما بپیوندید و محتوای پرطرفدار را دریافت کنید؟ قول می‌دهیم هرزنامه ارسال نکنیم."
+
+#: includes/plugins/WhatsiFluentCRM.php:139
+msgid "Pending status message"
+msgstr "پیام وضعیت در انتظار"
+
+#: includes/plugins/WhatsiFluentCRM.php:135
+msgid "Hi [first_name], you have unsubscribed and will no longer receive trending contents."
+msgstr "سلام [first_name]، شما از اشتراک خارج شده‌اید و دیگر محتوای پرطرفدار دریافت نخواهید کرد."
+
+#: includes/plugins/WhatsiFluentCRM.php:129
+#: includes/plugins/WhatsiGroundhoggCRM.php:137
+msgid "Unsubscribed status message"
+msgstr "پیام وضعیت لغو اشتراک"
+
+#: includes/plugins/WhatsiFluentCRM.php:125
+#: includes/plugins/WhatsiGroundhoggCRM.php:123
+msgid "Hi [first_name], thank you for subscribing, trending contents will be delivered to you."
+msgstr "سلام [first_name]، از اشتراک شما سپاسگزاریم، محتوای پرطرفدار به شما تحویل داده خواهد شد."
+
+#: includes/plugins/WhatsiFluentCRM.php:119
+msgid "Subscribed status message"
+msgstr "پیام وضعیت اشتراک"
+
+#: includes/plugins/WhatsiFluentCRM.php:105
+#: includes/plugins/WhatsiGroundhoggCRM.php:103
+msgid "Choose when to send a notification message"
+msgstr "زمان ارسال پیام اطلاع‌رسانی را انتخاب کنید"
+
+#: includes/plugins/WhatsiFluentCRM.php:45
+msgid "Fluent CRM"
+msgstr "Fluent CRM"
+
+#: includes/plugins/WhatsiFATService.php:127
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:137
+msgid "Rejected message"
+msgstr "پیام رد شده"
+
+#: includes/plugins/WhatsiFATService.php:107
+#: includes/plugins/WhatsiLatePoint.php:113
+msgid "Approved message"
+msgstr "پیام تایید شده"
+
+#: includes/plugins/WhatsiFATService.php:103
+#: includes/plugins/WhatsiFATService.php:113
+#: includes/plugins/WhatsiFATService.php:123
+#: includes/plugins/WhatsiFATService.php:133
+msgid "Greetings [c_first_name], your appointment for [s_name] on [b_date] [b_time] is [b_process_status]"
+msgstr "سلام [c_first_name]، وقت ملاقات شما برای [s_name] در تاریخ [b_date] و زمان [b_time] به وضعیت [b_process_status] است"
+
+#: includes/plugins/WhatsiFATService.php:97
+msgid "Cancel message"
+msgstr "پیام لغو شده"
+
+#: includes/plugins/WhatsiFATService.php:42
+msgid "FAT Services Booking"
+msgstr "رزرو خدمات FAT"
+
+#: includes/plugins/WhatsiBookIt.php:212
+msgid "Greetings [customer_name], your appointment for [service_name] on [appointment_day] is [appointment_status]. - custom"
+msgstr "سلام [customer_name]، وقت ملاقات شما برای [service_name] در تاریخ [appointment_day] به وضعیت [appointment_status] است. - سفارشی"
+
+#: includes/plugins/WhatsiBookIt.php:196
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:196
+#: includes/plugins/WhatsiRestaurantReservation.php:185
+msgid "60 minutes reminder message"
+msgstr "پیام یادآوری ۶۰ دقیقه"
+
+#: includes/plugins/WhatsiBookIt.php:186
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:186
+#: includes/plugins/WhatsiRestaurantReservation.php:175
+msgid "30 minutes reminder message"
+msgstr "پیام یادآوری ۳۰ دقیقه"
+
+#: includes/plugins/WhatsiBookIt.php:182
+#: includes/plugins/WhatsiBookIt.php:192
+#: includes/plugins/WhatsiBookIt.php:202
+msgid "Greetings [customer_name], your appointment for [service_name] on [appointment_day] is [appointment_status]."
+msgstr "سلام [customer_name]، وقت ملاقات شما برای [service_name] در تاریخ [appointment_day] به وضعیت [appointment_status] است."
+
+#: includes/plugins/WhatsiBookIt.php:176
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:176
+#: includes/plugins/WhatsiRestaurantReservation.php:165
+msgid "15 minutes reminder message"
+msgstr "پیام یادآوری ۱۵ دقیقه"
+
+#: includes/plugins/WhatsiBookIt.php:160
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:159
+#: includes/plugins/WhatsiRestaurantReservation.php:148
+msgid "Custom time before reservation"
+msgstr "زمان سفارشی قبل از رزرو"
+
+#: includes/plugins/WhatsiBookIt.php:159
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:158
+#: includes/plugins/WhatsiRestaurantReservation.php:147
+msgid "60 minutes before reservation"
+msgstr "۶۰ دقیقه قبل از رزرو"
+
+#: includes/plugins/WhatsiBookIt.php:158
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:157
+#: includes/plugins/WhatsiRestaurantReservation.php:146
+msgid "30 minutes before reservation"
+msgstr "۳۰ دقیقه قبل از رزرو"
+
+#: includes/plugins/WhatsiBookIt.php:157
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:156
+#: includes/plugins/WhatsiRestaurantReservation.php:145
+msgid "15 minutes before reservation"
+msgstr "۱۵ دقیقه قبل از رزرو"
+
+#: includes/plugins/WhatsiBookIt.php:153
+msgid "Send reminder to customer reservation"
+msgstr "ارسال یادآوری به رزرو مشتری"
+
+#: includes/plugins/WhatsiBookIt.php:138
+msgid "Appointment cancelled message"
+msgstr "پیام لغو وقت ملاقات"
+
+#: includes/plugins/WhatsiBookIt.php:128
+msgid "Appointment approved message"
+msgstr "پیام تایید وقت ملاقات"
+
+#: includes/plugins/WhatsiBookIt.php:124 includes/plugins/WhatsiBookIt.php:134
+#: includes/plugins/WhatsiBookIt.php:144
+msgid "Greetings [customer_name], your appointment for [service_name] on [appointment_day] is [appointment_status]"
+msgstr "سلام [customer_name]، وقت ملاقات شما برای [service_name] در تاریخ [appointment_day] به وضعیت [appointment_status] است"
+
+#: includes/plugins/WhatsiBookIt.php:118
+msgid "Appointment pending message"
+msgstr "پیام وقت ملاقات در انتظار"
+
+#: includes/plugins/WhatsiBookIt.php:58
+msgid "BookIt"
+msgstr "BookIt"
+
+#: includes/plugins/WhatsiARMemberPremium.php:56
+msgid "AR Member Premium"
+msgstr "عضویت پریمیوم AR"
+
+#: includes/plugins/WhatsiARMemberLite.php:239
+#: includes/plugins/WhatsiARMemberPremium.php:237
+msgid "Hi [first_name], your [name] subscription will expire in [reminder_custom_time] Days, renew now to keep access. - custom"
+msgstr "سلام [first_name]، اشتراک [name] شما در [reminder_custom_time] روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی حفظ شود. - سفارشی"
+
+#: includes/plugins/WhatsiARMemberLite.php:233
+#: includes/plugins/WhatsiARMemberPremium.php:231
+#: includes/plugins/WhatsiBookIt.php:206
+#: includes/plugins/WhatsiMemberMouse.php:283
+#: includes/plugins/WhatsiMemberPress.php:285
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:206
+#: includes/plugins/WhatsiRestaurantReservation.php:195
+#: includes/plugins/WhatsiS2Member.php:366
+#: includes/plugins/WhatsiSimpleMembership.php:217
+msgid "Custom time reminder message"
+msgstr "پیام یادآوری زمان سفارشی"
+
+#: includes/plugins/WhatsiARMemberLite.php:229
+#: includes/plugins/WhatsiARMemberPremium.php:227
+msgid "Hi [first_name], your [name] subscription will expire in 3 Days, renew now to keep access."
+msgstr "سلام [first_name]، اشتراک [name] شما در ۳ روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی حفظ شود."
+
+#: includes/plugins/WhatsiARMemberLite.php:223
+#: includes/plugins/WhatsiARMemberPremium.php:221
+#: includes/plugins/WhatsiMemberMouse.php:273
+#: includes/plugins/WhatsiMemberPress.php:275
+#: includes/plugins/WhatsiS2Member.php:356
+#: includes/plugins/WhatsiSimpleMembership.php:207
+msgid "3 days reminder message"
+msgstr "پیام یادآوری ۳ روزه"
+
+#: includes/plugins/WhatsiARMemberLite.php:219
+#: includes/plugins/WhatsiARMemberPremium.php:217
+msgid "Hi [first_name], your [name] subscription will expire in 2 Days, renew now to keep access."
+msgstr "سلام [first_name]، اشتراک [name] شما در ۲ روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی حفظ شود."
+
+#: includes/plugins/WhatsiARMemberLite.php:213
+#: includes/plugins/WhatsiARMemberPremium.php:211
+#: includes/plugins/WhatsiMemberMouse.php:263
+#: includes/plugins/WhatsiMemberPress.php:265
+#: includes/plugins/WhatsiS2Member.php:346
+#: includes/plugins/WhatsiSimpleMembership.php:197
+msgid "2 days reminder message"
+msgstr "پیام یادآوری ۲ روزه"
+
+#: includes/plugins/WhatsiARMemberLite.php:209
+#: includes/plugins/WhatsiARMemberPremium.php:207
+msgid "Hi [first_name], your [name] subscription will expire in 1 Day, renew now to keep access."
+msgstr "سلام [first_name]، اشتراک [name] شما در ۱ روز منقضی می‌شود، اکنون تمدید کنید تا دسترسی حفظ شود."
+
+#: includes/plugins/WhatsiARMemberLite.php:203
+#: includes/plugins/WhatsiARMemberPremium.php:201
+#: includes/plugins/WhatsiMemberMouse.php:253
+#: includes/plugins/WhatsiMemberPress.php:255
+#: includes/plugins/WhatsiS2Member.php:336
+#: includes/plugins/WhatsiSimpleMembership.php:187
+msgid "1 day reminder message"
+msgstr "پیام یادآوری ۱ روزه"
+
+#: includes/plugins/WhatsiARMemberLite.php:190
+#: includes/plugins/WhatsiARMemberPremium.php:190
+#: includes/plugins/WhatsiBookIt.php:166
+#: includes/plugins/WhatsiMemberMouse.php:242
+#: includes/plugins/WhatsiMemberPress.php:243
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:165
+#: includes/plugins/WhatsiRestaurantReservation.php:154
+#: includes/plugins/WhatsiS2Member.php:325
+#: includes/plugins/WhatsiSimpleMembership.php:176
+msgid "Enter the custom time you want to remind your customer before membership expires (in minutes). Choose when to send a reminder message to your customer. Please set your timezone in settings. You must set up a cron job <a href=\"https://whatsiplus.com/go?url=cron\" target=\"_blank\">here</a>."
+msgstr "زمان سفارشی را که می‌خواهید به مشتری خود یادآوری کنید قبل از انقضای عضویت وارد کنید (به دقیقه). زمان ارسال پیام یادآوری به مشتری خود را انتخاب کنید. لطفاً منطقه زمانی خود را در تنظیمات تنظیم کنید. شما باید یک کار کرون را تنظیم کنید <a href=\"https://whatsiplus.com/go?url=cron\" target=\"_blank\">اینجا</a>."
+
+#: includes/plugins/WhatsiARMemberLite.php:189
+#: includes/plugins/WhatsiARMemberPremium.php:189
+#: includes/plugins/WhatsiBookIt.php:165
+#: includes/plugins/WhatsiMemberMouse.php:241
+#: includes/plugins/WhatsiMemberPress.php:242
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:164
+#: includes/plugins/WhatsiRestaurantReservation.php:153
+#: includes/plugins/WhatsiS2Member.php:324
+#: includes/plugins/WhatsiSimpleMembership.php:175
+msgid "Custom Reminder Time"
+msgstr "زمان یادآوری سفارشی"
+
+#: includes/plugins/WhatsiARMemberLite.php:184
+#: includes/plugins/WhatsiARMemberPremium.php:184
+#: includes/plugins/WhatsiMemberMouse.php:236
+#: includes/plugins/WhatsiSimpleMembership.php:170
+msgid "Custom time before membership expiry"
+msgstr "زمان سفارشی قبل از انقضای عضویت"
+
+#: includes/plugins/WhatsiARMemberLite.php:183
+#: includes/plugins/WhatsiARMemberPremium.php:183
+#: includes/plugins/WhatsiMemberMouse.php:235
+#: includes/plugins/WhatsiSimpleMembership.php:169
+msgid "3 days before membership expiry"
+msgstr "۳ روز قبل از انقضای عضویت"
+
+#: includes/plugins/WhatsiARMemberLite.php:182
+#: includes/plugins/WhatsiARMemberPremium.php:182
+#: includes/plugins/WhatsiMemberMouse.php:234
+#: includes/plugins/WhatsiSimpleMembership.php:168
+msgid "2 days before membership expiry"
+msgstr "۲ روز قبل از انقضای عضویت"
+
+#: includes/plugins/WhatsiARMemberLite.php:181
+#: includes/plugins/WhatsiARMemberPremium.php:181
+#: includes/plugins/WhatsiMemberMouse.php:233
+#: includes/plugins/WhatsiSimpleMembership.php:167
+msgid "1 day before membership expiry"
+msgstr "۱ روز قبل از انقضای عضویت"
+
+#: includes/plugins/WhatsiARMemberLite.php:178
+#: includes/plugins/WhatsiARMemberPremium.php:178
+#: includes/plugins/WhatsiBookIt.php:154
+#: includes/plugins/WhatsiMemberMouse.php:230
+#: includes/plugins/WhatsiMemberPress.php:231
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:153
+#: includes/plugins/WhatsiRestaurantReservation.php:142
+#: includes/plugins/WhatsiS2Member.php:313
+#: includes/plugins/WhatsiSimpleMembership.php:164
+msgid "Description for the reminder field"
+msgstr "توضیحات برای فیلد یادآوری"
+
+#: includes/plugins/WhatsiARMemberLite.php:177
+#: includes/plugins/WhatsiARMemberPremium.php:177
+#: includes/plugins/WhatsiMemberMouse.php:229
+#: includes/plugins/WhatsiS2Member.php:312
+#: includes/plugins/WhatsiSimpleMembership.php:163
+msgid "Send reminder to renew membership"
+msgstr "ارسال یادآوری برای تمدید عضویت"
+
+#: includes/plugins/WhatsiARMemberLite.php:142
+#: includes/plugins/WhatsiARMemberPremium.php:142
+msgid "Hi [first_name], your [name] subscription has been renewed at [amount]"
+msgstr "سلام [first_name]، اشتراک [name] شما با مبلغ [amount] تمدید شده است"
+
+#: includes/plugins/WhatsiARMemberLite.php:136
+#: includes/plugins/WhatsiARMemberPremium.php:136
+msgid "After user plan renewed message"
+msgstr "پیام پس از تمدید طرح کاربر"
+
+#: includes/plugins/WhatsiARMemberLite.php:132
+#: includes/plugins/WhatsiARMemberPremium.php:132
+msgid "Hi [first_name], your subscription has been changed to [name]"
+msgstr "سلام [first_name]، اشتراک شما به [name] تغییر یافته است"
+
+#: includes/plugins/WhatsiARMemberLite.php:126
+#: includes/plugins/WhatsiARMemberPremium.php:126
+msgid "After user plan changed message"
+msgstr "پیام پس از تغییر طرح کاربر"
+
+#: includes/plugins/WhatsiARMemberLite.php:122
+#: includes/plugins/WhatsiARMemberPremium.php:122
+msgid "Hi [first_name], your [name] subscription has been cancelled"
+msgstr "سلام [first_name]، اشتراک [name] شما لغو شده است"
+
+#: includes/plugins/WhatsiARMemberLite.php:116
+#: includes/plugins/WhatsiARMemberPremium.php:116
+msgid "Cancel subscription message"
+msgstr "پیام لغو اشتراک"
+
+#: includes/plugins/WhatsiARMemberLite.php:102
+#: includes/plugins/WhatsiARMemberPremium.php:102
+#: includes/plugins/WhatsiBookIt.php:104
+#: includes/plugins/WhatsiFATService.php:82
+#: includes/plugins/WhatsiLatePoint.php:98
+#: includes/plugins/WhatsiMemberMouse.php:125
+#: includes/plugins/WhatsiMemberPress.php:126
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:92
+#: includes/plugins/WhatsiRestaurantReservation.php:92
+#: includes/plugins/WhatsiS2Member.php:241
+#: includes/plugins/WhatsiSimpleMembership.php:125
+#: includes/plugins/WhatsiWpERP.php:106
+msgid "Choose when to send the notification message to your customer"
+msgstr "زمان ارسال پیام اعلان به مشتری خود را انتخاب کنید"
+#: includes/plugins/WhatsiARMemberLite.php:93
+#: includes/plugins/WhatsiARMemberPremium.php:93
+#: includes/plugins/WhatsiBookIt.php:95
+#: includes/plugins/WhatsiFATService.php:73
+#: includes/plugins/WhatsiFluentCRM.php:96
+#: includes/plugins/WhatsiGroundhoggCRM.php:94
+#: includes/plugins/WhatsiJetpackCRM.php:95
+#: includes/plugins/WhatsiLatePoint.php:89
+#: includes/plugins/WhatsiMemberMouse.php:116
+#: includes/plugins/WhatsiMemberPress.php:117
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:83
+#: includes/plugins/WhatsiRestaurantReservation.php:83
+#: includes/plugins/WhatsiS2Member.php:232
+#: includes/plugins/WhatsiSimpleMembership.php:116
+#: includes/plugins/WhatsiWpERP.php:97
+msgid "To display in the Message Outbox section of the plugin"
+msgstr "برای نمایش در بخش پیام‌های خروجی افزونه"
+
+#: includes/plugins/WhatsiARMemberLite.php:92
+#: includes/plugins/WhatsiARMemberPremium.php:92
+#: includes/plugins/WhatsiBookIt.php:94
+#: includes/plugins/WhatsiFATService.php:72
+#: includes/plugins/WhatsiFluentCRM.php:95
+#: includes/plugins/WhatsiGroundhoggCRM.php:93
+#: includes/plugins/WhatsiJetpackCRM.php:94
+#: includes/plugins/WhatsiLatePoint.php:88
+#: includes/plugins/WhatsiMemberMouse.php:115
+#: includes/plugins/WhatsiMemberPress.php:116
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:82
+#: includes/plugins/WhatsiRestaurantReservation.php:82
+#: includes/plugins/WhatsiS2Member.php:231
+#: includes/plugins/WhatsiSimpleMembership.php:115
+#: includes/plugins/WhatsiWpERP.php:96
+msgid "Send from"
+msgstr "ارسال از"
+
+#: includes/plugins/WhatsiARMemberLite.php:82
+#: includes/plugins/WhatsiARMemberPremium.php:82
+#: includes/plugins/WhatsiBookIt.php:84
+#: includes/plugins/WhatsiFATService.php:62
+#: includes/plugins/WhatsiFluentCRM.php:85
+#: includes/plugins/WhatsiGroundhoggCRM.php:83
+#: includes/plugins/WhatsiJetpackCRM.php:84
+#: includes/plugins/WhatsiLatePoint.php:78
+#: includes/plugins/WhatsiMemberMouse.php:105
+#: includes/plugins/WhatsiMemberPress.php:106
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:72
+#: includes/plugins/WhatsiRestaurantReservation.php:72
+#: includes/plugins/WhatsiS2Member.php:221
+#: includes/plugins/WhatsiSimpleMembership.php:105
+#: includes/plugins/WhatsiWpERP.php:86
+msgid "Enable WhatsApp Notifications"
+msgstr "فعال‌سازی اطلاعیه‌های واتساپ"
+
+#: includes/plugins/WhatsiARMemberLite.php:56
+msgid "AR Member Lite"
+msgstr "AR عضو لایت"
+
+#: includes/multivendor/admin/class-whatsiplus-multivendor-setting.php:70
+msgid "Vendor message"
+msgstr "پیام فروشنده"
+
+#: includes/multivendor/admin/class-whatsiplus-multivendor-setting.php:54
+msgid "Third Party Plugin"
+msgstr "افزونه‌ی شخص سوم"
+
+#: includes/multivendor/admin/class-whatsiplus-multivendor-setting.php:36
+msgid "Choose when to send a status notification message to your vendors"
+msgstr "زمان ارسال اطلاعیه به فروشندگان را انتخاب کنید"
+
+#: includes/multivendor/admin/class-whatsiplus-multivendor-setting.php:35
+#: includes/plugins/WhatsiARMemberLite.php:101
+#: includes/plugins/WhatsiARMemberPremium.php:101
+#: includes/plugins/WhatsiBookIt.php:103
+#: includes/plugins/WhatsiFATService.php:81
+#: includes/plugins/WhatsiFluentCRM.php:104
+#: includes/plugins/WhatsiGroundhoggCRM.php:102
+#: includes/plugins/WhatsiJetpackCRM.php:103
+#: includes/plugins/WhatsiLatePoint.php:97
+#: includes/plugins/WhatsiMemberMouse.php:124
+#: includes/plugins/WhatsiMemberPress.php:125
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:91
+#: includes/plugins/WhatsiRestaurantReservation.php:91
+#: includes/plugins/WhatsiS2Member.php:240
+#: includes/plugins/WhatsiSimpleMembership.php:124
+#: includes/plugins/WhatsiWpERP.php:105
+msgid "Send notification on"
+msgstr "ارسال اطلاعیه در"
+
+#: includes/multivendor/admin/class-whatsiplus-multivendor-setting.php:28
+msgid "Enable Vendor WhatsApp Notifications"
+msgstr "فعال‌سازی اطلاعیه‌های واتساپ برای فروشندگان"
+
+#: includes/multivendor/admin/class-whatsiplus-multivendor-setting.php:15
+msgid "Multivendor Settings"
+msgstr "تنظیمات چند فروشنده"
+
+#: admin/smsoutbox.php:20
+msgid "Message Outbox"
+msgstr "صندوق پیام"
+
+#: admin/sendsms.php:632
+msgid "Message Sent!"
+msgstr "پیام ارسال شد!"
+
+#: admin/sendsms.php:195
+msgid "Message"
+msgstr "پیام"
+
+#: admin/sendsms.php:185
+msgid "Criteria"
+msgstr "شرایط"
+
+#: admin/sendsms.php:173
+msgid "Filter By"
+msgstr "فیلتر بر اساس"
+
+#: admin/sendsms.php:164
+msgid "Recipients"
+msgstr "گیرندگان"
+
+#: admin/sendsms.php:155
+msgid "Users"
+msgstr "کاربران"
+
+#: admin/sendsms.php:142
+msgid "To"
+msgstr "به"
+
+#: admin/sendsms.php:116
+msgid "Send WhatsApp Message"
+msgstr "ارسال پیام واتساپ"
+
+#: admin/logs.php:22
+msgid "Logs"
+msgstr "گزارش‌ها"
+
+#: admin/help.php:20
+msgid "Help"
+msgstr "راهنما"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:341
+msgid "Failed message"
+msgstr "پیام ناموفق"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:331
+msgid "Refunded message"
+msgstr "پیام بازگشت وجه"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:321
+#: includes/plugins/WhatsiLatePoint.php:143
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:127
+msgid "Cancelled message"
+msgstr "پیام لغو شده"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:311
+msgid "Completed message"
+msgstr "پیام تکمیل شده"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:301
+msgid "Processing message"
+msgstr "پیام در حال پردازش"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:291
+msgid "On-hold message"
+msgstr "پیام در انتظار"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:281
+#: includes/plugins/WhatsiFATService.php:117
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:107
+#: includes/plugins/WhatsiRestaurantReservation.php:106
+msgid "Pending message"
+msgstr "پیام در انتظار"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:277
+#: admin/class-whatsiplus-woocommerce-setting.php:287
+#: admin/class-whatsiplus-woocommerce-setting.php:297
+#: admin/class-whatsiplus-woocommerce-setting.php:307
+#: admin/class-whatsiplus-woocommerce-setting.php:317
+#: admin/class-whatsiplus-woocommerce-setting.php:327
+#: admin/class-whatsiplus-woocommerce-setting.php:337
+#: admin/class-whatsiplus-woocommerce-setting.php:347
+msgid "[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status]."
+msgstr "[shop_name] : با تشکر از خرید شما. سفارش شما ([order_id]) هم‌اکنون [order_status] است."
+
+#: admin/class-whatsiplus-woocommerce-setting.php:271
+msgid "Default Customer message"
+msgstr "پیام پیش‌فرض مشتری"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:252
+msgid "Choose when to send a status notification message to your customer"
+msgstr "زمان ارسال اطلاعیه به مشتری را انتخاب کنید"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:239
+msgid "Choose who to Send message to"
+msgstr "انتخاب کنید که پیام را برای کی ارسال کنید"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:238
+msgid "Send message to"
+msgstr "ارسال پیام به"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:225
+msgid "[shop_name] : Your product [product_name] has low stock. Current quantity: [product_stock_quantity]. Please restock soon."
+msgstr "[shop_name] : محصول شما [product_name] موجودی کم دارد. مقدار کنونی: [product_stock_quantity]. لطفا به زودی موجودی را تکمیل کنید."
+
+#: admin/class-whatsiplus-woocommerce-setting.php:219
+msgid "Low Stock Product Admin message"
+msgstr "پیام مدیریتی محصول با موجودی کم"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:215
+msgid "[shop_name] : You have a new order with order ID [order_id] and order amount [order_currency] [order_amount]. The order is now [order_status]."
+msgstr "[shop_name] : شما سفارش جدیدی با شناسه سفارش [order_id] و مبلغ سفارش [order_currency] [order_amount] دارید. وضعیت سفارش در حال حاضر [order_status] است."
+
+#: admin/class-whatsiplus-woocommerce-setting.php:209
+msgid "Admin message"
+msgstr "پیام مدیریتی"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:204
+msgid "Mobile number to receive new order notification. To send to multiple receivers, separate each entry with comma such as 0123456789, 0167888945"
+msgstr "شماره موبایل برای دریافت اطلاعیه سفارش جدید. برای ارسال به چند گیرنده، هر ورودی را با کاما جدا کنید مانند 0123456789، 0167888945"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:203
+msgid "Mobile Number"
+msgstr "شماره موبایل"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:184
+msgid "Choose when to send a status notification message to your admin <br> Set <strong>low stock threshold</strong> for each product under <strong>WooCommerce Product -> Product Data -> Inventory -> Low Stock Threshold</strong>"
+msgstr "زمان ارسال پیام اطلاعیه وضعیت به مدیر را انتخاب کنید <br> <strong>آستانه موجودی کم</strong> را برای هر محصول تنظیم کنید در <strong>محصول WooCommerce -> داده‌های محصول -> موجودی -> آستانه موجودی کم</strong>"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:183
+#: admin/class-whatsiplus-woocommerce-setting.php:251
+msgid "\tSend notification on"
+msgstr "\tارسال اطلاعیه در"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:177
+#: admin/class-whatsiplus-woocommerce-setting.php:232
+#: includes/plugins/WhatsiARMemberLite.php:83
+#: includes/plugins/WhatsiARMemberPremium.php:83
+#: includes/plugins/WhatsiBookIt.php:85
+#: includes/plugins/WhatsiFATService.php:63
+#: includes/plugins/WhatsiFluentCRM.php:86
+#: includes/plugins/WhatsiGroundhoggCRM.php:84
+#: includes/plugins/WhatsiJetpackCRM.php:85
+#: includes/plugins/WhatsiLatePoint.php:79
+#: includes/plugins/WhatsiMemberMouse.php:106
+#: includes/plugins/WhatsiMemberPress.php:107
+#: includes/plugins/WhatsiQuickRestaurantReservation.php:73
+#: includes/plugins/WhatsiRestaurantReservation.php:73
+#: includes/plugins/WhatsiS2Member.php:222
+#: includes/plugins/WhatsiSimpleMembership.php:106
+#: includes/plugins/WhatsiWpERP.php:87
+msgid "Enable"
+msgstr "فعال"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:176
+#: admin/class-whatsiplus-woocommerce-setting.php:231
+msgid "Enable Suborders WhatsApp Notifications"
+msgstr "فعال سازی اعلان‌های واتساپ زیر سفارش"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:160
+msgid "Select a Country"
+msgstr "انتخاب کشور"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:158
+msgid "Default country"
+msgstr "کشور پیش‌فرض"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:153
+msgid "Your WhatsApp API. Account can be registered <a href=\"https://whatsiplus.com/go/?url=apikey\" target=\"blank\">here</a>"
+msgstr "API واتساپ شما. می‌توانید حساب کاربری خود را <a href=\"https://whatsiplus.com/go/?url=apikey\" target=\"blank\">اینجا</a> ثبت کنید."
+
+#: admin/class-whatsiplus-woocommerce-setting.php:152
+msgid "API Key"
+msgstr "کلید API"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:146
+msgid "Your WhatsiAPI account balance"
+msgstr "موجودی حساب WhatsiAPI شما"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:145
+msgid "API KEY Status:"
+msgstr "وضعیت کلید API:"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:63
+msgid "Customer Settings"
+msgstr "تنظیمات مشتری"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:58
+msgid "Admin Settings"
+msgstr "تنظیمات مدیر"
+
+#: admin/class-whatsiplus-woocommerce-setting.php:54
+msgid "Whatsiplus Settings"
+msgstr "تنظیمات واتسی پلاس"
+
+#: admin/automation.php:33
+msgid "Automation"
+msgstr "اتوماسیون"
+
+#. Author of the plugin
+#: whatsiplus-woocommerce.php
+msgid "whatsiplus"
+msgstr "واتسی پلاس"
+
+#. Description of the plugin
+#: whatsiplus-woocommerce.php
+msgid "Send WhatsApp notifications to WordPress and WooCommerce users"
+msgstr "ارسال اطلاعیه‌های واتساپ به کاربران وردپرس و ووکامرس"
+
+#. Plugin URI of the plugin
+#: whatsiplus-woocommerce.php
+msgid "https://whatsiplus.com"
+msgstr "https://whatsiplus.com"
+
+#. Plugin Name of the plugin
+#: whatsiplus-woocommerce.php
+msgid "Whatsiplus Order Notification for WooCommerce"
+msgstr "اطلاعیه سفارش واتسی پلاس برای ووکامرس"
