@@ -14,8 +14,8 @@ class Whatsiplus_WooCommerce_Frontend_Scripts implements Whatsiplus_Register_Int
 
 	public function msmswc_admin_enqueue_scripts() {
         wp_enqueue_script( 'admin-whatsiplus-scripts', plugins_url( 'js/admin.js', __DIR__ ), array( 'jquery' ), '1.1.5', true );
-        //wp_enqueue_script( 'admin-whatsiplus-sendsms', plugins_url( 'js/sendsms.js', __DIR__ ), array(), '1.0.1', true );
-        wp_enqueue_script( 'admin-whatsiplus-charcounter', plugins_url( 'js/charactercounter.js', __DIR__ ), array(), '1.0.1', true );
+        //wp_enqueue_script( 'admin-whatsiplus-sendsms', plugins_url( 'js/sendsms.js', __DIR__ ), array(), '1.0.0', true );
+        wp_enqueue_script( 'admin-whatsiplus-charcounter', plugins_url( 'js/charactercounter.js', __DIR__ ), array(), '1.0.0', true );
     
         // jQuery modal
         //wp_enqueue_style( 'admin-whatsiplus-css', plugins_url( 'css/jquery.modal.min.css', __FILE__ ), array(), '0.9.1' );
@@ -33,8 +33,8 @@ class Whatsiplus_WooCommerce_Frontend_Scripts implements Whatsiplus_Register_Int
             $page = sanitize_text_field(wp_unslash($_GET['page']));
             global $pagenow;
             if ($pagenow === 'options-general.php' && $this->str_contains($page, 'whatsiplus-woocommerce-setting')) {
-                wp_enqueue_style ( 'admin-whatsiplus-bootstrap', plugins_url( 'css/bootstrap.css', __DIR__), array(), '1.0.1' );
-                wp_enqueue_style ( 'admin-whatsiplus-wpfooter-fix', plugins_url( 'css/wpfooter-fix.css', __DIR__), array(), '1.0.1' );
+                wp_enqueue_style ( 'admin-whatsiplus-bootstrap', plugins_url( 'css/bootstrap.css', __DIR__), array(), '1.0.0' );
+                wp_enqueue_style ( 'admin-whatsiplus-wpfooter-fix', plugins_url( 'css/wpfooter-fix.css', __DIR__), array(), '1.0.0' );
             }
         }
     }
