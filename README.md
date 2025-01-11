@@ -102,5 +102,8 @@ You'll be able to send notifications to customers when a new form is submitted.
 
 ## Changelog
 
+### 1.0.1
+- Resolved an issue where tabs occasionally failed to display content due to browser caching.
+
 ### 1.0.0
 - Initial version released

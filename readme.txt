@@ -2,8 +2,8 @@
 Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
-Tested up to: 6.5
-Stable tag: 1.0.0
+Tested up to: 6.7
+Stable tag: 1.0.1
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -155,10 +155,17 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.0.1 =
+* Resolved an issue where tabs occasionally failed to display content due to browser caching.
+* Improved script enqueue mechanism to ensure dynamic file versioning.
+
 = 1.0.0 =
-* Initial version released
+* Initial release with core features.
 
 == Upgrade Notice ==
 
+= 1.0.1 =
+This update fixes caching issues affecting tab content. It is highly recommended to update for smoother functionality.
+
 = 1.0.0 =
-Initial version released
+Initial version released.
