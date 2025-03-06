@@ -360,7 +360,7 @@ class Whatsiplus_WooCommerce_Notification {
 			isset($order_details->get_customer_order_notes()[0]->comment_content) ? $order_details->get_customer_order_notes()[0]->comment_content : "",
 			$product_name,
 			$product_with_qty,
-			nl2br($all_items),
+			$all_items,
 			$order_details->get_billing_first_name(),
 			$order_details->get_billing_last_name(),
 			$order_details->get_billing_phone(),
