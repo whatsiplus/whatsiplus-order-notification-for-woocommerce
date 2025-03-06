@@ -307,15 +307,22 @@ class Whatsiplus_WooCommerce_Notification {
 		$items            = $order_details->get_items();
 		$product_name     = '';
 		$product_with_qty = '';
+		$all_items        = '';
+	
 		foreach ( $items as $item ) {
 			$product_name     .= ', ' . $item->get_name();
 			$product_with_qty .= ', ' . $item->get_name() . ' X ' . $item->get_quantity();
+	
+			$line_total = $item->get_total();
+			$all_items .= "\n- " . $item->get_name() . " (x" . $item->get_quantity() . ") - " . $line_total . " " . get_woocommerce_currency();
 		}
+	
 		if ( $product_name ) {
 			$product_name     = substr( $product_name, 2 );
 			$product_with_qty = substr( $product_with_qty, 2 );
+			$all_items        = substr( $all_items, 1 );
 		}
-
+	
 		$search  = array(
 			'[shop_name]',
 			'[shop_email]',
@@ -324,9 +331,10 @@ class Whatsiplus_WooCommerce_Notification {
 			'[order_currency]',
 			'[order_amount]',
 			'[order_status]',
-            '[order_latest_cust_note]',
+			'[order_latest_cust_note]',
 			'[order_product]',
 			'[order_product_with_qty]',
+			'[all_items]',
 			'[billing_first_name]',
 			'[billing_last_name]',
 			'[billing_phone]',
@@ -337,7 +345,9 @@ class Whatsiplus_WooCommerce_Notification {
 			'[billing_city]',
 			'[billing_state]',
 			'[billing_postcode]',
-			'[payment_method]'
+			'[payment_method]',
+			'[shipping_address_1]',
+			'[shipping_address_2]'
 		);
 		$replace = array(
 			get_bloginfo( 'name' ),
@@ -347,9 +357,10 @@ class Whatsiplus_WooCommerce_Notification {
 			$order_details->get_currency(),
 			$order_details->get_total(),
 			ucfirst( $order_details->get_status() ),
-            isset($order_details->get_customer_order_notes()[0]->comment_content) ? $order_details->get_customer_order_notes()[0]->comment_content : "",
+			isset($order_details->get_customer_order_notes()[0]->comment_content) ? $order_details->get_customer_order_notes()[0]->comment_content : "",
 			$product_name,
 			$product_with_qty,
+			nl2br($all_items),
 			$order_details->get_billing_first_name(),
 			$order_details->get_billing_last_name(),
 			$order_details->get_billing_phone(),
@@ -360,55 +371,19 @@ class Whatsiplus_WooCommerce_Notification {
 			$order_details->get_billing_city(),
 			$order_details->get_billing_state(),
 			$order_details->get_billing_postcode(),
-			$order_details->get_payment_method()
+			$order_details->get_payment_method(),
+			$order_details->get_shipping_address_1(),
+			$order_details->get_shipping_address_2()
 		);
-
-        $message = str_replace( $search, $replace, $message );
-
+	
+		$message = str_replace( $search, $replace, $message );
+	
 		$additional_billing_fields_array = $this->get_additional_billing_fields();
 		foreach ( $additional_billing_fields_array as $field ) {
 			$post_data = get_post_meta( $order_details->get_order_number(), $field, true );
 			$message   = str_replace( '[' . $field . ']', $post_data, $message );
 		}
-
-		$status_for_basc = array( 'on-hold', 'pending', 'processing' );
-		if ( $user_type == 'customer' && in_array( $order_status, $status_for_basc ) && strpos( $message, '[bank_details]' ) !== false ) {
-			$bank_message          = '';
-			$bank_message_template = '[bank_name] - [account_name] (Acc No.: [account_number], Sort code: [sort_code], IBAN: [iban], BIC: [bic])';
-			$bank_details          = new WC_Gateway_BACS();
-			if ( $order_details->payment_method == 'bacs' ) {
-				foreach ( $bank_details->account_details as $details ) {
-					if ( $details['bank_name'] != '' && $details['account_name'] != '' && $details['account_number'] != '' ) {
-						$search       = array(
-							'[bank_name]',
-							'[account_name]',
-							'[account_number]',
-							'[sort_code]',
-							'[iban]',
-							'[bic]'
-						);
-						$replace      = array(
-							$details['bank_name'],
-							$details['account_name'],
-							$details['account_number'],
-							$details['sort_code'],
-							$details['iban'],
-							$details['bic']
-						);
-						$bank_message .= ', ' . str_replace( $search, $replace, $bank_message_template );
-					}
-				}
-				$bank_message = str_replace( ' Sort code: ,', '', $bank_message );
-				$bank_message = str_replace( ' IBAN: ,', '', $bank_message );
-				$bank_message = str_replace( ', BIC: )', ')', $bank_message );
-
-				if ( $bank_message ) {
-					$bank_message = 'Bank details: ' . substr( $bank_message, 2 );
-				}
-			}
-			$message = TRIM( str_replace( '[bank_details]', $bank_message, $message ) );
-		}
-
+	
 		return $message;
 	}
 
