@@ -102,6 +102,10 @@ You'll be able to send notifications to customers when a new form is submitted.
 
 ## Changelog
 
+### 1.0.2
+- Added support for [all_items] to display all order products.
+- Added [shipping_address_1] and [shipping_address_2] to display shipping address.
+
 ### 1.0.1
 - Resolved an issue where tabs occasionally failed to display content due to browser caching.
 
