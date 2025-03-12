@@ -1,65 +1,65 @@
-jQuery(document).ready(function($) {
+document.addEventListener('DOMContentLoaded', function() {
     // Initiate Color Picker
-    $('.wp-color-picker-field').wpColorPicker();
+    jQuery('.wp-color-picker-field').wpColorPicker();
 
     // Switches option sections
-    $('.group').hide();
+    jQuery('.group').hide();
     var activetab = '';
     var subtab = '';
     if (typeof(localStorage) != 'undefined' ) {
         activetab = localStorage.getItem("activetab");
     }
-    if (activetab != '' && $(activetab).length ) {
-        $(activetab).fadeIn();
+    if (activetab != '' && jQuery(activetab).length ) {
+        jQuery(activetab).fadeIn();
     } else {
-        $('.group:first').fadeIn();
+        jQuery('.group:first').fadeIn();
     }
-    $('.group .collapsed').each(function(){
-        $(this).find('input:checked').parent().parent().parent().nextAll().each(function(){
-            if ($(this).hasClass('last')) {
-                $(this).removeClass('hidden');
+    jQuery('.group .collapsed').each(function(){
+        jQuery(this).find('input:checked').parent().parent().parent().nextAll().each(function(){
+            if (jQuery(this).hasClass('last')) {
+                jQuery(this).removeClass('hidden');
                 return false;
             }
-            $(this).filter('.hidden').removeClass('hidden');
+            jQuery(this).filter('.hidden').removeClass('hidden');
         });
     });
 
-    if (activetab != '' && $(activetab + '-tab').length ) {
-        $(activetab + '-tab').addClass('nav-tab-active');
+    if (activetab != '' && jQuery(activetab + '-tab').length ) {
+        jQuery(activetab + '-tab').addClass('nav-tab-active');
     } else {
-        $('.nav-tab-wrapper a:first').addClass('nav-tab-active');
+        jQuery('.nav-tab-wrapper a:first').addClass('nav-tab-active');
     }
-    $('.nav-tab-wrapper a').click(function(evt) {
-        $('.nav-tab-wrapper a').removeClass('nav-tab-active');
-        $(this).addClass('nav-tab-active').blur();
-        var clicked_group = $(this).attr('href');
+    jQuery('.nav-tab-wrapper a').click(function(evt) {
+        jQuery('.nav-tab-wrapper a').removeClass('nav-tab-active');
+        jQuery(this).addClass('nav-tab-active').blur();
+        var clicked_group = jQuery(this).attr('href');
         if (typeof(localStorage) != 'undefined' ) {
-            localStorage.setItem("activetab", $(this).attr('href'));
+            localStorage.setItem("activetab", jQuery(this).attr('href'));
         }
-        $('.group').hide();
-        $(clicked_group).fadeIn();
+        jQuery('.group').hide();
+        jQuery(clicked_group).fadeIn();
         evt.preventDefault();
     });
 
-    $('.group .wrap .nav-tab-wrapper a').click(function(evt) {
-        $('.nav-tab-wrapper a').removeClass('nav-tab-active');
-        $(this).addClass('nav-tab-active').blur();
-        var clicked_group = $(this).attr('href');
+    jQuery('.group .wrap .nav-tab-wrapper a').click(function(evt) {
+        jQuery('.nav-tab-wrapper a').removeClass('nav-tab-active');
+        jQuery(this).addClass('nav-tab-active').blur();
+        var clicked_group = jQuery(this).attr('href');
         if (typeof(localStorage) != 'undefined' ) {
-            localStorage.setItem("subtab", $(this).attr('href'));
+            localStorage.setItem("subtab", jQuery(this).attr('href'));
         }
-        $('.group').hide();
-        parent_id = $(this).parent().parent().parent().attr("id");
-        $("#" + parent_id + "-tab").addClass('nav-tab-active').blur();
-        $(this).parent().parent().parent().show();
-        $(clicked_group).fadeIn();
+        jQuery('.group').hide();
+        parent_id = jQuery(this).parent().parent().parent().attr("id");
+        jQuery("#" + parent_id + "-tab").addClass('nav-tab-active').blur();
+        jQuery(this).parent().parent().parent().show();
+        jQuery(clicked_group).fadeIn();
         evt.preventDefault();
     });
 
-    $('.wpsa-browse').on('click', function (event) {
+    jQuery('.wpsa-browse').on('click', function (event) {
         event.preventDefault();
 
-        var self = $(this);
+        var self = jQuery(this);
 
         // Create the media frame.
         var file_frame = wp.media.frames.file_frame = wp.media({
