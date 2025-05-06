@@ -2,7 +2,7 @@
 Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
-Tested up to: 6.7
+Tested up to: 6.8
 Stable tag: 1.0.4
 Requires PHP: 5.6
 License: GPLv3
