@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.7
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -155,6 +155,9 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.0.4 =
+* Preserved line breaks by setting correct content-type for raw input.
+
 = 1.0.3 =
 * Fixed an issue causing a blank page in certain cases.
 
@@ -170,6 +173,9 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.0.4 =
+Preserved line breaks by setting correct content-type for raw input.
 
 = 1.0.3 =
 Fixed an issue causing a blank page in certain cases

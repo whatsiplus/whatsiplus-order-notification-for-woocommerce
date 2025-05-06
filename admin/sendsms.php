@@ -59,9 +59,14 @@ class WhatsiPLUS_SendSMS_View implements Whatsiplus_Register_Interface {
         if(isset($post_data['whatsiplus_sendsms_message_to']))
             $message_to = sanitize_text_field(wp_unslash($post_data['whatsiplus_sendsms_message_to']));
             //$message_to = esc_attr($message_to);
-        if(isset($post_data['whatsiplus_sendsms_message']))
-            $message = sanitize_text_field(wp_unslash($post_data['whatsiplus_sendsms_message']));
-            //$message = esc_textarea($message);
+            
+            $post_data_raw = isset($_POST['whatsiplus_sendsms_setting']) ? wp_unslash($_POST['whatsiplus_sendsms_setting']) : array();
+            $post_data = $this->sanitize_recursive($post_data_raw);
+
+            if(isset($post_data_raw['whatsiplus_sendsms_message'])) {
+                $message = wp_unslash($post_data_raw['whatsiplus_sendsms_message']);
+            }
+
         if(isset($post_data['whatsiplus_sendsms_users'])){
             $users = array();
             foreach ($post_data['whatsiplus_sendsms_users'] as $value) {
