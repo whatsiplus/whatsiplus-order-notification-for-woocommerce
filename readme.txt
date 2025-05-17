@@ -108,6 +108,45 @@ You'll be able to send notifications to customer when a new form is submitted.
 *   [Paid Memberships Pro](https://wordpress.org/plugins/paid-memberships-pro/)
 
 
+== Quick Setup ==
+
+1. Go to the "Whatsiplus Settings" tab and paste your API Key in the provided field.
+2. Navigate to the "Admin Settings and Customer Settings" tab.
+3. Check the "Enable" box to activate notifications.
+4. Select your desired notification types by checking the related options.
+5. Click the "Save" button to apply the changes.
+6. Customize your message content in the designated textboxes using supported shortcodes.
+
+== Supported Shortcodes ==
+
+You can use the following shortcodes in your notification messages. These will be automatically replaced with relevant order and customer data:
+
+[shop_name]  
+[shop_email]  
+[shop_url]  
+[order_id]  
+[order_currency]  
+[order_amount]  
+[order_status]  
+[order_latest_cust_note]  
+[order_product]  
+[order_product_with_qty]  
+[all_items]  
+[billing_first_name]  
+[billing_last_name]  
+[billing_phone]  
+[billing_email]  
+[billing_company]  
+[billing_address]  
+[billing_country]  
+[billing_city]  
+[billing_state]  
+[billing_postcode]  
+[payment_method]  
+[shipping_address_1]  
+[shipping_address_2]
+
+
 == Frequently Asked Questions ==
 
 = How do I get started with Whatsiplus? =
