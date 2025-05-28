@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -145,6 +145,7 @@ You can use the following shortcodes in your notification messages. These will b
 [payment_method]  
 [shipping_address_1]  
 [shipping_address_2]
+[shipping_amount]
 
 
 == Frequently Asked Questions ==
@@ -194,6 +195,10 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.0.5 =
+* Fixed bugs in certain cases, including issues with multi-vendor message sending
+* Added a new shortcode [shipping_amount] for including shipping amount in messages
+
 = 1.0.4 =
 * Preserved line breaks by setting correct content-type for raw input.
 
@@ -212,6 +217,10 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.0.5 =
+Fixed bugs in certain cases, including issues with multi-vendor message sending
+Added a new shortcode [shipping_amount] for including shipping amount in messages
 
 = 1.0.4 =
 Preserved line breaks by setting correct content-type for raw input.

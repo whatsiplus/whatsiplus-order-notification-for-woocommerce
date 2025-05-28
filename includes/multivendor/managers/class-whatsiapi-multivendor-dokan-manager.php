@@ -20,7 +20,11 @@ class Whatsiapi_Multivendor_Dokan_Manager extends Whatsiplus_Abstract_Multivendo
 	}
 
 	public function get_vendor_mobile_number_from_vendor_data( $vendor_data ) {
-		return $vendor_data['vendor_profile']['phone'];
+	    if ( is_array( $vendor_data ) && isset( $vendor_data['vendor_profile']['phone'] ) ) {
+	        return $vendor_data['vendor_profile']['phone'];
+	    }
+	    $this->log->add( 'Whatsiplus', 'Invalid vendor data or phone missing: ' . print_r( $vendor_data, true ) );
+	    return '';
 	}
 
 	public function get_vendor_country_from_vendor_data($vendor_data){

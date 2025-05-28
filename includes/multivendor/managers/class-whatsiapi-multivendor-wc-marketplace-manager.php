@@ -20,15 +20,27 @@ class Whatsiapi_Multivendor_WC_Marketplace_Manager extends Whatsiplus_Abstract_M
 	}
 
 	public function get_vendor_mobile_number_from_vendor_data( $vendor_data ) {
-		return $vendor_data['vendor_profile']['_vendor_phone'][0];
+		if ( is_array( $vendor_data ) && isset( $vendor_data['vendor_profile']['_vendor_phone'][0] ) ) {
+			return $vendor_data['vendor_profile']['_vendor_phone'][0];
+		}
+		$this->log->add( 'Whatsiplus', 'Invalid vendor data or missing phone: ' . print_r( $vendor_data, true ) );
+		return '';
 	}
 
 	public function get_vendor_country_from_vendor_data($vendor_data){
-		return $vendor_data['vendor_profile']['_vendor_country_code'][0];
+		if ( is_array( $vendor_data ) && isset( $vendor_data['vendor_profile']['_vendor_country_code'][0] ) ) {
+			return $vendor_data['vendor_profile']['_vendor_country_code'][0];
+		}
+		$this->log->add( 'Whatsiplus', 'Invalid vendor data or missing country code: ' . print_r( $vendor_data, true ) );
+		return '';
 	}
 
 	public function get_vendor_shop_name_from_vendor_data( $vendor_data ) {
-		return $vendor_data['vendor_profile']['_vendor_page_title'][0];
+		if ( is_array( $vendor_data ) && isset( $vendor_data['vendor_profile']['_vendor_page_title'][0] ) ) {
+			return $vendor_data['vendor_profile']['_vendor_page_title'][0];
+		}
+		$this->log->add( 'Whatsiplus', 'Invalid vendor data or missing shop name: ' . print_r( $vendor_data, true ) );
+		return '';
 	}
 
 	public function get_vendor_id_from_item( WC_Order_Item $item ) {
@@ -36,13 +48,22 @@ class Whatsiapi_Multivendor_WC_Marketplace_Manager extends Whatsiplus_Abstract_M
 	}
 
 	public function get_vendor_profile_from_item( WC_Order_Item $item ) {
-		return get_user_meta( $this->get_vendor_id_from_item( $item ) );
+		$vendor_id = $this->get_vendor_id_from_item( $item );
+		if ( $vendor_id ) {
+			return get_user_meta( $vendor_id );
+		}
+		$this->log->add( 'Whatsiplus', 'Invalid vendor ID from item: ' . print_r( $item, true ) );
+		return array();
 	}
 
 	public function get_vendor_data_list_from_order( $order_id ) {
 		$order = wc_get_order( $order_id );
-		$items = $order->get_items();
+		if ( ! $order ) {
+			$this->log->add( 'Whatsiplus', 'Invalid order ID: ' . print_r( $order_id, true ) );
+			return array();
+		}
 
+		$items = $order->get_items();
 		$vendor_data_list = array();
 
 		foreach ( $items as $item ) {

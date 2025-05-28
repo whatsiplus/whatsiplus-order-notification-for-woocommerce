@@ -347,7 +347,8 @@ class Whatsiplus_WooCommerce_Notification {
 			'[billing_postcode]',
 			'[payment_method]',
 			'[shipping_address_1]',
-			'[shipping_address_2]'
+			'[shipping_address_2]',
+			'[shipping_amount]'
 		);
 		$replace = array(
 			get_bloginfo( 'name' ),
@@ -373,7 +374,8 @@ class Whatsiplus_WooCommerce_Notification {
 			$order_details->get_billing_postcode(),
 			$order_details->get_payment_method(),
 			$order_details->get_shipping_address_1(),
-			$order_details->get_shipping_address_2()
+			$order_details->get_shipping_address_2(),
+			wc_price($order_details->get_shipping_total())
 		);
 	
 		$message = str_replace( $search, $replace, $message );
