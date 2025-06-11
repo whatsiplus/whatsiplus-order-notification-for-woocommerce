@@ -80,6 +80,10 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
 			$this->log->add( 'Whatsiplus', 'activated plugin: ' . Whatsiplus_Multivendor_Factory::$activatedPlugin );
 
 			$order_details = wc_get_order( $order_id );
+			if(!$order_details){
+			    $this->log->add( 'Whatsiplus', "Order not found for order ID: {$order_id}. Exiting..." );
+			    return;
+			}
 			$message       = whatsiplus_get_options( 'whatsiplus_multivendor_vendor_sms_template', 'whatsiplus_multivendor_setting', '' );
 			//Get default country v1.1.17
 			$default_country = whatsiplus_get_options('whatsiplus_woocommerce_country_code', 'whatsiplus_setting', '' );
@@ -117,67 +121,101 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
 	}
 
 	public function replace_vendor_order_keyword( $message, WC_Order $order_details, $vendor_datas ) {
-		$search  = array(
-			'[shop_name]',
-			'[shop_email]',
-			'[shop_url]',
-			'[vendor_shop_name]',
-			'[order_id]',
-			'[order_currency]',
-			'[order_amount]',
-			'[order_status]',
-            '[order_latest_cust_note]',
-			'[order_product]',
-			'[order_product_with_qty]',
-			'[billing_first_name]',
-			'[billing_last_name]',
-			'[billing_phone]',
-			'[billing_email]',
-			'[billing_company]',
-			'[billing_address]',
-			'[billing_country]',
-			'[billing_city]',
-			'[billing_state]',
-			'[billing_postcode]',
-			'[payment_method]'
-		);
-		$replace = array(
-			get_bloginfo( 'name' ),
-			get_bloginfo( 'admin_email' ),
-			get_bloginfo( 'url' ),
-			$this->whatsiplus_multivendor->get_vendor_shop_name_from_vendor_data( $vendor_datas ),
-			$order_details->get_order_number(),
-			$order_details->get_currency(),
-			$vendor_datas['total_amount_for_vendor'],
-			ucfirst( $order_details->get_status() ),
-            $order_details->get_customer_order_notes()[0],
-			$vendor_datas['item'],
-			$vendor_datas['product_with_qty'],
-			$order_details->get_billing_first_name(),
-			$order_details->get_billing_last_name(),
-			$order_details->get_billing_phone(),
-			$order_details->get_billing_email(),
-			$order_details->get_billing_company(),
-			$order_details->get_billing_address_1(),
-			$order_details->get_billing_country(),
-			$order_details->get_billing_city(),
-			$order_details->get_billing_state(),
-			$order_details->get_billing_postcode(),
-			$order_details->get_payment_method()
-		);
-		$message = str_replace( $search, $replace, $message, $total_replaced );
+    $search = array(
+        '[shop_name]',
+        '[shop_email]',
+        '[shop_url]',
+        '[vendor_shop_name]',
+        '[order_id]',
+        '[order_currency]',
+        '[order_amount]',
+        '[order_status]',
+        '[order_latest_cust_note]',
+        '[order_product]',
+        '[order_product_with_qty]',
+        '[billing_first_name]',
+        '[billing_last_name]',
+        '[billing_phone]',
+        '[billing_email]',
+        '[billing_company]',
+        '[billing_address]',
+        '[billing_country]',
+        '[billing_city]',
+        '[billing_state]',
+        '[billing_postcode]',
+        '[payment_method]',
+        '[order_note]',
+        '[product_options]',
+    );
 
-		// 2020-07-04 - Support additional billing field for Multivendor
-		$additional_billing_fields_array = $this->get_additional_billing_fields();
-		foreach ( $additional_billing_fields_array as $field ) {
-			$post_data = get_post_meta( $order_details->get_order_number(), $field, true );
-			$message   = str_replace( '[' . $field . ']', $post_data, $message );
-		}
+    $order_latest_cust_note = '';
+    $customer_note = $order_details->get_customer_note();
+    if (!empty($customer_note)) {
+        $order_latest_cust_note = $customer_note;
+    }
 
-		$this->log->add( 'Whatsiplus', "Total replaced keyword: $total_replaced" );
+    $product_options_text = '';
+    foreach ($order_details->get_items() as $item) {
+        $options = $item->get_formatted_meta_data('');
+        if (!empty($options)) {
+            foreach ($options as $meta) {
+                $product_options_text .= $meta->display_key . ': ' . $meta->display_value . ', ';
+            }
+        }
+    }
+    $product_options_text = rtrim($product_options_text, ', ');
 
-		return $message;
-	}
+    $vendor_shop_name = '';
+    if (method_exists($this->whatsiplus_multivendor, 'get_vendor_shop_name_from_vendor_data')) {
+        $vendor_shop_name = $this->whatsiplus_multivendor->get_vendor_shop_name_from_vendor_data($vendor_datas) ?: '';
+    }
+
+    $order_payment_method = $order_details->get_payment_method() ?: '';
+
+    $replace = array(
+        get_bloginfo('name'),
+        get_bloginfo('admin_email'),
+        get_bloginfo('url'),
+        $vendor_shop_name,
+        $order_details->get_order_number(),
+        $order_details->get_currency(),
+        isset($vendor_datas['total_amount_for_vendor']) ? $vendor_datas['total_amount_for_vendor'] : '',
+        ucfirst($order_details->get_status()),
+        $order_latest_cust_note,
+        isset($vendor_datas['item']) ? $vendor_datas['item'] : '',
+        isset($vendor_datas['product_with_qty']) ? $vendor_datas['product_with_qty'] : '',
+        $order_details->get_billing_first_name(),
+        $order_details->get_billing_last_name(),
+        $order_details->get_billing_phone(),
+        $order_details->get_billing_email(),
+        $order_details->get_billing_company(),
+        $order_details->get_billing_address_1(),
+        $order_details->get_billing_country(),
+        $order_details->get_billing_city(),
+        $order_details->get_billing_state(),
+        $order_details->get_billing_postcode(),
+        $order_payment_method,
+        $customer_note,
+        $product_options_text,
+    );
+
+    if (!is_string($message)) {
+        $this->log->add('Whatsiplus', "Warning: message template is not a string. Setting to empty string.");
+        $message = '';
+    }
+
+    $message = str_replace($search, $replace, $message, $total_replaced);
+
+    $additional_billing_fields_array = $this->get_additional_billing_fields();
+    foreach ($additional_billing_fields_array as $field) {
+        $post_data = get_post_meta($order_details->get_order_number(), $field, true);
+        $message = str_replace('[' . $field . ']', $post_data, $message);
+    }
+
+    $this->log->add('Whatsiplus', "Total replaced keyword: $total_replaced");
+
+    return $message;
+}
 
 	// 2020-07-04 - Support additional billing field for Multivendor
 	// Copied from class-whatsiplus-woocommerce-notification.php

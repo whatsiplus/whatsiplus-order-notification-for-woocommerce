@@ -5,14 +5,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Switches option sections
     jQuery('.group').hide();
     var activetab = '';
-    var subtab = '';
-    if (typeof(localStorage) != 'undefined' ) {
+    if (typeof(localStorage) !== 'undefined') {
         activetab = localStorage.getItem("activetab");
+        var validTabs = jQuery('.nav-tab-wrapper a').map(function() {
+            return jQuery(this).attr('href');
+        }).get();
+
+        if (!validTabs.includes(activetab)) {
+            activetab = validTabs[0];
+            localStorage.setItem("activetab", activetab);
+        }
     }
-    if (activetab != '' && jQuery(activetab).length ) {
+
+    if (activetab && jQuery(activetab).length) {
         jQuery(activetab).fadeIn();
+        jQuery(activetab + '-tab').addClass('nav-tab-active');
     } else {
+        // Fallback to first tab
         jQuery('.group:first').fadeIn();
+        jQuery('.nav-tab-wrapper a:first').addClass('nav-tab-active');
+        if (typeof(localStorage) !== 'undefined') {
+            localStorage.setItem("activetab", jQuery('.nav-tab-wrapper a:first').attr('href'));
+        }
     }
     jQuery('.group .collapsed').each(function(){
         jQuery(this).find('input:checked').parent().parent().parent().nextAll().each(function(){
@@ -24,11 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    if (activetab != '' && jQuery(activetab + '-tab').length ) {
-        jQuery(activetab + '-tab').addClass('nav-tab-active');
-    } else {
-        jQuery('.nav-tab-wrapper a:first').addClass('nav-tab-active');
-    }
     jQuery('.nav-tab-wrapper a').click(function(evt) {
         jQuery('.nav-tab-wrapper a').removeClass('nav-tab-active');
         jQuery(this).addClass('nav-tab-active').blur();

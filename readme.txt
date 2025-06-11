@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -146,6 +146,9 @@ You can use the following shortcodes in your notification messages. These will b
 [shipping_address_1]  
 [shipping_address_2]
 [shipping_amount]
+[vendor_shop_name]
+[order_note]
+[product_options]
 
 
 == Frequently Asked Questions ==
@@ -195,6 +198,15 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.0.6 =
+* Fixed an issue causing blank settings page due to outdated browser cache (now uses dynamic versioning for scripts/styles)
+* Added support for new shortcodes:
+  - [vendor_shop_name] for Vendor shop name
+  - [order_note] for WooCommerce customer note
+  - [product_options] for custom product options (like size, color)
+* Improved shortcode parsing reliability for multivendor messages
+* Better compatibility with "Product Options for WooCommerce" plugin
+
 = 1.0.5 =
 * Fixed bugs in certain cases, including issues with multi-vendor message sending
 * Added a new shortcode [shipping_amount] for including shipping amount in messages
@@ -217,6 +229,9 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.0.6 =
+This update adds new shortcodes for vendor messages, fixes fatal error with customer notes, improves plugin compatibility, and prevents blank settings pages by enhancing script loading.
 
 = 1.0.5 =
 Fixed bugs in certain cases, including issues with multi-vendor message sending
