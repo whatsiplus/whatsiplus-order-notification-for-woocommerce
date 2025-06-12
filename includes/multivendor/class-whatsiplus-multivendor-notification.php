@@ -149,9 +149,15 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
     );
 
     $order_latest_cust_note = '';
-    $customer_note = $order_details->get_customer_note();
-    if (!empty($customer_note)) {
-        $order_latest_cust_note = $customer_note;
+    $customer_order_notes = wc_get_order_notes(array(
+        'order_id' => $order_details->get_id(),
+        'type'     => 'customer',
+        'orderby'  => 'date_created',
+        'order'    => 'DESC',
+        'limit'    => 1
+    ));
+    if (!empty($customer_order_notes)) {
+        $order_latest_cust_note = wp_strip_all_tags($customer_order_notes[0]->content);
     }
 
     $product_options_text = '';
@@ -159,7 +165,7 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         $options = $item->get_formatted_meta_data('');
         if (!empty($options)) {
             foreach ($options as $meta) {
-                $product_options_text .= $meta->display_key . ': ' . $meta->display_value . ', ';
+                $product_options_text .= wp_strip_all_tags($meta->display_key) . ': ' . wp_strip_all_tags($meta->display_value) . ', ';
             }
         }
     }
@@ -167,7 +173,7 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
 
     $vendor_shop_name = '';
     if (method_exists($this->whatsiplus_multivendor, 'get_vendor_shop_name_from_vendor_data')) {
-        $vendor_shop_name = $this->whatsiplus_multivendor->get_vendor_shop_name_from_vendor_data($vendor_datas) ?: '';
+        $vendor_shop_name = wp_strip_all_tags($this->whatsiplus_multivendor->get_vendor_shop_name_from_vendor_data($vendor_datas) ?: '');
     }
 
     $order_payment_method = $order_details->get_payment_method() ?: '';
@@ -195,7 +201,7 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         $order_details->get_billing_state(),
         $order_details->get_billing_postcode(),
         $order_payment_method,
-        $customer_note,
+        wp_strip_all_tags($customer_note),
         $product_options_text,
     );
 
