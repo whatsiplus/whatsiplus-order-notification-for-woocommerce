@@ -146,6 +146,8 @@ You can use the following shortcodes in your notification messages. These will b
 [shipping_address_1]  
 [shipping_address_2]
 [shipping_amount]
+
+Only supported in the Multivendor tab:
 [vendor_shop_name]
 [order_note]
 [product_options]
