@@ -161,7 +161,20 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
     }
 
     // Define $customer_note as requested
-    $customer_note = wp_strip_all_tags($order_details->get_customer_note() ?: '');
+    $customer_note = $order_details->get_customer_note();
+    if (empty($customer_note)) {
+        $customer_order_notes = wc_get_order_notes(array(
+            'order_id' => $order_details->get_id(),
+            'type'     => 'customer',
+            'orderby'  => 'date_created',
+            'order'    => 'DESC',
+            'limit'    => 1
+        ));
+        if (!empty($customer_order_notes)) {
+            $customer_note = $customer_order_notes[0]->content;
+        }
+    }
+    $customer_note = wp_strip_all_tags($customer_note ?: '');
 
     // Build $product_options_text with products and their options together
     $product_options_text = '';
@@ -205,8 +218,8 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         isset($vendor_datas['total_amount_for_vendor']) ? $vendor_datas['total_amount_for_vendor'] : '',
         ucfirst($order_details->get_status()),
         $order_latest_cust_note,
-        isset($vendor_datas['item']) ? $vendor_datas['item'] : '',
-        isset($vendor_datas['product_with_qty']) ? $vendor_datas['product_with_qty'] : '',
+        '',
+        '',
         $order_details->get_billing_first_name(),
         $order_details->get_billing_last_name(),
         $order_details->get_billing_phone(),
