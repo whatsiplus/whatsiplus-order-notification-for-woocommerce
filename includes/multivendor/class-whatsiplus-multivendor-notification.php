@@ -160,16 +160,33 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         $order_latest_cust_note = wp_strip_all_tags($customer_order_notes[0]->content);
     }
 
+    // Define $customer_note as requested
+    $customer_note = wp_strip_all_tags($order_details->get_customer_note() ?: '');
+
+    // Build $product_options_text with products and their options together
     $product_options_text = '';
     foreach ($order_details->get_items() as $item) {
+        $item_name = $item->get_name();
+        $qty = $item->get_quantity();
+        $options_text = '';
+
         $options = $item->get_formatted_meta_data('');
         if (!empty($options)) {
+            $option_parts = [];
             foreach ($options as $meta) {
-                $product_options_text .= wp_strip_all_tags($meta->display_key) . ': ' . wp_strip_all_tags($meta->display_value) . ', ';
+                $option_parts[] = wp_strip_all_tags($meta->display_key) . ': ' . wp_strip_all_tags($meta->display_value);
             }
+            $options_text = implode(', ', $option_parts);
         }
+
+        $product_line = "{$item_name} x {$qty}";
+        if (!empty($options_text)) {
+            $product_line .= ", " . $options_text;
+        }
+
+        $product_options_text .= $product_line . "\n";
     }
-    $product_options_text = rtrim($product_options_text, ', ');
+    $product_options_text = trim($product_options_text);
 
     $vendor_shop_name = '';
     if (method_exists($this->whatsiplus_multivendor, 'get_vendor_shop_name_from_vendor_data')) {
