@@ -160,23 +160,24 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         $order_latest_cust_note = wp_strip_all_tags($customer_order_notes[0]->content);
     }
 
-    // Define $customer_note as requested
+    // Improved extraction of customer note
     $customer_note = $order_details->get_customer_note();
     if (empty($customer_note)) {
-        $customer_order_notes = wc_get_order_notes(array(
+        $notes = wc_get_order_notes(array(
             'order_id' => $order_details->get_id(),
-            'type'     => 'customer',
             'orderby'  => 'date_created',
             'order'    => 'DESC',
-            'limit'    => 1
         ));
-        if (!empty($customer_order_notes)) {
-            $customer_note = $customer_order_notes[0]->content;
+        foreach ($notes as $note) {
+            if (isset($note->customer_note) && $note->customer_note) {
+                $customer_note = $note->content;
+                break;
+            }
         }
     }
     $customer_note = wp_strip_all_tags($customer_note ?: '');
 
-    // Build $product_options_text with products and their options together
+    // Build $product_options_text with products and their filtered options together
     $product_options_text = '';
     foreach ($order_details->get_items() as $item) {
         $item_name = $item->get_name();
@@ -187,6 +188,9 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         if (!empty($options)) {
             $option_parts = [];
             foreach ($options as $meta) {
+                if (in_array(strtolower($meta->display_key), ['store', 'store order id'])) {
+                    continue;
+                }
                 $option_parts[] = wp_strip_all_tags($meta->display_key) . ': ' . wp_strip_all_tags($meta->display_value);
             }
             $options_text = implode(', ', $option_parts);
