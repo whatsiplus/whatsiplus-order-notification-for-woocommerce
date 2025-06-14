@@ -160,21 +160,23 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         $order_latest_cust_note = wp_strip_all_tags($customer_order_notes[0]->content);
     }
 
-    // Improved extraction of customer note
     $customer_note = $order_details->get_customer_note();
+
+    // Fallback: if not found, search latest customer-type comment
     if (empty($customer_note)) {
-        $notes = wc_get_order_notes(array(
+        $notes = wc_get_order_notes([
             'order_id' => $order_details->get_id(),
             'orderby'  => 'date_created',
             'order'    => 'DESC',
-        ));
+        ]);
         foreach ($notes as $note) {
-            if (isset($note->customer_note) && $note->customer_note) {
+            if ($note->customer_note || (isset($note->added_by) && $note->added_by === 'customer')) {
                 $customer_note = $note->content;
                 break;
             }
         }
     }
+
     $customer_note = wp_strip_all_tags($customer_note ?: '');
 
     // Build $product_options_text with products and their filtered options together
