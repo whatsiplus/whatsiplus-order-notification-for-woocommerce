@@ -37,7 +37,7 @@ abstract class Whatsiplus_Abstract_Multivendor implements Whatsiplus_Multivendor
 		$user = get_user_by( 'id', $user_id );
 
 		//register mobile field setting
-		if ( ! in_array( 'customer', (array) $user->roles ) ) {
+		if ( $user && ! in_array( 'customer', (array) $user->roles ) ) {
 			add_action( 'show_user_profile', array( $this, 'setup_mobile_number_setting_field' ) );
 			add_action( 'edit_user_profile', array( $this, 'setup_mobile_number_setting_field' ) );
 
