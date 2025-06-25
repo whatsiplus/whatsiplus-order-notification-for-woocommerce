@@ -388,6 +388,7 @@ class Whatsiplus_WooCommerce_Notification {
 			$message   = str_replace( '[' . $field . ']', $post_data, $message );
 		}
 	
+		$message = do_shortcode( $message );
 		return $message;
 	}
 
