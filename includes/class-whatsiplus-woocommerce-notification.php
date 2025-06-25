@@ -308,21 +308,29 @@ class Whatsiplus_WooCommerce_Notification {
 		$product_name     = '';
 		$product_with_qty = '';
 		$all_items        = '';
-	
+
 		foreach ( $items as $item ) {
 			$product_name     .= ', ' . $item->get_name();
 			$product_with_qty .= ', ' . $item->get_name() . ' X ' . $item->get_quantity();
-	
+
 			$line_total = $item->get_total();
 			$all_items .= "\n- " . $item->get_name() . " (x" . $item->get_quantity() . ") - " . $line_total . " " . get_woocommerce_currency();
 		}
-	
+
 		if ( $product_name ) {
 			$product_name     = substr( $product_name, 2 );
 			$product_with_qty = substr( $product_with_qty, 2 );
 			$all_items        = substr( $all_items, 1 );
 		}
-	
+
+		// Fetch shipping method name
+		$shipping_methods = $order_details->get_shipping_methods();
+		$shipping_method_name = '';
+		if ( ! empty( $shipping_methods ) ) {
+			$shipping_method = reset( $shipping_methods );
+			$shipping_method_name = $shipping_method->get_name();
+		}
+
 		$search  = array(
 			'[shop_name]',
 			'[shop_email]',
@@ -350,6 +358,7 @@ class Whatsiplus_WooCommerce_Notification {
 			'[shipping_address_2]',
 			'[shipping_amount]',
 			'[billing_address_2]',
+			'[shipping_method]',
 		);
 		$replace = array(
 			get_bloginfo( 'name' ),
@@ -378,16 +387,17 @@ class Whatsiplus_WooCommerce_Notification {
 			$order_details->get_shipping_address_2(),
 			wc_price($order_details->get_shipping_total()),
 			$order_details->get_billing_address_2(),
+			$shipping_method_name,
 		);
-	
+
 		$message = str_replace( $search, $replace, $message );
-	
+
 		$additional_billing_fields_array = $this->get_additional_billing_fields();
 		foreach ( $additional_billing_fields_array as $field ) {
 			$post_data = get_post_meta( $order_details->get_order_number(), $field, true );
 			$message   = str_replace( '[' . $field . ']', $post_data, $message );
 		}
-	
+
 		$message = do_shortcode( $message );
 		return $message;
 	}
