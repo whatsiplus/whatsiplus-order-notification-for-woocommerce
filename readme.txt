@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -201,6 +201,9 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.0.8 =
+* Added support for running WordPress shortcodes in WhatsApp messages.
+
 = 1.0.7 =
 * Fixed some bugs
 * Added a new shortcode [billing_address_2]
@@ -236,6 +239,9 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.0.8 =
+Added support for running WordPress shortcodes in WhatsApp messages.
 
 = 1.0.7 =
 Added a new shortcode [billing_address_2]
