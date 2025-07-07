@@ -39,10 +39,14 @@ function set_no_cache_headers() {
     if (is_admin()) {
         return;
     }
-    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-    header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
-    header("Pragma: no-cache");
+
+    if (!headers_sent()) {
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
+        header("Pragma: no-cache");
+    }
 }
+
 add_action('init', 'set_no_cache_headers');
 
 //require_once WHATSIPLUS_PLUGIN_DIR . 'lib/action-scheduler/action-scheduler.php';
