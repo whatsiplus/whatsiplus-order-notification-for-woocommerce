@@ -21,7 +21,7 @@ class WhatsiPLUS {
     private $log;
 
     // REST API URL
-    public $rest_base_url = "https://api.whatsiplus.com/";
+    public $rest_base_url;
     public $actual_api_url;
 
     private $rest_commands = array (
@@ -40,6 +40,15 @@ class WhatsiPLUS {
         $this->log = new Whatsiplus_WooCommerce_Logger();
         $this->api_key = $api_key;
         $this->api_secret = $api_secret;
+        
+        // Determine site language
+        $lang = get_locale();
+        if (strpos($lang, 'fa_IR') === 0) {
+            $this->rest_base_url = "http://api.whatsiplus.ir/";
+        } else {
+            $this->rest_base_url = "https://api.whatsiplus.com/";
+        }
+
         $this->actual_api_url = $this->rest_base_url;
     }
 

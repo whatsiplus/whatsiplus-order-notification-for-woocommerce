@@ -99,7 +99,14 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
         if (!empty($default_country_code) && !empty($apikey)) {
             $dialing_country_code = $this->get_country_dialing_code($default_country_code);
-            $api_url = "https://api.whatsiplus.com/serviceSettings/{$apikey}?countryCode={$dialing_country_code}";
+
+            $lang = get_locale();
+            if (strpos($lang, 'fa_IR') === 0) {
+                $api_url = "http://api.whatsiplus.ir/serviceSettings/{$apikey}?countryCode={$dialing_country_code}";
+            } else {
+                $api_url = "https://api.whatsiplus.com/serviceSettings/{$apikey}?countryCode={$dialing_country_code}";
+            }
+                        
         
             // Set up arguments for wp_remote_get
             $args = array(
@@ -577,7 +584,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
             if($acc_balance === "Connected to WhatsApp")
             {
                 $acc_balance = sprintf(__('Status: %s', 'whatsiplus-order-notification-for-woocommerce'), $acc_balance);
-
+                
                 echo '<p style="color: green;"><b>' . esc_html__('API KEY is Valid', 'whatsiplus-order-notification-for-woocommerce') . '</b></p>';
                 echo '<p style="color: green;"><b>' . esc_html($acc_balance) . '</b></p>';
                 echo '<p style="color: green;"><b>' . esc_html($wNumber) . '</b></p>';
