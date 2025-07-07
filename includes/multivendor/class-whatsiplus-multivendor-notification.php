@@ -199,12 +199,12 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
             $options_text = implode(', ', $option_parts);
         }
 
-        $product_line = "{$item_name} x {$qty}";
+        $product_line = "{$qty} x {$item_name}";
         if (!empty($options_text)) {
             $product_line .= ", " . $options_text;
         }
 
-        $product_options_text .= $product_line . "\n";
+        $product_options_text .= $product_line . "\n\n"; // Add extra line break between items
     }
     $product_options_text = trim($product_options_text);
 
