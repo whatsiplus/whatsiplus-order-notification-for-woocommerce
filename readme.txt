@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -147,6 +147,7 @@ You can use the following shortcodes in your notification messages. These will b
 [shipping_address_1]  
 [shipping_address_2]
 [shipping_amount]
+[shipping_method]
 
 Only supported in the Multivendor tab:
 [vendor_shop_name]
@@ -201,6 +202,13 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.0.9 =
+* Improved support for using WordPress shortcodes in WhatsApp messages
+* Added new shortcode: [shipping_method] to display selected shipping method in messages
+* Dynamic API endpoint selection based on WordPress dashboard language
+* Improved order listing display for vendors in multi-vendor setups
+* Fixed minor caching-related bugs in the admin panel
+
 = 1.0.8 =
 * Added support for running WordPress shortcodes in WhatsApp messages.
 
@@ -239,6 +247,13 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.0.9 =
+Improved support for using WordPress shortcodes in WhatsApp messages
+Added new shortcode: [shipping_method] to display selected shipping method in messages
+Dynamic API endpoint selection based on WordPress dashboard language
+Improved order listing display for vendors in multi-vendor setups
+Fixed minor caching-related bugs in the admin panel
 
 = 1.0.8 =
 Added support for running WordPress shortcodes in WhatsApp messages.
