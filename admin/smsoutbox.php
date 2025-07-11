@@ -41,7 +41,7 @@ class WhatsiPLUS_SMSOutbox_View implements Whatsiplus_Register_Interface {
     ?>
         <br>
         <div class="bootstrap-wrapper">
-            <span>List of 30 last sent messages</span>
+            <span>List of 20 last sent messages</span>
             <table class="table">
                 <thead>
                     <tr>
@@ -62,9 +62,18 @@ class WhatsiPLUS_SMSOutbox_View implements Whatsiplus_Register_Interface {
             $result = wp_cache_get( 'whatsiplus_wc_send_sms_outbox_results', 'whatsiplus_wc_send_sms_outbox' );
             if ( false === $result ) {
                 $result = $wpdb->get_results(
-                    "SELECT * FROM whatsiplus_wc_send_sms_outbox ORDER BY id DESC"
+                    "SELECT * FROM whatsiplus_wc_send_sms_outbox ORDER BY id DESC LIMIT 20"
                 );
                 wp_cache_set( 'whatsiplus_wc_send_sms_outbox_results', $result, 'whatsiplus_wc_send_sms_outbox' );
+
+                $wpdb->query("
+                    DELETE FROM whatsiplus_wc_send_sms_outbox
+                    WHERE id NOT IN (
+                        SELECT id FROM (
+                            SELECT id FROM whatsiplus_wc_send_sms_outbox ORDER BY id DESC LIMIT 200
+                        ) AS temp_ids
+                    )
+                ");
             }
 
             foreach ( $result as $print ) {

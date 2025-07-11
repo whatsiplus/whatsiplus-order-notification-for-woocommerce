@@ -531,10 +531,10 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
             // if cur === lat = 0
             // if cur > lat = 1
             if(version_compare( $current_plugin_version, $latest_plugin_version ) < 0) {
-                $this->log->add("Whatsiplus", "current plugin version: {$current_plugin_version}.");
-                $this->log->add("Whatsiplus", "latest plugin version: {$latest_plugin_version}.");
+                //$this->log->add("Whatsiplus", "current plugin version: {$current_plugin_version}.");
+                //$this->log->add("Whatsiplus", "latest plugin version: {$latest_plugin_version}.");
                 as_unschedule_all_actions("whatsiplus_check_domain");
-                $this->log->add("Whatsiplus", "Successfully unscheduled domain reachability for initialization.");
+                //$this->log->add("Whatsiplus", "Successfully unscheduled domain reachability for initialization.");
                 update_option("whatsiplus_plugin_version", $latest_plugin_version);
             }
         } else {

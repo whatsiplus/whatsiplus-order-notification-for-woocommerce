@@ -123,7 +123,7 @@ class Whatsiplus_WooCommerce_Notification {
 		//Checking if multivendor is "YITH"
 		if (Whatsiplus_Multivendor_Factory::$activatedPlugin == "yith")
 		{
-            $this->log->add("Whatsiplus", "Plugin activated: Yith");
+            //"Whatsiplus", "Plugin activated: Yith");
 			//checking if it's a suborder
 			$yith_suborders =  wp_get_post_parent_id($order_id) ;
 			if($yith_suborders)

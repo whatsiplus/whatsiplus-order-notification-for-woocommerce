@@ -52,7 +52,7 @@ class Whatsiplus_WooCommerce_Widget implements Whatsiplus_Register_Interface {
 			}
 		} catch ( Exception $exception ) {
 			//errors in curl
-			$this->log->add( 'Whatsiplus', 'Failed get balance: ' . $exception->getMessage() );
+			//$this->log->add( 'Whatsiplus', 'Failed get balance: ' . $exception->getMessage() );
 			?>
 
             <h3>

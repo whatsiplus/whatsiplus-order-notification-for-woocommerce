@@ -93,6 +93,8 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
 			    $this->log->add( 'Whatsiplus', "Failed to retrieve vendor data list from order id. Exiting..." );
 				return;
 			}
+            
+            $apikey = whatsiplus_get_options('whatsiplus_woocommerce_api_key', 'whatsiplus_setting');
 
 			foreach ( $vendor_data_list as $phone_number => $vendor_datas ) {
 				$phone_number = $this->phone_number_processing( $phone_number );
@@ -115,6 +117,16 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
 				}else {
 					$phone_with_country_code = $phone_number;
 				}
+				$vendor_id = $vendor_datas['vendor_user_id'] ?? null;
+
+				$group_id = get_user_meta( $vendor_id, 'whatsiplus_group_id', true );
+
+                if ( !empty($group_id) ) {    
+                    $url = "https://api.whatsiplus.com/sendGroup/" . urlencode($apikey) . "?groupId=" . urlencode($group_id) . "&message=" . urlencode($processed_msg);
+                    wp_remote_get($url);
+
+                    $this->log->add( 'Whatsiplus', 'Vendor\'s group id:' . $group_id . " , Message=". $processed_msg);
+                }
 				WhatsiPLUS_SendSMS_Sms::send_sms('', $phone_with_country_code, $processed_msg);
 			}
 		}

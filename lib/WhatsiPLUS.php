@@ -128,47 +128,47 @@ class WhatsiPLUS {
     }
 
     private function invokeApi($command, $params = array())
-{
-    if (get_option("whatsiplus_domain_reachable")) {
-        $this->setApiUrl(true);
-    } else {
-        $this->setApiUrl(false);
+    {
+        if (get_option("whatsiplus_domain_reachable")) {
+            $this->setApiUrl(true);
+        } else {
+            $this->setApiUrl(false);
+        }
+
+        // Get REST URL and HTTP method
+        $command_info = $this->rest_commands[$command];
+        $url = $this->actual_api_url;
+        $method = $command_info['method'];
+
+        // Build the request URL
+        $request_url = $url . $command_info['url'] . $this->api_key;
+
+        // Set up request parameters
+        $request_args = array(
+            'headers' => array(
+                'Content-Type' => 'application/x-www-form-urlencoded', // Adjust content type if needed
+            ),
+        );
+
+        if ($method === 'POST') {
+            $request_args['body'] = $params;
+        } else {
+            $request_url .= '?' . http_build_query($params);
+        }
+
+        // Make the request using wp_remote_get()
+        $response = wp_remote_get($request_url, $request_args);
+
+        // Check for errors
+        if (is_wp_error($response)) {
+            throw new Exception('WP error: ' . esc_html($response->get_error_message()));
+        }
+
+        // Get the response body
+        $rest_response = wp_remote_retrieve_body($response);
+
+        return $rest_response;
     }
-
-    // Get REST URL and HTTP method
-    $command_info = $this->rest_commands[$command];
-    $url = $this->actual_api_url;
-    $method = $command_info['method'];
-
-    // Build the request URL
-    $request_url = $url . $command_info['url'] . $this->api_key;
-
-    // Set up request parameters
-    $request_args = array(
-        'headers' => array(
-            'Content-Type' => 'application/x-www-form-urlencoded', // Adjust content type if needed
-        ),
-    );
-
-    if ($method === 'POST') {
-        $request_args['body'] = $params;
-    } else {
-        $request_url .= '?' . http_build_query($params);
-    }
-
-    // Make the request using wp_remote_get()
-    $response = wp_remote_get($request_url, $request_args);
-
-    // Check for errors
-    if (is_wp_error($response)) {
-        throw new Exception('WP error: ' . esc_html($response->get_error_message()));
-    }
-
-    // Get the response body
-    $rest_response = wp_remote_retrieve_body($response);
-
-    return $rest_response;
-}
 
     private function utf16HexToUtf8($string)
     {

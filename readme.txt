@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.0.9
+Stable tag: 1.1.0
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -117,6 +117,35 @@ You'll be able to send notifications to customer when a new form is submitted.
 5. Click the "Save" button to apply the changes.
 6. Customize your message content in the designated textboxes using supported shortcodes.
 
+
+== WhatsApp Group Messaging for Vendors ==
+
+Since version 1.1.0, this plugin supports automatic WhatsApp group message delivery for multivendor vendors.
+
+== Description ==
+
+Admins can now assign a WhatsApp group ID to each vendor using the whatsiplus_group_id meta field. If this field is set, any order notification message that would normally go to the vendor’s phone will also be sent to their assigned group.
+
+== How It Works ==
+	1.	Create a user meta field called whatsiplus_group_id for each vendor.
+	2.	Enter a valid WhatsApp group ID for the vendor. Example:
+12036xxxxxxxx
+	3.	When a new order is placed, vendors will receive a message both:
+	•	on their personal WhatsApp number
+	•	and in the WhatsApp group, if whatsiplus_group_id is set.
+
+== Notes ==
+	•	The WhatsApp number connected to your WhatsiPlus API must be a member of the vendor’s WhatsApp group.
+	•	You can retrieve your connected group list via this API call:
+https://api.whatsiplus.com/getGroupList/YOUR_API_KEY
+
+== Example ==
+
+If a vendor has the following group ID stored:
+120368574965432
+They will receive their order alerts in that group in addition to their personal number.
+
+
 == Supported Shortcodes ==
 
 You can use the following shortcodes in your notification messages. These will be automatically replaced with relevant order and customer data:
@@ -202,6 +231,12 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.1.0 =
+* Improved plugin load speed and overall performance
+* Added support for automatic WhatsApp group messaging to vendors in multivendor setups using the whatsiplus_group_id user meta field
+* Automatic deletion of old and excessive log entries from the database
+* Automatic cleanup of sent WhatsApp messages from the database to reduce clutter
+
 = 1.0.9 =
 * Improved support for using WordPress shortcodes in WhatsApp messages
 * Added new shortcode: [shipping_method] to display selected shipping method in messages
@@ -247,6 +282,12 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Improved plugin load speed and overall performance
+Added support for automatic WhatsApp group messaging to vendors in multivendor setups using the whatsiplus_group_id user meta field
+Automatic deletion of old and excessive log entries from the database
+Automatic cleanup of sent WhatsApp messages from the database to reduce clutter
 
 = 1.0.9 =
 Improved support for using WordPress shortcodes in WhatsApp messages

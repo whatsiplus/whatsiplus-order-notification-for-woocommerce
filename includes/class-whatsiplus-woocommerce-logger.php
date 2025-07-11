@@ -43,7 +43,7 @@ class Whatsiplus_WooCommerce_Logger {
         $total_records = $wpdb->get_var( "SELECT COUNT(*) FROM whatsiplus_logs" );
     
         // If total records exceed 200, delete older records
-        if ( $total_records > 200 ) {
+        if ( $total_records > 20 ) {
             $wpdb->query( "
                 DELETE FROM whatsiplus_logs
                 WHERE id NOT IN (
@@ -52,7 +52,7 @@ class Whatsiplus_WooCommerce_Logger {
                         SELECT id
                         FROM whatsiplus_logs
                         ORDER BY id DESC
-                        LIMIT 100
+                        LIMIT 20
                     ) tmp
                 )
             " );
