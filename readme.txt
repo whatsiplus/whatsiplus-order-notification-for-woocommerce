@@ -127,16 +127,15 @@ Since version 1.1.0, this plugin supports automatic WhatsApp group message deliv
 Admins can now assign a WhatsApp group ID to each vendor using the whatsiplus_group_id meta field. If this field is set, any order notification message that would normally go to the vendor’s phone will also be sent to their assigned group.
 
 == How It Works ==
-	1.	Create a user meta field called whatsiplus_group_id for each vendor.
-	2.	Enter a valid WhatsApp group ID for the vendor. Example:
-12036xxxxxxxx
-	3.	When a new order is placed, vendors will receive a message both:
-	•	on their personal WhatsApp number
-	•	and in the WhatsApp group, if whatsiplus_group_id is set.
+*   Create a user meta field called whatsiplus_group_id for each vendor.
+*   Enter a valid WhatsApp group ID for the vendor.
+*   When a new order is placed, vendors will receive a message both:
+*   on their personal WhatsApp number
+*   and in the WhatsApp group, if whatsiplus_group_id is set.
 
 == Notes ==
-	•	The WhatsApp number connected to your WhatsiPlus API must be a member of the vendor’s WhatsApp group.
-	•	You can retrieve your connected group list via this API call:
+*   The WhatsApp number connected to your WhatsiPlus API must be a member of the vendor’s WhatsApp group.
+*   You can retrieve your connected group list via this API call:
 https://api.whatsiplus.com/getGroupList/YOUR_API_KEY
 
 == Example ==
