@@ -122,8 +122,6 @@ You'll be able to send notifications to customer when a new form is submitted.
 
 Since version 1.1.0, this plugin supports automatic WhatsApp group message delivery for multivendor vendors.
 
-== Description ==
-
 Admins can now assign a WhatsApp group ID to each vendor using the whatsiplus_group_id meta field. If this field is set, any order notification message that would normally go to the vendor’s phone will also be sent to their assigned group.
 
 == How It Works ==
