@@ -159,6 +159,7 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         '[payment_method]',
         '[order_note]',
         '[product_options]',
+        '[order_product_links]',
     );
 
     $order_latest_cust_note = '';
@@ -220,12 +221,34 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
     }
     $product_options_text = trim($product_options_text);
 
+    $product_links = '';
+    foreach ($order_details->get_items() as $item) {
+        $product = $item->get_product();
+        if ($product) {
+            $product_name = $product->get_name();
+            $product_url = $product->get_permalink();
+            $product_links .= "{$product_name}: {$product_url}\n";
+        }
+    }
+    $product_links = trim($product_links);
+
     $vendor_shop_name = '';
     if (method_exists($this->whatsiplus_multivendor, 'get_vendor_shop_name_from_vendor_data')) {
         $vendor_shop_name = wp_strip_all_tags($this->whatsiplus_multivendor->get_vendor_shop_name_from_vendor_data($vendor_datas) ?: '');
     }
 
     $order_payment_method = $order_details->get_payment_method() ?: '';
+
+    $order_product_names_only = '';
+    $order_product_with_qty = '';
+    foreach ( $order_details->get_items() as $item ) {
+        $item_name = $item->get_name();
+        $qty = $item->get_quantity();
+        $order_product_names_only .= $item_name . ', ';
+        $order_product_with_qty .= "{$qty} x {$item_name}\n";
+    }
+    $order_product_names_only = rtrim($order_product_names_only, ', ');
+    $order_product_with_qty = trim($order_product_with_qty);
 
     $replace = array(
         get_bloginfo('name'),
@@ -237,8 +260,8 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         isset($vendor_datas['total_amount_for_vendor']) ? $vendor_datas['total_amount_for_vendor'] : '',
         ucfirst($order_details->get_status()),
         $order_latest_cust_note,
-        '',
-        '',
+        $order_product_names_only,
+        $order_product_with_qty,
         $order_details->get_billing_first_name(),
         $order_details->get_billing_last_name(),
         $order_details->get_billing_phone(),
@@ -253,6 +276,7 @@ class Whatsiplus_Multivendor_Notification extends Whatsiplus_WooCommerce_Notific
         $order_payment_method,
         wp_strip_all_tags($customer_note),
         $product_options_text,
+        $product_links,
     );
 
     if (!is_string($message)) {

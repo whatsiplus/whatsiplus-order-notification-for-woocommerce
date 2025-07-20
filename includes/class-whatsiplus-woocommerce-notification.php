@@ -317,10 +317,24 @@ class Whatsiplus_WooCommerce_Notification {
 			$all_items .= "\n- " . $item->get_name() . " (x" . $item->get_quantity() . ") - " . $line_total . " " . get_woocommerce_currency();
 		}
 
+		// Add product_links block after $all_items is constructed
+		$product_links = '';
+		foreach ( $items as $item ) {
+			$product = $item->get_product();
+			if ( $product ) {
+				$product_links .= "\n- " . $item->get_name() . ": " . get_permalink( $product->get_id() );
+			}
+		}
+
 		if ( $product_name ) {
 			$product_name     = substr( $product_name, 2 );
 			$product_with_qty = substr( $product_with_qty, 2 );
 			$all_items        = substr( $all_items, 1 );
+		}
+
+		// After $all_items is substr, handle $product_links
+		if ( $product_links ) {
+			$product_links = substr( $product_links, 1 );
 		}
 
 		// Fetch shipping method name
@@ -343,6 +357,7 @@ class Whatsiplus_WooCommerce_Notification {
 			'[order_product]',
 			'[order_product_with_qty]',
 			'[all_items]',
+			'[order_product_links]',
 			'[billing_first_name]',
 			'[billing_last_name]',
 			'[billing_phone]',
@@ -372,6 +387,7 @@ class Whatsiplus_WooCommerce_Notification {
 			$product_name,
 			$product_with_qty,
 			$all_items,
+			$product_links,
 			$order_details->get_billing_first_name(),
 			$order_details->get_billing_last_name(),
 			$order_details->get_billing_phone(),

@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -174,6 +174,7 @@ You can use the following shortcodes in your notification messages. These will b
 [shipping_address_2]
 [shipping_amount]
 [shipping_method]
+[order_product_links]
 
 Only supported in the Multivendor tab:
 [vendor_shop_name]
@@ -228,6 +229,12 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.1.1 =
+	•	Fixed: [order_product] and [order_product_with_qty] placeholders were not displaying correctly in vendor messages — now they show product names and quantities properly
+	•	Added: New placeholder [order_product_links] to include product URLs in WhatsApp messages to vendors
+	•	Improved: Placeholder processing logic in multivendor notifications to ensure accurate data replacement
+	•	Internal cleanup: Removed unused empty placeholder values in the replacement array for better readability
+
 = 1.1.0 =
 * Improved plugin load speed and overall performance
 * Added support for automatic WhatsApp group messaging to vendors in multivendor setups using the whatsiplus_group_id user meta field
@@ -279,6 +286,12 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Fixed: [order_product] and [order_product_with_qty] placeholders were not displaying correctly in vendor messages — now they show product names and quantities properly
+Added: New placeholder [order_product_links] to include product URLs in WhatsApp messages to vendors
+Improved: Placeholder processing logic in multivendor notifications to ensure accurate data replacement
+Internal cleanup: Removed unused empty placeholder values in the replacement array for better readability
 
 = 1.1.0 =
 Improved plugin load speed and overall performance
