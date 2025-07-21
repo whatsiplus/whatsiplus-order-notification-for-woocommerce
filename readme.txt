@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -229,6 +229,11 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.1.2 =
+* Added: Full support for custom WooCommerce order statuses
+* Improved: Automatically display custom statuses in Admin, Customer, and Multivendor settings
+* Added: WhatsApp messages now trigger correctly when orders transition into any custom status
+
 = 1.1.1 =
 * Fixed: [order_product] and [order_product_with_qty] placeholders were not displaying correctly in vendor messages — now they show product names and quantities properly
 * Added: New placeholder [order_product_links] to include product URLs in WhatsApp messages to vendors
@@ -286,6 +291,11 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+Added: Full support for custom WooCommerce order statuses
+Improved: Automatically display custom statuses in Admin, Customer, and Multivendor settings
+Added: WhatsApp messages now trigger correctly when orders transition into any custom status
 
 = 1.1.1 =
 Fixed: [order_product] and [order_product_with_qty] placeholders were not displaying correctly in vendor messages — now they show product names and quantities properly

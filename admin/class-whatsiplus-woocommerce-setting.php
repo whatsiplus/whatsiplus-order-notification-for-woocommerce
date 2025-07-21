@@ -397,34 +397,45 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         foreach($fields_to_iterate as $field) {
             if(array_key_exists($field, $setting_fields)) {
                 for( $i=0; $i<count($setting_fields[$field]); $i++ ) {
-                    if(array_key_exists('options', $setting_fields[$field][$i])) {
-                        foreach($processed_wc_statuses as $processed_key => $processed_value) {
-                            if( ! array_key_exists($processed_key, $setting_fields[$field][$i]['options']) ) {
-                                // Concatenate $processed_value outside of translation functions
-                                $processed_value_text = " " . $processed_value;
-        
-                                $setting_fields[$field][$i]['options'][$processed_key] = $processed_value_text;
-                                if($field == 'whatsiplus_customer_setting') {
-                                    // Concatenate $processed_value outside of translation functions
-                                    $message_label = $processed_value . ' Customer message';
-                                    $message_default = "Your {$processed_value} message template";
-        
-                                    $setting_fields[$field][] = array(
-                                        'name'    => "whatsiplus_woocommerce_sms_template_{$processed_key}",
-                                        'label'   => $message_label,
-                                        'desc'    => sprintf('Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="default" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_%s]" class="button button-secondary">Keywords</button>', $processed_key),
-                                        'type'    => 'textarea',
-                                        'rows'    => '8',
-                                        'cols'    => '500',
-                                        'css'     => 'min-width:350px;',
-                                        'default' => $message_default
-                                    );
-                                }
-                            }
-                        }
-                        break;
-                    }
+    if(array_key_exists('options', $setting_fields[$field][$i])) {
+
+        $field_name = $setting_fields[$field][$i]['name'] ?? '';
+
+        if (!in_array($field_name, [
+            'whatsiplus_woocommerce_send_sms',
+            'whatsiplus_woocommerce_admin_send_sms_on',
+            'whatsiplus_woocommerce_vendor_send_sms_on'
+        ])) {
+            continue;
+        }
+
+        foreach($processed_wc_statuses as $processed_key => $processed_value) {
+            if( ! array_key_exists($processed_key, $setting_fields[$field][$i]['options']) ) {
+                $processed_value_text = " " . $processed_value;
+
+                $setting_fields[$field][$i]['options'][$processed_key] = $processed_value_text;
+
+                if($field == 'whatsiplus_customer_setting') {
+                    $message_label = $processed_value . ' Customer message';
+                    $message_default = "Your {$processed_value} message template";
+
+                    $setting_fields[$field][] = array(
+                        'name'    => "whatsiplus_woocommerce_sms_template_{$processed_key}",
+                        'label'   => $message_label,
+                        'desc'    => sprintf('Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="default" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_%s]" class="button button-secondary">Keywords</button>', $processed_key),
+                        'type'    => 'textarea',
+                        'rows'    => '8',
+                        'cols'    => '500',
+                        'css'     => 'min-width:350px;',
+                        'default' => $message_default
+                    );
                 }
+            }
+        }
+
+                break;
+            }
+        }
                 continue;
             }
         }
@@ -500,25 +511,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
     public function check_domain_reachability()
     {
-        /*
-        try {
-            $this->log->add("Whatsiplus", "Running scheduled checking domain task.");
-            $response_code = wp_remote_retrieve_response_code( wp_remote_get("https://rest.whatsiapi.com/rest/2/account/balance") );
-            // successfully reached our domain
-            if($response_code === 400) {
-                update_option("whatsiplus_domain_reachable", true);
-                $this->log->add("Whatsiplus", "Domain is reachable. Will be using domain.");
-            }
-            else {
-                $this->log->add("Whatsiplus", "Exception thrown. Domain not reachable.");
-                throw new Exception("Domain not reachable.");
-            }
-        } catch (Exception $e) {
-            $this->log->add("Whatsiplus", "Domain not reachable. Using IP address");
-            $this->log->add("Whatsiplus", "err msg: {$e->getMessage()}");
-            update_option("whatsiplus_domain_reachable", false);
-        }
-        */
+        
     }
 
     public function schedule_check_domain()

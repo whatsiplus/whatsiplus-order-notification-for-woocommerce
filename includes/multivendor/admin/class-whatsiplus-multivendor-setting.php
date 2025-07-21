@@ -39,15 +39,15 @@ class Whatsiplus_Multivendor_Setting implements Whatsiplus_Register_Interface {
 					'processing' => 'processing',
 					'completed'  => 'completed',
 				),
-				'options' => array(
-					'pending'    => ' Pending',
-					'on-hold'    => ' On-hold',
-					'processing' => ' Processing',
-					'completed'  => ' Completed',
-					'cancelled'  => ' Cancelled',
-					'refunded'   => ' Refunded',
-					'failed'     => ' Failed'
-				)
+				'options' => array_reduce(
+					array_keys(wc_get_order_statuses()),
+					function($carry, $status_key) {
+						$status_clean = str_replace('wc-', '', $status_key);
+						$carry[$status_clean] = ' ' . wc_get_order_status_name($status_clean);
+						return $carry;
+					},
+					[]
+				),
 			),
 			array(
 				'name'    => 'whatsiplus_multivendor_selected_plugin',
