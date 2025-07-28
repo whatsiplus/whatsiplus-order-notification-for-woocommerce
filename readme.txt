@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -144,6 +144,7 @@ They will receive their order alerts in that group in addition to their personal
 
 
 == Supported Shortcodes ==
+View and test all shortcodes visually here: **[Open WhatsApp Message Formatter](https://whatsiplus.com/upload/wordpress/whatsapp-text-formatter/)**
 
 You can use the following shortcodes in your notification messages. These will be automatically replaced with relevant order and customer data:
 
@@ -229,6 +230,9 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.1.3 =
+* Add the feature to create and display WordPress shortcodes and messages graphically
+
 = 1.1.2 =
 * Added: Full support for custom WooCommerce order statuses
 * Improved: Automatically display custom statuses in Admin, Customer, and Multivendor settings
@@ -291,6 +295,9 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.1.3 =
+Add the feature to create and display WordPress shortcodes and messages graphically
 
 = 1.1.2 =
 Added: Full support for custom WooCommerce order statuses

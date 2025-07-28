@@ -211,6 +211,17 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'desc'  => __( 'Mobile number to receive new order notification. To send to multiple receivers, separate each entry with comma such as 0123456789, 0167888945', 'whatsiplus-order-notification-for-woocommerce' ),
 					'type'  => 'text',
 				),
+                array(
+			    'name'  => 'whatsiplus_formatter_link_button',
+			    'label' => __( 'Visual Message Formatter', 'whatsiplus-order-notification-for-woocommerce' ),
+			    'desc'  => '',
+			    'type'  => 'custom_html',
+			    'custom_html' => function () {
+			      echo '<p><a href="https://whatsiplus.com/upload/wordpress/whatsapp-text-formatter/" target="_blank" rel="noopener noreferrer" class="button button-primary">' .
+			           esc_html__('Open WhatsApp Message Formatter', 'whatsiplus-order-notification-for-woocommerce') .
+			           '</a></p>';
+			    },
+			    ),
 				array(
 					'name'    => 'whatsiplus_woocommerce_admin_sms_template',
 					'label'   => __( 'Admin message', 'whatsiplus-order-notification-for-woocommerce' ),
@@ -273,6 +284,17 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 						'failed'     => ' Failed'
 					)
 				),
+                array(
+			    'name'  => 'whatsiplus_formatter_link_button',
+			    'label' => __( 'Visual Message Formatter', 'whatsiplus-order-notification-for-woocommerce' ),
+			    'desc'  => '',
+			    'type'  => 'custom_html',
+			    'custom_html' => function () {
+			      echo '<p><a href="https://whatsiplus.com/upload/wordpress/whatsapp-text-formatter/" target="_blank" rel="noopener noreferrer" class="button button-primary">' .
+			           esc_html__('Open WhatsApp Message Formatter', 'whatsiplus-order-notification-for-woocommerce') .
+			           '</a></p>';
+			    },
+			    ),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_default',
 					'label'   => __( 'Default Customer message', 'whatsiplus-order-notification-for-woocommerce' ),

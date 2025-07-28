@@ -66,6 +66,17 @@ class Whatsiplus_Multivendor_Setting implements Whatsiplus_Register_Interface {
 				)
 			),
 			array(
+			    'name'  => 'whatsiplus_formatter_link_button',
+			    'label' => __( 'Visual Message Formatter', 'whatsiplus-order-notification-for-woocommerce' ),
+			    'desc'  => '',
+			    'type'  => 'custom_html',
+			    'custom_html' => function () {
+			      echo '<p><a href="https://whatsiplus.com/upload/wordpress/whatsapp-text-formatter/" target="_blank" rel="noopener noreferrer" class="button button-primary">' .
+			           esc_html__('Open WhatsApp Message Formatter', 'whatsiplus-order-notification-for-woocommerce') .
+			           '</a></p>';
+			    },
+			),
+			array(
 				'name'    => 'whatsiplus_multivendor_vendor_sms_template',
 				'label'   => __( 'Vendor message', 'whatsiplus-order-notification-for-woocommerce' ),
 				'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="multivendor" data-attr-target="whatsiplus_multivendor_setting[whatsiplus_multivendor_vendor_sms_template]" class="button button-secondary">Keywords</button>',
