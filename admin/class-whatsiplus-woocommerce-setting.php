@@ -11,33 +11,23 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 	function __construct() {
 		$this->settings_api = new WONFW_Settings_API;
         $this->log = new Whatsiplus_WooCommerce_Logger();
-
-        //$this->prev_default_country_code = get_option('whatsiplus_prev_default_country_code');
 	}
 
 	public function register() {
-        // if ( class_exists( 'woocommerce' ) ) {
-            add_action( 'admin_init', array( $this, 'admin_init' ) );
-            add_action( 'admin_init', array( $this, 'initialise_default_recipient_setting' ) );
-            add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-            add_action( 'whatsiplus_setting_fields_custom_html', array( $this, 'whatsiplus_wc_not_activated' ), 10, 1 );
+        add_action( 'admin_init', array( $this, 'admin_init' ) );
+        add_action( 'admin_init', array( $this, 'initialise_default_recipient_setting' ) );
+        add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+        add_action( 'whatsiplus_setting_fields_custom_html', array( $this, 'whatsiplus_wc_not_activated' ), 10, 1 );
 
-            add_action( 'init', array( $this, 'schedule_check_domain' ) );
-            add_action( 'whatsiplus_check_domain', array( $this, 'check_domain_reachability' ) );
+        add_action( 'init', array( $this, 'schedule_check_domain' ) );
+        add_action( 'whatsiplus_check_domain', array( $this, 'check_domain_reachability' ) );
 
-            add_filter( 'whatsiplus_setting_fields', array( $this, 'add_custom_order_status' ) );
-
-        // } else {
-        //     add_action( 'admin_menu', array( $this, 'woocommerce_not_activated_menu_view' ) );
-        // }
+        add_filter( 'whatsiplus_setting_fields', array( $this, 'add_custom_order_status' ) );
 	}
 
 	function admin_init() {
-		//set the settings
 		$this->settings_api->set_sections( $this->get_settings_sections() );
 		$this->settings_api->set_fields( $this->get_settings_fields() );
-
-		//initialize settings
 		$this->settings_api->admin_init();
 	}
 
@@ -70,32 +60,14 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 		return $sections;
 	}
 
-	/**
-	 * Returns all the settings fields
-	 *
-	 * @return array settings fields
-	 */
 	function get_settings_fields() {
-		//WooCommerce Country
 		global $woocommerce;
-        // $countries_obj = $this->get_countries();
-    	// $countries_obj   = new WC_Countries();
-		// $countries   = $countries_obj->__get('countries');
         $countries =  $this->get_countries();
 
-        // country
         $default_country_code = whatsiplus_get_options('whatsiplus_woocommerce_country_code', 'whatsiplus_setting');
         $apikey = whatsiplus_get_options('whatsiplus_woocommerce_api_key', 'whatsiplus_setting');
         
         $country_code = '';
-        //if( empty($default_country_code) ) {
-            //$user_ip = $this->get_user_ip();
-            //if(!empty($user_ip) ) {
-            //    $country_code = $this->get_country_code_from_ip($user_ip);
-            //}
-
-            
-        //}
 
         if (!empty($default_country_code) && !empty($apikey)) {
             $dialing_country_code = $this->get_country_dialing_code($default_country_code);
@@ -107,33 +79,19 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
                 $api_url = "https://api.whatsiplus.com/serviceSettings/{$apikey}?countryCode={$dialing_country_code}";
             }
                         
-        
-            // Set up arguments for wp_remote_get
             $args = array(
-                'timeout' => 20, // Set a timeout value in seconds
+                'timeout' => 20,
             );
         
-            // Make the HTTP request using wp_remote_get
             $response = wp_remote_get($api_url, $args);
         
-            // Check for errors in the response
             if (is_wp_error($response)) {
                 $error_message = $response->get_error_message();
                 $this->log->add("Whatsiplus", "Error occurred while sending data to API: " . $error_message);
             } else {
-                // Get the response body
                 $response_body = wp_remote_retrieve_body($response);
-                //$this->log->add("Whatsiplus", "URL: {$api_url}");
-                //$this->log->add("Whatsiplus", "Response from API: {$response_body}");
             }
         }        
-
-
-
-        //$country_code = '';
-        //if( empty($default_country_code) ) {
-        //    $country_code = $this->get_country_code_from_ip();
-        //}
 
 		$additional_billing_fields = '';
 		$additional_billing_fields_desc  = '';
@@ -160,7 +118,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'desc'  => __( 'Your WhatsApp API. Account can be registered <a href="https://whatsiplus.com/go/?url=apikey" target="blank">here</a>', 'whatsiplus-order-notification-for-woocommerce' ),
 					'type'  => 'text',
 				),
-				array(//Get default country v1.1.17
+				array(
 					'name'    		=> 'whatsiplus_woocommerce_country_code',
 					'label'   		=> __( 'Default country', 'whatsiplus-order-notification-for-woocommerce' ),
 					'class'     	=> array('chzn-drop'),
@@ -187,7 +145,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
                 ),                
 				array(
 					'name'    => 'whatsiplus_woocommerce_admin_send_sms_on',
-					'label'   => __( '	Send notification on', 'whatsiplus-order-notification-for-woocommerce' ),
+					'label'   => __( 'Send notification on', 'whatsiplus-order-notification-for-woocommerce' ),
 					'desc'    => __( 'Choose when to send a status notification message to your admin <br> Set <strong>low stock threshold</strong> for each product under <strong>WooCommerce Product -> Product Data -> Inventory -> Low Stock Threshold</strong>', 'whatsiplus-order-notification-for-woocommerce' ),
 					'type'    => 'multicheck',
 					'default' => array(
@@ -212,16 +170,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'type'  => 'text',
 				),
                 array(
-			    'name'  => 'whatsiplus_formatter_link_button',
-			    'label' => __( 'Visual Message Formatter', 'whatsiplus-order-notification-for-woocommerce' ),
-			    'desc'  => '',
-			    'type'  => 'custom_html',
-			    'custom_html' => function () {
-			      echo '<p><a href="https://whatsiplus.com/upload/wordpress/whatsapp-text-formatter/" target="_blank" rel="noopener noreferrer" class="button button-primary">' .
-			           esc_html__('Open WhatsApp Message Formatter', 'whatsiplus-order-notification-for-woocommerce') .
-			           '</a></p>';
-			    },
-			    ),
+					'name'  => 'whatsiplus_formatter_link_button',
+					'label' => __( 'Visual Message Formatter', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'  => '',
+					'type'  => 'custom_html',
+					'custom_html' => function () {
+						echo '<p><a href="https://whatsiplus.com/upload/wordpress/whatsapp-text-formatter/" target="_blank" rel="noopener noreferrer" class="button button-primary">' .
+							esc_html__('Open WhatsApp Message Formatter', 'whatsiplus-order-notification-for-woocommerce') .
+							'</a></p>';
+					},
+				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_admin_sms_template',
 					'label'   => __( 'Admin message', 'whatsiplus-order-notification-for-woocommerce' ),
@@ -231,7 +189,17 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
 					'default' => __( '[shop_name] : You have a new order with order ID [order_id] and order amount [order_currency] [order_amount]. The order is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
-                ),
+				),
+				array(
+					'name'    => 'whatsiplus_woocommerce_admin_sms_template_secondary',
+					'label'   => __( 'Admin message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="admin" data-attr-target="whatsiplus_admin_setting[whatsiplus_woocommerce_admin_sms_template_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
+				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_admin_sms_template_low_stock_product',
 					'label'   => __( 'Low Stock Product Admin message', 'whatsiplus-order-notification-for-woocommerce' ),
@@ -241,7 +209,17 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
 					'default' => __( '[shop_name] : Your product [product_name] has low stock. Current quantity: [product_stock_quantity]. Please restock soon.', 'whatsiplus-order-notification-for-woocommerce' )
-                ),
+				),
+				array(
+					'name'    => 'whatsiplus_woocommerce_admin_sms_template_low_stock_product_secondary',
+					'label'   => __( 'Low Stock Product Admin message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords-low-product-stock]" data-attr-type="admin" data-attr-target="whatsiplus_admin_setting[whatsiplus_woocommerce_admin_sms_template_low_stock_product_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
+				),
 			),
 			'whatsiplus_customer_setting'  => array(
 				array(
@@ -266,7 +244,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_send_sms',
-					'label'   => __( '	Send notification on', 'whatsiplus-order-notification-for-woocommerce' ),
+					'label'   => __( 'Send notification on', 'whatsiplus-order-notification-for-woocommerce' ),
 					'desc'    => __( 'Choose when to send a status notification message to your customer', 'whatsiplus-order-notification-for-woocommerce' ),
 					'type'    => 'multicheck',
                     'default' => array(
@@ -285,16 +263,41 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					)
 				),
                 array(
-			    'name'  => 'whatsiplus_formatter_link_button',
-			    'label' => __( 'Visual Message Formatter', 'whatsiplus-order-notification-for-woocommerce' ),
-			    'desc'  => '',
-			    'type'  => 'custom_html',
-			    'custom_html' => function () {
-			      echo '<p><a href="https://whatsiplus.com/upload/wordpress/whatsapp-text-formatter/" target="_blank" rel="noopener noreferrer" class="button button-primary">' .
-			           esc_html__('Open WhatsApp Message Formatter', 'whatsiplus-order-notification-for-woocommerce') .
-			           '</a></p>';
-			    },
-			    ),
+					'name'  => 'whatsiplus_formatter_link_button',
+					'label' => __( 'Visual Message Formatter', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'  => '',
+					'type'  => 'custom_html',
+					'custom_html' => function () {
+						echo '<p><a href="https://whatsiplus.com/upload/wordpress/whatsapp-text-formatter/" target="_blank" rel="noopener noreferrer" class="button button-primary">' .
+							esc_html__('Open WhatsApp Message Formatter', 'whatsiplus-order-notification-for-woocommerce') .
+							'</a></p>';
+					},
+				),
+				array(
+                'name'    => 'whatsiplus_woocommerce_secondary_language',
+                'label'   => __( 'Secondary Language Code', 'whatsiplus-order-notification-for-woocommerce' ),
+                'desc'    => __( 'Select the secondary language - When this option is enabled, messages in the secondary language will be automatically delivered to customers based on their phone number information, Leave blank if you dont need this feature.', 'whatsiplus-order-notification-for-woocommerce' ),
+                'type'    => 'select',
+                'options' => array(
+                    ''       => __( 'Select a Language', 'whatsiplus-order-notification-for-woocommerce' ),
+                    'fa_IR'  => 'Persian (fa_IR)',
+                    'fr_FR'  => 'French (fr_FR)',
+                    'es_ES'  => 'Spanish (es_ES)',
+                    'de_DE'  => 'German (de_DE)',
+                    'ar_AR'  => 'Arabic (ar_AR)',
+                    'zh_CN'  => 'Chinese (zh_CN)',
+                    'ru_RU'  => 'Russian (ru_RU)',
+                    'pt_BR'  => 'Portuguese (pt_BR)',
+                    'it_IT'  => 'Italian (it_IT)',
+                    'ja_JP'  => 'Japanese (ja_JP)',
+                    'tr_TR'  => 'Turkish (tr_TR)',
+                    'nl_NL'  => 'Dutch (nl_NL)',
+                    'es_MX'  => 'Spanish - Mexico (es_MX)',
+                    'es_AR'  => 'Spanish - Argentina (es_AR)',
+                ),
+                'default' => '',
+                'class'   => array('chzn-drop')
+            ),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_default',
 					'label'   => __( 'Default Customer message', 'whatsiplus-order-notification-for-woocommerce' ),
@@ -304,6 +307,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
 					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
+				),
+				array(
+					'name'    => 'whatsiplus_woocommerce_sms_template_default_secondary',
+					'label'   => __( 'Default Customer message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="default" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_default_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_pending',
@@ -316,6 +329,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
 				),
 				array(
+					'name'    => 'whatsiplus_woocommerce_sms_template_pending_secondary',
+					'label'   => __( 'Pending message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="pending" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_pending_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
+				),
+				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_on-hold',
 					'label'   => __( 'On-hold message', 'whatsiplus-order-notification-for-woocommerce' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="on_hold" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_on-hold]" class="button button-secondary">Keywords</button>',
@@ -324,6 +347,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
 					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
+				),
+				array(
+					'name'    => 'whatsiplus_woocommerce_sms_template_on-hold_secondary',
+					'label'   => __( 'On-hold message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="on_hold" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_on-hold_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_processing',
@@ -336,6 +369,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
 				),
 				array(
+					'name'    => 'whatsiplus_woocommerce_sms_template_processing_secondary',
+					'label'   => __( 'Processing message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="processing" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_processing_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
+				),
+				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_completed',
 					'label'   => __( 'Completed message', 'whatsiplus-order-notification-for-woocommerce' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="completed" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_completed]" class="button button-secondary">Keywords</button>',
@@ -344,6 +387,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
 					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
+				),
+				array(
+					'name'    => 'whatsiplus_woocommerce_sms_template_completed_secondary',
+					'label'   => __( 'Completed message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="completed" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_completed_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
 				),
 				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_cancelled',
@@ -356,6 +409,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
 				),
 				array(
+					'name'    => 'whatsiplus_woocommerce_sms_template_cancelled_secondary',
+					'label'   => __( 'Cancelled message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="cancelled" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_cancelled_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
+				),
+				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_refunded',
 					'label'   => __( 'Refunded message', 'whatsiplus-order-notification-for-woocommerce' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="refunded" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_refunded]" class="button button-secondary">Keywords</button>',
@@ -366,6 +429,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
 				),
 				array(
+					'name'    => 'whatsiplus_woocommerce_sms_template_refunded_secondary',
+					'label'   => __( 'Refunded message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="refunded" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_refunded_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
+				),
+				array(
 					'name'    => 'whatsiplus_woocommerce_sms_template_failed',
 					'label'   => __( 'Failed message', 'whatsiplus-order-notification-for-woocommerce' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="failed" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_failed]" class="button button-secondary">Keywords</button>',
@@ -374,6 +447,16 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
 					'default' => __( '[shop_name] : Thank you for purchasing. Your order ([order_id]) is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
+				),
+				array(
+					'name'    => 'whatsiplus_woocommerce_sms_template_failed_secondary',
+					'label'   => __( 'Failed message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
+					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="failed" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_failed_secondary]" class="button button-secondary">Keywords</button>',
+					'type'    => 'textarea',
+					'rows'    => '8',
+					'cols'    => '500',
+					'css'     => 'min-width:350px;',
+					'default' => ''
 				)
 			)
 		);
@@ -391,7 +474,6 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
     public function add_custom_order_status($setting_fields)
     {
         $log = new Whatsiplus_WooCommerce_Logger();
-        // $log->add("Whatsiplus", print_r($custom_wc_statuses, 1));
         $default_statuses = [
             'wc-pending',
             'wc-processing',
@@ -419,68 +501,67 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         foreach($fields_to_iterate as $field) {
             if(array_key_exists($field, $setting_fields)) {
                 for( $i=0; $i<count($setting_fields[$field]); $i++ ) {
-    if(array_key_exists('options', $setting_fields[$field][$i])) {
+                    if(array_key_exists('options', $setting_fields[$field][$i])) {
+                        $field_name = $setting_fields[$field][$i]['name'] ?? '';
 
-        $field_name = $setting_fields[$field][$i]['name'] ?? '';
+                        if (!in_array($field_name, [
+                            'whatsiplus_woocommerce_send_sms',
+                            'whatsiplus_woocommerce_admin_send_sms_on',
+                            'whatsiplus_woocommerce_vendor_send_sms_on'
+                        ])) {
+                            continue;
+                        }
 
-        if (!in_array($field_name, [
-            'whatsiplus_woocommerce_send_sms',
-            'whatsiplus_woocommerce_admin_send_sms_on',
-            'whatsiplus_woocommerce_vendor_send_sms_on'
-        ])) {
-            continue;
-        }
+                        foreach($processed_wc_statuses as $processed_key => $processed_value) {
+                            if( ! array_key_exists($processed_key, $setting_fields[$field][$i]['options']) ) {
+                                $processed_value_text = " " . $processed_value;
+                                $setting_fields[$field][$i]['options'][$processed_key] = $processed_value_text;
 
-        foreach($processed_wc_statuses as $processed_key => $processed_value) {
-            if( ! array_key_exists($processed_key, $setting_fields[$field][$i]['options']) ) {
-                $processed_value_text = " " . $processed_value;
+                                if($field == 'whatsiplus_customer_setting') {
+                                    $message_label = $processed_value . ' Customer message';
+                                    $message_label_secondary = $processed_value . ' Customer message (Secondary Language)';
+                                    $message_default = "Your {$processed_value} message template";
 
-                $setting_fields[$field][$i]['options'][$processed_key] = $processed_value_text;
-
-                if($field == 'whatsiplus_customer_setting') {
-                    $message_label = $processed_value . ' Customer message';
-                    $message_default = "Your {$processed_value} message template";
-
-                    $setting_fields[$field][] = array(
-                        'name'    => "whatsiplus_woocommerce_sms_template_{$processed_key}",
-                        'label'   => $message_label,
-                        'desc'    => sprintf('Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="default" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_%s]" class="button button-secondary">Keywords</button>', $processed_key),
-                        'type'    => 'textarea',
-                        'rows'    => '8',
-                        'cols'    => '500',
-                        'css'     => 'min-width:350px;',
-                        'default' => $message_default
-                    );
+                                    $setting_fields[$field][] = array(
+                                        'name'    => "whatsiplus_woocommerce_sms_template_{$processed_key}",
+                                        'label'   => $message_label,
+                                        'desc'    => sprintf('Customize your message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="default" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_%s]" class="button button-secondary">Keywords</button>', $processed_key),
+                                        'type'    => 'textarea',
+                                        'rows'    => '8',
+                                        'cols'    => '500',
+                                        'css'     => 'min-width:350px;',
+                                        'default' => $message_default
+                                    );
+                                    $setting_fields[$field][] = array(
+                                        'name'    => "whatsiplus_woocommerce_sms_template_{$processed_key}_secondary",
+                                        'label'   => $message_label_secondary,
+                                        'desc'    => sprintf('Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="default" data-attr-target="whatsiplus_customer_setting[whatsiplus_woocommerce_sms_template_%s_secondary]" class="button button-secondary">Keywords</button>', $processed_key),
+                                        'type'    => 'textarea',
+                                        'rows'    => '8',
+                                        'cols'    => '500',
+                                        'css'     => 'min-width:350px;',
+                                        'default' => ''
+                                    );
+                                }
+                            }
+                        }
+                        break;
+                    }
                 }
-            }
-        }
-
-                break;
-            }
-        }
                 continue;
             }
         }
         
-
         return $setting_fields;
     }
 
 	function plugin_page() {
-
 		$this->settings_api->show_navigation();
 		$this->settings_api->show_forms();
 		echo '<input type="hidden" value="' . esc_attr( join(",", $this->get_additional_billing_fields()) ) . '" id="whatsiplus_new_billing_field" />';
-
-
 		echo '</div>';
 	}
 
-	/**
-	 * Get all the pages
-	 *
-	 * @return array page names with key value pairs
-	 */
 	function get_pages() {
 		$pages         = get_pages();
 		$pages_options = array();
@@ -489,15 +570,11 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 				$pages_options[ $page->ID ] = $page->post_title;
 			}
 		}
-
 		return $pages_options;
 	}
 
     public function initialise_default_recipient_setting() {
-
         if( !get_option("whatsiplus_customer_setting") ) {
-            // this is because new users.
-            // no settings to anything.
             return;
         }
 
@@ -507,7 +584,6 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
         $option_setting = whatsiplus_get_options("whatsiplus_woocommerce_send_sms_to", "whatsiplus_customer_setting");
 
-        // no settings, usually after update plugin.
         if(empty($option_setting)) {
             return whatsiplus_update_options("whatsiplus_woocommerce_send_sms_to", $default_setting, "whatsiplus_customer_setting");
         }
@@ -523,9 +599,6 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
             $send_to_shipping_recipient = $option_setting['shipping-recipient'];
         }
 
-        // var_dump($option_setting);
-        // var_dump($send_to_billing_recipient);
-        // var_dump($send_to_shipping_recipient);
         if( empty($send_to_billing_recipient) && empty($send_to_shipping_recipient) ) {
             return whatsiplus_update_options("whatsiplus_woocommerce_send_sms_to", $default_setting, "whatsiplus_customer_setting");
         }
@@ -542,14 +615,8 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         $current_plugin_version = get_option("whatsiplus_plugin_version");
 
         if(!empty($current_plugin_version)) {
-            // if cur < lat = -1
-            // if cur === lat = 0
-            // if cur > lat = 1
             if(version_compare( $current_plugin_version, $latest_plugin_version ) < 0) {
-                //$this->log->add("Whatsiplus", "current plugin version: {$current_plugin_version}.");
-                //$this->log->add("Whatsiplus", "latest plugin version: {$latest_plugin_version}.");
                 as_unschedule_all_actions("whatsiplus_check_domain");
-                //$this->log->add("Whatsiplus", "Successfully unscheduled domain reachability for initialization.");
                 update_option("whatsiplus_plugin_version", $latest_plugin_version);
             }
         } else {
@@ -585,7 +652,6 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
             $log->add("Whatsiplus", print_r($e->getMessage(), 1));
             $acc_balance = 'Failed to retrieve status for API KEY';
         }
-
 
         if ($acc_balance === "Invalid API KEY")
         {
@@ -647,7 +713,6 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 				array_push( $additional_billing_field, $field_key );
 			}
 		}
-
 		return $additional_billing_field;
 	}
 
@@ -1156,11 +1221,8 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
         if (array_key_exists($country_code, $country_codes)) {
             return $country_codes[$country_code];
         } else {
-            
             return "0";
         }
     }
-
 }
-
 ?>

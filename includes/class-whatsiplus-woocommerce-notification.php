@@ -10,6 +10,32 @@ class Whatsiplus_WooCommerce_Notification {
 		$this->log = $log;
 	}
 
+	/**
+	 * Map country code to language code based on available secondary language options
+	 */
+	protected function get_language_from_country( $country_code ) {
+		$language_map = array(
+			'IR' => 'fa_IR', // Persian
+			'FR' => 'fr_FR', // French
+			'ES' => 'es_ES', // Spanish
+			'DE' => 'de_DE', // German
+			// Arabic-speaking countries
+			'SA' => 'ar_AR', // Saudi Arabia
+			'EG' => 'ar_AR', // Egypt
+			'AE' => 'ar_AR', // United Arab Emirates
+			'KW' => 'ar_AR', // Kuwait
+			'QA' => 'ar_AR', // Qatar
+			'OM' => 'ar_AR', // Oman
+			'BH' => 'ar_AR', // Bahrain
+			'CN' => 'zh_CN', // Chinese
+			'RU' => 'ru_RU', // Russian
+			'BR' => 'pt_BR', // Portuguese
+			'IT' => 'it_IT', // Italian
+			'JP' => 'ja_JP', // Japanese
+		);
+		return isset( $language_map[$country_code] ) ? $language_map[$country_code] : '';
+	}
+
 	public function send_sms_woocommerce_order_status_pending( $order_id ) {
 		$this->send_customer_notification( $order_id, "pending" );
 		$this->send_admin_notification( $order_id, "pending" );
@@ -123,8 +149,7 @@ class Whatsiplus_WooCommerce_Notification {
 		//Checking if multivendor is "YITH"
 		if (Whatsiplus_Multivendor_Factory::$activatedPlugin == "yith")
 		{
-            //"Whatsiplus", "Plugin activated: Yith");
-			//checking if it's a suborder
+            //checking if it's a suborder
 			$yith_suborders =  wp_get_post_parent_id($order_id) ;
 			if($yith_suborders)
 			{
@@ -139,47 +164,73 @@ class Whatsiplus_WooCommerce_Notification {
 
 		if($send_sms_flag)
 		{
-			$message = whatsiplus_get_options( 'whatsiplus_woocommerce_sms_template_' . $status, 'whatsiplus_customer_setting', '' );
-			if ( empty( $message ) ) {
-				$message = whatsiplus_get_options( 'whatsiplus_woocommerce_sms_template_default', 'whatsiplus_customer_setting', '' );
+			// Get the user's country and map to language
+			$country_code = $order_details->get_billing_country();
+			$user_language = $this->get_language_from_country( $country_code );
+
+			// If billing country is empty, try to derive from billing phone
+			if ( empty( $country_code ) ) {
+				$billing_phone = $order_details->get_billing_phone();
+				if ( ! empty( $billing_phone ) ) {
+					$phone_with_country_code = $this->check_and_get_phone_number( $billing_phone, '' );
+					// Extract country code from phone number (e.g., +966 for Saudi Arabia)
+					if ( preg_match( '/^\+(\d{1,3})/', $phone_with_country_code, $matches ) ) {
+						$phone_country_code = $this->map_phone_code_to_country( $matches[1] );
+						$user_language = $this->get_language_from_country( $phone_country_code );
+					}
+				}
 			}
+
+			$secondary_language = whatsiplus_get_options( 'whatsiplus_woocommerce_secondary_language', 'whatsiplus_customer_setting', '' );
+
+			// Check if secondary language is set and matches the user's language
+			if ( ! empty( $secondary_language ) && $user_language === $secondary_language ) {
+				$message = whatsiplus_get_options( 'whatsiplus_woocommerce_sms_template_' . $status . '_secondary', 'whatsiplus_customer_setting', '' );
+				if ( empty( $message ) ) {
+					$message = whatsiplus_get_options( 'whatsiplus_woocommerce_sms_template_default_secondary', 'whatsiplus_customer_setting', '' );
+				}
+			} else {
+				$message = whatsiplus_get_options( 'whatsiplus_woocommerce_sms_template_' . $status, 'whatsiplus_customer_setting', '' );
+				if ( empty( $message ) ) {
+					$message = whatsiplus_get_options( 'whatsiplus_woocommerce_sms_template_default', 'whatsiplus_customer_setting', '' );
+				}
+			}
+
 			if ( empty( $message ) ) {
 				return;
 			}
 
-            $sms_recipient_setting = whatsiplus_get_options("whatsiplus_woocommerce_send_sms_to", "whatsiplus_customer_setting");
+			$sms_recipient_setting = whatsiplus_get_options( "whatsiplus_woocommerce_send_sms_to", "whatsiplus_customer_setting" );
 
-			$message           = $this->replace_order_keyword( $message, $order_details, 'customer', $status );
+			$message = $this->replace_order_keyword( $message, $order_details, 'customer', $status );
 
-            if( isset($sms_recipient_setting['billing-recipient']) ) {
-                $customer_billing_phone = $this->check_and_get_phone_number( $order_details->get_billing_phone(), $order_details->get_billing_country() );
-                if ( $customer_billing_phone !== false ) {
-                    $this->log->add( 'Whatsiplus', 'Customer\'s billing phone number (' . $order_details->get_billing_phone() . ') in country (' . $order_details->get_billing_country() . ') converted to ' . $customer_billing_phone );
-                } else {
-                    $customer_billing_phone = $order_details->get_billing_phone();
-                }
-                WhatsiPLUS_SendSMS_Sms::send_sms( '', $customer_billing_phone, $message );
-            }
+			if ( isset( $sms_recipient_setting['billing-recipient'] ) ) {
+				$customer_billing_phone = $this->check_and_get_phone_number( $order_details->get_billing_phone(), $order_details->get_billing_country() );
+				if ( $customer_billing_phone !== false ) {
+					$this->log->add( 'Whatsiplus', 'Customer\'s billing phone number (' . $order_details->get_billing_phone() . ') in country (' . $order_details->get_billing_country() . ') converted to ' . $customer_billing_phone );
+				} else {
+					$customer_billing_phone = $order_details->get_billing_phone();
+				}
+				WhatsiPLUS_SendSMS_Sms::send_sms( '', $customer_billing_phone, $message );
+			}
 
-            if ( isset($sms_recipient_setting['shipping-recipient']) ) {
-                $customer_shipping_phone = $this->check_and_get_phone_number( $order_details->get_shipping_phone(), $order_details->get_shipping_country() );
+			if ( isset( $sms_recipient_setting['shipping-recipient'] ) ) {
+				$customer_shipping_phone = $this->check_and_get_phone_number( $order_details->get_shipping_phone(), $order_details->get_shipping_country() );
 
-                if ( $customer_shipping_phone !== false ) {
-                    $this->log->add( 'Whatsiplus', 'Customer\'s shipping phone number (' . $order_details->get_shipping_phone() . ') in country (' . $order_details->get_shipping_country() . ') converted to ' . $customer_shipping_phone );
-                } else {
-                    $customer_shipping_phone = $order_details->get_shipping_phone();
-                }
-                WhatsiPLUS_SendSMS_Sms::send_sms( '', $customer_shipping_phone, $message );
-            }
-
+				if ( $customer_shipping_phone !== false ) {
+					$this->log->add( 'Whatsiplus', 'Customer\'s shipping phone number (' . $order_details->get_shipping_phone() . ') in country (' . $order_details->get_shipping_country() . ') converted to ' . $customer_shipping_phone );
+				} else {
+					$customer_shipping_phone = $order_details->get_shipping_phone();
+				}
+				WhatsiPLUS_SendSMS_Sms::send_sms( '', $customer_shipping_phone, $message );
+			}
 		}
 	}
 
 	public function send_admin_notification( $order_id, $status ) {
-        if ( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_suborders_send_sms', 'whatsiplus_admin_setting', 'off' ) == 'off') {
-            return;
-        }
-		//v1.1.18 add selection for sending admin notification on which status
+		if ( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_suborders_send_sms', 'whatsiplus_admin_setting', 'off' ) == 'off' ) {
+			return;
+		}
 		if ( ! in_array( $status, whatsiplus_get_options( 'whatsiplus_woocommerce_admin_send_sms_on', 'whatsiplus_admin_setting', array() ) ) ) {
 			return;
 		}
@@ -187,32 +238,27 @@ class Whatsiplus_WooCommerce_Notification {
 		$order_details = new WC_Order( $order_id );
 		$send_sms_flag = true;
 
-		if (Whatsiplus_Multivendor_Factory::$activatedPlugin == "wc_marketplace")
-		{
-			$is_suborder = (get_wcmp_suborders( $order_id, false, false) ? false : true);
-			if( $is_suborder ) {
+		if ( Whatsiplus_Multivendor_Factory::$activatedPlugin == "wc_marketplace" ) {
+			$is_suborder = ( get_wcmp_suborders( $order_id, false, false ) ? false : true );
+			if ( $is_suborder ) {
 				$send_sms_flag = false;
 				if ( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_suborders_send_sms', 'whatsiplus_admin_setting', 'off' ) == 'on' ) {
 					$send_sms_flag = true;
 				}
 			}
 		}
-		if (Whatsiplus_Multivendor_Factory::$activatedPlugin == "dokan")
-		{
-			$dokan_suborders = dokan_is_sub_order($order_id);
-			if($dokan_suborders)
-			{
+		if ( Whatsiplus_Multivendor_Factory::$activatedPlugin == "dokan" ) {
+			$dokan_suborders = dokan_is_sub_order( $order_id );
+			if ( $dokan_suborders ) {
 				$send_sms_flag = false;
 				if ( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_suborders_send_sms', 'whatsiplus_admin_setting', 'off' ) == 'on' ) {
 					$send_sms_flag = true;
 				}
 			}
 		}
-		if (Whatsiplus_Multivendor_Factory::$activatedPlugin == "yith")
-		{
-			$yith_suborders =  wp_get_post_parent_id($order_id) ;
-			if($yith_suborders)
-			{
+		if ( Whatsiplus_Multivendor_Factory::$activatedPlugin == "yith" ) {
+			$yith_suborders = wp_get_post_parent_id( $order_id );
+			if ( $yith_suborders ) {
 				$send_sms_flag = false;
 				if ( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_suborders_send_sms', 'whatsiplus_admin_setting', 'off' ) == 'on' ) {
 					$send_sms_flag = true;
@@ -220,20 +266,45 @@ class Whatsiplus_WooCommerce_Notification {
 			}
 		}
 
-		if($send_sms_flag){
-            $message = whatsiplus_get_options( 'whatsiplus_woocommerce_admin_sms_template', 'whatsiplus_admin_setting', '' );
-            $message = $this->replace_order_keyword( $message, $order_details, 'admin', $status );
+		if ( $send_sms_flag ) {
+			// Get the user's country and map to language
+			$country_code = $order_details->get_billing_country();
+			$user_language = $this->get_language_from_country( $country_code );
+
+			// If billing country is empty, try to derive from billing phone
+			if ( empty( $country_code ) ) {
+				$billing_phone = $order_details->get_billing_phone();
+				if ( ! empty( $billing_phone ) ) {
+					$phone_with_country_code = $this->check_and_get_phone_number( $billing_phone, '' );
+					if ( preg_match( '/^\+(\d{1,3})/', $phone_with_country_code, $matches ) ) {
+						$phone_country_code = $this->map_phone_code_to_country( $matches[1] );
+						$user_language = $this->get_language_from_country( $phone_country_code );
+					}
+				}
+			}
+
+			$secondary_language = whatsiplus_get_options( 'whatsiplus_woocommerce_secondary_language', 'whatsiplus_customer_setting', '' );
+
+			// Check if secondary language is set and matches the user's language
+			if ( ! empty( $secondary_language ) && $user_language === $secondary_language ) {
+				$message = whatsiplus_get_options( 'whatsiplus_woocommerce_admin_sms_template_secondary', 'whatsiplus_admin_setting', '' );
+			} else {
+				$message = whatsiplus_get_options( 'whatsiplus_woocommerce_admin_sms_template', 'whatsiplus_admin_setting', '' );
+			}
+
+			if ( empty( $message ) ) {
+				return;
+			}
+
+			$message = $this->replace_order_keyword( $message, $order_details, 'admin', $status );
 			$admin_phone = trim( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_sms_recipients', 'whatsiplus_admin_setting', '' ) );
-			//Get default country v1.1.17
-			$admin_country = whatsiplus_get_options('whatsiplus_woocommerce_country_code', 'whatsiplus_setting', '' );
+			$admin_country = whatsiplus_get_options( 'whatsiplus_woocommerce_country_code', 'whatsiplus_setting', '' );
 
-			//If multiple number, need to call check_and_get_phone_number multiple time
 			if ( $admin_phone != '' ) {
 				$phone_no_array = explode( ",", $admin_phone );
 				foreach ( $phone_no_array as $number ) {
 					if ( $number != '' ) {
-						//Get default country v1.1.17
-						$phone_with_country_code = $this->check_and_get_phone_number($number, $admin_country);
+						$phone_with_country_code = $this->check_and_get_phone_number( $number, $admin_country );
 						if ( $phone_with_country_code !== false ) {
 							$this->log->add( 'Whatsiplus', 'Admin\'s phone number (' . $number . ') in country (' . $admin_country . ') converted to ' . $phone_with_country_code );
 						} else {
@@ -244,38 +315,65 @@ class Whatsiplus_WooCommerce_Notification {
 						if ( $admin_phone_no == '' || $message == '' ) {
 							return;
 						}
-						WhatsiPLUS_SendSMS_Sms::send_sms('', $admin_phone_no, $message );
+						WhatsiPLUS_SendSMS_Sms::send_sms( '', $admin_phone_no, $message );
 					}
 				}
 			}
 		}
 	}
 
-    public function send_admin_low_stock_notification($product, $status)
-    {
-        if ( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_suborders_send_sms', 'whatsiplus_admin_setting', 'off' ) == 'off') {
+    public function send_admin_low_stock_notification( $product, $status ) {
+        if ( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_suborders_send_sms', 'whatsiplus_admin_setting', 'off' ) == 'off' ) {
             return;
         }
-		//v1.1.18 add selection for sending admin notification on which status
-		if ( ! in_array( $status, whatsiplus_get_options( 'whatsiplus_woocommerce_admin_send_sms_on', 'whatsiplus_admin_setting', array()) ) ) {
+		if ( ! in_array( $status, whatsiplus_get_options( 'whatsiplus_woocommerce_admin_send_sms_on', 'whatsiplus_admin_setting', array() ) ) ) {
 			return;
 		}
 
-        $this->log->add("Whatsiplus", "send admin notification on low stock enabled");
+        $this->log->add( "Whatsiplus", "send admin notification on low stock enabled" );
 
-        $message = whatsiplus_get_options("whatsiplus_woocommerce_admin_sms_template_{$status}", 'whatsiplus_admin_setting');
-        $message = $this->product_kw_mapper($message, $product);
+		// Get the user's country and map to language
+		$admin_country = whatsiplus_get_options( 'whatsiplus_woocommerce_country_code', 'whatsiplus_setting', '' );
+		$user_language = $this->get_language_from_country( $admin_country );
+
+		// If admin country is empty, try to derive from admin phone
+		if ( empty( $admin_country ) ) {
+			$admin_phone = trim( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_sms_recipients', 'whatsiplus_admin_setting', '' ) );
+			if ( ! empty( $admin_phone ) ) {
+				$phone_no_array = explode( ",", $admin_phone );
+				$first_number = reset( $phone_no_array );
+				if ( $first_number ) {
+					$phone_with_country_code = $this->check_and_get_phone_number( $first_number, '' );
+					if ( preg_match( '/^\+(\d{1,3})/', $phone_with_country_code, $matches ) ) {
+						$phone_country_code = $this->map_phone_code_to_country( $matches[1] );
+						$user_language = $this->get_language_from_country( $phone_country_code );
+					}
+				}
+			}
+		}
+
+		$secondary_language = whatsiplus_get_options( 'whatsiplus_woocommerce_secondary_language', 'whatsiplus_customer_setting', '' );
+
+		// Check if secondary language is set and matches the user's language
+		if ( ! empty( $secondary_language ) && $user_language === $secondary_language ) {
+			$message = whatsiplus_get_options( "whatsiplus_woocommerce_admin_sms_template_{$status}_secondary", 'whatsiplus_admin_setting', '' );
+		} else {
+			$message = whatsiplus_get_options( "whatsiplus_woocommerce_admin_sms_template_{$status}", 'whatsiplus_admin_setting', '' );
+		}
+
+        if ( empty( $message ) ) {
+            return;
+        }
+
+        $message = $this->product_kw_mapper( $message, $product );
         $admin_phone = trim( whatsiplus_get_options( 'whatsiplus_woocommerce_admin_sms_recipients', 'whatsiplus_admin_setting', '' ) );
-        //Get default country v1.1.17
-        $admin_country = whatsiplus_get_options('whatsiplus_woocommerce_country_code', 'whatsiplus_setting', '' );
+        $admin_country = whatsiplus_get_options( 'whatsiplus_woocommerce_country_code', 'whatsiplus_setting', '' );
 
-        //If multiple number, need to call check_and_get_phone_number multiple time
         if ( $admin_phone != '' ) {
             $phone_no_array = explode( ",", $admin_phone );
             foreach ( $phone_no_array as $number ) {
                 if ( $number != '' ) {
-                    //Get default country v1.1.17
-                    $phone_with_country_code = $this->check_and_get_phone_number($number, $admin_country);
+                    $phone_with_country_code = $this->check_and_get_phone_number( $number, $admin_country );
                     if ( $phone_with_country_code !== false ) {
                         $this->log->add( 'Whatsiplus', 'Admin\'s phone number (' . $number . ') in country (' . $admin_country . ') converted to ' . $phone_with_country_code );
                     } else {
@@ -292,14 +390,42 @@ class Whatsiplus_WooCommerce_Notification {
         }
     }
 
-	protected function check_and_get_phone_number( $phone_number, $country ) {
-		$sm=new WhatsiPLUS_SendSMS_Sms;
-		$phone_number2 = $sm->get_formatted_number($phone_number, $country);
-		if(!empty($phone_number2))
-			return $phone_number2;
-		else
-			return $phone_number;
+	/**
+	 * Map phone country code to country code
+	 */
+	protected function map_phone_code_to_country( $phone_code ) {
+		$phone_code_map = array(
+			'98'  => 'IR', // Iran
+			'33'  => 'FR', // France
+			'34'  => 'ES', // Spain
+			'49'  => 'DE', // Germany
+			'966' => 'SA', // Saudi Arabia
+			'20'  => 'EG', // Egypt
+			'971' => 'AE', // United Arab Emirates
+			'965' => 'KW', // Kuwait
+			'974' => 'QA', // Qatar
+			'968' => 'OM', // Oman
+			'973' => 'BH', // Bahrain
+			'86'  => 'CN', // China
+			'7'   => 'RU', // Russia
+			'55'  => 'BR', // Brazil
+			'39'  => 'IT', // Italy
+			'81'  => 'JP', // Japan
+			'90'  => 'TR', // Turkey
+			'31'  => 'NL', // Netherlands
+			'52'  => 'MX', // Mexico
+			'54'  => 'AR', // Argentina
+		);
+		return isset( $phone_code_map[$phone_code] ) ? $phone_code_map[$phone_code] : '';
+	}
 
+	protected function check_and_get_phone_number( $phone_number, $country ) {
+		$sm = new WhatsiPLUS_SendSMS_Sms;
+		$phone_number2 = $sm->get_formatted_number( $phone_number, $country );
+		if ( ! empty( $phone_number2 ) ) {
+			return $phone_number2;
+		}
+		return $phone_number;
 	}
 
 	protected function replace_order_keyword( $message, $order_details, $user_type, $order_status ) {
@@ -312,12 +438,10 @@ class Whatsiplus_WooCommerce_Notification {
 		foreach ( $items as $item ) {
 			$product_name     .= ', ' . $item->get_name();
 			$product_with_qty .= ', ' . $item->get_name() . ' X ' . $item->get_quantity();
-
 			$line_total = $item->get_total();
 			$all_items .= "\n- " . $item->get_name() . " (x" . $item->get_quantity() . ") - " . $line_total . " " . get_woocommerce_currency();
 		}
 
-		// Add product_links block after $all_items is constructed
 		$product_links = '';
 		foreach ( $items as $item ) {
 			$product = $item->get_product();
@@ -332,12 +456,10 @@ class Whatsiplus_WooCommerce_Notification {
 			$all_items        = substr( $all_items, 1 );
 		}
 
-		// After $all_items is substr, handle $product_links
 		if ( $product_links ) {
 			$product_links = substr( $product_links, 1 );
 		}
 
-		// Fetch shipping method name
 		$shipping_methods = $order_details->get_shipping_methods();
 		$shipping_method_name = '';
 		if ( ! empty( $shipping_methods ) ) {
@@ -383,7 +505,7 @@ class Whatsiplus_WooCommerce_Notification {
 			$order_details->get_currency(),
 			$order_details->get_total(),
 			ucfirst( $order_details->get_status() ),
-			isset($order_details->get_customer_order_notes()[0]->comment_content) ? $order_details->get_customer_order_notes()[0]->comment_content : "",
+			isset( $order_details->get_customer_order_notes()[0]->comment_content ) ? $order_details->get_customer_order_notes()[0]->comment_content : "",
 			$product_name,
 			$product_with_qty,
 			$all_items,
@@ -401,7 +523,7 @@ class Whatsiplus_WooCommerce_Notification {
 			$order_details->get_payment_method(),
 			$order_details->get_shipping_address_1(),
 			$order_details->get_shipping_address_2(),
-			wc_price($order_details->get_shipping_total()),
+			wc_price( $order_details->get_shipping_total() ),
 			$order_details->get_billing_address_2(),
 			$shipping_method_name,
 		);
@@ -418,7 +540,7 @@ class Whatsiplus_WooCommerce_Notification {
 		return $message;
 	}
 
-    private function product_kw_mapper($message, $product) {
+    private function product_kw_mapper( $message, $product ) {
         $product_search = array(
 			'[shop_name]'                 => get_bloginfo( 'name' ),
 			'[shop_email]'                => get_bloginfo( 'admin_email' ),
@@ -432,8 +554,7 @@ class Whatsiplus_WooCommerce_Notification {
             '[product_stock_quantity]'    => $product->get_stock_quantity(),
 		);
 
-        return str_replace(array_keys($product_search), array_values($product_search), $message);
-
+        return str_replace( array_keys( $product_search ), array_values( $product_search ), $message );
     }
 
 	protected function phone_number_processing( $phone_no ) {

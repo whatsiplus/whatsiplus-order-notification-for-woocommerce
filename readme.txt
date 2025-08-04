@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -230,6 +230,13 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.1.4 =
+* The admin can now select a secondary language to send WhatsApp messages to customers.
+
+* Secondary language messages are automatically sent based on the customer’s phone number information
+
+* Secondary language settings have been added in the plugin settings with options to choose from various languages such as Persian, Arabic, French, Spanish, German, Chinese, Russian, Portuguese, Italian, Japanese, Turkish, Dutch, and different Spanish variants.
+
 = 1.1.3 =
 * Add the feature to create and display WordPress shortcodes and messages graphically
 
@@ -295,6 +302,11 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.1.4 =
+The admin can now select a secondary language to send WhatsApp messages to customers.
+econdary language messages are automatically sent based on the customer’s phone number information
+Secondary language settings have been added in the plugin settings with options to choose from various languages such as Persian, Arabic, French, Spanish, German, Chinese, Russian, Portuguese, Italian, Japanese, Turkish, Dutch, and different Spanish variants.
 
 = 1.1.3 =
 Add the feature to create and display WordPress shortcodes and messages graphically
