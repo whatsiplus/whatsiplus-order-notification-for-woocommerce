@@ -191,16 +191,6 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'default' => __( '[shop_name] : You have a new order with order ID [order_id] and order amount [order_currency] [order_amount]. The order is now [order_status].', 'whatsiplus-order-notification-for-woocommerce' )
 				),
 				array(
-					'name'    => 'whatsiplus_woocommerce_admin_sms_template_secondary',
-					'label'   => __( 'Admin message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
-					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords]" data-attr-type="admin" data-attr-target="whatsiplus_admin_setting[whatsiplus_woocommerce_admin_sms_template_secondary]" class="button button-secondary">Keywords</button>',
-					'type'    => 'textarea',
-					'rows'    => '8',
-					'cols'    => '500',
-					'css'     => 'min-width:350px;',
-					'default' => ''
-				),
-				array(
 					'name'    => 'whatsiplus_woocommerce_admin_sms_template_low_stock_product',
 					'label'   => __( 'Low Stock Product Admin message', 'whatsiplus-order-notification-for-woocommerce' ),
 					'desc'    => 'Customize your message with <button type="button" id="whatsi_sms[open-keywords-low-product-stock]" data-attr-type="admin" data-attr-target="whatsiplus_admin_setting[whatsiplus_woocommerce_admin_sms_template_low_stock_product]" class="button button-secondary">Keywords</button>',
@@ -209,16 +199,6 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 					'cols'    => '500',
 					'css'     => 'min-width:350px;',
 					'default' => __( '[shop_name] : Your product [product_name] has low stock. Current quantity: [product_stock_quantity]. Please restock soon.', 'whatsiplus-order-notification-for-woocommerce' )
-				),
-				array(
-					'name'    => 'whatsiplus_woocommerce_admin_sms_template_low_stock_product_secondary',
-					'label'   => __( 'Low Stock Product Admin message (Secondary Language)', 'whatsiplus-order-notification-for-woocommerce' ),
-					'desc'    => 'Customize your secondary language message with <button type="button" id="whatsi_sms[open-keywords-low-product-stock]" data-attr-type="admin" data-attr-target="whatsiplus_admin_setting[whatsiplus_woocommerce_admin_sms_template_low_stock_product_secondary]" class="button button-secondary">Keywords</button>',
-					'type'    => 'textarea',
-					'rows'    => '8',
-					'cols'    => '500',
-					'css'     => 'min-width:350px;',
-					'default' => ''
 				),
 			),
 			'whatsiplus_customer_setting'  => array(
