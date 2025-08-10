@@ -142,6 +142,9 @@ If a vendor has the following group ID stored:
 120368574965432
 They will receive their order alerts in that group in addition to their personal number.
 
+== Multi-Language WhatsApp Messaging – Secondary Language Support ==
+
+Since version 1.1.4, this plugin supports sending WhatsApp messages in two languages. The admin can select a **secondary language** from multiple options, including Persian, Arabic, French, Spanish, German, Chinese, Russian, Portuguese, Italian, Japanese, Turkish, Dutch, and various Spanish variants. Messages will be automatically sent in the correct language based on the customer’s phone number, providing a more personalized and localized communication experience.
 
 == Supported Shortcodes ==
 View and test all shortcodes visually here: **[Open WhatsApp Message Formatter](https://whatsiplus.com/upload/wordpress/whatsapp-text-formatter/)**
