@@ -650,7 +650,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
                 echo '<p style="color: green;"><b>' . esc_html($acc_balance) . '</b></p>';
                 echo '<p style="color: green;"><b>' . esc_html($wNumber) . '</b></p>';
                 echo '<p>' . esc_html__('Default country code:', 'whatsiplus-order-notification-for-woocommerce') . ' ' . esc_html($countryCode) . '</p>';
-                echo '<p><a href="' . esc_url('https://whatsiplus.com/go?url=apikey') . '" target="_blank">' . esc_html__('Manage your service', 'whatsiplus-order-notification-for-woocommerce') . '</a></p>';
+                echo '<p><a href="' . esc_url( __('https://whatsiplus.com/go?url=apikey', 'whatsiplus-order-notification-for-woocommerce') ) . '" target="_blank">' . esc_html__('Manage your service', 'whatsiplus-order-notification-for-woocommerce') . '</a></p>';
 
             }
             else if($acc_balance === "Not connected to WhatsApp")
@@ -659,7 +659,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
                 echo '<p style="color: red;"><b>' . esc_html($acc_balance) . '</b></p>';
                 echo '<h3>' . esc_html__('To link the service with WhatsApp, please click on the provided link below.', 'whatsiplus-order-notification-for-woocommerce') . '</h3>';
-                echo '<h2><a href="' . esc_url('https://whatsiplus.com/go?url=apikey') . '" target="_blank">' . esc_html__('Whatsiplus', 'whatsiplus-order-notification-for-woocommerce') . '</a></h2>';
+                echo '<h2><a href="' . esc_url( __('https://whatsiplus.com/go?url=apikey', 'whatsiplus-order-notification-for-woocommerce') ) . '" target="_blank">' . esc_html__('Whatsiplus', 'whatsiplus-order-notification-for-woocommerce') . '</a></h2>';
                 echo '<p>' . esc_html__('Default country code:', 'whatsiplus-order-notification-for-woocommerce') . ' ' . esc_html($countryCode) . '</p>';
 
             }
