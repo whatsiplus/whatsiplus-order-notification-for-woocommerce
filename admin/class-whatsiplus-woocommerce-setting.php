@@ -74,7 +74,7 @@ class Whatsiplus_WooCommerce_Setting implements Whatsiplus_Register_Interface {
 
             $lang = get_locale();
             if (strpos($lang, 'fa_IR') === 0) {
-                $api_url = "http://api.whatsiplus.ir/serviceSettings/{$apikey}?countryCode={$dialing_country_code}";
+                $api_url = "https://api.whatsiplus.com/serviceSettings/{$apikey}?countryCode={$dialing_country_code}";
             } else {
                 $api_url = "https://api.whatsiplus.com/serviceSettings/{$apikey}?countryCode={$dialing_country_code}";
             }
