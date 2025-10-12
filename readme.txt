@@ -3,7 +3,7 @@ Contributors: whatsiplus
 Tags: whatsiplus, woocommerce, multivendor, notification, whatsapp
 Requires at least: 3.8
 Tested up to: 6.8
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 Requires PHP: 5.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -233,6 +233,9 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 
 == Changelog ==
 
+= 1.1.5 =
+* Fixed: Admin notification messages issue resolved — now admin messages are sent correctly.
+
 = 1.1.4 =
 * The admin can now select a secondary language to send WhatsApp messages to customers.
 
@@ -305,6 +308,9 @@ Yes, downloading the plugin is free for all users and you will not pay anything 
 * Initial release with core features.
 
 == Upgrade Notice ==
+
+= 1.1.5 =
+Fixed: Admin notification messages issue resolved — now admin messages are sent correctly.
 
 = 1.1.4 =
 The admin can now select a secondary language to send WhatsApp messages to customers.
