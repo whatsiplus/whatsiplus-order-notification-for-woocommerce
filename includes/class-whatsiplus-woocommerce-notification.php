@@ -460,8 +460,15 @@ class Whatsiplus_WooCommerce_Notification {
 			$order_details->get_currency(),
 			$order_details->get_total(),
 			ucfirst( $order_details->get_status() ),
-			isset( $order_details->get_customer_order_notes()[0]->comment_content ) ? $order_details->get_customer_order_notes()[0]->comment_content : "",
-			isset( $order_details->get_customer_order_notes()[0]->comment_content ) ? $order_details->get_customer_order_notes()[0]->comment_content : "",
+			(function($order_details) {
+				$notes = $order_details->get_customer_order_notes();
+				if (!empty($notes)) {
+					$last_note = end($notes);
+					return isset($last_note->comment_content) ? $last_note->comment_content : "";
+				}
+				return "";
+			})($order_details),
+			$order_details->get_customer_note(),
 			$product_name,
 			$product_with_qty,
 			$all_items,
