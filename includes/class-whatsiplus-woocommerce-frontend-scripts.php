@@ -13,7 +13,7 @@ class Whatsiplus_WooCommerce_Frontend_Scripts implements Whatsiplus_Register_Int
 	}
 
 	public function msmswc_admin_enqueue_scripts() {
-        wp_enqueue_script( 'admin-whatsiplus-scripts', plugins_url( 'js/admin.js', __DIR__ ), array( 'jquery' ), '1.1.5', true );
+        wp_enqueue_script( 'admin-whatsiplus-scripts', plugins_url( 'js/admin.js', __DIR__ ), array( 'jquery' ), '1.1.6', true );
         //wp_enqueue_script( 'admin-whatsiplus-sendsms', plugins_url( 'js/sendsms.js', __DIR__ ), array(), '1.0.0', true );
         wp_enqueue_script( 'admin-whatsiplus-charcounter', plugins_url( 'js/charactercounter.js', __DIR__ ), array(), '1.0.0', true );
     
