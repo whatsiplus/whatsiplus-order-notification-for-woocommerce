@@ -44,7 +44,7 @@ class WhatsiPLUS {
         // Determine site language
         $lang = get_locale();
         if (strpos($lang, 'fa_IR') === 0) {
-            $this->rest_base_url = "https://api.whatsiplus.com/";
+            $this->rest_base_url = "http://api.whatsiplus.ir/";
         } else {
             $this->rest_base_url = "https://api.whatsiplus.com/";
         }
