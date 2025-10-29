@@ -451,6 +451,7 @@ class Whatsiplus_WooCommerce_Notification {
 			'[shipping_amount]',
 			'[billing_address_2]',
 			'[shipping_method]',
+			'[vendor_shop_name]',
 		);
 		$replace = array(
 			get_bloginfo( 'name' ),
@@ -489,6 +490,7 @@ class Whatsiplus_WooCommerce_Notification {
 			wc_price( $order_details->get_shipping_total() ),
 			$order_details->get_billing_address_2(),
 			$shipping_method_name,
+			$this->get_vendor_shop_name($order_details),
 		);
 
 		$message = str_replace( $search, $replace, $message );
@@ -560,6 +562,48 @@ class Whatsiplus_WooCommerce_Notification {
 
 		return $additional_billing_field;
 	}
+    /**
+     * Get the vendor shop name for an order, depending on the active multi-vendor plugin.
+     */
+    protected function get_vendor_shop_name( $order_details ) {
+        $vendor_shop_name = '';
+
+        foreach ( $order_details->get_items() as $item ) {
+            $product_id = $item->get_product_id();
+
+            // --- Dokan ---
+            if ( function_exists( 'dokan_get_vendor_by_product' ) ) {
+                $vendor = dokan_get_vendor_by_product( $product_id );
+                if ( $vendor && method_exists( $vendor, 'get_shop_name' ) ) {
+                    $vendor_shop_name = $vendor->get_shop_name();
+                    break;
+                }
+            }
+
+            // --- WCFM Marketplace ---
+            if ( function_exists( 'wcfm_get_vendor_id_by_post' ) ) {
+                $vendor_id = wcfm_get_vendor_id_by_post( $product_id );
+                if ( $vendor_id ) {
+                    $store = wcfmmp_get_store( $vendor_id );
+                    if ( $store ) {
+                        $vendor_shop_name = $store->get_shop_name();
+                        break;
+                    }
+                }
+            }
+
+            // --- WC Marketplace ---
+            if ( function_exists( 'get_wcmp_product_vendors' ) ) {
+                $vendor = get_wcmp_product_vendors( $product_id );
+                if ( $vendor ) {
+                    $vendor_shop_name = $vendor->page_title;
+                    break;
+                }
+            }
+        }
+
+        return $vendor_shop_name ? $vendor_shop_name : get_bloginfo( 'name' );
+    }
 }
 
 ?>
